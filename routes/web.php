@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'EntertainersController@index');
+Route::resource('entertainers', 'EntertainersController');

@@ -12,4 +12,5 @@
 */
 
 Route::get('/', 'EntertainersController@index');
+
 Route::resource('entertainers', 'EntertainersController');

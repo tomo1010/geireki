@@ -8,16 +8,13 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>id</th>
                     <th>芸人</th>
-                    <th>人数</th>
-                    <th>別名</th>
                     <th>活動時期</th>
                     <th>活動終了時期</th>
                     <th>師匠</th>
-                    <th>別名</th>
+                    <th>旧名</th>
                     <th>公式</th>
-                    <th>Youtubeチャンネル</th>
+                    <th>Youtube</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -25,25 +22,23 @@
             <tbody>
                 @foreach ($entertainers as $entertainer)
                 <tr>
-                    <td>{!! link_to_route('entertainers.show', $entertainer->id, ['entertainer' => $entertainer->id]) !!}</td>
-                    <td>{{ $entertainer->name }}</td>
-                    <td>{{ $entertainer->numberofpeople }}</td>
-                    <td>{{ $entertainer->alias }}</td>
+                    <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['entertainer' => $entertainer->id]) !!}</td>
                     <td>{{ $entertainer->active }}</td>
                     <td>{{ $entertainer->activeend }}</td>
                     <td>{{ $entertainer->master }}</td>
                     <td>{{ $entertainer->oldname }}</td>
-                    <td>{{ $entertainer->official }}</td>
-                    <td>{{ $entertainer->youtube }}</td>
-                    <td>{{ $diff[$loop->index] }}</td>
-
+                    <td><a href="{{ $entertainer->official }}">公式</a></td>
+                    <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
+                    <td nowrap>{{ $diff[$loop->index] }}年</td>
                 </tr>
                 @endforeach
                 
 
-
-
-                
+                @foreach ($results as $value)
+                <tr>
+                   <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['entertainer' => $entertainer->id]) !!}</td>                    
+                </tr>
+                @endforeach
 
             </tbody>
         </table>

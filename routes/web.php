@@ -12,5 +12,6 @@
 */
 
 Route::get('/', 'EntertainersController@index');
-
+Route::get('upload', 'EntertainersController@uploadcsv');
+Route::post('upload', 'EntertainersController@importCsv')->name('Entertainer.importCsv');
 Route::resource('entertainers', 'EntertainersController');

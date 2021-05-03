@@ -19,7 +19,7 @@ class CreateEntertainersTable extends Migration
             $table->integer('numberofpeople');
             $table->string('alias');
             $table->date('active');
-            $table->date('activeend');
+            $table->date('activeend')->nullable();
             $table->string('master');
             $table->string('oldname');
             $table->string('official');

@@ -38,10 +38,10 @@ class EntertainersController extends Controller
             //dd($value);
 
 
-        // 芸歴を検索する処理
-        $year = '2000';
-        $results = Entertainer::whereYear('active','>=', $year)->get();
-        //dd($result);
+        // 芸歴15年目を表示
+        $lastyear = $today->subYear(15); 
+        $results = Entertainer::whereYear('active','=', $lastyear)->get();
+        //dd($results);
 
         
         // 一覧ビューでそれを表示

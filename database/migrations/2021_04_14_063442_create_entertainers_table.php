@@ -17,13 +17,13 @@ class CreateEntertainersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('numberofpeople');
-            $table->string('alias');
+            $table->string('alias')->nullable();
             $table->date('active');
             $table->date('activeend')->nullable();
-            $table->string('master');
-            $table->string('oldname');
-            $table->string('official');
-            $table->string('youtube');
+            $table->string('master')->nullable();
+            $table->string('oldname')->nullable();
+            $table->string('official')->nullable();
+            $table->string('youtube')->nullable();
             $table->timestamps();
         });
     }

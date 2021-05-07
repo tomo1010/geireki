@@ -22,29 +22,48 @@ class EntertainersController extends Controller
     public function index()
     {
         // 一覧を取得
-        $entertainers = Entertainer::all();
-        
+        $entertainers = Entertainer::sortable()->paginate(3);
+
+
+        // 活動開始年から芸歴を取得        
         $active = Entertainer::select('active')->get();
         $today = new Carbon();
         $diff = array();
 
-    
-        // 活動開始年から芸歴を取得        
         foreach($active as $value){
             $value = $value->active;
             $value = new Carbon($value);
             $diff[] = $value->diffInYears($today);
         }
-            //dd($value);
+        //dd($value);
 
+
+    
+        /*芸歴別にカウントしリスト表示
+        $years = array();
+        $results = array();
+        $counts = array();
+
+        for($i=0; $i<=50; $i++){
+            $years[] = Carbon::now()->subYear($i); //今日から○年前を西暦で取得
+        }
+        
+        foreach($years as $year){
+            $results[] = Entertainer::whereYear('active','=', $year)->get();
+            $counts[] = count($results);
+        }
+        //dd($results);
+        //dd($counts);
+*/
 
         // 芸歴15年目を表示
         $lastyear = $today->subYear(15); 
+        //dd($lastyear);
         $results = Entertainer::whereYear('active','=', $lastyear)->get();
         //dd($results);
 
         
-        // 一覧ビューでそれを表示
+        // 一覧ビューで表示
         return view('entertainers.index', [
             'entertainers' => $entertainers,
             'diff' => $diff,
@@ -121,10 +140,23 @@ class EntertainersController extends Controller
     {
         // idの値でメッセージを検索して取得
         $entertainer = Entertainer::findOrFail($id);
+        
+        // 活動開始年から芸歴を取得
+        $active = $entertainer->active;
+        $today = new Carbon();
+        $value = new Carbon($active);
+        $diff = $value->diffInYears($today);
+        //dd($diff);
+        
+        // 同期芸人を取得
+        $syncs = Entertainer::whereYear('active','=', $active)->where('id','!=',$id)->get();
+        //dd($syncs);
 
         // メッセージ詳細ビューでそれを表示
         return view('entertainers.show', [
             'entertainer' => $entertainer,
+            'diff' => $diff,
+            'syncs' => $syncs,
         ]);
     }
 

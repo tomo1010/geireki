@@ -45,8 +45,42 @@
             <th>Youtubeチャンネル</th>
             <td>{{ $entertainer->youtube }}</td>
         </tr>
-
+        <tr>
+            <th>芸歴</th>
+            <td>{{ $diff }}年目</td>
+        </tr>
     </table>
+    
+    
+            <h2>同期芸人</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>芸人</th>
+                    <th>活動時期</th>
+                    <th>活動終了時期</th>
+                    <th>師匠</th>
+                    <th>旧名</th>
+                    <th>公式</th>
+                    <th>Youtube</th>
+                </tr>
+            </thead>
+             
+            <tbody>
+                @foreach ($syncs as $value)
+                <tr>
+                    <td nowrap>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                    <td>{{ $value->active }}</td>
+                    <td>{{ $value->activeend }}</td>
+                    <td>{{ $value->master }}</td>
+                    <td>{{ $value->oldname }}</td>
+                    <td><a href="{{ $value->official }}">公式</a></td>
+                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
+                </tr>
+                @endforeach
+            </tbody>   
+        </table>    
+    
 
     {{-- 編集ページへのリンク --}}
     {!! link_to_route('entertainers.edit', 'このメッセージを編集', ['entertainer' => $entertainer->id], ['class' => 'btn btn-light']) !!}

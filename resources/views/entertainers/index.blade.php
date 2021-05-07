@@ -8,14 +8,14 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>芸人</th>
-                    <th>活動時期</th>
+                    <th>@sortablelink('name', '芸人')</th>
+                    <th>@sortablelink('active', '活動時期')</th>
                     <th>活動終了時期</th>
                     <th>師匠</th>
                     <th>旧名</th>
                     <th>公式</th>
                     <th>Youtube</th>
-                    <th>芸歴</th>
+                    <th>@sortablelink('active', '芸歴')</th>
                 </tr>
             </thead>
             
@@ -34,6 +34,10 @@
                 @endforeach
             </tbody>
         </table>
+
+    {{-- ページネーションのリンク --}}
+    {{ $entertainers->appends(request()->query())->links() }}
+
         
         
         <h2>今年M1ラストイヤーの芸人</h2>

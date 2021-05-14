@@ -22,52 +22,50 @@ class EntertainersController extends Controller
     public function index()
     {
         // 一覧を取得
-        $entertainers = Entertainer::sortable()->paginate(3);
-
-
-        // 活動開始年から芸歴を取得        
-        $active = Entertainer::select('active')->get();
-        $today = new Carbon();
-        $diff = array();
-
-        foreach($active as $value){
-            $value = $value->active;
-            $value = new Carbon($value);
-            $diff[] = $value->diffInYears($today);
-        }
-        //dd($value);
+        $entertainers = Entertainer::sortable()->orderBy('active')->paginate(5);
+        
+        // dd($entertainers);
 
 
     
-        /*芸歴別にカウントしリスト表示
+        // 芸歴別に人数をカウントし表示
         $years = array();
-        $results = array();
         $counts = array();
+        $results_1 = array();
+        $results_2 = array();
+        $results_3 = array();
 
-        for($i=0; $i<=50; $i++){
-            $years[] = Carbon::now()->subYear($i); //今日から○年前を西暦で取得
+        for($i=0; $i<=70; $i++){
+            $years[] = Carbon::now()->subYear($i); //今日から「○年前」を取得
         }
+        //dd(years);
         
         foreach($years as $year){
-            $results[] = Entertainer::whereYear('active','=', $year)->get();
-            $counts[] = count($results);
+            $counts[] = Entertainer::whereYear('active','=', $year)->count(); //「○年前」の芸人の数を取得
+            $results_1[] = Entertainer::whereYear('active','=', $year)->where('numberofpeople','=', '1')->count();
+            $results_2[] = Entertainer::whereYear('active','=', $year)->where('numberofpeople','=', '2')->count();
+            $results_3[] = Entertainer::whereYear('active','=', $year)->where('numberofpeople','=', '3')->count();
         }
-        //dd($results);
+        //dd($results_1 ,$results_2 ,$results_3 ,$counts);
         //dd($counts);
-*/
 
-        // 芸歴15年目を表示
-        $lastyear = $today->subYear(15); 
+
+        //今年解散した芸人の一覧
+        $lastyear = Carbon::now()->subYear(0); // 今年を取得
         //dd($lastyear);
-        $results = Entertainer::whereYear('active','=', $lastyear)->get();
-        //dd($results);
+        $dissolutions = Entertainer::whereYear('activeend','=', $lastyear)->get();
+        //dd($dissolutions);
 
-        
+
         // 一覧ビューで表示
         return view('entertainers.index', [
             'entertainers' => $entertainers,
-            'diff' => $diff,
-            'results' => $results,
+            'counts' => $counts,
+            'results_1' => $results_1,
+            'results_2' => $results_2,
+            'results_3' => $results_3,        
+            'now' => new \Carbon\Carbon(),
+            'dissolutions' => $dissolutions,
         ]);
         
 
@@ -234,7 +232,7 @@ class EntertainersController extends Controller
 
 
 
-    //csvインポート処理
+    // csvインポート処理
 
     public function importCsv(Request $request)
     {
@@ -275,7 +273,7 @@ class EntertainersController extends Controller
                 'numberofpeople' => $row[1],
                 'alias' => $row[2],
                 'active' => $row[3],
-                'activeend' => $row[4],
+                'activeend' => $row[4] == '' ? NULL : $row[4],
                 'master' => $row[5],
                 'oldname' => $row[6],
                 'official' => $row[7],
@@ -286,4 +284,53 @@ class EntertainersController extends Controller
  
         return redirect()->action('EntertainersController@index')->with('flash_message', $count . '組登録しました！');
     }
+    
+    
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function list($year)
+    {
+        //芸歴○年別で一覧表示
+        $entertainers = Entertainer::sortable()->orderBy('active')->get();// 一覧を取得
+        $results = array();
+        $listyear = Carbon::now()->subYear($year); // 芸歴○年目を取得
+        //dd($listyear);
+        $results_1 = Entertainer::whereYear('active','=', $listyear)->where('numberofpeople','=', '1')->get();
+        $results_2 = Entertainer::whereYear('active','=', $listyear)->where('numberofpeople','=', '2')->get();
+        $results_3 = Entertainer::whereYear('active','=', $listyear)->where('numberofpeople','=', '3')->get();
+        
+        //dd($results);
+        
+        // 一覧ビューで表示
+        return view('entertainers.list', [
+            'results_1' => $results_1,
+            'results_2' => $results_2,
+            'results_3' => $results_3,
+            'year' => $year,
+            'now' => new \Carbon\Carbon(),
+        ]);
+    }
+    
+    
+    
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function selectYear(Request $request)
+    {
+        //indexのプルダウンから受け取った年数をlistControllerへ渡すだけの処理
+        $year = $request->year;
+        return redirect()->action('EntertainersController@list',['year' => $year]);
+    }
+    
+
 }

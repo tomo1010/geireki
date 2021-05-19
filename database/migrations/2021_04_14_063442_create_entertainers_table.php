@@ -17,6 +17,7 @@ class CreateEntertainersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('numberofpeople');
+            $table->integer('gender');
             $table->string('alias')->nullable();
             $table->date('active');
             $table->date('activeend')->nullable();

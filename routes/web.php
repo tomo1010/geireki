@@ -17,3 +17,4 @@ Route::post('upload', 'EntertainersController@importCsv')->name('entertainer.imp
 Route::resource('entertainers', 'EntertainersController');
 Route::get('list/{year}', 'EntertainersController@list')->name('entertainers.list');
 Route::post('/', 'EntertainersController@selectYear')->name('entertainers.select');
+//Route::post('/', 'EntertainersController@checkDissolution')->name('entertainers.check');

@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+{{--芸歴リストへのセレクトBOX--}}
 <form method="post" action="{{ route('entertainers.select')}}">
      @csrf
 <select name="year" onchange="submit(this.form)">
@@ -12,9 +14,16 @@
 </form>
 
 
-<h1>芸人一覧</h1>
+{{--解散済み表示非表示のチェックBOX
+<form method="post" action="{{ route('entertainers.check')}}">
+         @csrf
+    <input type="checkbox" name="check" value="1" onchange="submit(this.form)">
+</form>--}}
 
-    @if (count($entertainers) > 0)
+
+
+<h1>芸人一覧</h1>
+    
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -30,7 +39,7 @@
             </thead>
             
             <tbody>
-                @foreach ($entertainers as $entertainer)
+                @foreach ($entertainersAll as $entertainer)
                 @if($entertainer->activeend == NULL) {{--解散済みNULLの場合はグレー文字--}}
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['entertainer' => $entertainer->id]) !!}</td>
@@ -38,7 +47,11 @@
                     <td>{{ $entertainer->activeend }}</td>
                     <td>{{ $entertainer->master }}</td>
                     <td>{{ $entertainer->oldname }}</td>
-                    <td><a href="{{ $entertainer->official }}">公式</a></td>
+                    @empty($entertainer->official)
+                    <td></td>
+                    @else
+                    <td><a href="{{$entertainer->official}}>"公式</a></td>
+                    @endempty
                     <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
                     <td nowrap>{{$now->diffInYears($entertainer->active)}}年</td>
                 </tr>
@@ -50,7 +63,7 @@
                     <td>{{ $entertainer->activeend }}</td>
                     <td>{{ $entertainer->master }}</td>
                     <td>{{ $entertainer->oldname }}</td>
-                    <td><a href="{{ $entertainer->official }}">公式</a></td>
+                    <td><a href="{{$entertainer->official==NULL?'':'$entertainer->official'}}>"公式</a></td>
                     <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
                     <td nowrap>{{$now->diffInYears($entertainer->active)}}年</td>
                 </tr>
@@ -62,6 +75,10 @@
 
     {{-- ページネーションのリンク --}}
     {{ $entertainers->appends(request()->query())->links() }}
+
+    
+
+
 
 <h2>芸歴年別一覧</h2>     
     <table>
@@ -113,7 +130,7 @@
         </table>
     
         
-    @endif
+
     
     {{-- 作成ページへのリンク --}}
     {!! link_to_route('entertainers.create', '新規メッセージの投稿', [], ['class' => 'btn btn-primary']) !!}

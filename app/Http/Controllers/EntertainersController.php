@@ -23,8 +23,9 @@ class EntertainersController extends Controller
     {
         // 一覧を取得
         $entertainers = Entertainer::sortable()->orderBy('active')->paginate(5);
+        $entertainersAll = Entertainer::where('activeend', NULL)->sortable()->orderBy('active')->paginate(5);
         
-        // dd($entertainers);
+        //dd($check);
 
 
     
@@ -60,6 +61,7 @@ class EntertainersController extends Controller
         // 一覧ビューで表示
         return view('entertainers.index', [
             'entertainers' => $entertainers,
+            'entertainersAll' => $entertainersAll,
             'counts' => $counts,
             'results_1' => $results_1,
             'results_2' => $results_2,
@@ -141,20 +143,27 @@ class EntertainersController extends Controller
         
         // 活動開始年から芸歴を取得
         $active = $entertainer->active;
-        $today = new Carbon();
-        $value = new Carbon($active);
-        $diff = $value->diffInYears($today);
-        //dd($diff);
         
         // 同期芸人を取得
-        $syncs = Entertainer::whereYear('active','=', $active)->where('id','!=',$id)->get();
-        //dd($syncs);
+        $sync = Entertainer::whereYear('active','=', $active)->where('id','!=',$id)->get();
+
+        // 1年後輩を取得
+        $year = new Carbon($active);
+        $addYear = $year->addYear();
+        $junior = Entertainer::whereYear('active','=', $addYear)->get();
+
+        // 1年先輩を取得
+        $year = new Carbon($active);
+        $subYear = $year->subYear();
+        $senior = Entertainer::whereYear('active','=', $subYear)->get();
 
         // メッセージ詳細ビューでそれを表示
         return view('entertainers.show', [
             'entertainer' => $entertainer,
-            'diff' => $diff,
-            'syncs' => $syncs,
+            'sync' => $sync,
+            'junior' => $junior,
+            'senior' => $senior,
+            'now' => new \Carbon\Carbon(),
         ]);
     }
 
@@ -332,5 +341,23 @@ class EntertainersController extends Controller
         return redirect()->action('EntertainersController@list',['year' => $year]);
     }
     
+
+
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function checkDissolution(Request $request)
+    {
+        //indexのチェックボックスをindexControllerへ渡すだけの処理
+        $check = $request->check;
+        //dd($check);
+        return redirect()->action('EntertainersController@index',['check' => $check]);
+    }
+
+
 
 }

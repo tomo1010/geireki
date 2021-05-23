@@ -14,12 +14,6 @@
 </form>
 
 
-{{--解散済み表示非表示のチェックBOX
-<form method="post" action="{{ route('entertainers.check')}}">
-         @csrf
-    <input type="checkbox" name="check" value="1" onchange="submit(this.form)">
-</form>--}}
-
 
 
 <h1>芸人一覧</h1>
@@ -40,19 +34,26 @@
             
             <tbody>
                 @foreach ($entertainersAll as $entertainer)
-                @if($entertainer->activeend == NULL) {{--解散済みNULLの場合はグレー文字--}}
+                @if($entertainer->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['entertainer' => $entertainer->id]) !!}</td>
                     <td>{{ $entertainer->active }}</td>
                     <td>{{ $entertainer->activeend }}</td>
                     <td>{{ $entertainer->master }}</td>
                     <td>{{ $entertainer->oldname }}</td>
+
                     @empty($entertainer->official)
                     <td></td>
                     @else
-                    <td><a href="{{$entertainer->official}}>"公式</a></td>
+                    <td><a href="{{ $entertainer->official }}">公式</a></td>
                     @endempty
+
+                    @empty($entertainer->youtube)
+                    <td></td>
+                    @else
                     <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
+                    @endempty
+                    
                     <td nowrap>{{$now->diffInYears($entertainer->active)}}年</td>
                 </tr>
                 @else
@@ -63,8 +64,19 @@
                     <td>{{ $entertainer->activeend }}</td>
                     <td>{{ $entertainer->master }}</td>
                     <td>{{ $entertainer->oldname }}</td>
-                    <td><a href="{{$entertainer->official==NULL?'':'$entertainer->official'}}>"公式</a></td>
+
+                    @empty($entertainer->official)
+                    <td></td>
+                    @else
+                    <td><a href="{{ $entertainer->official }}">公式</a></td>
+                    @endempty
+
+                    @empty($entertainer->youtube)
+                    <td></td>
+                    @else
                     <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
+                    @endempty
+                    
                     <td nowrap>{{$now->diffInYears($entertainer->active)}}年</td>
                 </tr>
                 @endif
@@ -121,8 +133,19 @@
                     <td>{{ $dissolution->activeend }}</td>
                     <td>{{ $dissolution->master }}</td>
                     <td>{{ $dissolution->oldname }}</td>
+                    
+                    @empty($dissolution->official)
+                    <td></td>
+                    @else
                     <td><a href="{{ $dissolution->official }}">公式</a></td>
+                    @endempty
+
+                    @empty($dissolution->youtube)
+                    <td></td>
+                    @else
                     <td><a href="{{ $dissolution->youtube }}">Youtube</a></td>
+                    @endempty
+                    
                     <td nowrap>{{$now->diffInYears($dissolution->active)}}年</td>
                 </tr>
                 @endforeach

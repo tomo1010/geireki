@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>id = {{ $entertainer->id }} の詳細ページ</h1>
+    <h1>{{ $entertainer->name }} の詳細ページ</h1>
 
     <table class="table table-bordered">
         <tr>
@@ -52,65 +52,91 @@
     </table>
     
     
-            <h2>同期芸人</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>芸人</th>
-                    <th>活動時期</th>
-                    <th>活動終了時期</th>
-                    <th>師匠</th>
-                    <th>旧名</th>
-                    <th>公式</th>
-                    <th>Youtube</th>
-                </tr>
-            </thead>
-             
-            <tbody>
-                @foreach ($sync as $value)
-                <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                    <td>{{ $value->active }}</td>
-                    <td>{{ $value->activeend }}</td>
-                    <td>{{ $value->master }}</td>
-                    <td>{{ $value->oldname }}</td>
-                    <td><a href="{{ $value->official }}">公式</a></td>
-                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
-                </tr>
-                @endforeach
-            </tbody>   
-        </table>    
+    
+    <table class="table table-striped">
+        <tr>
+            <td>1年先輩</td>
+            <td>同期芸人</td>
+            <td>1年後輩</td>
+        </tr>
+        <tr>
+            <td>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>芸人</th>
+                            <th>gender</th>
+                            <th>師匠</th>
+                        </tr>
+                    </thead>
+                     
+                    <tbody>
+                        @foreach ($senior as $value)
+                        <tr>
+                            <td nowrap>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            <td>{{ $value->gender }}</td>
+                            <td>{{ $value->master }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>   
+                </table>
+            </td>
+            
+            <td>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>芸人</th>
+                            <th>gender</th>
+                            <th>師匠</th>
+                        </tr>
+                    </thead>
+                     
+                    <tbody>
+                        @foreach ($sync as $value)
+                        <tr>
+                            <td nowrap>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            <td>{{ $value->gender }}</td>
+                            <td>{{ $value->master }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>   
+                </table>    
+            </td>
+            
+            <td>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>芸人</th>
+                            <th>gender</th>
+                            <th>師匠</th>
+                        </tr>
+                    </thead>
+                     
+                    <tbody>
+                        @foreach ($junior as $value)
+                        <tr>
+                            <td nowrap>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            <td>{{ $value->gender }}</td>
+                            <td>{{ $value->master }}</td>
+
+                        </tr>
+                        @endforeach
+                    </tbody>   
+            </table>
+            </td>
+            
+        </tr>
+    </table>    
     
     
     
-                <h2>1年後輩芸人</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>芸人</th>
-                    <th>活動時期</th>
-                    <th>活動終了時期</th>
-                    <th>師匠</th>
-                    <th>旧名</th>
-                    <th>公式</th>
-                    <th>Youtube</th>
-                </tr>
-            </thead>
-             
-            <tbody>
-                @foreach ($junior as $value)
-                <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                    <td>{{ $value->active }}</td>
-                    <td>{{ $value->activeend }}</td>
-                    <td>{{ $value->master }}</td>
-                    <td>{{ $value->oldname }}</td>
-                    <td><a href="{{ $value->official }}">公式</a></td>
-                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
-                </tr>
-                @endforeach
-            </tbody>   
-        </table>    
+    
+    
+    
+    
+ 
     
     
     
@@ -119,34 +145,7 @@
     
     
     
-                    <h2>1年先輩芸人</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>芸人</th>
-                    <th>活動時期</th>
-                    <th>活動終了時期</th>
-                    <th>師匠</th>
-                    <th>旧名</th>
-                    <th>公式</th>
-                    <th>Youtube</th>
-                </tr>
-            </thead>
-             
-            <tbody>
-                @foreach ($senior as $value)
-                <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                    <td>{{ $value->active }}</td>
-                    <td>{{ $value->activeend }}</td>
-                    <td>{{ $value->master }}</td>
-                    <td>{{ $value->oldname }}</td>
-                    <td><a href="{{ $value->official }}">公式</a></td>
-                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
-                </tr>
-                @endforeach
-            </tbody>   
-        </table>
+
     
     
     

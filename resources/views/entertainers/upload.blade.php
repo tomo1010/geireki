@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-6">
-            {!! Form::open(['route' => 'Entertainer.importCsv','files'=>true]) !!}
+            {!! Form::open(['route' => 'entertainer.importCsv','files'=>true]) !!}
 
                 <div class="form-group">
                     {!! Form::label('csv', 'ｃｓｖ:') !!}

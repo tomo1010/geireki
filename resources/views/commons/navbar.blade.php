@@ -14,5 +14,13 @@
                 <li class="nav-item">{!! link_to_route('entertainers.create', '新規メッセージの投稿', [], ['class' => 'nav-link']) !!}</li>
             </ul>
         </div>
+        
+        {{--解散済み表示非表示のチェックBOX
+        <form method="post" action="{{ route('entertainers.check')}}">
+         @csrf
+            <input type="checkbox" name="check" value="1" onchange="submit(this.form)">
+        </form>--}}
+
+        
     </nav>
 </header>

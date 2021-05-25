@@ -24,5 +24,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \URL::forceScheme('https');
+        
+        // adminのみ許可
+        \Gate::define('admin', function ($user) {
+        return ($user->admin_flag == 1);
+        });
     }
 }

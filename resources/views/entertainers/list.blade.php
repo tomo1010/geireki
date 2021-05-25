@@ -27,19 +27,19 @@
              
             <tbody>
                 @foreach ($results_1 as $value)
-                @if($value->activeend == NULL)
+                @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                    <td>{{ $value->active }}</td>
-                    <td>{{ $value->activeend }}</td>
+                    <td>{{ $value->active->format('Y年～') }}</td>
+                    <td></td>
                     <td>{{ $value->master }}</td>
                     <td>{{ $value->oldname }}</td>
                 </tr>
                 @else
                 <tr class="text-secondary">
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                    <td>{{ $value->active }}</td>
-                    <td>{{ $value->activeend }}</td>
+                    <td>{{ $value->active->format('Y年～') }}</td>
+                    <td>{{ $value->activeend->format('Y年') }}</td>
                     <td>{{ $value->master }}</td>
                     <td>{{ $value->oldname }}</td>
                 </tr>
@@ -62,19 +62,19 @@
                  
                 <tbody>
                     @foreach ($results_2 as $value)
-                    @if($value->activeend == NULL)
+                    @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
                     <tr>
                         <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                        <td>{{ $value->active }}</td>
-                        <td>{{ $value->activeend }}</td>
+                        <td>{{ $value->active->format('Y年～') }}</td>
+                        <td></td>
                         <td>{{ $value->master }}</td>
                         <td>{{ $value->oldname }}</td>
                     </tr>
                     @else
                     <tr class="text-secondary">
                         <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                        <td>{{ $value->active }}</td>
-                        <td>{{ $value->activeend }}</td>
+                        <td>{{ $value->active->format('Y年～') }}</td>
+                        <td>{{ $value->activeend->format('Y年') }}</td>
                         <td>{{ $value->master }}</td>
                         <td>{{ $value->oldname }}</td>
                     </tr>
@@ -97,19 +97,19 @@
              
             <tbody>
                 @foreach ($results_3 as $value)
-                @if($value->activeend == NULL)
+                @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                    <td>{{ $value->active }}</td>
-                    <td>{{ $value->activeend }}</td>
+                    <td>{{ $value->active->format('Y年～') }}</td>
+                    <td></td>
                     <td>{{ $value->master }}</td>
                     <td>{{ $value->oldname }}</td>
                 </tr>
                 @else
                 <tr class="text-secondary">
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                    <td>{{ $value->active }}</td>
-                    <td>{{ $value->activeend }}</td>
+                    <td>{{ $value->active->format('Y年～') }}</td>
+                    <td>{{ $value->activeend->format('Y年') }}</td>
                     <td>{{ $value->master }}</td>
                     <td>{{ $value->oldname }}</td>
                 </tr>

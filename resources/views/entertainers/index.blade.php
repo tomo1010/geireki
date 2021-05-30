@@ -3,19 +3,6 @@
 @section('content')
 
 
-{{--芸歴リストへのセレクトBOX--}}
-<form method="post" action="{{ route('entertainers.select')}}">
-     @csrf
-<select name="year" onchange="submit(this.form)">
-@for($i = 0; $i < 70; $i++)
-  <option value="{{$i}}">{{$i}}</option>
-@endfor
-</select>
-</form>
-
-
-
-
 <h1>芸人一覧</h1>
     
         <table class="table table-striped">
@@ -86,7 +73,7 @@
         </table>
 
     {{-- ページネーションのリンク --}}
-    {{ $entertainers->appends(request()->query())->links() }}
+    {{ $entertainersAll->appends(request()->query())->links() }}
 
     
 
@@ -108,6 +95,50 @@
             @endforeach
         </tbody>
     </table>
+
+
+<h2>M1ラストイヤーの芸人</h2>    
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@sortablelink('name', '芸人')</th>
+                    <th>@sortablelink('active', '活動時期')</th>
+                    <th>師匠</th>
+                    <th>旧名</th>
+                    <th>公式</th>
+                    <th>Youtube</th>
+                    <th>@sortablelink('active', '芸歴')</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($m1year as $value)
+                <tr>
+                    <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['entertainer' => $value->id]) !!}</td>
+                    <td>{{ $value->active->format('Y年～')}}</td>
+                    <td>{{ $value->master }}</td>
+                    <td>{{ $value->oldname }}</td>
+                    
+                    @empty($value->official)
+                    <td></td>
+                    @else
+                    <td><a href="{{ $value->official }}">公式</a></td>
+                    @endempty
+
+                    @empty($value->youtube)
+                    <td></td>
+                    @else
+                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
+                    @endempty
+                    
+                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+
+
 
     
 <h2>今年解散した芸人</h2>    
@@ -156,9 +187,12 @@
 
     
     {{-- 作成ページへのリンク --}}
+    @if (Auth::check())
     {!! link_to_route('entertainers.create', '新規メッセージの投稿', [], ['class' => 'btn btn-primary']) !!}
-    
+
     {{-- ユーザ登録ページへのリンク --}}
     {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
+    @else
+    @endif
 
 @endsection

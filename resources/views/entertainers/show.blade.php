@@ -2,20 +2,16 @@
 
 @section('content')
 
-    <h1>{{ $entertainer->name }} の詳細ページ</h1>
+    <h1>芸歴{{$now->diffInYears($entertainer->active)}}年目 {{ $entertainer->name }} の詳細ページ</h1>
 
     <table class="table table-bordered">
-        <tr>
-            <th>id</th>
-            <td>{{ $entertainer->id }}</td>
-        </tr>
         <tr>
             <th>名前</th>
             <td>{{ $entertainer->name }}</td>
         </tr>
         <tr>
             <th>人数</th>
-            <td>{{ $entertainer->numberofpeople }}</td>
+            <td>{{ $entertainer->gender }}</td>
         </tr>
         <tr>
             <th>別名</th>
@@ -23,7 +19,7 @@
         </tr>
         <tr>
             <th>活動時期</th>
-            <td>{{ $entertainer->active }}</td>
+            <td>{{ $entertainer->active->format('Y年m月d日～') }}</td>
         </tr>
         <tr>
             <th>活動終了時期</th>
@@ -39,11 +35,11 @@
         </tr>
         <tr>
             <th>公式URL</th>
-            <td>{{ $entertainer->official }}</td>
+            <td><a href="{{ $entertainer->official }}" target="new">{{ $entertainer->official }}</a></td>
         </tr>
         <tr>
             <th>Youtubeチャンネル</th>
-            <td>{{ $entertainer->youtube }}</td>
+            <td><a href="{{ $entertainer->youtube }}" target="new">{{ $entertainer->youtube }}</a></td>
         </tr>
         <tr>
             <th>芸歴</th>
@@ -53,103 +49,103 @@
     
     
     
-    <table class="table table-striped">
-        <tr>
-            <td>1年先輩</td>
-            <td>同期芸人</td>
-            <td>1年後輩</td>
-        </tr>
-        <tr>
-            <td>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>芸人</th>
-                            <th>gender</th>
-                            <th>師匠</th>
-                        </tr>
-                    </thead>
-                     
+    <div class="container">
+        <div class="row">
+                <div class="col-lg-4">1年先輩
+                    <table class="table table-striped">
                     <tbody>
+                        <tr>
+                            <td>名前</td><td>人数</td><td>師匠</td>
+                        </tr>    
                         @foreach ($senior as $value)
                         <tr>
-                            <td nowrap>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                            <td>{{ $value->gender }}</td>
+                            <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            @if($value->gender == '1')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
+                            @elseif($value->gender == '2')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
+                            @elseif($value->gender == '11')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
+                            @elseif($value->gender == '12')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
+                            @elseif($value->gender == '22')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>                                
+                            @elseif($value->gender == '111')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
+                            @elseif($value->gender == '222')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
+                            @endif
                             <td>{{ $value->master }}</td>
                         </tr>
                         @endforeach
                     </tbody>   
-                </table>
-            </td>
-            
-            <td>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>芸人</th>
-                            <th>gender</th>
-                            <th>師匠</th>
-                        </tr>
-                    </thead>
-                     
+                    </table>
+                </div>
+                <div class="col-lg-4">同期
+                    <table class="table table-striped">
                     <tbody>
+                        <tr>
+                            <td>名前</td><td>人数</td><td>師匠</td>
+                        </tr>                        
                         @foreach ($sync as $value)
                         <tr>
-                            <td nowrap>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                            <td>{{ $value->gender }}</td>
+                            <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            @if($value->gender == '1')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
+                            @elseif($value->gender == '2')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinF.png" height="30"></td>
+                            @elseif($value->gender == '11')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
+                            @elseif($value->gender == '12')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiMF.png" height="30"></td>
+                            @elseif($value->gender == '22')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiF.png" height="30"></td>                                
+                            @elseif($value->gender == '111')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
+                            @elseif($value->gender == '222')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioF.png" height="30"></td>
+                            @endif
                             <td>{{ $value->master }}</td>
                         </tr>
                         @endforeach
                     </tbody>   
-                </table>    
-            </td>
-            
-            <td>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>芸人</th>
-                            <th>gender</th>
-                            <th>師匠</th>
-                        </tr>
-                    </thead>
-                     
+                    </table>
+                </div>    
+                <div class="col-lg-4">1年後輩
+                    <table class="table table-striped">
                     <tbody>
+                        <tr>
+                            <td>名前</td><td>人数</td><td>師匠</td>
+                        </tr>                        
                         @foreach ($junior as $value)
                         <tr>
-                            <td nowrap>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                            <td>{{ $value->gender }}</td>
+                            <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            @if($value->gender == '1')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
+                            @elseif($value->gender == '2')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
+                            @elseif($value->gender == '11')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
+                            @elseif($value->gender == '10')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
+                            @elseif($value->gender == '20')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>                                
+                            @elseif($value->gender == '111')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
+                            @elseif($value->gender == '200')
+                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
+                            @endif
                             <td>{{ $value->master }}</td>
-
                         </tr>
                         @endforeach
                     </tbody>   
-            </table>
-            </td>
-            
-        </tr>
-    </table>    
-    
-    
-    
-    
-    
-    
-    
- 
-    
-    
-    
-    
-    
-    
-    
-    
+                    </table>                
+                </div>
+        </div>
+    </div>
 
-    
-    
-    
-
+    {{-- 作成ページへのリンク --}}
+    @if (Auth::check())
     {{-- 編集ページへのリンク --}}
     {!! link_to_route('entertainers.edit', 'このメッセージを編集', ['entertainer' => $entertainer->id], ['class' => 'btn btn-light']) !!}
 
@@ -157,5 +153,7 @@
     {!! Form::model($entertainer, ['route' => ['entertainers.destroy', $entertainer->id], 'method' => 'delete']) !!}
         {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
+    @else
+    @endif
 
 @endsection

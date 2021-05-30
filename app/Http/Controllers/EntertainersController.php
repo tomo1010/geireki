@@ -23,9 +23,24 @@ class EntertainersController extends Controller
     {
         // 一覧を取得
         $entertainersAll = Entertainer::sortable()->orderBy('active', 'desc')->paginate(5);
-        $entertainers = Entertainer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(5);
         
-        //dd($check);
+        //↑一覧から、解散済み、芸歴65年以上データ無しを除いて取得
+        $overyear = Carbon::now()->subYear(65); // ６５年目を取得
+        $entertainers = Entertainer::where('activeend', NULL)->where('active', '<=', $overyear)->sortable()->orderBy('active', 'desc')->paginate(5);
+        
+
+
+        //活動終了入力の場合、活動開始から計算して芸歴を固定する
+        $cal = Entertainer::where('activeend', '!=', NULL)->get();      
+        $diff = array();
+
+        foreach($cal as $value){
+            $active = $value->active;
+            $activeend = $value->activeend;
+            $diff[] = $active->diffInYears($activeend);
+        }
+
+        //dd($diff);
 
 
     
@@ -55,6 +70,10 @@ class EntertainersController extends Controller
         $dissolutions = Entertainer::whereYear('activeend','=', $lastyear)->get();
 
 
+        //芸歴15年目の芸人の一覧
+        $m1year = Carbon::now()->subYear(15); // １５年目を取得
+        $m1year = Entertainer::whereYear('active','=', $m1year)->where('activeend', '=', NULL)->where('numberofpeople', '=', '2')->get();
+
 
 
         // 一覧ビューで表示
@@ -67,6 +86,7 @@ class EntertainersController extends Controller
             'results_3' => $results_3,        
             'now' => new \Carbon\Carbon(),
             'dissolutions' => $dissolutions,
+            'm1year' => $m1year,
         ]);
         
 

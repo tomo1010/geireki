@@ -140,6 +140,7 @@ class EntertainersController extends Controller
         $entertainer = new Entertainer;
         $entertainer->name = $request->name;
         $entertainer->numberofpeople = $request->numberofpeople;
+        $entertainer->gender = $request->gender;
         $entertainer->alias = $request->alias;
         $entertainer->active = $request->active;
         $entertainer->activeend = $request->activeend;
@@ -324,16 +325,17 @@ class EntertainersController extends Controller
         $count = 0;
         foreach($dataList as $row){
             Entertainer::insert([
-                'name' => $row[0], 
-                'numberofpeople' => $row[1],
-                'gender' => $row[2],
-                'alias' => $row[3],
-                'active' => $row[4],
-                'activeend' => $row[5] == '' ? NULL : $row[5],
-                'master' => $row[6],
-                'oldname' => $row[7],
-                'official' => $row[8] == '' ? NULL : $row[8],
-                'youtube' => $row[9] == '' ? NULL : $row[9],
+                'id' => $row[0], 
+                'name' => $row[1], 
+                'numberofpeople' => $row[2],
+                'gender' => $row[3],
+                'alias' => $row[4],
+                'active' => $row[5],
+                'activeend' => $row[6] == '' ? NULL : $row[6],
+                'master' => $row[7],
+                'oldname' => $row[8],
+                'official' => $row[9] == '' ? NULL : $row[9],
+                'youtube' => $row[10] == '' ? NULL : $row[10],
                 ]);
             $count++;
         }

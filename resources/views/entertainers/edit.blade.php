@@ -11,9 +11,10 @@
                 <div class="form-group">
                     {!! Form::label('name', '名前:') !!}
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}
-
                     {!! Form::label('numberofpeople', '人数:') !!}
                     {!! Form::text('numberofpeople', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('gender', '性別:') !!}
+                    {!! Form::text('gender', null, ['class' => 'form-control']) !!}
                     {!! Form::label('alias', '別名・略名:') !!}
                     {!! Form::text('alias', null, ['class' => 'form-control']) !!}
                     {!! Form::label('active', '活動時期:') !!}

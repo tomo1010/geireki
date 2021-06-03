@@ -6,11 +6,19 @@
 
     <table class="table table-bordered">
         <tr>
+            <th>id</th>
+            <td>{{ $entertainer->id }}</td>
+        </tr>
+        <tr>
             <th>名前</th>
             <td>{{ $entertainer->name }}</td>
         </tr>
         <tr>
             <th>人数</th>
+            <td>{{ $entertainer->numberofpeople }}</td>
+        </tr>
+        <tr>
+            <th>性別</th>
             <td>{{ $entertainer->gender }}</td>
         </tr>
         <tr>
@@ -126,13 +134,13 @@
                                 <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
                             @elseif($value->gender == '11')
                                 <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
-                            @elseif($value->gender == '10')
+                            @elseif($value->gender == '12')
                                 <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
-                            @elseif($value->gender == '20')
+                            @elseif($value->gender == '22')
                                 <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>                                
                             @elseif($value->gender == '111')
                                 <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
-                            @elseif($value->gender == '200')
+                            @elseif($value->gender == '222')
                                 <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
                             @endif
                             <td>{{ $value->master }}</td>

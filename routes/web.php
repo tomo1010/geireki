@@ -12,8 +12,9 @@
 */
 
 Route::get('/', 'EntertainersController@index');
-Route::resource('entertainers', 'EntertainersController');
-//Route::get('/{id}', 'EntertainersController@show')->name('entertainers.show');
+//Route::resource('entertainer', 'EntertainersController');
+Route::get('entertainers/{entertainer}', 'EntertainersController@show')->name('entertainers.show');
+
 
 Route::get('list/{year}', 'EntertainersController@list')->name('entertainers.list');
 Route::post('/', 'EntertainersController@selectYear')->name('entertainers.select');
@@ -24,6 +25,7 @@ Route::post('/', 'EntertainersController@selectYear')->name('entertainers.select
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
 Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 
+
 // login
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
@@ -32,11 +34,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
     });
 
-/* システム管理者のみ
+
+// システム管理者のみ
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], function () {
-    Route::post('/', 'EntertainersController@store');
-    Route::put('/{id}', 'EntertainersController@update');
-    Route::delete('/{id}', 'EntertainersController@destroy');
+    Route::post('entertainer', 'EntertainersController@store')->name('entertainers.store');
+    Route::get('entertainers/create', 'EntertainersController@create')->name('entertainers.create');
+    Route::put('entertainers/{entertainer}', 'EntertainersController@update')->name('entertainers.update');
+    Route::delete('entertainers/{entertainer}', 'EntertainersController@destroy')->name('entertainers.destroy');
+    Route::get('entertainers/{entertainer}/edit', 'EntertainersController@edit')->name('entertainers.edit');
     
     Route::resource('user', 'AdminController');
     
@@ -44,4 +49,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     Route::get('upload', 'EntertainersController@uploadcsv');
     Route::post('upload', 'EntertainersController@importCsv')->name('entertainer.importCsv');
 });
-*/

@@ -18,8 +18,12 @@ Route::get('entertainers/{entertainer}', 'EntertainersController@show')->name('e
 
 Route::get('list/{year}', 'EntertainersController@list')->name('entertainers.list');
 Route::post('/', 'EntertainersController@selectYear')->name('entertainers.select');
-//Route::post('/', 'EntertainersController@checkDissolution')->name('entertainers.check');
+//Route::post('check', 'EntertainersController@checkDissolution')->name('entertainers.check');
 
+
+    // csv upload
+    Route::get('upload', 'EntertainersController@uploadcsv');
+    Route::post('upload', 'EntertainersController@importCsv')->name('entertainer.importCsv');
 
 // signup
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -43,9 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     Route::delete('entertainers/{entertainer}', 'EntertainersController@destroy')->name('entertainers.destroy');
     Route::get('entertainers/{entertainer}/edit', 'EntertainersController@edit')->name('entertainers.edit');
     
-    Route::resource('user', 'AdminController');
+    // Route::resource('user', 'AdminController');
     
-    // csv upload
-    Route::get('upload', 'EntertainersController@uploadcsv');
-    Route::post('upload', 'EntertainersController@importCsv')->name('entertainer.importCsv');
+
 });

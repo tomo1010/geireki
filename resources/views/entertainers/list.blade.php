@@ -13,8 +13,6 @@
                             <th>芸人</th>
                             <th>活動時期</th>
                             <th>活動終了時期</th>
-                            <th>師匠</th>
-                            <th>旧名</th>
                         </tr>
                     </thead>
                      
@@ -25,16 +23,12 @@
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
                             <td>{{ $value->active->format('Y年～') }}</td>
                             <td></td>
-                            <td>{{ $value->master }}</td>
-                            <td>{{ $value->oldname }}</td>
                         </tr>
                         @else
                         <tr class="text-secondary">
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
                             <td>{{ $value->active->format('Y年～') }}</td>
                             <td>{{ $value->activeend->format('Y年') }}</td>
-                            <td>{{ $value->master }}</td>
-                            <td>{{ $value->oldname }}</td>
                         </tr>
                         @endif
                         @endforeach
@@ -48,8 +42,6 @@
                             <th>芸人</th>
                             <th>活動時期</th>
                             <th>活動終了時期</th>
-                            <th>師匠</th>
-                            <th>旧名</th>
                         </tr>
                     </thead>
                      
@@ -60,16 +52,12 @@
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
                             <td>{{ $value->active->format('Y年～') }}</td>
                             <td></td>
-                            <td>{{ $value->master }}</td>
-                            <td>{{ $value->oldname }}</td>
                         </tr>
                         @else
                         <tr class="text-secondary">
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
                             <td>{{ $value->active->format('Y年～') }}</td>
                             <td>{{ $value->activeend->format('Y年') }}</td>
-                            <td>{{ $value->master }}</td>
-                            <td>{{ $value->oldname }}</td>
                         </tr>
                         @endif
                         @endforeach
@@ -83,8 +71,6 @@
                             <th>芸人</th>
                             <th>活動時期</th>
                             <th>活動終了時期</th>
-                            <th>師匠</th>
-                            <th>旧名</th>
                         </tr>
                     </thead>
                      
@@ -95,16 +81,12 @@
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
                             <td>{{ $value->active->format('Y年～') }}</td>
                             <td></td>
-                            <td>{{ $value->master }}</td>
-                            <td>{{ $value->oldname }}</td>
                         </tr>
                         @else
                         <tr class="text-secondary">
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
                             <td>{{ $value->active->format('Y年～') }}</td>
                             <td>{{ $value->activeend->format('Y年') }}</td>
-                            <td>{{ $value->master }}</td>
-                            <td>{{ $value->oldname }}</td>
                         </tr>
                         @endif
                         @endforeach

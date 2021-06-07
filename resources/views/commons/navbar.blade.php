@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         
         {{-- トップページへのリンク --}}
-        <a class="navbar-brand" href="/">芸歴.net</a>
+        <a class="navbar-brand" href="/">芸歴</a>
 
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
             <span class="navbar-toggler-icon"></span>
@@ -46,7 +46,16 @@
         </form>--}}
 
 
-
+    <input type="checkbox" name="disband" value="1" onchange="myfunc(this.value)" /> <font color="white">解散済みを含める</font>
+        <script>
+            function myfunc(value) {
+            if (value==1) {
+               location.href = '/?disband=1';
+            }
+        }
+    </script>
+        
+        
         
         
     </nav>

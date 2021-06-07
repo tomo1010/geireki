@@ -12,6 +12,7 @@ use Goodby\CSV\Import\Standard\Lexer;
 use Goodby\CSV\Import\Standard\Interpreter;
 
 
+
 class EntertainersController extends Controller
 {
     /**
@@ -21,14 +22,22 @@ class EntertainersController extends Controller
      */
     public function index()
     {
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+
+
+        if($disband == '1'){
         // 一覧を取得
         $entertainersAll = Entertainer::sortable()->orderBy('active', 'desc')->paginate(5);
+        }
         
+        else{
         //↑一覧から、解散済み、芸歴65年以上データ無しを除いて取得
-        $overyear = Carbon::now()->subYear(65); // ６５年目を取得
-        $entertainers = Entertainer::where('activeend', NULL)->where('active', '<=', $overyear)->sortable()->orderBy('active', 'desc')->paginate(5);
+        //$overyear = Carbon::now()->subYear(65); // ６５年目を取得
+        //->where('active', '<', $overyear)
+        $entertainersAll = Entertainer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(5);
+        }
         
-
 
         //活動終了入力の場合、活動開始から計算して芸歴を固定する
         $cal = Entertainer::where('activeend', '!=', NULL)->get();      
@@ -78,7 +87,7 @@ class EntertainersController extends Controller
 
         // 一覧ビューで表示
         return view('entertainers.index', [
-            'entertainers' => $entertainers,
+            //'entertainers' => $entertainers,
             'entertainersAll' => $entertainersAll,
             'counts' => $counts,
             'results_1' => $results_1,
@@ -325,17 +334,17 @@ class EntertainersController extends Controller
         $count = 0;
         foreach($dataList as $row){
             Entertainer::insert([
-                'id' => $row[0], 
-                'name' => $row[1], 
-                'numberofpeople' => $row[2],
-                'gender' => $row[3],
-                'alias' => $row[4],
-                'active' => $row[5],
-                'activeend' => $row[6] == '' ? NULL : $row[6],
-                'master' => $row[7],
-                'oldname' => $row[8],
-                'official' => $row[9] == '' ? NULL : $row[9],
-                'youtube' => $row[10] == '' ? NULL : $row[10],
+                //'id' => $row[0], 
+                'name' => $row[0], 
+                'numberofpeople' => $row[1],
+                'gender' => $row[2],
+                'alias' => $row[3],
+                'active' => $row[4],
+                'activeend' => $row[5] == '' ? NULL : $row[5],
+                'master' => $row[6],
+                'oldname' => $row[7],
+                'official' => $row[8] == '' ? NULL : $row[8],
+                'youtube' => $row[9] == '' ? NULL : $row[9],
                 ]);
             $count++;
         }

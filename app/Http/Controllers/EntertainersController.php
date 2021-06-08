@@ -27,27 +27,27 @@ class EntertainersController extends Controller
 
 
         if($disband == '1'){
-        // 一覧を取得
-        $entertainersAll = Entertainer::sortable()->orderBy('active', 'desc')->paginate(5);
-        }
+            // 一覧を取得
+            $entertainers = Entertainer::sortable()->orderBy('active', 'desc')->paginate(5);
+            }
         
         else{
-        //↑一覧から、解散済み、芸歴65年以上データ無しを除いて取得
-        //$overyear = Carbon::now()->subYear(65); // ６５年目を取得
-        //->where('active', '<', $overyear)
-        $entertainersAll = Entertainer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(5);
-        }
+            //↑一覧から、解散済み、芸歴65年以上データ無しを除いて取得
+            //$overyear = Carbon::now()->subYear(65); // ６５年目を取得
+            //->where('active', '<', $overyear)
+            $entertainers = Entertainer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(5);
+            }
         
 
         //活動終了入力の場合、活動開始から計算して芸歴を固定する
-        $cal = Entertainer::where('activeend', '!=', NULL)->get();      
-        $diff = array();
+        //$cal = Entertainer::where('activeend', '!=', NULL)->get();      
+        //$diff = array();
 
-        foreach($cal as $value){
-            $active = $value->active;
-            $activeend = $value->activeend;
-            $diff[] = $active->diffInYears($activeend);
-        }
+        //foreach($cal as $value){
+            //$active = $value->active;
+            //$activeend = $value->activeend;
+            //$diff[] = $active->diffInYears($activeend);
+        //}
 
         //dd($diff);
 
@@ -87,8 +87,8 @@ class EntertainersController extends Controller
 
         // 一覧ビューで表示
         return view('entertainers.index', [
-            //'entertainers' => $entertainers,
-            'entertainersAll' => $entertainersAll,
+            'entertainers' => $entertainers,
+            //'entertainersAll' => $entertainersAll,
             'counts' => $counts,
             'results_1' => $results_1,
             'results_2' => $results_2,

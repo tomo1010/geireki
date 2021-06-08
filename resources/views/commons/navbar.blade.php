@@ -55,9 +55,11 @@
         }
     </script>
         
-        
-        
-        
+
+            {{--Google検索BOX--}}
+<script async src="https://cse.google.com/cse.js?cx=cac89bc70139611b6"></script>
+<div class="gcse-search"></div>
+
     </nav>
 
         {{--芸歴リストへのセレクトBOX--}}
@@ -71,5 +73,6 @@
             </select>
         </form>
         </p></center>
+        
 
 </header>

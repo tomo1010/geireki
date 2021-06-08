@@ -15,12 +15,12 @@
                     <th>旧名</th>
                     <th>公式</th>
                     <th>Youtube</th>
-                    <th>@sortablelink('active', '芸歴')</th>
+                    <th>芸歴</th>
                 </tr>
             </thead>
             
             <tbody>
-                @foreach ($entertainersAll as $entertainer)
+                @foreach ($entertainers as $entertainer)
                 @if($entertainer->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['entertainer' => $entertainer->id]) !!}</td>
@@ -73,7 +73,7 @@
         </table>
 
     {{-- ページネーションのリンク --}}
-    {{ $entertainersAll->appends(request()->query())->links() }}
+    {{ $entertainers->appends(request()->query())->links() }}
 
     
 
@@ -107,7 +107,7 @@
                     <th>旧名</th>
                     <th>公式</th>
                     <th>Youtube</th>
-                    <th>@sortablelink('active', '芸歴')</th>
+                    <th>芸歴</th>
                 </tr>
             </thead>
             
@@ -152,7 +152,7 @@
                     <th>旧名</th>
                     <th>公式</th>
                     <th>Youtube</th>
-                    <th>@sortablelink('active', '芸歴')</th>
+                    <th>芸歴</th>
                 </tr>
             </thead>
             

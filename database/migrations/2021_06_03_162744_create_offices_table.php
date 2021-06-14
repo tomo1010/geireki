@@ -17,6 +17,7 @@ class CreateOfficesTable extends Migration
             $table->bigIncrements('id');
             $table->string('office');    // officeカラム追加
             $table->timestamps();
+            
         });
     }
 

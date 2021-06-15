@@ -18,4 +18,11 @@ class Entertainer extends Model
         'active', //　追加する
         'activeend' //　追加する
     ];
+    
+    
+    //この芸人が所属する事務所。
+    public function office()
+    {
+        return $this->belongsTo(Office::class);
+    }
 }

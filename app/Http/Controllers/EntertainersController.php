@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entertainer;
+use App\Office; 
 
 use Carbon\Carbon; //芸歴計算
 
@@ -36,8 +37,9 @@ class EntertainersController extends Controller
             //$overyear = Carbon::now()->subYear(65); // ６５年目を取得
             //->where('active', '<', $overyear)
             $entertainers = Entertainer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(5);
+            //$office = Office::find(1)->entertainers;
             }
-        
+        //dd($office);
 
         //活動終了入力の場合、活動開始から計算して芸歴を固定する
         //$cal = Entertainer::where('activeend', '!=', NULL)->get();      
@@ -96,6 +98,7 @@ class EntertainersController extends Controller
             'now' => new \Carbon\Carbon(),
             'dissolutions' => $dissolutions,
             'm1year' => $m1year,
+            'office' => $office,
         ]);
         
 
@@ -345,6 +348,7 @@ class EntertainersController extends Controller
                 'oldname' => $row[7],
                 'official' => $row[8] == '' ? NULL : $row[8],
                 'youtube' => $row[9] == '' ? NULL : $row[9],
+                'office_id' => $row[10] == '' ? NULL : $row[10],
                 ]);
             $count++;
         }

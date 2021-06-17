@@ -37,9 +37,8 @@ class EntertainersController extends Controller
             //$overyear = Carbon::now()->subYear(65); // ６５年目を取得
             //->where('active', '<', $overyear)
             $entertainers = Entertainer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(5);
-            //$office = Office::find(1)->entertainers;
             }
-        //dd($office);
+
 
         //活動終了入力の場合、活動開始から計算して芸歴を固定する
         //$cal = Entertainer::where('activeend', '!=', NULL)->get();      
@@ -75,6 +74,12 @@ class EntertainersController extends Controller
 
 
 
+        //事務所別に人数を表示
+        $office = Office::all();
+        foreach($office as $value){
+            $value->loadRelationshipCounts();  // 関係するモデルの件数をロード
+        }
+
 
         //今年解散した芸人の一覧
         $lastyear = Carbon::now()->subYear(0); // 今年を取得
@@ -84,6 +89,7 @@ class EntertainersController extends Controller
         //芸歴15年目の芸人の一覧
         $m1year = Carbon::now()->subYear(15); // １５年目を取得
         $m1year = Entertainer::whereYear('active','=', $m1year)->where('activeend', '=', NULL)->where('numberofpeople', '=', '2')->get();
+
 
 
 
@@ -198,6 +204,12 @@ class EntertainersController extends Controller
         $year = new Carbon($active);
         $subYear = $year->subYear();
         $senior = Entertainer::whereYear('active','=', $subYear)->get();
+        
+        
+        //所属事務所
+        $office = Entertainer::find($id)->office;
+
+
 
         // メッセージ詳細ビューでそれを表示
         return view('entertainers.show', [
@@ -206,6 +218,7 @@ class EntertainersController extends Controller
             'junior' => $junior,
             'senior' => $senior,
             'now' => new \Carbon\Carbon(),
+            'office' => $office,
         ]);
     }
 

@@ -79,7 +79,7 @@
 
 
 
-<h2>芸歴年別一覧</h2>     
+<h2>芸歴年別一覧</h2>
     <table>
         <tbody>
             <?php $year=0; ?>
@@ -95,6 +95,21 @@
             @endforeach
         </tbody>
     </table>
+
+
+<h2>事務所別一覧</h2>
+    <table>
+        <tbody>
+            @foreach ($office as $value)
+                <tr>
+                    <td>
+                    {{$value->office}} {{$value->entertainers_count}}人
+                </tr>
+
+            @endforeach
+        </tbody>
+    </table>
+
 
 
 <h2>M1ラストイヤーの芸人</h2>    

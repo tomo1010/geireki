@@ -42,6 +42,10 @@
             <td>{{ $entertainer->oldname }}</td>
         </tr>
         <tr>
+            <th>事務所</th>
+            <td>{{ $office->office }}</td>
+        </tr>
+        <tr>
             <th>公式URL</th>
             <td><a href="{{ $entertainer->official }}" target="new">{{ $entertainer->official }}</a></td>
         </tr>

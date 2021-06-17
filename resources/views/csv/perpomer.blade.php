@@ -2,11 +2,11 @@
 
 @section('content')
 
-    <h1>CSVアップロード</h1>
+    <h1>個人CSVアップロード</h1>
 
     <div class="row">
         <div class="col-6">
-            {!! Form::open(['route' => 'entertainer.importCsv','files'=>true]) !!}
+            {!! Form::open(['route' => 'csv.importPerfomer','files'=>true]) !!}
 
                 <div class="form-group">
                     {!! Form::label('csv', 'ｃｓｖ:') !!}

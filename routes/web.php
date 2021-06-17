@@ -21,9 +21,18 @@ Route::post('/', 'EntertainersController@selectYear')->name('entertainers.select
 //Route::post('check', 'EntertainersController@checkDissolution')->name('entertainers.check');
 
 
-    // csv upload
-    Route::get('upload', 'EntertainersController@uploadcsv');
-    Route::post('upload', 'EntertainersController@importCsv')->name('entertainer.importCsv');
+    // 芸人データ csv処理
+    Route::get('csv/entertainer', 'CsvController@uploadEntertainer');
+    Route::post('csv/entertainer', 'CsvController@importEntertainer')->name('csv.importEntertainer');
+    
+    // 事務所データ csv処理
+    Route::get('csv/office', 'CsvController@uploadOffice');
+    Route::post('csv/office', 'CsvController@importOffice')->name('csv.importOffice');
+    
+    // 個人データ csv処理
+    Route::get('csv/perfomer', 'CsvController@uploadPerfomer');
+    Route::post('csv/perfomer', 'CsvController@importPerfomer')->name('csv.importPerfomer');
+
 
 // signup
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -39,7 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 
-// システム管理者のみ
+// 管理者のみ
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], function () {
     Route::post('entertainer', 'EntertainersController@store')->name('entertainers.store');
     Route::get('entertainers/create', 'EntertainersController@create')->name('entertainers.create');

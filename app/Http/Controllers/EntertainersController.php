@@ -188,7 +188,7 @@ class EntertainersController extends Controller
     {
         // idの値でメッセージを検索して取得
         $entertainer = Entertainer::findOrFail($id);
-        
+
         // 活動開始年から芸歴を取得
         $active = $entertainer->active;
         
@@ -210,6 +210,9 @@ class EntertainersController extends Controller
         $office = Entertainer::find($id)->office;
 
 
+        //メンバー（個人）を取得
+        $perfomer = Entertainer::find($id)->perfomers;
+
 
         // メッセージ詳細ビューでそれを表示
         return view('entertainers.show', [
@@ -219,6 +222,7 @@ class EntertainersController extends Controller
             'senior' => $senior,
             'now' => new \Carbon\Carbon(),
             'office' => $office,
+            'perfomer' => $perfomer,
         ]);
     }
 

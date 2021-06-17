@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Entertainer;
 use App\Office; 
+use App\Perfomer; 
 
 use Goodby\CSV\Import\Standard\LexerConfig; //csvインポート
 use Goodby\CSV\Import\Standard\Lexer;
@@ -200,16 +201,23 @@ class CsvController extends Controller
             Perfomer::insert([
                 //'id' => $row[0], 
                 'name' => $row[0], 
-                'numberofpeople' => $row[1],
-                'gender' => $row[2],
-                'alias' => $row[3],
-                'active' => $row[4],
-                'activeend' => $row[5] == '' ? NULL : $row[5],
-                'master' => $row[6],
-                'oldname' => $row[7],
-                'official' => $row[8] == '' ? NULL : $row[8],
-                'youtube' => $row[9] == '' ? NULL : $row[9],
-                'office_id' => $row[10] == '' ? NULL : $row[10],
+                'realname' => $row[1],
+                'alias' => $row[2],
+                'birthday' => $row[3] == '' ? NULL : $row[3],
+                'deth' => $row[4] == '' ? NULL : $row[4],
+                'birthplace' => $row[5],
+                'bloodtype' => $row[6],
+                'height' => $row[7],
+                'dialect' => $row[8],
+                'educational' => $row[9],
+                'master' => $row[10],
+                'school' => $row[11],                
+                'active' => $row[12] == '' ? NULL : $row[12],
+                'activeend' => $row[13] == '' ? NULL : $row[13],
+                'official' => $row[14] == '' ? NULL : $row[14],
+                'youtube' => $row[15] == '' ? NULL : $row[15],
+                'entertainer_id' => $row[16] == '' ? NULL : $row[16],
+                'office_id' => $row[17] == '' ? NULL : $row[17],
                 ]);
             $count++;
         }

@@ -17,4 +17,7 @@ class Office extends Model
     {
         $this->loadCount('entertainers');
     }
+
+
+    
 }

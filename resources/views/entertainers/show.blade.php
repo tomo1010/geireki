@@ -46,6 +46,14 @@
             <td>{{ $office->office }}</td>
         </tr>
         <tr>
+            <th>メンバー</th>
+            <td>
+            @foreach($perfomer as $value)
+            {{ $value->name }}/
+            @endforeach
+            </td>
+        </tr>
+        <tr>
             <th>公式URL</th>
             <td><a href="{{ $entertainer->official }}" target="new">{{ $entertainer->official }}</a></td>
         </tr>

@@ -25,4 +25,11 @@ class Entertainer extends Model
     {
         return $this->belongsTo(Office::class);
     }
+    
+    
+    //このコンビ名の個人（メンバー）
+    public function perfomers()
+    {
+        return $this->hasMany(Perfomer::class);
+    }
 }

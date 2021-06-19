@@ -11,6 +11,13 @@ class Office extends Model
     {
         return $this->hasMany(Entertainer::class);
     }
+
+    
+    //この事務所に所属する個人
+    public function perfomers()
+    {
+        return $this->hasMany(Perfomer::class);
+    }
     
     //所属芸人の件数
     public function loadRelationshipCounts()

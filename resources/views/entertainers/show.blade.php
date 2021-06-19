@@ -27,11 +27,11 @@
         </tr>
         <tr>
             <th>活動時期</th>
-            <td>{{ $entertainer->active->format('Y年m月d日～') }}</td>
+            <td>{{ $entertainer->active }}</td>
         </tr>
         <tr>
             <th>活動終了時期</th>
-            <td>{{ $entertainer->activeend->format('Y年m月d日') }}</td>
+            <td>{{ $entertainer->activeend}}</td>
         </tr>
         <tr>
             <th>師匠</th>
@@ -76,7 +76,7 @@
             <tbody>
                 @foreach ($perfomer as $value)
                 <tr>
-                    <td nowrap>{{ $value->name }}</td>
+                    <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
                     <td>{{ $value->active }}</td>
                     <td>{{ $value->master }}</td>
                     <td>{{ $value->school }}</td>

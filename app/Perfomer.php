@@ -11,4 +11,10 @@ class Perfomer extends Model
     {
         return $this->belongsTo(Entertainer::class);
     }
+    
+    //この個人が所属する事務所。
+    public function office()
+    {
+        return $this->belongsTo(Office::class);
+    }
 }

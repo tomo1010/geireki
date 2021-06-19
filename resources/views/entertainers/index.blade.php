@@ -23,7 +23,7 @@
                 @foreach ($entertainers as $entertainer)
                 @if($entertainer->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                 <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['entertainer' => $entertainer->id]) !!}</td>
+                    <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}</td>
                     <td>{{ $entertainer->active->format('Y年～') }}</td>
                     <td></td>
                     <td>{{ $entertainer->master }}</td>
@@ -46,7 +46,7 @@
                 @else
 
                 <tr class="text-secondary">
-                    <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['entertainer' => $entertainer->id]) !!}（解散済）</td>
+                    <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}（解散済）</td>
                     <td>{{ $entertainer->active->format('Y年～') }}</td>
                     <td>{{ $entertainer->activeend->format('Y年') }}</td>
                     <td>{{ $entertainer->master }}</td>
@@ -75,6 +75,8 @@
     {{-- ページネーションのリンク --}}
     {{ $entertainers->appends(request()->query())->links() }}
 
+    
+    
     
 
 
@@ -129,7 +131,7 @@
             <tbody>
                 @foreach ($m1year as $value)
                 <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['entertainer' => $value->id]) !!}</td>
+                    <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
                     <td>{{ $value->active->format('Y年～')}}</td>
                     <td>{{ $value->master }}</td>
                     <td>{{ $value->oldname }}</td>
@@ -174,7 +176,7 @@
             <tbody>
                 @foreach ($dissolutions as $dissolution)
                 <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $dissolution->name, ['entertainer' => $dissolution->id]) !!}</td>
+                    <td nowrap>{!! link_to_route('entertainers.show', $dissolution->name, ['id' => $dissolution->id]) !!}</td>
                     <td>{{ $dissolution->active->format('Y年～')}}</td>
                     <td>{{ $dissolution->activeend->format('Y年m月d日') }}</td>
                     <td>{{ $dissolution->master }}</td>

@@ -21,14 +21,14 @@
                         @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
                         <tr>
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                            <td>{{ $value->active->format('Y年～') }}</td>
+                            <td>{{ $value->active }}</td>
                             <td></td>
                         </tr>
                         @else
                         <tr class="text-secondary">
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            <td>{{ $value->active->format('Y年～') }}</td>
-                            <td>{{ $value->activeend->format('Y年') }}</td>
+                            <td>{{ $value->active }}</td>
+                            <td>{{ $value->activeend }}</td>
                         </tr>
                         @endif
                         @endforeach

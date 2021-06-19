@@ -11,14 +11,18 @@
 |
 */
 
+//芸人データ
 Route::get('/', 'EntertainersController@index');
-//Route::resource('entertainer', 'EntertainersController');
-Route::get('entertainers/{entertainer}', 'EntertainersController@show')->name('entertainers.show');
+Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertainers.show');
 
 
 Route::get('list/{year}', 'EntertainersController@list')->name('entertainers.list');
 Route::post('/', 'EntertainersController@selectYear')->name('entertainers.select');
 //Route::post('check', 'EntertainersController@checkDissolution')->name('entertainers.check');
+
+
+//個人データ
+Route::resource('perfomers', 'PerfomersController');
 
 
     // 芸人データ csv処理

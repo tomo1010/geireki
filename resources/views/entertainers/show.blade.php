@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <th>活動終了時期</th>
-            <td>{{ $entertainer->activeend }}</td>
+            <td>{{ $entertainer->activeend->format('Y年m月d日') }}</td>
         </tr>
         <tr>
             <th>師匠</th>
@@ -45,15 +45,6 @@
             <th>事務所</th>
             <td>{{ $office->office }}</td>
         </tr>
-        <tr>
-            <th>メンバー</th>
-            <td>
-            @foreach($perfomer as $value)
-            {{ $value->name }}/
-            @endforeach
-            </td>
-        </tr>
-        <tr>
             <th>公式URL</th>
             <td><a href="{{ $entertainer->official }}" target="new">{{ $entertainer->official }}</a></td>
         </tr>
@@ -65,8 +56,38 @@
             <th>芸歴</th>
             <td>{{$now->diffInYears($entertainer->active)}}年目</td>
         </tr>
-    </table>
-    
+
+        <tr>
+        <th>
+            メンバー
+        </th>
+        <td>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>名前</th>
+                    <th>活動時期</th>
+                    <th>師匠</th>
+                    <th>出身</th>
+                    <th>芸歴</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($perfomer as $value)
+                <tr>
+                    <td nowrap>{{ $value->name }}</td>
+                    <td>{{ $value->active }}</td>
+                    <td>{{ $value->master }}</td>
+                    <td>{{ $value->school }}</td>
+                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        </td>
+        </tr>
+        </table>
     
     
     <div class="container">

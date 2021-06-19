@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Entertainer;
 use App\Office; 
+use App\Perfomer;
 
 use Carbon\Carbon; //芸歴計算
 
@@ -40,18 +41,19 @@ class EntertainersController extends Controller
             }
 
 
-        //活動終了入力の場合、活動開始から計算して芸歴を固定する
-        //$cal = Entertainer::where('activeend', '!=', NULL)->get();      
-        //$diff = array();
 
-        //foreach($cal as $value){
-            //$active = $value->active;
-            //$activeend = $value->activeend;
-            //$diff[] = $active->diffInYears($activeend);
-        //}
+        /*活動終了入力の場合、活動開始から計算して芸歴を固定する
+        $cal = Entertainer::where('activeend', '!=', NULL)->get();      
+        $diff = array();
+
+        foreach($cal as $value){
+            $active = $value->active;
+            $activeend = $value->activeend;
+            $diff[] = $active->diffInYears($activeend);
+        }
 
         //dd($diff);
-
+        */
 
     
         // 芸歴別に人数をカウントし一覧
@@ -72,6 +74,25 @@ class EntertainersController extends Controller
             $results_3[] = Entertainer::whereYear('active','=', $year)->where('numberofpeople','=', '3')->count();
         }
 
+
+
+        /*本日の誕生日を表示
+        $perfomers = Perfomer::find(100);
+        $birthday = $perfomers->birthday;
+        dd($birthday);
+        
+        foreach($perfomers as $value){
+            if($value->birthday->isBirthday()){
+                $birthday[] = $value;
+            }
+            else{
+                
+            }
+        }
+
+        //$perfomers = Perfomer::where('birthday', '=' , $today);
+        //dd($perfomers);
+*/
 
 
         //事務所別に人数を表示
@@ -194,6 +215,7 @@ class EntertainersController extends Controller
         
         // 同期芸人を取得
         $sync = Entertainer::whereYear('active','=', $active)->where('id','!=',$id)->get();
+        $sync_1 = Perfomer::whereYear('active','=', $active)->where('entertainer_id','=',NULL)->where('id','!=',$id)->get();
 
         // 1年後輩を取得
         $year = new Carbon($active);
@@ -218,6 +240,7 @@ class EntertainersController extends Controller
         return view('entertainers.show', [
             'entertainer' => $entertainer,
             'sync' => $sync,
+            'sync_1' => $sync_1,
             'junior' => $junior,
             'senior' => $senior,
             'now' => new \Carbon\Carbon(),
@@ -330,9 +353,11 @@ class EntertainersController extends Controller
         $entertainers = Entertainer::sortable()->orderBy('active')->get();// 一覧を取得
         $listyear = Carbon::now()->subYear($year); // 芸歴○年目を取得
         
-        $results_1 = Entertainer::whereYear('active','=', $listyear)->where('numberofpeople','=', '1')->get();
+        $results_1 = Perfomer::whereYear('active','=', $listyear)->where('entertainer_id','=', NULL)->get();
         $results_2 = Entertainer::whereYear('active','=', $listyear)->where('numberofpeople','=', '2')->get();
         $results_3 = Entertainer::whereYear('active','=', $listyear)->where('numberofpeople','=', '3')->get();
+        
+        //dd($results_1);
         
         
         // 一覧ビューで表示

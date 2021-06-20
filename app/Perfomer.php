@@ -17,4 +17,7 @@ class Perfomer extends Model
     {
         return $this->belongsTo(Office::class);
     }
+    
+    //carbonで使えるように設定
+    protected $dates   = ['birthday','active'];
 }

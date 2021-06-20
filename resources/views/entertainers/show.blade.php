@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <th>活動時期</th>
-            <td>{{ $entertainer->active }}</td>
+            <td>{{ $entertainer->active}}</td>
         </tr>
         <tr>
             <th>活動終了時期</th>

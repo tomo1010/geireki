@@ -55,7 +55,7 @@
         </tr>        
         <tr>
             <th>活動時期</th>
-            <td>{{ $perfomer->active }}</td>
+            <td>{{ $perfomer->active}}</td>
         </tr>
         <tr>
             <th>活動終了時期</th>

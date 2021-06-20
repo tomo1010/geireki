@@ -24,6 +24,7 @@ class EntertainersController extends Controller
      */
     public function index()
     {
+        // dd(Perfomer::with('entertainer')->get()[1000]);
         //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
         $disband = request('disband');
 
@@ -76,23 +77,19 @@ class EntertainersController extends Controller
 
 
 
-        /*本日の誕生日を表示
-        $perfomers = Perfomer::find(100);
-        $birthday = $perfomers->birthday;
-        dd($birthday);
-        
+        //本日の誕生日を表示
+        $perfomers = Perfomer::get();
+        $carbon = Carbon::now();
+        $birthday = array();
+
         foreach($perfomers as $value){
-            if($value->birthday->isBirthday()){
-                $birthday[] = $value;
-            }
-            else{
-                
+            $day = $value->birthday;
+            if($day !== NULL){
+                if($day->isBirthday($carbon)){
+                    $birthday[] = $value;
+                }
             }
         }
-
-        //$perfomers = Perfomer::where('birthday', '=' , $today);
-        //dd($perfomers);
-*/
 
 
         //事務所別に人数を表示
@@ -126,6 +123,7 @@ class EntertainersController extends Controller
             'dissolutions' => $dissolutions,
             'm1year' => $m1year,
             'office' => $office,
+            'birthday' => $birthday,
         ]);
         
 

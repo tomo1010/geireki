@@ -46,11 +46,14 @@
         </form>--}}
 
 
-    <input type="checkbox" name="disband" value="1" onchange="myfunc(this.value)" /> <font color="white">解散済みを含める</font>
+    <input type="checkbox" name="disband" value="1" onchange="myfunc(this.value)"  {{ request()->input('disband') ? 'checked' : '' }}/> <font color="white">解散済みを含める</font>
         <script>
             function myfunc(value) {
-            if (value==1) {
-               location.href = '/?disband=1';
+            let element = document.getElementsByName('disband');
+            if (element[0].checked) {
+                location.href = '/?disband=1';
+            } else {
+                location.href = '/';
             }
         }
     </script>

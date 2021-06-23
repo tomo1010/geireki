@@ -188,7 +188,7 @@
     {{-- 作成ページへのリンク --}}
     @if (Auth::check())
     {{-- 編集ページへのリンク --}}
-    {!! link_to_route('entertainers.edit', 'このメッセージを編集', ['entertainer' => $entertainer->id], ['class' => 'btn btn-light']) !!}
+    {!! link_to_route('entertainers.edit', 'このメッセージを編集', ['id' => $entertainer->id], ['class' => 'btn btn-light']) !!}
 
     {{-- 削除フォーム --}}
     {!! Form::model($entertainer, ['route' => ['entertainers.destroy', $entertainer->id], 'method' => 'delete']) !!}

@@ -14,7 +14,8 @@
             <ul class="navbar-nav">
                 @if (Auth::check())
                     {{-- メッセージ作成ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('entertainers.create', '新規メッセージの投稿', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('entertainers.create', '芸人データ登録', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('perfomers.create', '個人データ登録', [], ['class' => 'nav-link']) !!}</li>
                     
                     {{-- ユーザ一覧ページへのリンク --}}
                     <li class="nav-item">{!! link_to_route('users.index', 'Users', [], ['class' => 'nav-link']) !!}</li>

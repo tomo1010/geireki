@@ -28,6 +28,9 @@ class PerfomersController extends Controller
         ]);
     }
 
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -43,6 +46,9 @@ class PerfomersController extends Controller
         ]);
     }
 
+
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -52,30 +58,33 @@ class PerfomersController extends Controller
     public function store(Request $request)
     {
         // 作成
-        $entertainer = new Entertainer;
-        $entertainer->name = $request->name;
-        $entertainer->realname = $request->realname;
-        $entertainer->alias = $request->alias;
-        $entertainer->birthday = $request->birthday;
-        $entertainer->deth = $request->deth;
-        $entertainer->birthplace = $request->birthplace;        
-        $entertainer->bloodtype = $request->bloodtype;
-        $entertainer->height = $request->height;
-        $entertainer->dialect = $request->dialect;
-        $entertainer->education = $request->education;
-        $entertainer->master = $request->master;
-        $entertainer->school = $request->school;        
-        $entertainer->active = $request->active;
-        $entertainer->activeend = $request->activeend;
-        $entertainer->official = $request->official;
-        $entertainer->youtube = $request->youtube;
-        $entertainer->entertainer_id = $request->entertainer_id;
-        $entertainer->office_id = $request->office_id;
-        $entertainer->save();
+        $perfomer = new Perfomer;
+        $perfomer->name = $request->name;
+        $perfomer->realname = $request->realname;
+        $perfomer->alias = $request->alias;
+        $perfomer->birthday = $request->birthday;
+        $perfomer->deth = $request->deth;
+        $perfomer->birthplace = $request->birthplace;        
+        $perfomer->bloodtype = $request->bloodtype;
+        $perfomer->height = $request->height;
+        $perfomer->dialect = $request->dialect;
+        $perfomer->educational = $request->educational;
+        $perfomer->master = $request->master;
+        $perfomer->school = $request->school;        
+        $perfomer->active = $request->active;
+        $perfomer->activeend = $request->activeend;
+        $perfomer->official = $request->official;
+        $perfomer->youtube = $request->youtube;
+        $perfomer->entertainer_id = $request->entertainer_id;
+        $perfomer->office_id = $request->office_id;
+        $perfomer->save();
 
         // トップページへリダイレクトさせる
         return redirect('/');
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -113,8 +122,19 @@ class PerfomersController extends Controller
      */
     public function edit($id)
     {
-        //
+        // idの値で検索して取得
+        $perfomer = Perfomer::findOrFail($id);
+
+        // 編集ビューでそれを表示
+        return view('perfomers.edit', [
+            'perfomer' => $perfomer,
+        ]);
     }
+
+
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -125,8 +145,39 @@ class PerfomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // idの値でメッセージを検索して取得
+        $perfomer = Perfomer::findOrFail($id);
+        // メッセージを更新
+        $perfomer->name = $request->name;
+        $perfomer->realname = $request->realname;
+        $perfomer->alias = $request->alias;
+        $perfomer->birthday = $request->birthday;
+        $perfomer->deth = $request->deth;
+        $perfomer->birthplace = $request->birthplace;        
+        $perfomer->bloodtype = $request->bloodtype;
+        $perfomer->height = $request->height;
+        $perfomer->dialect = $request->dialect;
+        $perfomer->educational = $request->educational;
+        $perfomer->master = $request->master;
+        $perfomer->school = $request->school;        
+        $perfomer->active = $request->active;
+        $perfomer->activeend = $request->activeend;
+        $perfomer->official = $request->official;
+        $perfomer->youtube = $request->youtube;
+        $perfomer->entertainer_id = $request->entertainer_id;
+        $perfomer->office_id = $request->office_id;
+        $perfomer->save();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
+        //return back();
     }
+
+
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -136,6 +187,12 @@ class PerfomersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // idの値でメッセージを検索して取得
+        $perfomer = Perfomer::findOrFail($id);
+        // メッセージを削除
+        $perfomer->delete();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
     }
 }

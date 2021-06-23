@@ -185,6 +185,7 @@ class EntertainersController extends Controller
         $entertainer->oldname = $request->oldname;
         $entertainer->official = $request->official;
         $entertainer->youtube = $request->youtube;
+        $entertainer->office_id = $request->office_id;        
         $entertainer->save();
 
         // トップページへリダイレクトさせる
@@ -272,6 +273,10 @@ class EntertainersController extends Controller
         
     }
 
+
+
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -293,6 +298,7 @@ class EntertainersController extends Controller
         $entertainer->oldname = $request->oldname;
         $entertainer->official = $request->official;
         $entertainer->youtube = $request->youtube;
+        $entertainer->office_id = $request->office_id;
         $entertainer->save();
 
         // トップページへリダイレクトさせる

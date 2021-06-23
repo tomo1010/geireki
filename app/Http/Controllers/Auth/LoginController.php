@@ -32,7 +32,7 @@ class LoginController extends Controller
     //protected $redirectTo = '/home';
     protected function redirectTo()
     {
-        $admin_flag = $this->guard()->user()->admin_flag;
+        $admin_flag = $this->guard()->user()->admin_flag; //ログイン後のリダイレクト先を管理者かどうかで分ける
         if($admin_flag == 1){
             return '/admin';
         }else{

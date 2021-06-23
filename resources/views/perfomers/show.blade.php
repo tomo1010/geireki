@@ -78,7 +78,12 @@
         </tr>
         <tr>
             <th>コンビ名、グループ名</th>
+            @if($entertainer !== NULL)
             <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}</td>
+
+            @else
+            <td></td>
+            @endif
         </tr>
         <tr>
             <th>事務所id</th>
@@ -94,7 +99,7 @@
     {{-- 作成ページへのリンク --}}
     @if (Auth::check())
     {{-- 編集ページへのリンク --}}
-    {!! link_to_route('perfomers.edit', 'このメッセージを編集', ['perfomer' => $perfomer->id], ['class' => 'btn btn-light']) !!}
+    {!! link_to_route('perfomers.edit', 'このメッセージを編集', ['id' => $perfomer->id], ['class' => 'btn btn-light']) !!}
 
     {{-- 削除フォーム --}}
     {!! Form::model($perfomer, ['route' => ['perfomers.destroy', $perfomer->id], 'method' => 'delete']) !!}

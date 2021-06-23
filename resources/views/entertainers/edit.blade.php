@@ -28,7 +28,9 @@
                     {!! Form::label('official', '公式URL:') !!}
                     {!! Form::text('official', null, ['class' => 'form-control']) !!}
                     {!! Form::label('youtube', 'Youtubeチャンネル:') !!}
-                    {!! Form::text('youtube', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('office_id', '事務所id:') !!}
+                    {!! Form::text('office_id', null, ['class' => 'form-control']) !!}                    
                 </div>
 
                 {!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}

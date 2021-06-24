@@ -36,4 +36,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    
+    //このユーザーが投稿したYoutubeURL
+    public function youtubes()
+    {
+        return $this->hasMany(Youtube::class);
+    }
+
+    
+    //投稿したURLの件数をロード
+    public function loadRelationshipCounts()
+    {
+        $this->loadCount('youtubes');
+    }
 }

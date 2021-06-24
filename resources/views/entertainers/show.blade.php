@@ -74,8 +74,10 @@
             <th>芸歴</th>
             <td>{{$now->diffInYears($entertainer->active)}}年目</td>
         </tr>
-
         </table>
+        
+        
+        
     
     <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
     <div class="container">

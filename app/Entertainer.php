@@ -32,4 +32,13 @@ class Entertainer extends Model
     {
         return $this->hasMany(Perfomer::class);
     }
+    
+    
+    //この芸人に紐付けされたYoutubeURL
+    public function youtubes()
+    {
+        return $this->hasMany(Youtbe::class);
+    }
+    
+    
 }

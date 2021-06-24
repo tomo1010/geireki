@@ -77,18 +77,29 @@ class EntertainersController extends Controller
 
 
 
-        //本日の誕生日を表示
+        //本日・明日の誕生日を表示
         $perfomers = Perfomer::get();
-        $carbon = Carbon::now();
+        $today = Carbon::now();
+        $tomorrow = Carbon::tomorrow();
         $birthday = array();
+        $birthdayTomorrow = array();
 
         foreach($perfomers as $value){
             $day = $value->birthday;
             if($day !== NULL){
-                if($day->isBirthday($carbon)){
+                if($day->isBirthday($today)){
                     $birthday[] = $value;
                 }
             }
+        }    
+        
+        foreach($perfomers as $value){
+            $day = $value->birthday;
+            if($day !== NULL){
+                if($day->isBirthday($tomorrow)){
+                    $birthdayTomorrow[] = $value;
+                }
+            }    
         }
 
 
@@ -124,6 +135,7 @@ class EntertainersController extends Controller
             'm1year' => $m1year,
             'office' => $office,
             'birthday' => $birthday,
+            'birthdayTomorrow' => $birthdayTomorrow,
         ]);
         
 

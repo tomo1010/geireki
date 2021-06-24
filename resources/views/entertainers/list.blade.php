@@ -2,11 +2,11 @@
 
 @section('content')
 
-<h1>芸歴 {{ $year }} 年目</h1>
+<h1 class="mt-2 pb-2">芸歴 {{ $year }} 年目</h1>
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">ピン芸人
+            <div class="col-lg-4"><h2 class="mt-2 pb-2 display-5">ピン芸人</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -35,7 +35,7 @@
                     </tbody>   
                 </table>
             </div>
-            <div class="col-lg-4">コンビ芸人
+            <div class="col-lg-4"><h2 class="mt-2 pb-2 display-5">コンビ芸人</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -64,7 +64,7 @@
                     </tbody>   
                 </table>
             </div>
-            <div class="col-lg-4">トリオ芸人
+            <div class="col-lg-4"><h2 class="mt-2 pb-2 display-5">トリオ芸人</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>

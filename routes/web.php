@@ -16,28 +16,13 @@ Route::get('/', 'EntertainersController@index');
 Route::post('/', 'EntertainersController@selectYear')->name('entertainers.select');
 Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertainers.show');
 Route::get('list/{year}', 'EntertainersController@list')->name('entertainers.list');
-//Route::post('check', 'EntertainersController@checkDissolution')->name('entertainers.check');
 
 
 
 //個人データ
-//Route::resource('perfomers', 'PerfomersController');
 Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');
+//Route::post('age', 'PerfomersController@age')->name('perfomers.age');
 
-
-
-//csv処理
-    // 芸人データ 
-    Route::get('csv/entertainer', 'CsvController@uploadEntertainer');
-    Route::post('csv/entertainer', 'CsvController@importEntertainer')->name('csv.importEntertainer');
-    
-    // 事務所データ 
-    Route::get('csv/office', 'CsvController@uploadOffice');
-    Route::post('csv/office', 'CsvController@importOffice')->name('csv.importOffice');
-    
-    // 個人データ 
-    Route::get('csv/perfomer', 'CsvController@uploadPerfomer');
-    Route::post('csv/perfomer', 'CsvController@importPerfomer')->name('csv.importPerfomer');
 
 
 // signup
@@ -78,6 +63,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     Route::get('perfomers/{id}/edit', 'PerfomersController@edit')->name('perfomers.edit');
     
     
+    
+    //csv処理
+    // 芸人データ 
+    Route::get('csv/entertainer', 'CsvController@uploadEntertainer');
+    Route::post('csv/entertainer', 'CsvController@importEntertainer')->name('csv.importEntertainer');
+    
+    // 事務所データ 
+    Route::get('csv/office', 'CsvController@uploadOffice');
+    Route::post('csv/office', 'CsvController@importOffice')->name('csv.importOffice');
+    
+    // 個人データ 
+    Route::get('csv/perfomer', 'CsvController@uploadPerfomer');
+    Route::post('csv/perfomer', 'CsvController@importPerfomer')->name('csv.importPerfomer');
     // Route::resource('user', 'AdminController');
     
 

@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         
         {{-- トップページへのリンク --}}
-        <a class="navbar-brand" href="/">芸歴</a>
+        <a class="navbar-brand" href="/"><h1>芸歴</h1></a>
 
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
             <span class="navbar-toggler-icon"></span>
@@ -13,9 +13,6 @@
             
             <ul class="navbar-nav">
                 @if (Auth::check())
-                    {{-- メッセージ作成ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('entertainers.create', '芸人データ登録', [], ['class' => 'nav-link']) !!}</li>
-                    <li class="nav-item">{!! link_to_route('perfomers.create', '個人データ登録', [], ['class' => 'nav-link']) !!}</li>
                     
                     {{-- ユーザ一覧ページへのリンク --}}
                     <li class="nav-item">{!! link_to_route('users.index', 'Users', [], ['class' => 'nav-link']) !!}</li>
@@ -39,35 +36,27 @@
                 @endif
             </ul>
         </div>
-        
-        {{--解散済み表示非表示のチェックBOX
-        <form method="post" action="{{ route('entertainers.check')}}">
-         @csrf
-            <input type="checkbox" name="check" value="1" onchange="submit(this.form)">
-        </form>--}}
-
-
-    <input type="checkbox" name="disband" value="1" onchange="myfunc(this.value)"  {{ request()->input('disband') ? 'checked' : '' }}/> <font color="white">解散済みを含める</font>
-        <script>
-            function myfunc(value) {
-            let element = document.getElementsByName('disband');
-            if (element[0].checked) {
-                location.href = '/?disband=1';
-            } else {
-                location.href = '/';
-            }
-        }
-    </script>
-        
-
-            {{--Google検索BOX--}}
-<script async src="https://cse.google.com/cse.js?cx=cac89bc70139611b6"></script>
-<div class="gcse-search"></div>
-
     </nav>
 
-        {{--芸歴リストへのセレクトBOX--}}
+        {{--解散済み表示非表示のチェックBOX--}}
+        <p style="text-align: right">
+        <input type="checkbox" name="disband" value="1" onchange="myfunc(this.value)"  {{ request()->input('disband') ? 'checked' : '' }}/> 解散済みを含める　
+        </p>
+        <script>
+            function myfunc(value) {
+                let element = document.getElementsByName('disband');
+                if (element[0].checked) {
+                    location.href = '/?disband=1';
+                } else {
+                    location.href = '/';
+                }
+            }
+        </script>
+
+
+        
         <center><p>
+        {{--芸歴リストへのセレクトBOX--}}
         <form method="post" action="{{ route('entertainers.select')}}">
             @csrf
             <select name="year" onchange="submit(this.form)">
@@ -76,6 +65,9 @@
                 @endfor
             </select>
         </form>
+        
+        {{--年代別一覧へのリンク--}}
+
         </p></center>
         
 

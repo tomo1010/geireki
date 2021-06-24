@@ -2,28 +2,46 @@
 
 @section('content')
 
-    <h1>芸歴{{$now->diffInYears($entertainer->active)}}年目 {{ $entertainer->name }} の詳細ページ</h1>
+    <h1 class="mt-2 pb-2">芸歴{{$now->diffInYears($entertainer->active)}}年目：{{ $entertainer->name }} </h1>
 
     <table class="table table-bordered">
-        <tr>
-            <th>id</th>
-            <td>{{ $entertainer->id }}</td>
-        </tr>
         <tr>
             <th>名前</th>
             <td>{{ $entertainer->name }}</td>
         </tr>
         <tr>
-            <th>人数</th>
-            <td>{{ $entertainer->numberofpeople }}</td>
-        </tr>
-        <tr>
-            <th>性別</th>
-            <td>{{ $entertainer->gender }}</td>
-        </tr>
-        <tr>
             <th>別名</th>
             <td>{{ $entertainer->alias }}</td>
+        </tr>
+        <tr>
+        <th>
+            メンバー
+        </th>
+        <td>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>名前</th>
+                    <th>活動時期</th>
+                    <th>師匠</th>
+                    <th>出身</th>
+                    <th>芸歴</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($perfomer as $value)
+                <tr>
+                    <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+                    <td>{{ $value->active }}</td>
+                    <td>{{ $value->master }}</td>
+                    <td>{{ $value->school }}</td>
+                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        </td>
         </tr>
         <tr>
             <th>活動時期</th>
@@ -57,42 +75,12 @@
             <td>{{$now->diffInYears($entertainer->active)}}年目</td>
         </tr>
 
-        <tr>
-        <th>
-            メンバー
-        </th>
-        <td>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>名前</th>
-                    <th>活動時期</th>
-                    <th>師匠</th>
-                    <th>出身</th>
-                    <th>芸歴</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                @foreach ($perfomer as $value)
-                <tr>
-                    <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td>{{ $value->active }}</td>
-                    <td>{{ $value->master }}</td>
-                    <td>{{ $value->school }}</td>
-                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        </td>
-        </tr>
         </table>
     
-    
+    <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
     <div class="container">
         <div class="row">
-                <div class="col-lg-4">1年先輩
+                <div class="col-lg-4"><h3 class="mt-2 pb-1">1年先輩</h3>
                     <table class="table table-striped">
                     <tbody>
                         <tr>
@@ -122,7 +110,7 @@
                     </tbody>   
                     </table>
                 </div>
-                <div class="col-lg-4">同期
+                <div class="col-lg-4"><h3 class="mt-2 pb-1">同期</h3>
                     <table class="table table-striped">
                     <tbody>
                         <tr>
@@ -152,7 +140,7 @@
                     </tbody>   
                     </table>
                 </div>    
-                <div class="col-lg-4">1年後輩
+                <div class="col-lg-4"><h3 class="mt-2 pb-1">1年後輩</h3>
                     <table class="table table-striped">
                     <tbody>
                         <tr>

@@ -195,4 +195,28 @@ class PerfomersController extends Controller
         // トップページへリダイレクトさせる
         return redirect('/');
     }
+    
+    
+    
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function age($year)
+    {
+        // yearの値で検索して取得
+        $perfomer = Perfomer::whereBetween('office_id', [$year])->get();
+dd($perfomer);
+
+        // 編集ビューでそれを表示
+        return view('perfomers.edit', [
+            'perfomer' => $perfomer,
+        ]);
+    }
+
+    
+    
+    
 }

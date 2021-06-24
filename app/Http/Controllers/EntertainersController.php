@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Entertainer;
 use App\Office; 
 use App\Perfomer;
+use App\Youtube;
 
 use Carbon\Carbon; //芸歴計算
 
@@ -245,6 +246,10 @@ class EntertainersController extends Controller
 
         //メンバー（個人）を取得
         $perfomer = Entertainer::find($id)->perfomers;
+        
+        
+        //Youtubeを取得
+        $youtube = Entertainer::find($id)->youtubes;
 
 
         // メッセージ詳細ビューでそれを表示
@@ -257,6 +262,7 @@ class EntertainersController extends Controller
             'now' => new \Carbon\Carbon(),
             'office' => $office,
             'perfomer' => $perfomer,
+            'youtube' => $youtube,
         ]);
     }
 

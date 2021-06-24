@@ -34,10 +34,10 @@ class Entertainer extends Model
     }
     
     
-    //この芸人に紐付けされたYoutubeURL
+    //この芸人に紐付けされたYoutubeのURL
     public function youtubes()
     {
-        return $this->hasMany(Youtbe::class);
+        return $this->hasMany(Youtube::class);
     }
     
     

@@ -76,7 +76,34 @@
         </tr>
         </table>
         
+    <h2 class="mt-5 pb-2">関連Youtube</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>時間</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($youtube as $value)
+                <tr>
+                    <td>{{ $value->youtube }}</td>
+                    <td>{{ $value->time }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
         
+    {{-- 投稿フォーム --}}
+    {!! Form::open(['route' => 'youtubes.store']) !!}
+        <div class="form-group">
+            <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
+            {!! Form::textarea('youtube', null, ['class' => 'form-control', 'rows' => '2']) !!}
+            {!! Form::textarea('time', null, ['class' => 'form-control', 'rows' => '2']) !!}
+            {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
+        </div>
+    {!! Form::close() !!} 
         
     
     <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>

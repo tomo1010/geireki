@@ -18,4 +18,11 @@ class Youtube extends Model
     {
         return $this->belongsTo(Entertainer::class);
     }
+    
+    
+    protected $fillable = [
+        'youtube', 'time', 'entertainer_id',
+    ];
+    
+    
 }

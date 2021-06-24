@@ -54,11 +54,15 @@ class YoutubesController extends Controller
         // バリデーション
         $request->validate([
             'youtube' => 'required|max:255',
+            'time' => 'required|max:255',
         ]);
 
         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
         $request->user()->youtubes()->create([
             'youtube' => $request->youtube,
+            'time' => $request->time,
+            'entertainer_id' => $request->entertainer_id,
+            
         ]);
 
         // 前のURLへリダイレクトさせる

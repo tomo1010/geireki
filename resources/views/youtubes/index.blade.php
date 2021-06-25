@@ -19,7 +19,10 @@
  
                             <div>
                                 {{-- 投稿内容 --}}
-                                <p class="mb-0">{!! nl2br(e($value->youtube)) !!}</p>
+                                <p class="mb-0">{!! ($entertainers->name) !!}</p>
+                                <p class="mb-0">{!! ($value->youtube) !!}</p>
+                                <p class="mb-0">{!! ($value->time) !!}</p>
+                                
                             </div>
                             
                             <div>

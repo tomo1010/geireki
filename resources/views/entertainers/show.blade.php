@@ -94,17 +94,29 @@
                 @endforeach
             </tbody>
         </table>
-        
-    {{-- 投稿フォーム --}}
-    {!! Form::open(['route' => 'youtubes.store']) !!}
-        <div class="form-group">
+    
+    @if (Auth::check())    
+        {{-- 投稿フォーム --}}
+        {!! Form::open(['route' => 'youtubes.store']) !!}
             <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
-            {!! Form::textarea('youtube', null, ['class' => 'form-control', 'rows' => '2']) !!}
-            {!! Form::textarea('time', null, ['class' => 'form-control', 'rows' => '2']) !!}
-            {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
-        </div>
-    {!! Form::close() !!} 
-        
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Youtube URL:</label>
+                <div class="col-10">
+                {!! Form::textarea('youtube', null, ['class' => 'form-control', 'rows' => '2']) !!}
+                </div>
+                <label class="col-2 col-form-label">コメント:</label>
+                <div class="col-10">
+                {!! Form::textarea('time', null, ['class' => 'form-control', 'rows' => '2']) !!}
+                </div>
+                <div class="offset-2 col-10">
+                {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) !!}
+                </div>
+            </div>
+        {!! Form::close() !!} 
+    @else
+        {{-- ログインページへのリンク --}}
+        ※YoutubeのURLを投稿するには{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}が必要です。
+    @endif
     
     <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
     <div class="container">

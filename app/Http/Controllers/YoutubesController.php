@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Youtube;    // 追加
 use App\User;    // 追加
+use App\Entertainer;    // 追加
 
 class YoutubesController extends Controller
 {
@@ -15,19 +16,23 @@ class YoutubesController extends Controller
      */
     public function index()
     {
-        if (\Auth::check()) { // 認証済みの場合
-            // 認証済みユーザを取得
-            $user = \Auth::user();
+        if (\Auth::check()) {
+            $user = \Auth::user();  // 認証済みユーザを取得
             $youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
+            
+            $entertainers = array();
+            foreach($youtubes as $value){
+            $entertainers = Entertainer::find($value->entertainer_id);
+            //dd($entertainers);
+            }
         } 
      
-        // Youtube URL一覧を取得
-        //$youtubes = Youtube::all();
 
         // Youtube URL一覧ビューでそれを表示
         return view('youtubes.index', [
             //'user' => $user,
             'youtubes' => $youtubes,
+            'entertainers' =>$entertainers,
         ]);
     }
 

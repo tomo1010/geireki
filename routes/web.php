@@ -37,7 +37,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 //ユーザのみ
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show',]]);
+    //Route::get('users/{id}', 'UsersController@show')->name('users.show');
     Route::resource('youtubes', 'YoutubesController');
     });
 

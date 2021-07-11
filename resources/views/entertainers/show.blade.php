@@ -18,6 +18,9 @@
             メンバー
         </th>
         <td>
+        @empty($entertainer->perfomers)
+        <td></td>
+        @else
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -30,7 +33,7 @@
             </thead>
             
             <tbody>
-                @foreach ($perfomer as $value)
+                @foreach ($entertainer->perfomers as $value)
                 <tr>
                     <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
                     <td>{{ $value->active }}</td>
@@ -41,11 +44,12 @@
                 @endforeach
             </tbody>
         </table>
+        @endempty
         </td>
         </tr>
         <tr>
             <th>活動時期</th>
-            <td>{{ $entertainer->active}}</td>
+            <td>{{ $entertainer->active->format('Y年～')}}</td>
         </tr>
         <tr>
             <th>活動終了時期</th>
@@ -60,8 +64,16 @@
             <td>{{ $entertainer->oldname }}</td>
         </tr>
         <tr>
+            <th>ネタ製作者</th>
+            <td>{{ $entertainer->brain }}</td>
+        </tr>
+        <tr>
+            <th>出会い</th>
+            <td>{{ $entertainer->encounter }}</td>
+        </tr>        
+        <tr>
             <th>事務所</th>
-            <td>{{ $office->office }}</td>
+            <td>{!! link_to_route('entertainers.office', $office->office, [$entertainer->office_id]) !!}</td>
         </tr>
             <th>公式URL</th>
             <td><a href="{{ $entertainer->official }}" target="new">{{ $entertainer->official }}</a></td>
@@ -125,27 +137,18 @@
                     <table class="table table-striped">
                     <tbody>
                         <tr>
-                            <td>名前</td><td>人数</td><td>師匠</td>
+                            <td>名前</td><td>人数</td>
                         </tr>    
                         @foreach ($senior as $value)
                         <tr>
-                            <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                            @if($value->gender == '1')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
-                            @elseif($value->gender == '2')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
-                            @elseif($value->gender == '11')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
-                            @elseif($value->gender == '12')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
-                            @elseif($value->gender == '22')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>                                
-                            @elseif($value->gender == '111')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
-                            @elseif($value->gender == '222')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
+                            @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                                <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            @else
+                                <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
                             @endif
-                            <td>{{ $value->master }}</td>
+
+                                @include('commons.gender')
+                                
                         </tr>
                         @endforeach
                     </tbody>   
@@ -155,27 +158,18 @@
                     <table class="table table-striped">
                     <tbody>
                         <tr>
-                            <td>名前</td><td>人数</td><td>師匠</td>
+                            <td>名前</td><td>人数</td>
                         </tr>                        
                         @foreach ($sync as $value)
                         <tr>
-                            <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                            @if($value->gender == '1')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
-                            @elseif($value->gender == '2')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinF.png" height="30"></td>
-                            @elseif($value->gender == '11')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
-                            @elseif($value->gender == '12')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiMF.png" height="30"></td>
-                            @elseif($value->gender == '22')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiF.png" height="30"></td>                                
-                            @elseif($value->gender == '111')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
-                            @elseif($value->gender == '222')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioF.png" height="30"></td>
+                            @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                                <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            @else
+                                <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
                             @endif
-                            <td>{{ $value->master }}</td>
+                            
+                                @include('commons.gender')
+                                
                         </tr>
                         @endforeach
                     </tbody>   
@@ -185,27 +179,18 @@
                     <table class="table table-striped">
                     <tbody>
                         <tr>
-                            <td>名前</td><td>人数</td><td>師匠</td>
+                            <td>名前</td><td>人数</td>
                         </tr>                        
                         @foreach ($junior as $value)
                         <tr>
-                            <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                            @if($value->gender == '1')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
-                            @elseif($value->gender == '2')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/pinM.png" height="30"></td>
-                            @elseif($value->gender == '11')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
-                            @elseif($value->gender == '12')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>
-                            @elseif($value->gender == '22')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/conbiM.png" height="30"></td>                                
-                            @elseif($value->gender == '111')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
-                            @elseif($value->gender == '222')
-                                <td><img src="https://blog-imgs-147.fc2.com/6/6/0/660/trioM.png" height="30"></td>
+                            @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                                <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            @else
+                                <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
                             @endif
-                            <td>{{ $value->master }}</td>
+                            
+                                @include('commons.gender')
+                                
                         </tr>
                         @endforeach
                     </tbody>   

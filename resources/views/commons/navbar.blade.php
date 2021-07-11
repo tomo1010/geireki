@@ -35,6 +35,20 @@
                     <li class="nav-item">{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}</li>
                 @endif
             </ul>
+            
+
+
+    {{--検索BOX--}}
+ 
+    <form class="form-inline my-2 my-lg-0 ml-2" action="{{ route('entertainers.search')}}">
+      <div class="form-group">
+      <input type="search" class="form-control mr-sm-2" name="search"  value="{{request('search')}}" placeholder="キーワードを入力" aria-label="検索...">
+      </div>
+      <input type="submit" value="検索" class="btn btn-info">
+    </form>
+
+
+            
         </div>
     </nav>
 
@@ -46,9 +60,9 @@
             function myfunc(value) {
                 let element = document.getElementsByName('disband');
                 if (element[0].checked) {
-                    location.href = '/?disband=1';
+                    location.href = location.pathname + '?disband=1';
                 } else {
-                    location.href = '/';
+                    location.href = location.pathname;
                 }
             }
         </script>
@@ -57,14 +71,16 @@
         
         <center><p>
         {{--芸歴リストへのセレクトBOX--}}
+        
         <form method="post" action="{{ route('entertainers.select')}}">
             @csrf
             <select name="year" onchange="submit(this.form)">
                 @for($i = 0; $i < 70; $i++)
-                    <option value="{{$i}}">芸歴{{$i}}年目</option>
+                      <option value="{{$i}}">芸歴{{$i}}年目</option>
                 @endfor
             </select>
         </form>
+        
         
         {{--年代別一覧へのリンク--}}
 

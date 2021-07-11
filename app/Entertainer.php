@@ -27,10 +27,12 @@ class Entertainer extends Model
     }
     
     
-    //このコンビ名の個人（メンバー）
+    //このコンビに所属するメンバー（個人）
     public function perfomers()
     {
-        return $this->hasMany(Perfomer::class);
+        return $this->belongsToMany(Perfomer::class, 'members', 'entertainer_id', 'perfomer_id');
+        //return $this->belongsToMany(Perfomer::class);
+        //return $this->hasMany(Perfomer::class);
     }
     
     

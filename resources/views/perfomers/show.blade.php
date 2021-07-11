@@ -6,10 +6,6 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>id</th>
-            <td>{{ $perfomer->id }}</td>
-        </tr>
-        <tr>
             <th>名前</th>
             <td>{{ $perfomer->name }}</td>
         </tr>
@@ -17,6 +13,22 @@
             <th>本名</th>
             <td>{{ $perfomer->realname }}</td>
         </tr>
+        <tr>
+            <th>コンビ名、グループ名</th>
+            
+        @empty($perfomer->entertainer)
+            <td></td>
+        @else
+            @foreach($perfomer->entertainer as $value)
+                @if($value !== NULL)
+                <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
+                @else
+                <td></td>
+                @endif
+            @endforeach
+        @endempty
+
+        </tr>        
         <tr>
             <th>別名</th>
             <td>{{ $perfomer->alias }}</td>
@@ -26,13 +38,17 @@
             <td>{{ $perfomer->birthday }}</td>
         </tr>
         <tr>
-            <th>終了日</th>
+            <th>没年月日</th>
             <td>{{ $perfomer->deth }}</td>
         </tr>
         <tr>
             <th>出身地</th>
             <td>{{ $perfomer->birthplace }}</td>
         </tr>
+        <tr>
+            <th>血液型</th>
+            <td>{{ $perfomer->bloodtype }}</td>
+        </tr>        
         <tr>
             <th>身長</th>
             <td>{{ $perfomer->height }}</td>
@@ -62,8 +78,20 @@
             <td>{{ $perfomer->activeend }}</td>
         </tr>
         <tr>
+            <th>配偶者</th>
+            <td>{{ $perfomer->spouse }}</td>
+        </tr>
+        <tr>
+            <th>親族</th>
+            <td>{{ $perfomer->relatives }}</td>
+        </tr>
+        <tr>
+            <th>弟子</th>
+            <td>{{ $perfomer->disciple }}</td>
+        </tr>        
+        <tr>
             <th>事務所</th>
-            <td>{{ $office->office }}</td>
+            <td>{!! link_to_route('entertainers.office', $office->office, [$perfomer->office_id]) !!}</td>
         </tr>
             <th>公式URL</th>
             <td><a href="{{ $perfomer->official }}" target="new">{{ $perfomer->official }}</a></td>
@@ -71,23 +99,6 @@
         <tr>
             <th>Youtubeチャンネル</th>
             <td><a href="{{ $perfomer->youtube }}" target="new">{{ $perfomer->youtube }}</a></td>
-        </tr>
-        <tr>
-            <th>芸人id</th>
-            <td>{{ $perfomer->entertainer_id }}</td>
-        </tr>
-        <tr>
-            <th>コンビ名、グループ名</th>
-            @if($entertainer !== NULL)
-            <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}</td>
-
-            @else
-            <td></td>
-            @endif
-        </tr>
-        <tr>
-            <th>事務所id</th>
-            <td>{{ $perfomer->office_id }}</td>
         </tr>
             <th>芸歴</th>
             <td>{{$now->diffInYears($perfomer->active)}}年目</td>

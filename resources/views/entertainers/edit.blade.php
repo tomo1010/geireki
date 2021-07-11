@@ -30,7 +30,8 @@
                     {!! Form::label('youtube', 'Youtubeチャンネル:') !!}
                     {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
                     {!! Form::label('office_id', '事務所id:') !!}
-                    {!! Form::text('office_id', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::text('office_id', null, ['class' => 'form-control']) !!}
+                    {!! Form::hidden('back_url', url()->previous()) !!}
                 </div>
 
                 {!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}

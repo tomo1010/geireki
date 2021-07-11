@@ -2,79 +2,85 @@
 
 @section('content')
 
-    <h2 class="mt-2 pb-2" >本日誕生日の芸人</h2>    
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>芸人</th>
-                    <th>誕生日</th>
-                    <th>年齢</th>                    
-                    <th>公式</th>
-                    <th>Youtube</th>
-                    <th>芸歴</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                @foreach ($birthday as $value)
-                <tr>
-                    <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td>{{ $value->birthday->format('Y年 n/d')}}</td>
-                    <td>{{$now->diffInYears($value->birthday)}}歳</td>
-                    @empty($value->official)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $value->official }}">公式</a></td>
-                    @endempty
-                    @empty($value->youtube)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
-                    @endempty
-                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        
-    <h2 class="mt-2 pb-2" >明日誕生日の芸人</h2>    
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>芸人</th>
-                    <th>誕生日</th>
-                    <th>年齢</th>                    
-                    <th>公式</th>
-                    <th>Youtube</th>
-                    <th>芸歴</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                @foreach ($birthdayTomorrow as $value)
-                <tr>
-                    <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td>{{ $value->birthday->format('Y年 n/d')}}</td>
-                    <td>{{$now->diffInYears($value->birthday)}}歳</td>
-                    @empty($value->official)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $value->official }}">公式</a></td>
-                    @endempty
-                    @empty($value->youtube)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
-                    @endempty
-                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">    
+                <h2 class="mt-2 pb-2" >本日誕生日の芸人</h2>    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>芸人</th>
+                                <th>誕生日</th>
+                                <th>年齢</th>                    
+                                <th>公式</th>
+                                <th>Youtube</th>
+                                <th>芸歴</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            @foreach ($birthday as $value)
+                            <tr>
+                                <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+                                <td>{{ $value->birthday->format('Y年 n/j')}}</td>
+                                <td>{{$now->diffInYears($value->birthday)}}歳</td>
+ 
+                                @empty($value->official)
+                                    <td></td>
+                                @else
+                                    <td><a href="{{ $value->official }}">公式</a></td>
+                                @endempty
+ 
+                                @empty($value->youtube)
+                                    <td></td>
+                                @else
+                                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
+                                @endempty
+ 
+                                @empty($value->active)
+                                    <td>-</td>
+                                @else
+                                <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                                @endempty
+ 
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+            </div>
+            <div class="col-lg-4">        
+                <h2 class="mt-2 pb-2" >明日誕生日</h2>    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>芸人</th>
+                                <th>年齢</th>
+                                <th>芸歴</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            @foreach ($birthdayTomorrow as $value)
+                            <tr>
+                                <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+                                <td>{{$now->diffInYears($value->birthday)}}歳</td>
+                                @empty($value->active)
+                                    <td>-</td>
+                                @else
+                                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                                @endempty
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+            </div>
+        </div>    
+    </div>        
 
 <div class="container">
     <div class="row">
+        
+        {{--芸歴一覧--}}
         <div class="col-lg-6"><h2 class="mt-2 pb-2 display-5 border-bottom">芸歴年一覧</h2>
             <table>
                 <tbody>
@@ -91,20 +97,23 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>    
+        </div>
+        
+        {{--事務所一覧--}}
         <div class="col-lg-6"><h2 class="mt-2 pb-2 display-5 border-bottom">事務所一覧</h2>
             <table>
                 <tbody>
-                    @foreach ($office as $value)
+                   @foreach ($office as $value)
                         <tr>
                             <td>
-                            {{$value->office}} {{$value->entertainers_count}}人
+                            {{$value->office}}　<a href="{{ route('entertainers.office', ['id'=>$value->id]) }}">{{$office = $value->entertainers_count}}</a>人
+                            </td>
                         </tr>
-        
                     @endforeach
                 </tbody>
             </table>
         </div>
+    
     </div>
 </div>    
         

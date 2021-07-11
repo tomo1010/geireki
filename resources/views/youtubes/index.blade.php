@@ -19,10 +19,8 @@
  
                             <div>
                                 {{-- 投稿内容 --}}
-                                <p class="mb-0">{!! ($entertainers->name) !!}</p>
-                                <p class="mb-0">{!! ($value->youtube) !!}</p>
-                                <p class="mb-0">{!! ($value->time) !!}</p>
-                                
+                                @include('youtubes.youtubes')
+
                             </div>
                             
                             <div>

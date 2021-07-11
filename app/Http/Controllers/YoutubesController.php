@@ -18,21 +18,14 @@ class YoutubesController extends Controller
     {
         if (\Auth::check()) {
             $user = \Auth::user();  // 認証済みユーザを取得
-            $youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
-            
-            $entertainers = array();
-            foreach($youtubes as $value){
-            $entertainers = Entertainer::find($value->entertainer_id);
-            //dd($entertainers);
-            }
+            //$youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
+            $youtubes = $user->youtubes()->with(['entertainer'])->orderBy('created_at', 'desc')->paginate(10);
         } 
      
-
         // Youtube URL一覧ビューでそれを表示
-        return view('youtubes.index', [
+        return view('youtubes.youtubes', [
             //'user' => $user,
             'youtubes' => $youtubes,
-            'entertainers' =>$entertainers,
         ]);
     }
 

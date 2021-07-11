@@ -8,4 +8,5 @@
     {!! link_to_route('csv.importEntertainer', '芸人csv', [], ['class' => 'nav-link']) !!}
     {!! link_to_route('csv.importOffice', '事務所csv', [], ['class' => 'nav-link']) !!}
     {!! link_to_route('csv.importPerfomer', '個人csv', [], ['class' => 'nav-link']) !!}
+    {!! link_to_route('csv.importMember', '芸人個人の中間テーブルcsv', [], ['class' => 'nav-link']) !!}
 @endsection

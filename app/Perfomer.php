@@ -9,7 +9,9 @@ class Perfomer extends Model
     //この個人が所属するコンビ名。
     public function entertainer()
     {
-        return $this->belongsTo(Entertainer::class);
+        return $this->belongsToMany(Entertainer::class, 'members', 'perfomer_id', 'entertainer_id');
+        //return $this->belongsToMany(Entertainer::class);
+        //return $this->belongsTo(Entertainer::class);
     }
     
     //この個人が所属する事務所。

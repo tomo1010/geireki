@@ -16,6 +16,8 @@ Route::get('/', 'EntertainersController@index');
 Route::post('/', 'EntertainersController@selectYear')->name('entertainers.select');
 Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertainers.show');
 Route::get('list/{year}', 'EntertainersController@list')->name('entertainers.list');
+Route::get('office/{id}', 'EntertainersController@office')->name('entertainers.office');
+Route::get('search', 'EntertainersController@search')->name('entertainers.search');
 
 
 
@@ -80,7 +82,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     // 個人データ 
     Route::get('csv/perfomer', 'CsvController@uploadPerfomer');
     Route::post('csv/perfomer', 'CsvController@importPerfomer')->name('csv.importPerfomer');
-    // Route::resource('user', 'AdminController');
+
+    // 芸人個人（中間）データ 
+    Route::get('csv/member', 'CsvController@uploadMember');
+    Route::post('csv/member', 'CsvController@importMember')->name('csv.importMember');
     
 
 });

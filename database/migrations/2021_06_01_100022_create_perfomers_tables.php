@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEntertainersTable extends Migration
+class CreatePerfomersTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,27 @@ class CreateEntertainersTable extends Migration
      */
     public function up()
     {
-        Schema::create('entertainers', function (Blueprint $table) {
+        Schema::create('perfomers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('office_id');
 
             $table->string('name');
-            $table->integer('numberofpeople');
-            $table->integer('gender');
+            $table->string('realname')->nullable();
             $table->string('alias')->nullable();
+            $table->date('birthday')->nullable();
+            $table->date('deth')->nullable();
+            $table->string('birthplace')->nullable(); 
+            $table->string('bloodtype')->nullable();
+            $table->string('height')->nullable();
+            $table->string('dialect')->nullable();
+            $table->string('educational')->nullable();
+            $table->string('master')->nullable();
+            $table->string('school')->nullable();
             $table->date('active')->nullable();
             $table->date('activeend')->nullable();
-            $table->string('master')->nullable();
-            $table->string('oldname')->nullable();
-            $table->string('brain')->nullable();
-            $table->string('encouter')->nullable();            
+            $table->string('spouse')->nullable();
+            $table->string('relatives')->nullable();
+            $table->string('disciple')->nullable();            
             $table->string('official')->nullable();
             $table->string('youtube')->nullable();
             
@@ -34,7 +41,7 @@ class CreateEntertainersTable extends Migration
             
             // 外部キー制約
             $table->foreign('office_id')->references('id')->on('offices');
-
+            
         });
     }
 
@@ -45,6 +52,6 @@ class CreateEntertainersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entertainers');
+        Schema::dropIfExists('perfomers');
     }
 }

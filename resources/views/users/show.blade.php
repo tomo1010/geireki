@@ -27,7 +27,8 @@
                 {{-- フォロワー一覧タブ --}}
                 <li class="nav-item"><a href="#" class="nav-link">Followers</a></li>
             </ul>
-   
+            {{-- 投稿一覧 --}}
+            @include('youtubes.youtubes')
         </div>
     </div>
 @endsection

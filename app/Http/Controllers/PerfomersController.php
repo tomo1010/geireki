@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Entertainer;
 use App\Office; 
 use App\Perfomer;
+use App\Member;
 
 use Carbon\Carbon; //芸歴計算
 
@@ -101,9 +102,8 @@ class PerfomersController extends Controller
         $office = Perfomer::find($id)->office;
 
         //コンビ名を取得
-        $entertainer = Perfomer::find($id)->entertainer;
-        //dd($entertainer);
-
+        $entertainer = Perfomer::find($id)->entertainer();
+//dd($entertainer);
         
         // メッセージ詳細ビューでそれを表示
         return view('perfomers.show', [
@@ -169,8 +169,8 @@ class PerfomersController extends Controller
         $perfomer->save();
 
         // トップページへリダイレクトさせる
-        return redirect('/');
-        //return back();
+        //return redirect('/');
+        return back();
     }
 
 

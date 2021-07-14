@@ -96,22 +96,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     
     
     
-    //csv処理
-    // 芸人データ 
-    Route::get('csv/entertainer', 'CsvController@uploadEntertainer');
-    Route::post('csv/entertainer', 'CsvController@importEntertainer')->name('csv.importEntertainer');
-    
-    // 事務所データ 
-    Route::get('csv/office', 'CsvController@uploadOffice');
-    Route::post('csv/office', 'CsvController@importOffice')->name('csv.importOffice');
-    
-    // 個人データ 
-    Route::get('csv/perfomer', 'CsvController@uploadPerfomer');
-    Route::post('csv/perfomer', 'CsvController@importPerfomer')->name('csv.importPerfomer');
 
-    // 芸人個人（中間）データ 
-    Route::get('csv/member', 'CsvController@uploadMember');
-    Route::post('csv/member', 'CsvController@importMember')->name('csv.importMember');
     
 
 });

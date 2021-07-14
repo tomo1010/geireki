@@ -26,19 +26,6 @@ class EntertainersController extends Controller
      */
     public function index()
     {
-        // dd(Perfomer::with('entertainer')->get()[1000]);
-        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
-        $disband = request('disband');
-
-        if($disband == '1'){
-            // 一覧を取得
-            $entertainers = Entertainer::sortable()->orderBy('active', 'desc')->paginate(5);
-        }
-        else{
-            //↑一覧から解散済みを除いて取得
-            $entertainers = Entertainer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(5);
-        }
-
 
 
         /*活動終了入力の場合、活動開始から計算して芸歴を固定する
@@ -53,26 +40,6 @@ class EntertainersController extends Controller
 
         //dd($diff);
         */
-
-    
-        // 芸歴別に人数をカウントし一覧表示
-        $years = array();
-        $counts = array();
-        $results_1 = array();
-        $results_2 = array();
-        $results_3 = array();
-
-        for($i=0; $i<=70; $i++){
-            $years[] = Carbon::now()->subYear($i); //今日から「○年前」を取得
-        }
-
-        foreach($years as $year){
-            $counts[] = Entertainer::whereYear('active','=', $year)->count(); //「○年前」の芸人の数を取得
-            $results_1[] = Entertainer::whereYear('active','=', $year)->where('numberofpeople','=', '1')->count();
-            $results_2[] = Entertainer::whereYear('active','=', $year)->where('numberofpeople','=', '2')->count();
-            $results_3[] = Entertainer::whereYear('active','=', $year)->where('numberofpeople','=', '3')->count();
-        }
-
 
 
         //本日・明日の誕生日を表示
@@ -101,14 +68,6 @@ class EntertainersController extends Controller
         }
 
 
-        //事務所別に人数を表示
-        $office = Office::all();
-        foreach($office as $value){
-            $value->loadRelationshipCounts();  // 関係するモデルの件数をロード
-        }
-
-
-
         //今年解散した芸人の一覧
         $lastyear = Carbon::now()->subYear(0); // 今年を取得
         $dissolutions = Entertainer::whereYear('activeend','=', $lastyear)->get();
@@ -123,16 +82,9 @@ class EntertainersController extends Controller
 
         // 一覧ビューで表示
         return view('entertainers.index', [
-            'entertainers' => $entertainers,
-            //'entertainersAll' => $entertainersAll,
-            'counts' => $counts,
-            'results_1' => $results_1,
-            'results_2' => $results_2,
-            'results_3' => $results_3,        
             'now' => new \Carbon\Carbon(),
             'dissolutions' => $dissolutions,
             'm1year' => $m1year,
-            'office' => $office->sortByDesc('entertainers_count'),
             'birthday' => $birthday,
             'birthdayTomorrow' => $birthdayTomorrow,
         ]);
@@ -269,7 +221,7 @@ class EntertainersController extends Controller
         $office = Entertainer::find($id)->office;
 
         //メンバー（個人）を取得
-        $perfomer = Entertainer::find($id)->perfomers();
+        //$perfomer = Entertainer::find($id)->perfomers();
         
         //Youtubeを取得
         $youtube = Entertainer::find($id)->youtubes;
@@ -283,7 +235,7 @@ class EntertainersController extends Controller
             'senior' => $senior,
             'now' => new \Carbon\Carbon(),
             'office' => $office,
-            'perfomer' => $perfomer,
+            //'perfomer' => $perfomer,
             'youtube' => $youtube,
         ]);
     }
@@ -371,84 +323,6 @@ class EntertainersController extends Controller
         return redirect('/');
     }
     
- 
- 
- 
- 
-    
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function list($year)
-    {
-        
-        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
-        $disband = request('disband');
-
-
-        if($disband == '1'){
-            //芸歴○年別で一覧表示
-            $listyear = Carbon::now()->subYear($year); // 芸歴○年目を取得
-            
-            //$results_1 = Perfomer::whereYear('active','=', $listyear)->get();
-            $results_1 = Entertainer::whereYear('active','=', $listyear)->where('numberofpeople','=', '1')->get();
-            $results_2 = Entertainer::whereYear('active','=', $listyear)->where('numberofpeople','=', '2')->get();
-            $results_3 = Entertainer::whereYear('active','=', $listyear)->where('numberofpeople','=', '3')->get();
-            
-            //$entertainers = Entertainer::sortable()->orderBy('active', 'desc')->paginate(5);
-        }
-        else{
-            //芸歴○年別で一覧表示
-            $listyear = Carbon::now()->subYear($year); // 芸歴○年目を取得
-            
-            //$results_1 = Perfomer::whereYear('active','=', $listyear)->get();
-            $results_1 = Entertainer::where('activeend', NULL)->whereYear('active','=', $listyear)->where('numberofpeople','=', '1')->get();            
-            $results_2 = Entertainer::where('activeend', NULL)->whereYear('active','=', $listyear)->where('numberofpeople','=', '2')->get();
-            $results_3 = Entertainer::where('activeend', NULL)->whereYear('active','=', $listyear)->where('numberofpeople','=', '3')->get();
-            
-        }
-
-
-        
-        // 一覧ビューで表示
-        return view('entertainers.list', [
-            'results_1' => $results_1,
-            'results_2' => $results_2,
-            'results_3' => $results_3,
-            'year' => $year,
-            'now' => new \Carbon\Carbon(),
-        ]);
-    }
-    
-    
-    
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function selectYear(Request $request)
-    {
-        //indexのプルダウンから受け取った年数をlistControllerへ渡すだけの処理
-        $year = $request->year;
-        return redirect()->action('EntertainersController@list',['year' => $year]);
-    }
     
 
 
@@ -480,48 +354,7 @@ class EntertainersController extends Controller
 
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function office($id)
-    {
-        
-        $office = Office::find($id);
-        //dd($office);
-        
-        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
-        $disband = request('disband');
 
-
-        if($disband == '1'){
-            
-            $results_1 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
-            $results_2 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
-            $results_3 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
-
-        }
-        else{
-
-            $results_1 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
-            $results_2 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
-            $results_3 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
-            
-        }
-
-
-        
-        // 一覧ビューで表示
-        return view('entertainers.office', [
-            'results_1' => $results_1,
-            'results_2' => $results_2,
-            'results_3' => $results_3,
-            'office' => $office->office,
-            //'now' => new \Carbon\Carbon(),
-        ]);
-    }
 
 
 

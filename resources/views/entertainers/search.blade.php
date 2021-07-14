@@ -29,7 +29,11 @@
                 @if($value->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
+                    @if($value->active == null)
+                    <td></td>
+                    @else
                     <td>{{ $value->active->format('Y年～') }}</td>
+                    @endif
                     <td></td>
                     <td>{{ $value->master }}</td>
                     <td>{{ $value->oldname }}</td>
@@ -52,8 +56,16 @@
 
                 <tr class="text-secondary">
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}（解散済）</td>
+                    @if($value->active == null)
+                    <td></td>
+                    @else
                     <td>{{ $value->active->format('Y年～') }}</td>
+                    @endif
+                    @if($value->active == null)
+                    <td></td>
+                    @else
                     <td>{{ $value->activeend->format('Y年') }}</td>
+                    @endif
                     <td>{{ $value->master }}</td>
                     <td>{{ $value->oldname }}</td>
 

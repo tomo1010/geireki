@@ -13,13 +13,18 @@
 
 //芸人データ
 Route::get('/', 'EntertainersController@index');
-Route::post('/', 'EntertainersController@selectYear')->name('entertainers.select');
 Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertainers.show');
-Route::get('list/{year}', 'EntertainersController@list')->name('entertainers.list');
-Route::get('office/{id}', 'EntertainersController@office')->name('entertainers.office');
 Route::get('search', 'EntertainersController@search')->name('entertainers.search');
 
 
+//一覧表示
+Route::get('lists/all', 'ListsController@all')->name('lists.all');
+Route::get('lists/history', 'ListsController@history')->name('lists.history');
+Route::get('lists/history/{year}', 'ListsController@historyList')->name('lists.historyList');
+Route::post('/', 'ListsController@selectYear')->name('lists.select');
+Route::get('lists/office', 'ListsController@office')->name('lists.office');
+Route::get('lists/office/{id}', 'ListsController@officeList')->name('lists.officeList');
+Route::get('lists/age', 'ListsController@age')->name('lists.age');
 
 //個人データ
 Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');

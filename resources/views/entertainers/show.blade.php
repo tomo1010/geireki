@@ -18,42 +18,55 @@
             メンバー
         </th>
         <td>
-        @empty($entertainer->perfomers)
-        <td></td>
-        @else
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>名前</th>
-                    <th>活動時期</th>
-                    <th>師匠</th>
-                    <th>出身</th>
-                    <th>芸歴</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                @foreach ($entertainer->perfomers as $value)
-                <tr>
-                    <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td>{{ $value->active }}</td>
-                    <td>{{ $value->master }}</td>
-                    <td>{{ $value->school }}</td>
-                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        @endempty
+            @empty($entertainer->perfomers)
+            <td></td>
+            @else
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>名前</th>
+                        <th>活動時期</th>
+                        <th>師匠</th>
+                        <th>出身</th>
+                        <th>芸歴</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    @foreach ($entertainer->perfomers as $value)
+                    <tr>
+                        <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+                        <td>{{ $value->active }}</td>
+                        <td>{{ $value->master }}</td>
+                        <td>{{ $value->school }}</td>
+                        <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endempty
         </td>
         </tr>
         <tr>
             <th>活動時期</th>
+            
+            @empty($entertainer->active)
+            <td></td>
+            @else
             <td>{{ $entertainer->active->format('Y年～')}}</td>
+            @endempty
+            
         </tr>
         <tr>
             <th>活動終了時期</th>
+
+            @empty($entertainer->active)
+            <td></td>
+            @else
             <td>{{ $entertainer->activeend}}</td>
+            @endempty
+
+
         </tr>
         <tr>
             <th>師匠</th>
@@ -73,7 +86,7 @@
         </tr>        
         <tr>
             <th>事務所</th>
-            <td>{!! link_to_route('entertainers.office', $office->office, [$entertainer->office_id]) !!}</td>
+            <td>{!! link_to_route('lists.officeList', $office->office, [$entertainer->office_id]) !!}</td>
         </tr>
             <th>公式URL</th>
             <td><a href="{{ $entertainer->official }}" target="new">{{ $entertainer->official }}</a></td>
@@ -87,7 +100,8 @@
             <td>{{$now->diffInYears($entertainer->active)}}年目</td>
         </tr>
         </table>
-        
+    
+    {{--
     <h2 class="mt-5 pb-2">関連Youtube</h2>
         <table class="table table-striped">
             <thead>
@@ -108,7 +122,7 @@
         </table>
     
     @if (Auth::check())    
-        {{-- 投稿フォーム --}}
+        {{-- 投稿フォーム --
         {!! Form::open(['route' => 'youtubes.store']) !!}
             <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
             <div class="form-group row">
@@ -126,9 +140,12 @@
             </div>
         {!! Form::close() !!} 
     @else
-        {{-- ログインページへのリンク --}}
+        {{-- ログインページへのリンク 
         ※YoutubeのURLを投稿するには{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}が必要です。
     @endif
+
+    --}}
+    
     
     <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
     <div class="container">

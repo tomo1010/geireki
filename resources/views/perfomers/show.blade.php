@@ -15,19 +15,33 @@
         </tr>
         <tr>
             <th>コンビ名、グループ名</th>
-            
+        <td>    
         @empty($perfomer->entertainer)
-            <td></td>
+        <td></td>
         @else
-            @foreach($perfomer->entertainer as $value)
-                @if($value !== NULL)
-                <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
-                @else
-                <td></td>
-                @endif
-            @endforeach
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>名前</th>
+                    <th>活動時期</th>
+                    <th>師匠</th>
+                    <th>芸歴</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($perfomer->entertainer as $value)
+                <tr>
+                    <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
+                    <td>{{ $value->active }}</td>
+                    <td>{{ $value->master }}</td>
+                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
         @endempty
-
+        </td>
         </tr>        
         <tr>
             <th>別名</th>
@@ -91,7 +105,7 @@
         </tr>        
         <tr>
             <th>事務所</th>
-            <td>{!! link_to_route('entertainers.office', $office->office, [$perfomer->office_id]) !!}</td>
+            <td>{!! link_to_route('lists.officeList', $office->office, [$perfomer->office_id]) !!}</td>
         </tr>
             <th>公式URL</th>
             <td><a href="{{ $perfomer->official }}" target="new">{{ $perfomer->official }}</a></td>

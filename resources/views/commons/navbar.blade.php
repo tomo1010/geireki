@@ -31,8 +31,9 @@
                     <li class="nav-item">{!! link_to_route('signup.get', 'Signup', [], ['class' => 'nav-link']) !!}</li>
 
                 @else
-                    {{-- ログインページへのリンク --}}
+                    {{-- ログインページへのリンク
                     <li class="nav-item">{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}</li>
+ --}}
                 @endif
             </ul>
             
@@ -72,7 +73,7 @@
         <center><p>
         {{--芸歴リストへのセレクトBOX--}}
         
-        <form method="post" action="{{ route('entertainers.select')}}">
+        <form method="post" action="{{ route('lists.select')}}">
             @csrf
             <select name="year" onchange="submit(this.form)">
                 @for($i = 0; $i < 70; $i++)
@@ -83,7 +84,11 @@
         
         
         {{--年代別一覧へのリンク--}}
-
+<p><br>
+{!! link_to_route('lists.all', '全ての芸人', [], ['class' => 'btn btn-primary']) !!}
+{!! link_to_route('lists.history', '芸歴別一覧', [], ['class' => 'btn btn-primary']) !!}
+{!! link_to_route('lists.office', '事務所別一覧', [], ['class' => 'btn btn-primary']) !!}
+</p>
         </p></center>
         
 

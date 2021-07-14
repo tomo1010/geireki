@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="container">
         <div class="row">
             <div class="col-lg-8">    
@@ -76,48 +77,6 @@
             </div>
         </div>    
     </div>        
-
-<div class="container">
-    <div class="row">
-        
-        {{--芸歴一覧--}}
-        <div class="col-lg-6"><h2 class="mt-2 pb-2 display-5 border-bottom">芸歴年一覧</h2>
-            <table>
-                <tbody>
-                    <?php $year=0; ?>
-                    @foreach ($counts as $count)
-                        <tr>
-                            <td>
-                            <?php echo $year; ?>年
-                            {!! link_to_route('entertainers.list', $count, ['year' => $year]) !!}人（ピン{{ $results_1[$loop->index] }}人　コンビ{{ $results_2[$loop->index] }}人　トリオ{{ $results_3[$loop->index] }}人）
-                            <?php $year++; ?>
-                            </td>
-                        </tr>
-        
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        
-        {{--事務所一覧--}}
-        <div class="col-lg-6"><h2 class="mt-2 pb-2 display-5 border-bottom">事務所一覧</h2>
-            <table>
-                <tbody>
-                   @foreach ($office as $value)
-                        <tr>
-                            <td>
-                            {{$value->office}}　<a href="{{ route('entertainers.office', ['id'=>$value->id]) }}">{{$office = $value->entertainers_count}}</a>人
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    
-    </div>
-</div>    
-        
-
 
 
 <h2 class="mt-2 pb-2">M1ラストイヤーの芸人</h2>    
@@ -207,77 +166,7 @@
         </table>
     
         
-<h2 class="mt-2 pb-2">芸人一覧</h1>
-    
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>@sortablelink('name', '芸人')</th>
-                    <th>@sortablelink('active', '活動時期')</th>
-                    <th>活動終了時期</th>
-                    <th>師匠</th>
-                    <th>旧名</th>
-                    <th>公式</th>
-                    <th>Youtube</th>
-                    <th>芸歴</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                @foreach ($entertainers as $entertainer)
-                @if($entertainer->activeend == NULL) {{--解散済みの場合はグレー文字--}}
-                <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}</td>
-                    <td>{{ $entertainer->active->format('Y年～') }}</td>
-                    <td></td>
-                    <td>{{ $entertainer->master }}</td>
-                    <td>{{ $entertainer->oldname }}</td>
 
-                    @empty($entertainer->official)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $entertainer->official }}">公式</a></td>
-                    @endempty
-
-                    @empty($entertainer->youtube)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
-                    @endempty
-                    
-                    <td nowrap>{{$now->diffInYears($entertainer->active)}}年</td>
-                </tr>
-                @else
-
-                <tr class="text-secondary">
-                    <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}（解散済）</td>
-                    <td>{{ $entertainer->active->format('Y年～') }}</td>
-                    <td>{{ $entertainer->activeend->format('Y年') }}</td>
-                    <td>{{ $entertainer->master }}</td>
-                    <td>{{ $entertainer->oldname }}</td>
-
-                    @empty($entertainer->official)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $entertainer->official }}">公式</a></td>
-                    @endempty
-
-                    @empty($entertainer->youtube)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
-                    @endempty
-                    
-                    <td nowrap>{{$now->diffInYears($entertainer->active)}}年</td>
-                </tr>
-                @endif
-                
-                @endforeach
-            </tbody>
-        </table>
-
-    {{-- ページネーションのリンク --}}
-    {{ $entertainers->appends(request()->query())->links() }}
 
 
     {{-- 作成ページへのリンク --}}

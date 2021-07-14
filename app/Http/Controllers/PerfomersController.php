@@ -102,14 +102,14 @@ class PerfomersController extends Controller
         $office = Perfomer::find($id)->office;
 
         //コンビ名を取得
-        $entertainer = Perfomer::find($id)->entertainer();
+        //$entertainer = Perfomer::find($id)->entertainer();
 //dd($entertainer);
         
         // メッセージ詳細ビューでそれを表示
         return view('perfomers.show', [
             'perfomer' => $perfomer,
             'office' => $office,
-            'entertainer' => $entertainer,
+            //'entertainer' => $entertainer,
             'now' => new \Carbon\Carbon(),
         ]);
     }

@@ -110,7 +110,6 @@ class ListsController extends Controller
             
         }
 
-
         
         // 一覧ビューで表示
         return view('lists.historyList', [
@@ -118,6 +117,8 @@ class ListsController extends Controller
             'results_2' => $results_2,
             'results_3' => $results_3,
             'year' => $year,
+            'plus' => $year+=1,
+            'minus' => $year-=2,
             'now' => new \Carbon\Carbon(),
         ]);
     }

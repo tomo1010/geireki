@@ -70,7 +70,7 @@ class EntertainersController extends Controller
 
         //今年解散した芸人の一覧
         $lastyear = Carbon::now()->subYear(0); // 今年を取得
-        $dissolutions = Entertainer::whereYear('activeend','=', $lastyear)->get();
+        $dissolutions = Entertainer::whereYear('activeend','=', $lastyear)->orderBy('active', 'asc')->get();
 
 
         //芸歴15年目の芸人の一覧

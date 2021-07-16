@@ -25,8 +25,7 @@
                 <thead>
                     <tr>
                         <th>名前</th>
-                        <th>活動時期</th>
-                        <th>師匠</th>
+                        <th>出身地</th>
                         <th>出身</th>
                         <th>芸歴</th>
                     </tr>
@@ -36,8 +35,7 @@
                     @foreach ($entertainer->perfomers as $value)
                     <tr>
                         <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                        <td>{{ $value->active }}</td>
-                        <td>{{ $value->master }}</td>
+                        <td>{{ $value->birthplace }}</td>
                         <td>{{ $value->school }}</td>
                         <td nowrap>{{$now->diffInYears($value->active)}}年</td>
                     </tr>
@@ -150,7 +148,7 @@
     <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
     <div class="container">
         <div class="row">
-                <div class="col-lg-4"><h3 class="mt-2 pb-1">1年先輩</h3>
+                <div class="col-lg-4" id="senior"><h3 class="mt-2 pb-1">1年先輩</h3><a href="#sync">同期</a>｜<a href="#junior">1年後輩</a>
                     <table class="table table-striped">
                     <tbody>
                         <tr>
@@ -171,7 +169,7 @@
                     </tbody>   
                     </table>
                 </div>
-                <div class="col-lg-4"><h3 class="mt-2 pb-1">同期</h3>
+                <div class="col-lg-4" id="sync"><h3 class="mt-2 pb-1">同期</h3><a href="#senior">1年先輩</a>｜<a href="#junior">1年後輩</a>
                     <table class="table table-striped">
                     <tbody>
                         <tr>
@@ -192,7 +190,7 @@
                     </tbody>   
                     </table>
                 </div>    
-                <div class="col-lg-4"><h3 class="mt-2 pb-1">1年後輩</h3>
+                <div class="col-lg-4" id="junior"><h3 class="mt-2 pb-1">1年後輩</h3><a href="#sync">同期</a>｜<a href="#senior">1年先輩</a>
                     <table class="table table-striped">
                     <tbody>
                         <tr>

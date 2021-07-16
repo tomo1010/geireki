@@ -23,8 +23,7 @@
             <thead>
                 <tr>
                     <th>名前</th>
-                    <th>活動時期</th>
-                    <th>師匠</th>
+                    <th>別名</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -33,8 +32,7 @@
                 @foreach ($perfomer->entertainer as $value)
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td>{{ $value->active }}</td>
-                    <td>{{ $value->master }}</td>
+                    <td>{{ $value->alias }}</td>
                     <td nowrap>{{$now->diffInYears($value->active)}}年</td>
                 </tr>
                 @endforeach

@@ -13,8 +13,6 @@
                                 <th>芸人</th>
                                 <th>誕生日</th>
                                 <th>年齢</th>                    
-                                <th>公式</th>
-                                <th>Youtube</th>
                                 <th>芸歴</th>
                             </tr>
                         </thead>
@@ -25,19 +23,7 @@
                                 <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
                                 <td>{{ $value->birthday->format('Y年 n/j')}}</td>
                                 <td>{{$now->diffInYears($value->birthday)}}歳</td>
- 
-                                @empty($value->official)
-                                    <td></td>
-                                @else
-                                    <td><a href="{{ $value->official }}">公式</a></td>
-                                @endempty
- 
-                                @empty($value->youtube)
-                                    <td></td>
-                                @else
-                                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
-                                @endempty
- 
+
                                 @empty($value->active)
                                     <td>-</td>
                                 @else
@@ -83,12 +69,8 @@
             <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>@sortablelink('name', '芸人')</th>
-                    <th>@sortablelink('active', '活動時期')</th>
-                    <th>師匠</th>
+                    <th>名前</th>
                     <th>旧名</th>
-                    <th>公式</th>
-                    <th>Youtube</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -97,22 +79,7 @@
                 @foreach ($m1year as $value)
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td>{{ $value->active->format('Y年～')}}</td>
-                    <td>{{ $value->master }}</td>
                     <td>{{ $value->oldname }}</td>
-                    
-                    @empty($value->official)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $value->official }}">公式</a></td>
-                    @endempty
-
-                    @empty($value->youtube)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
-                    @endempty
-                    
                     <td nowrap>{{$now->diffInYears($value->active)}}年</td>
                 </tr>
                 @endforeach
@@ -127,13 +94,9 @@
             <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>@sortablelink('name', '芸人')</th>
-                    <th>@sortablelink('active', '活動時期')</th>
+                    <th>名前</th>
                     <th>活動終了時期</th>
-                    <th>師匠</th>
                     <th>旧名</th>
-                    <th>公式</th>
-                    <th>Youtube</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -142,23 +105,8 @@
                 @foreach ($dissolutions as $dissolution)
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $dissolution->name, ['id' => $dissolution->id]) !!}</td>
-                    <td>{{ $dissolution->active->format('Y年～')}}</td>
                     <td>{{ $dissolution->activeend->format('Y年m月d日') }}</td>
-                    <td>{{ $dissolution->master }}</td>
                     <td>{{ $dissolution->oldname }}</td>
-                    
-                    @empty($dissolution->official)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $dissolution->official }}">公式</a></td>
-                    @endempty
-
-                    @empty($dissolution->youtube)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $dissolution->youtube }}">Youtube</a></td>
-                    @endempty
-                    
                     <td nowrap>{{$now->diffInYears($dissolution->active)}}年</td>
                 </tr>
                 @endforeach

@@ -25,6 +25,7 @@ Route::post('/', 'ListsController@selectYear')->name('lists.select');
 Route::get('lists/office', 'ListsController@office')->name('lists.office');
 Route::get('lists/office/{id}', 'ListsController@officeList')->name('lists.officeList');
 Route::get('lists/age', 'ListsController@age')->name('lists.age');
+Route::get('lists/age/{year}', 'ListsController@ageList')->name('lists.ageList');
 
 //個人データ
 Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');

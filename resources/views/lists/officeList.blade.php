@@ -85,6 +85,7 @@
                     <thead>
                         <tr>
                             <th>芸人</th>
+                            
                             <th>活動時期</th>
                         </tr>
                     </thead>

@@ -352,10 +352,4 @@ class EntertainersController extends Controller
     }
 
 
-
-
-
-
-
-
 }

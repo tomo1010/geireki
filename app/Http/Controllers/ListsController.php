@@ -215,41 +215,40 @@ class ListsController extends Controller
     
  
  
+ 
+ 
+ 
     
-    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
     public function age()
     {
 
 
-
-        
-        $today = Carbon::now(); //2021-07-13
-        $two = $today->subYear(20)->format('Y-m-d'); //"2001-07-13"
-        $three = $today->subYear(30)->format('Y-m-d'); //"1991-07-13"
-        $four = $today->subYear(40)->format('Y-m-d');
-        $five = $today->subYear(50)->format('Y-m-d'); 
-        $six = $today->subYear(60)->format('Y-m-d');
-        $seven = $today->subYear(70)->format('Y-m-d');
-        $eight = $today->subYear(80)->format('Y-m-d');
-        //dd($seventy);
+        //10年単位で今日から○年前を取得
+        $two = Carbon::now()->subYear(20)->format('Y-m-d'); //"2001-07-13"
+        $three = Carbon::now()->subYear(30)->format('Y-m-d'); //"1971-07-17"
+        $four = Carbon::now()->subYear(40)->format('Y-m-d');//"1931-07-17"
+        $five = Carbon::now()->subYear(50)->format('Y-m-d'); 
+        $six = Carbon::now()->subYear(60)->format('Y-m-d');
+        $seven = Carbon::now()->subYear(70)->format('Y-m-d');
+        $eight = Carbon::now()->subYear(80)->format('Y-m-d');
 
 
-        $perfomer = Perfomer::where('birthday', '!=', NULL)->where('birthday', '<=', $four)->where('birthday', '>', $five)->get();
-        //dd($perfomer);
-
-
-        $ten = Perfomer::where('birthday', '>', $two)->get();
-        $twenty = Perfomer::where([['birthday', '<=', $two],['birthday', '>', $three]],)->get();        
-        $thirty = Perfomer::where([['birthday', '<=', $three],['birthday', '>', $four]],)->get();
-        //$forty = $perfomer->where('birthday', '>', $four)->get();
-            //['birthday', '>', $five],
-            //['birthday', '<=', $four],
-            //])->get();
-        $fifty = Perfomer::where([['birthday', '<=', $five],['birthday', '>', $six]],)->get();                
-        $sixty = Perfomer::where([['birthday', '<=', $seven],['birthday', '>', $eight]],)->get();                
-        $seventy = Perfomer::where('birthday', '<=', $eight)->get();                        
-        dd($forty);
-
+        $age = array();
+        //perfomerテーブルから↑で範囲を指定して取得
+        $age[] = Perfomer::where('birthday', '>', $two)->count();
+        $age[] = Perfomer::where([['birthday', '<=', $two],['birthday', '>', $three]],)->count();        
+        $age[] = Perfomer::where([['birthday', '<=', $three],['birthday', '>', $four]],)->count();
+        $age[] = Perfomer::where([['birthday', '<=', $four],['birthday', '>', $five]],)->count();
+        $age[] = Perfomer::where([['birthday', '<=', $five],['birthday', '>', $six]],)->count();                
+        $age[] = Perfomer::where([['birthday', '<=', $seven],['birthday', '>', $eight]],)->count();                
+        $age[] = Perfomer::where('birthday', '<=', $eight)->count();                        
+        //dd($age);
 
         
         /*getパラメータから「解散済みを含めるか？」のチェックを受け取る        
@@ -274,21 +273,107 @@ class ListsController extends Controller
         
         // 一覧ビューで表示
         return view('lists.age', [
-            //'results_1' => $results_1,
-            //'results_2' => $results_2,
-            //'results_3' => $results_3,
-            'ten' => $ten,
-            'twenty' => $twenty,
-            'thirty' => $thirty,
-            'forty' => $forty,
-            'fifty' => $fifty,
-            'sixty' => $sixty,
-            'seventy' => $seventy,            
-            'now' => new \Carbon\Carbon(),
+
+            'age' => $age,
+            //'ten' => $ten,
+            //'twenty' => $twenty,
+            //'thirty' => $thirty,
+            //'forty' => $forty,
+            //'fifty' => $fifty,
+            //'sixty' => $sixty,
+            //'seventy' => $seventy,            
+            //'now' => new \Carbon\Carbon(),
         ]);
     }
     
-    
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+    public function ageList($year)
+    {
+
+
+        //10年 単位で今日から○年前を取得
+        $two = Carbon::now()->subYear(20)->format('Y-m-d'); //"2001-07-13"
+        $three = Carbon::now()->subYear(30)->format('Y-m-d'); //"1971-07-17"
+        $four = Carbon::now()->subYear(40)->format('Y-m-d');//"1931-07-17"
+        $five = Carbon::now()->subYear(50)->format('Y-m-d'); 
+        $six = Carbon::now()->subYear(60)->format('Y-m-d');
+        $seven = Carbon::now()->subYear(70)->format('Y-m-d');
+        $eight = Carbon::now()->subYear(80)->format('Y-m-d');
+
+
+        //perfomerテーブルから↑で範囲を指定して取得
+        if($year == '1'){
+        $perfomer = Perfomer::where('birthday', '>', $two)->with('entertainer')->paginate(15);
+        }
+        elseif($year == '2'){
+        $perfomer = Perfomer::where([['birthday', '<=', $two],['birthday', '>', $three]],)->paginate(15);
+        //$perfomer;
+        
+            //$user = \Auth::user();  // 認証済みユーザを取得
+            //$youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
+            //$youtubes = $user->youtubes()->with(['entertainer'])->orderBy('created_at', 'desc')->paginate(10);
+        }
+        elseif($year == '3'){
+        $perfomer = Perfomer::where([['birthday', '<=', $three],['birthday', '>', $four]],)->paginate(15);
+        }
+        elseif($year == '4'){
+        $perfomer = Perfomer::where([['birthday', '<=', $four],['birthday', '>', $five]],)->paginate(15);
+        }
+        elseif($year == '5'){
+        $perfomer = Perfomer::where([['birthday', '<=', $five],['birthday', '>', $six]],)->paginate(15);                
+        }
+        elseif($year == '6'){
+        $perfomer = Perfomer::where([['birthday', '<=', $seven],['birthday', '>', $eight]],)->paginate(15);                
+        }
+        else
+        $perfomer = Perfomer::where('birthday', '<=', $eight)->paginate(15);                        
+        //dd($perfomer);
+        
+
+        
+        /*getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+
+        if($disband == '1'){
+            
+            $results_1 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
+            $results_2 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
+            $results_3 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
+
+        }
+        else{
+
+            $results_1 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
+            $results_2 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
+            $results_3 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
+            
+        }*/
+
+
+        
+        // 一覧ビューで表示
+        return view('lists.ageList', [
+
+            'perfomer' => $perfomer,
+            'year' => $year,
+            //'ten' => $ten,
+            //'twenty' => $twenty,
+            //'thirty' => $thirty,
+            //'forty' => $forty,
+            //'fifty' => $fifty,
+            //'sixty' => $sixty,
+            //'seventy' => $seventy,            
+            'now' => new \Carbon\Carbon(),
+        ]);
+    }    
     
     
     

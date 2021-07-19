@@ -88,6 +88,7 @@
 {!! link_to_route('lists.all', '全ての芸人', [], ['class' => 'btn btn-primary']) !!}
 {!! link_to_route('lists.history', '芸歴別一覧', [], ['class' => 'btn btn-primary']) !!}
 {!! link_to_route('lists.office', '事務所別一覧', [], ['class' => 'btn btn-primary']) !!}
+{!! link_to_route('lists.age', '年代別一覧', [], ['class' => 'btn btn-primary']) !!}
 </p>
         </p></center>
         

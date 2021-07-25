@@ -300,7 +300,7 @@ class ListsController extends Controller
 
 
         //10年 単位で今日から○年前を取得
-        $two = Carbon::now()->subYear(20)->format('Y-m-d'); //"2001-07-13"
+        $two = Carbon::now()->subYear(20)->format('Y-m-d'); //"2001-07-17"
         $three = Carbon::now()->subYear(30)->format('Y-m-d'); //"1971-07-17"
         $four = Carbon::now()->subYear(40)->format('Y-m-d');//"1931-07-17"
         $five = Carbon::now()->subYear(50)->format('Y-m-d'); 
@@ -311,30 +311,25 @@ class ListsController extends Controller
 
         //perfomerテーブルから↑で範囲を指定して取得
         if($year == '1'){
-        $perfomer = Perfomer::where('birthday', '>', $two)->with('entertainer')->paginate(15);
+        $perfomer = Perfomer::with(['entertainer.office'])->where('birthday', '>', $two)->paginate(15);
         }
         elseif($year == '2'){
-        $perfomer = Perfomer::where([['birthday', '<=', $two],['birthday', '>', $three]],)->paginate(15);
-        //$perfomer;
-        
-            //$user = \Auth::user();  // 認証済みユーザを取得
-            //$youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
-            //$youtubes = $user->youtubes()->with(['entertainer'])->orderBy('created_at', 'desc')->paginate(10);
+        $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $two],['birthday', '>', $three]],)->paginate(15);
         }
         elseif($year == '3'){
-        $perfomer = Perfomer::where([['birthday', '<=', $three],['birthday', '>', $four]],)->paginate(15);
+        $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $three],['birthday', '>', $four]],)->paginate(15);
         }
         elseif($year == '4'){
-        $perfomer = Perfomer::where([['birthday', '<=', $four],['birthday', '>', $five]],)->paginate(15);
+        $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $four],['birthday', '>', $five]],)->paginate(15);
         }
         elseif($year == '5'){
-        $perfomer = Perfomer::where([['birthday', '<=', $five],['birthday', '>', $six]],)->paginate(15);                
+        $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $five],['birthday', '>', $six]],)->paginate(15);                
         }
         elseif($year == '6'){
-        $perfomer = Perfomer::where([['birthday', '<=', $seven],['birthday', '>', $eight]],)->paginate(15);                
+        $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $seven],['birthday', '>', $eight]],)->paginate(15);                
         }
         else
-        $perfomer = Perfomer::where('birthday', '<=', $eight)->paginate(15);                        
+        $perfomer = Perfomer::with(['entertainer.office'])->where('birthday', '<=', $eight)->paginate(15);                        
         //dd($perfomer);
         
 

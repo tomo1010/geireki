@@ -170,7 +170,9 @@ class EntertainersController extends Controller
     public function show($id)
     {
         // idの値でメッセージを検索して取得
-        $entertainer = Entertainer::findOrFail($id);
+        $entertainer = Entertainer::with('perfomers')->findOrFail($id);
+        // $entertainer = Entertainer::with(['perfomers.office', 'office'])->findOrFail($id);
+        //dd($entertainer);
 
         // 活動開始年から芸歴を取得
         $active = $entertainer->active;
@@ -339,12 +341,14 @@ class EntertainersController extends Controller
     public function search(Request $request)
     {
            $search = $request->search;
-           $search = Entertainer::where('name', 'like', "%$search%")->get();
+           $search_1 = Entertainer::where('name', 'like', "%$search%")->get();
+           $search_2 = Perfomer::where('name', 'like', "%$search%")->get();           
            //dd($search);
         
             // 一覧ビューで表示
             return view('entertainers.search', [
-            'search' => $search,
+            'search_1' => $search_1,
+            'search_2' => $search_2,            
             'now' => new \Carbon\Carbon(),
         ]);
             

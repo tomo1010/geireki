@@ -103,7 +103,7 @@ class PerfomersController extends Controller
 
         //コンビ名を取得
         //$entertainer = Perfomer::find($id)->entertainer();
-//dd($entertainer);
+
         
         // メッセージ詳細ビューでそれを表示
         return view('perfomers.show', [
@@ -113,6 +113,11 @@ class PerfomersController extends Controller
             'now' => new \Carbon\Carbon(),
         ]);
     }
+
+
+
+
+
 
     /**
      * Show the form for editing the specified resource.

@@ -98,6 +98,11 @@
             <td>{{$now->diffInYears($entertainer->active)}}年目</td>
         </tr>
         </table>
+        
+    {{-- 修正依頼ページへのリンク --}}
+    <p><center>
+    <a href="https://forms.gle/PayWcxWhphTi36zRA" class="btn btn-success">修正依頼はこちら</a>
+    </p></center>
     
     {{--
     <h2 class="mt-5 pb-2">関連Youtube</h2>
@@ -213,6 +218,9 @@
                 </div>
         </div>
     </div>
+    
+
+
 
     {{-- 作成ページへのリンク --}}
     @if (Auth::check())

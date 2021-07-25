@@ -117,6 +117,11 @@
         </tr>
         </table>
     
+    {{-- 修正依頼ページへのリンク --}}
+    <p><center>
+    <a href="https://forms.gle/DhSu4LLoKPhBSDLH8" class="btn btn-warning">修正依頼はこちら</a>
+    </p></center>
+    
     
     
     {{-- 作成ページへのリンク --}}

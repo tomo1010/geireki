@@ -107,7 +107,8 @@
                     <td nowrap>{!! link_to_route('entertainers.show', $dissolution->name, ['id' => $dissolution->id]) !!}</td>
                     <td>{{ $dissolution->activeend->format('Y年m月d日') }}</td>
                     <td>{{ $dissolution->oldname }}</td>
-                    <td nowrap>{{$now->diffInYears($dissolution->active)}}年</td>
+                    
+                    <td>{{$now->diffInYears($dissolution->active)}}年</td>
                 </tr>
                 @endforeach
             </tbody>

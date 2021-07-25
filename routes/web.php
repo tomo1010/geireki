@@ -11,6 +11,8 @@
 |
 */
 
+
+
 //芸人データ
 Route::get('/', 'EntertainersController@index');
 Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertainers.show');

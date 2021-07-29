@@ -30,7 +30,6 @@
                             <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
 
 
-
                         </tr>
                         @else
                         <tr class="text-secondary">

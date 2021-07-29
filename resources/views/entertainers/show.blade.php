@@ -151,9 +151,11 @@
     
     
     <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
+    <a href="#senior">先輩</a>｜<a href="#sync">同期</a>｜<a href="#junior">後 輩</a>
+    
     <div class="container">
         <div class="row">
-                <div class="col-lg-4" id="senior"><h3 class="mt-2 pb-1">1年先輩</h3><a href="#sync">同期</a>｜<a href="#junior">1年後輩</a>
+                <div class="col-lg-4" id="senior"><h3 class="mt-2 pb-1">1年先輩</h3>
                     <table class="table table-striped">
                     <tbody>
                         <tr>
@@ -174,7 +176,7 @@
                     </tbody>   
                     </table>
                 </div>
-                <div class="col-lg-4" id="sync"><h3 class="mt-2 pb-1">同期</h3><a href="#senior">1年先輩</a>｜<a href="#junior">1年後輩</a>
+                <div class="col-lg-4" id="sync"><h3 class="mt-2 pb-1">同期</h3>
                     <table class="table table-striped">
                     <tbody>
                         <tr>
@@ -195,7 +197,7 @@
                     </tbody>   
                     </table>
                 </div>    
-                <div class="col-lg-4" id="junior"><h3 class="mt-2 pb-1">1年後輩</h3><a href="#sync">同期</a>｜<a href="#senior">1年先輩</a>
+                <div class="col-lg-4" id="junior"><h3 class="mt-2 pb-1">1年後輩</h3>
                     <table class="table table-striped">
                     <tbody>
                         <tr>

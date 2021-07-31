@@ -23,9 +23,8 @@
                             <tr>
                                 <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
                                 <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>                                  
-                                <td>{{$now->diffInYears($value->birthday)}}歳</td>
                                 <td>{{ $value->birthday->format('Y年 n/j')}}</td>
-
+                                <td>{{$now->diffInYears($value->birthday)}}歳</td>
 
                                 @empty($value->active)
                                     <td>-</td>

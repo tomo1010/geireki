@@ -16,25 +16,25 @@
                         <tr>
                             <th>芸人</th>
                             <th>性別</th>
-                            <th>活動時期</th>
+                            <th>芸歴</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($results_1 as $value)
                         @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
                         <tr>
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
+                            <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
                             @include('commons.gender')                            
 
                             @empty($value->active)
                             <td></td>
                             @else
-                            <td>{{ $value->active->format('Y年～') }}</td>
+                            <td>{{$now->diffInYears($value->active)}}年目</td>
                             @endempty
                         </tr>
                         @else
                         <tr class="text-secondary">
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
+                            <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
                             <td>{{ $value->active }}</td>
                             <td>{{ $value->activeend }}</td>
                         </tr>
@@ -51,7 +51,7 @@
                         <tr>
                             <th>芸人</th>
                             <th>性別</th>
-                            <th>活動時期</th>
+                            <th>芸歴</th>
                         </tr>
                     </thead>
                      
@@ -64,7 +64,7 @@
                             @empty($value->active)
                             <td></td>
                             @else
-                            <td>{{ $value->active->format('Y年～') }}</td>
+                            <td>{{$now->diffInYears($value->active)}}年目</td>
                             @endempty
                             
                         </tr>
@@ -87,7 +87,7 @@
                         <tr>
                             <th>芸人</th>
                             <th>性別</th>                            
-                            <th>活動時期</th>
+                            <th>芸歴</th>
                         </tr>
                     </thead>
                      
@@ -96,12 +96,12 @@
                         @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
                         <tr>
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                            @include('commons.gender')                            
-                            
+                            @include('commons.gender')
+
                             @empty($value->active)
                             <td></td>
                             @else
-                            <td>{{ $value->active->format('Y年～') }}</td>
+                            <td>{{$now->diffInYears($value->active)}}年目</td>
                             @endempty
                             
                         </tr>

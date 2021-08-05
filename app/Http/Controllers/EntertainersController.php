@@ -338,7 +338,7 @@ class EntertainersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
+    public function searchbox(Request $request)
     {
            $search = $request->search;
            $search_1 = Entertainer::where('name', 'like', "%$search%")->get();
@@ -346,7 +346,7 @@ class EntertainersController extends Controller
            //dd($search);
         
             // 一覧ビューで表示
-            return view('entertainers.search', [
+            return view('entertainers.searchbox', [
             'search_1' => $search_1,
             'search_2' => $search_2,            
             'now' => new \Carbon\Carbon(),

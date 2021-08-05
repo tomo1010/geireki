@@ -16,7 +16,7 @@
 //芸人データ
 Route::get('/', 'EntertainersController@index');
 Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertainers.show');
-Route::get('search', 'EntertainersController@search')->name('entertainers.search');
+Route::get('searchbox', 'EntertainersController@searchbox')->name('entertainers.searchbox');
 
 
 //一覧表示
@@ -29,9 +29,14 @@ Route::get('lists/office/{id}', 'ListsController@officeList')->name('lists.offic
 Route::get('lists/age', 'ListsController@age')->name('lists.age');
 Route::get('lists/age/{year}', 'ListsController@ageList')->name('lists.ageList');
 
+
 //個人データ
 Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');
 //Route::post('age', 'PerfomersController@age')->name('perfomers.age');
+
+
+//検索
+Route::get('search', 'SearchController@search')->name('search');
 
 
 // signup

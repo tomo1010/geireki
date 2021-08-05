@@ -2,6 +2,18 @@
 
 @section('content')
 
+<?php
+ $s_name = null;
+ $s_bloodtype = null;
+ $s_birthplace = null;
+?>
+
+{!! Form::open(['action' => 'SearchController@search','method' => 'get']) !!}
+    名前:{!! Form::text('s_name', $s_name) !!}
+    血液型:{!! Form::text('s_bloodtype', $s_bloodtype) !!}
+    出身地:{!! Form::text('s_birthplace', $s_birthplace) !!}
+    {!! Form::submit('検索') !!}
+{!! Form::close() !!}
 
 
 
@@ -28,7 +40,7 @@
                     @empty($entertainer->active)
                     <td></td>
                     @else
-                    <td>{{ $entertainer->active->format('Y年～') }}</td>
+                    <td>{{ $entertainer->active }}</td>
                     @endempty
                     
                     <td></td>
@@ -56,10 +68,10 @@
                     @empty($entertainer->active)
                     <td></td>
                     @else                    
-                    <td>{{ $entertainer->active->format('Y年～') }}</td>
+                    <td>{{ $entertainer->active }}</td>
                     @endempty                    
                     
-                    <td>{{ $entertainer->activeend->format('Y年') }}</td>
+                    <td>{{ $entertainer->activeend }}</td>
                     <td>{{ $entertainer->master }}</td>
                     <td>{{ $entertainer->oldname }}</td>
 
@@ -85,5 +97,8 @@
 
     {{-- ページネーションのリンク --}}
     {{ $entertainers->appends(request()->query())->links() }}
+
+
+
 
 @endsection

@@ -41,7 +41,7 @@
 
     {{--検索BOX--}}
  
-    <form class="form-inline my-2 my-lg-0 ml-2" action="{{ route('entertainers.search')}}">
+    <form class="form-inline my-2 my-lg-0 ml-2" action="{{ route('entertainers.searchbox')}}">
       <div class="form-group">
       <input type="search" class="form-control mr-sm-2" name="search"  value="{{request('search')}}" placeholder="キーワードを入力" aria-label="検索...">
       </div>
@@ -86,7 +86,7 @@
         
 {{--年代別一覧へのリンク--}}
 <p><br>
-{!! link_to_route('lists.all', '全ての芸人', [], ['class' => 'btn btn-primary']) !!}
+{!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-primary']) !!}
 {!! link_to_route('lists.history', '芸歴別一覧', [], ['class' => 'btn btn-primary']) !!}
 {!! link_to_route('lists.office', '事務所別一覧', [], ['class' => 'btn btn-primary']) !!}
 {!! link_to_route('lists.age', '年代別一覧', [], ['class' => 'btn btn-primary']) !!}

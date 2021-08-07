@@ -8,10 +8,15 @@
  $s_birthplace = null;
 ?>
 
+
+
+
 {!! Form::open(['action' => 'SearchController@search','method' => 'get']) !!}
     名前:{!! Form::text('s_name', $s_name) !!}
-    血液型:{!! Form::text('s_bloodtype', $s_bloodtype) !!}
+    血液型:{!! Form::select('s_bloodtype', ['A' => 'A型', 'B' => 'B型', 'O' => 'O型', 'AB' => 'AB型'], 'null', ['placeholder' => '選択']) !!}
     出身地:{!! Form::text('s_birthplace', $s_birthplace) !!}
+    年代:{!! Form::select('s_start', ['20' => '20代', '30' => '30代', '40' => '40代', '50' => '50代', '60' => '60代', '70' => '70代'], 'null', ['placeholder' => '選択']) !!}～
+         {!! Form::select('s_end', ['20' => '20代', '30' => '30代', '40' => '40代', '50' => '50代', '60' => '60代', '70' => '70代'], 'null', ['placeholder' => '選択']) !!}    
     {!! Form::submit('検索') !!}
 {!! Form::close() !!}
 
@@ -22,72 +27,76 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>@sortablelink('name', '芸人')</th>
-                    <th>@sortablelink('active', '活動時期')</th>
+                    <th>芸人</th>
+                    <th>活動時期</th>
                     <th>活動終了時期</th>
                     <th>旧名</th>
                     <th>公式</th>
                     <th>Youtube</th>
+                    <th>年齢</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
             
             <tbody>
-                @foreach ($entertainers as $entertainer)
-                @if($entertainer->activeend == NULL) {{--解散済みの場合はグレー文字--}}
+                @foreach ($perfomers as $value)
+                @if($value->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                 <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}</td>
-                    @empty($entertainer->active)
+                    <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+                    @empty($value->active)
                     <td></td>
                     @else
-                    <td>{{ $entertainer->active }}</td>
+                    <td>{{ $value->active }}</td>
                     @endempty
                     
                     <td></td>
-                    <td>{{ $entertainer->oldname }}</td>
+                    <td>{{ $value->oldname }}</td>
 
-                    @empty($entertainer->official)
+                    @empty($value->official)
                     <td></td>
                     @else
-                    <td><a href="{{ $entertainer->official }}">公式</a></td>
+                    <td><a href="{{ $value->official }}">公式</a></td>
                     @endempty
 
-                    @empty($entertainer->youtube)
+                    @empty($value->youtube)
                     <td></td>
                     @else
-                    <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
+                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
                     @endempty
                     
-                    <td nowrap>{{$now->diffInYears($entertainer->active)}}年</td>
+                    <td>{{$now->diffInYears($value->birthday)}}歳</td>
+
+                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
                 </tr>
                 @else
 
                 <tr class="text-secondary">
-                    <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}（解散済）</td>
+                    <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}（解散済）</td>
                     
-                    @empty($entertainer->active)
+                    @empty($value->active)
                     <td></td>
                     @else                    
-                    <td>{{ $entertainer->active }}</td>
+                    <td>{{ $value->active }}</td>
                     @endempty                    
                     
-                    <td>{{ $entertainer->activeend }}</td>
-                    <td>{{ $entertainer->master }}</td>
-                    <td>{{ $entertainer->oldname }}</td>
+                    <td>{{ $value->activeend }}</td>
+                    <td>{{ $value->master }}</td>
+                    <td>{{ $value->oldname }}</td>
 
-                    @empty($entertainer->official)
+                    @empty($value->official)
                     <td></td>
                     @else
-                    <td><a href="{{ $entertainer->official }}">公式</a></td>
+                    <td><a href="{{ $value->official }}">公式</a></td>
                     @endempty
 
-                    @empty($entertainer->youtube)
+                    @empty($value->youtube)
                     <td></td>
                     @else
-                    <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
+                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
                     @endempty
                     
-                    <td nowrap>{{$now->diffInYears($entertainer->active)}}年</td>
+                    <td>{{$now->diffInYears($value->birthday)}}歳</td>                    
+                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
                 </tr>
                 @endif
                 
@@ -96,7 +105,7 @@
         </table>
 
     {{-- ページネーションのリンク --}}
-    {{ $entertainers->appends(request()->query())->links() }}
+    {{ $perfomers->appends(request()->query())->links() }}
 
 
 

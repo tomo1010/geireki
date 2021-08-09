@@ -36,9 +36,18 @@ class ListsController extends Controller
         ]);
         
     }
+
+
+
     
     
-    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+
     public function history()
     {
         
@@ -156,7 +165,7 @@ class ListsController extends Controller
         //事務所別に人数を表示
         $office = Office::all();
         foreach($office as $value){
-            $value->loadRelationshipCounts();  // 関係するモデルの件数をロード
+            $value->loadRelationshipCounts();  // 件数をロード
         }
     
         // ビューで表示
@@ -369,6 +378,120 @@ class ListsController extends Controller
             'now' => new \Carbon\Carbon(),
         ]);
     }    
+    
+    
+    
+    
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+
+    public function pref()
+    {
+        $prefs = config('pref');
+
+        foreach($prefs as $pref){
+            $prefCount[] = Perfomer::where('birthplace', 'like', '%'.$pref.'%')->count();
+        }
+
+
+        $touhoku = '0';
+        for($i=1; $i<7; $i++){
+        $touhoku += $prefCount[$i];
+        }
+        
+        $kantou = '0';
+        for($i=8; $i<14; $i++){
+        $kantou += $prefCount[$i];
+        }
+        
+        $hokuriku = '0';
+        for($i=15; $i<20; $i++){
+        $hokuriku += $prefCount[$i];
+        }
+
+        $toukai = '0';
+        for($i=21; $i<24; $i++){
+        $toukai += $prefCount[$i];
+        }        
+        
+        $kansai = '0';
+        for($i=25; $i<30; $i++){
+        $kansai += $prefCount[$i];
+        } 
+
+        $chugoku = '0';
+        for($i=31; $i<35; $i++){
+        $chugoku += $prefCount[$i];
+        } 
+
+        $shikoku = '0';
+        for($i=36; $i<39; $i++){
+        $shikoku += $prefCount[$i];
+        } 
+
+        $kyuusyu = '0';
+        for($i=40; $i<46; $i++){
+        $kyuusyu += $prefCount[$i];
+        }         
+
+
+        return view('lists.pref', [
+            'prefCount' => $prefCount,
+            'prefs' => $prefs,
+            
+            'touhoku' => $touhoku,
+            'kantou' => $kantou,
+            'hokuriku' => $hokuriku,
+            'toukai' => $toukai,
+            'kansai' => $kansai,
+            'chugoku' => $chugoku,
+            'shikoku' => $shikoku,
+            'kyuusyu' => $kyuusyu,
+        ]);
+        
+    }
+    
+    
+    
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+
+    public function prefList($pref)
+    {
+
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+
+
+        if($disband == '1'){
+            
+            $prefs = Perfomer::with(['entertainer.office'])->where('birthplace', 'like', '%'.$pref.'%')->paginate(15);
+        
+        }
+        else{
+            
+            $prefs = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where('birthplace', 'like', '%'.$pref.'%')->paginate(15);
+            
+        }
+
+        
+        // 一覧ビューで表示
+        return view('lists.prefList', [
+            'perfomer' => $prefs,
+            'pref' => $pref,            
+            'now' => new \Carbon\Carbon(),            
+        ]);
+    }
     
     
     

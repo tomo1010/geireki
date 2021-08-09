@@ -28,6 +28,8 @@ Route::get('lists/office', 'ListsController@office')->name('lists.office');
 Route::get('lists/office/{id}', 'ListsController@officeList')->name('lists.officeList');
 Route::get('lists/age', 'ListsController@age')->name('lists.age');
 Route::get('lists/age/{year}', 'ListsController@ageList')->name('lists.ageList');
+Route::get('lists/pref', 'ListsController@pref')->name('lists.pref');
+Route::get('lists/pref/{pref}', 'ListsController@prefList')->name('lists.prefList');
 
 
 //個人データ

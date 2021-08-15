@@ -26,8 +26,8 @@ class SearchController extends Controller
         $s_start = $request->input('s_start'); 
         $s_end = $request->input('s_end');         
 
-        $s_ageStart = $request->input('s_ageStart') +1; 
-        $s_ageEnd = $request->input('s_ageEnd') +1;        
+        $s_ageStart = $request->input('s_ageStart'); 
+        $s_ageEnd = $request->input('s_ageEnd');        
 
         $s_month = $request->input('s_month'); 
         $s_day = $request->input('s_day');                
@@ -60,6 +60,9 @@ class SearchController extends Controller
             $query->whereBetween('birthday', [$to,$from]);
         }
         elseif(!empty($s_ageStart) && !empty($s_ageEnd) && $s_ageStart == $s_ageEnd){
+            $s_ageStart = $request->input('s_ageStart')+1; 
+            $s_ageEnd = $request->input('s_ageEnd')+1;                
+            $from = Carbon::now()->subYear($s_ageStart)->format('Y-m-d');
             $to = Carbon::now()->subYear($s_ageEnd)->modify('+1 year')->format('Y-m-d');
             $query->whereBetween('birthday', [$from,$to]);
         }

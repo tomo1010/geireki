@@ -435,7 +435,7 @@ class ListsController extends Controller
         } 
 
         $kyuusyu = '0';
-        for($i=40; $i<46; $i++){
+        for($i=40; $i<7; $i++){
         $kyuusyu += $prefCount[$i];
         }         
 

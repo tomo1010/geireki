@@ -155,10 +155,12 @@ class ListsController extends Controller
     
     
     
-    
-    
-    
-    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
     public function office()
     {    
     
@@ -237,61 +239,18 @@ class ListsController extends Controller
     public function age()
     {
 
-
-        //10年単位で今日から○年前を取得
-        $two = Carbon::now()->subYear(20)->format('Y-m-d'); //"2001-07-13"
-        $three = Carbon::now()->subYear(30)->format('Y-m-d'); //"1971-07-17"
-        $four = Carbon::now()->subYear(40)->format('Y-m-d');//"1931-07-17"
-        $five = Carbon::now()->subYear(50)->format('Y-m-d'); 
-        $six = Carbon::now()->subYear(60)->format('Y-m-d');
-        $seven = Carbon::now()->subYear(70)->format('Y-m-d');
-        $eight = Carbon::now()->subYear(80)->format('Y-m-d');
-
-
         $age = array();
-        //perfomerテーブルから↑で範囲を指定して取得
-        $age[] = Perfomer::where('birthday', '>', $two)->count();
-        $age[] = Perfomer::where([['birthday', '<=', $two],['birthday', '>', $three]],)->count();        
-        $age[] = Perfomer::where([['birthday', '<=', $three],['birthday', '>', $four]],)->count();
-        $age[] = Perfomer::where([['birthday', '<=', $four],['birthday', '>', $five]],)->count();
-        $age[] = Perfomer::where([['birthday', '<=', $five],['birthday', '>', $six]],)->count();                
-        $age[] = Perfomer::where([['birthday', '<=', $seven],['birthday', '>', $eight]],)->count();                
-        $age[] = Perfomer::where('birthday', '<=', $eight)->count();                        
-        //dd($age);
-
         
-        /*getパラメータから「解散済みを含めるか？」のチェックを受け取る        
-        $disband = request('disband');
-
-        if($disband == '1'){
-            
-            $results_1 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
-            $results_2 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
-            $results_3 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
-
+        for($i = 1; $i < 8; $i++){
+        $from = Carbon::now()->subYear($i*10)->format('Y-m-d');
+        $to = Carbon::now()->subYear(($i*10)+10)->format('Y-m-d');
+        $age[] = Perfomer::where([['birthday', '<=', $from],['birthday', '>', $to]],)->count();
         }
-        else{
-
-            $results_1 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
-            $results_2 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
-            $results_3 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
-            
-        }*/
 
 
-        
         // 一覧ビューで表示
         return view('lists.age', [
-
             'age' => $age,
-            //'ten' => $ten,
-            //'twenty' => $twenty,
-            //'thirty' => $thirty,
-            //'forty' => $forty,
-            //'fifty' => $fifty,
-            //'sixty' => $sixty,
-            //'seventy' => $seventy,            
-            //'now' => new \Carbon\Carbon(),
         ]);
     }
     
@@ -307,74 +266,30 @@ class ListsController extends Controller
     public function ageList($year)
     {
 
-
-        //10年 単位で今日から○年前を取得
-        $two = Carbon::now()->subYear(20)->format('Y-m-d'); //"2001-07-17"
-        $three = Carbon::now()->subYear(30)->format('Y-m-d'); //"1971-07-17"
-        $four = Carbon::now()->subYear(40)->format('Y-m-d');//"1931-07-17"
-        $five = Carbon::now()->subYear(50)->format('Y-m-d'); 
-        $six = Carbon::now()->subYear(60)->format('Y-m-d');
-        $seven = Carbon::now()->subYear(70)->format('Y-m-d');
-        $eight = Carbon::now()->subYear(80)->format('Y-m-d');
-
-
-        //perfomerテーブルから↑で範囲を指定して取得
-        if($year == '1'){
-        $perfomer = Perfomer::with(['entertainer.office'])->where('birthday', '>', $two)->orderBy('birthday','desc')->paginate(15);
-        }
-        elseif($year == '2'){
-        $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $two],['birthday', '>', $three]],)->orderBy('birthday','desc')->paginate(15);
-        }
-        elseif($year == '3'){
-        $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $three],['birthday', '>', $four]],)->orderBy('birthday','desc')->paginate(15);
-        }
-        elseif($year == '4'){
-        $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $four],['birthday', '>', $five]],)->orderBy('birthday','desc')->paginate(15);
-        }
-        elseif($year == '5'){
-        $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $five],['birthday', '>', $six]],)->orderBy('birthday','desc')->paginate(15);                
-        }
-        elseif($year == '6'){
-        $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $six],['birthday', '>', $seven]],)->orderBy('birthday','desc')->paginate(15);                
-        }
-        else
-        $perfomer = Perfomer::with(['entertainer.office'])->where('birthday', '<=', $seven)->orderBy('birthday','desc')->paginate(15);                        
-        //dd($perfomer);
+        $year = $year *10;
         
+        $from = Carbon::now()->subYear($year)->format('Y-m-d');
+        $to = Carbon::now()->subYear($year+10)->format('Y-m-d');
 
-        
-        /*getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
         $disband = request('disband');
 
         if($disband == '1'){
-            
-            $results_1 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
-            $results_2 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
-            $results_3 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
 
+            $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+
+        }else{
+            
+            $perfomer = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
         }
-        else{
-
-            $results_1 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
-            $results_2 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
-            $results_3 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
-            
-        }*/
-
+ 
 
         
         // 一覧ビューで表示
         return view('lists.ageList', [
-
             'perfomer' => $perfomer,
             'year' => $year,
-            //'ten' => $ten,
-            //'twenty' => $twenty,
-            //'thirty' => $thirty,
-            //'forty' => $forty,
-            //'fifty' => $fifty,
-            //'sixty' => $sixty,
-            //'seventy' => $seventy,            
             'now' => new \Carbon\Carbon(),
         ]);
     }    
@@ -435,7 +350,7 @@ class ListsController extends Controller
         } 
 
         $kyuusyu = '0';
-        for($i=40; $i<7; $i++){
+        for($i=40; $i<46; $i++){
         $kyuusyu += $prefCount[$i];
         }         
 

@@ -68,6 +68,36 @@
             </select>
         </div>
     </div>
+
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">人数:</label>
+        <div class="col-2">
+        {!! Form::select('s_pin', ['1' => 'ピン', '2' => 'コンビ', '3' => 'トリオ', 'グループ' => 'group'], 'null', ['placeholder' => '選択','class' => 'form-control']) !!}
+        </div>
+    </div>
+
+
+
+
+
+    {{--Form::label('checkbox','人数:',['class' => 'col-2 col-form-label text-left'])}}
+
+    <div class="form-check col-md-0 d-flex align-items-center pr-2">
+        {{Form::checkbox('numberofpeople','1',false,['class'=>'col-md-0 form-check-input','id'=>'1'])}}
+        {{Form::label('1','ピン',['class' => 'col-md-0 form-check-label text-left'])}}
+    </div>
+    <div class="form-check col-md-0 d-flex align-items-center pr-2">
+        {{Form::checkbox('numberofpeople','2',false,['class'=>'col-md-0 form-check-input','id'=>'2'])}}
+        {{Form::label('2','コンビ',['class' => 'col-md-0 form-check-label text-left'])}}
+    </div>
+    <div class="form-check col-md-0 d-flex align-items-center pr-2">
+        {{Form::checkbox('numberofpeople','3',false,['class'=>'col-md-0 form-check-input','id'=>'3'])}}
+        {{Form::label('3','トリオ',['class' => 'col-md-0 form-check-label text-left'])}}
+    </div>
+--}}
+
+
         
     {{--年代:{!! Form::select('s_start', ['20' => '20代', '30' => '30代', '40' => '40代', '50' => '50代', '60' => '60代', '70' => '70代'], 'null', ['placeholder' => '選択']) !!}～
          {!! Form::select('s_end', ['20' => '20代', '30' => '30代', '40' => '40代', '50' => '50代', '60' => '60代', '70' => '70代'], 'null', ['placeholder' => '選択']) !!}    
@@ -165,9 +195,9 @@
             </tbody>
         </table>
 
-    {{-- ページネーションのリンク --}}
+    {{-- ページネーションのリンク
     {{ $perfomers->appends(request()->query())->links() }}
-
+ --}}
 
 
 

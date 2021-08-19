@@ -9,7 +9,10 @@
                    @foreach ($office as $value)
                         <tr>
                             <td>
-                            {{$value->office}}　<a href="{{ route('lists.officeList', ['id'=>$value->id]) }}">{{$office = $value->entertainers_count}}</a>人
+                            {{$value->office}}
+                            </td>
+                            <td align="right">
+                            <a href="{{ route('lists.officeList', ['id'=>$value->id]) }}">{{$office = $value->entertainers_count}}</a>人
                             </td>
                         </tr>
                     @endforeach

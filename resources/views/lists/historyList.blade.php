@@ -90,6 +90,6 @@
         </div>
     </div>
         
-<<{!! link_to_route('lists.historyList', '1年後輩', ['year' => $minus]) !!}　　{!! link_to_route('lists.historyList', '1年先輩', ['year' => $plus]) !!}>>    
+　<<{!! link_to_route('lists.historyList', '1年先輩', ['year' => $plus]) !!}　{!! link_to_route('lists.historyList', '1年後輩', ['year' => $minus]) !!}>>　    
 
 @endsection

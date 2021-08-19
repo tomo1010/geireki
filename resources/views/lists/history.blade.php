@@ -11,7 +11,10 @@
                     <tr>
                         <td>
                         <?php echo $year; ?>年
-                        {!! link_to_route('lists.historyList', $count, ['year' => $year]) !!}人（ピン{{ $results_1[$loop->index] }}人　コンビ{{ $results_2[$loop->index] }}人　トリオ{{ $results_3[$loop->index] }}人）
+                        </td>
+                        <td align="right">
+                        {!! link_to_route('lists.historyList', $count, ['year' => $year]) !!}人
+                        （ピン{{ $results_1[$loop->index] }}人　コンビ{{ $results_2[$loop->index] }}人　トリオ{{ $results_3[$loop->index] }}人）
                         <?php $year++; ?>
                         </td>
                     </tr>

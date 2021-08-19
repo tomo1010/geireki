@@ -72,7 +72,11 @@
                         <tr class="text-secondary">
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
                             @include('commons.gender')                            
-                            <td>{{ $value->active }}</td>
+                            @empty($value->active)
+                            <td></td>
+                            @else
+                            <td>{{$now->diffInYears($value->active)}}年目</td>
+                            @endempty
                         </tr>
                         @endif
                         @endforeach

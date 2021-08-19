@@ -10,7 +10,10 @@
                    @foreach ($age as $value)
                         <tr>
                             <td>
-                                <?php echo $year; ?>0代　<a href="{{ route('lists.ageList', ['year'=>$year]) }}">{{$value}}</a>人
+                                <?php echo $year; ?>0代　
+                            </td>
+                            <td align="right">
+                                <a href="{{ route('lists.ageList', ['year'=>$year]) }}">{{$value}}</a>人
                                 <?php $year++; ?>
                             </td>
                         </tr>

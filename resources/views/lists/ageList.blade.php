@@ -4,7 +4,7 @@
 
 
 
-<h1 class="mt-2 pb-2"> {{$year}}0代の芸人一覧</h1>
+<h1 class="mt-2 pb-2"> {{$year}}代の芸人一覧</h1>
 
     <div class="container">
         <div class="row">
@@ -15,8 +15,7 @@
                             <th>名前</th>
                             <th>年齢</th>
                             <th>芸歴</th>
-                            <th>コンビ名、芸名</th>
-
+                            <th>コンビ名、芸名</th>                       
                         </tr>
                     </thead>
                     <tbody>
@@ -26,13 +25,14 @@
                             <td nowrap>{!! link_to_route('perfomers.show', $value->name, [$value->id]) !!}</td>
                             <td>{{$now->diffInYears($value->birthday)}}歳</td>
                             <td>{{$now->diffInYears($value->active)}}年目</td>
-                            <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
-
-
+                            <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>                              
                         </tr>
                         @else
                         <tr class="text-secondary">
                             <td nowrap>{!! link_to_route('perfomers.show', $value->name, [$value->id]) !!}（解散済）</td>
+                            <td>{{$now->diffInYears($value->birthday)}}歳</td>
+                            <td>{{$now->diffInYears($value->active)}}年目</td>
+                            <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>                            
                         </tr>
                         @endif
                         @endforeach

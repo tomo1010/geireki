@@ -13,7 +13,7 @@
                         <td>
                         {{ $prefs[$loop->iteration] }}
                         </td>    
-                        <td>
+                        <td align="right">
                         {!! link_to_route('lists.prefList', $count, ['pref' => $prefs[$loop->iteration]]) !!}人
                         </td>
                     </tr>

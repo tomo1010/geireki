@@ -30,6 +30,8 @@ Route::get('lists/age', 'ListsController@age')->name('lists.age');
 Route::get('lists/age/{year}', 'ListsController@ageList')->name('lists.ageList');
 Route::get('lists/pref', 'ListsController@pref')->name('lists.pref');
 Route::get('lists/pref/{pref}', 'ListsController@prefList')->name('lists.prefList');
+Route::get('lists/award', 'ListsController@award')->name('lists.award');
+Route::get('lists/award/{year}', 'ListsController@awardList')->name('lists.awardList');
 
 
 //個人データ
@@ -98,6 +100,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     // 芸人個人（中間）データ 
     Route::get('csv/member', 'CsvController@uploadMember');
     Route::post('csv/member', 'CsvController@importMember')->name('csv.importMember');
+    
+    // 受賞歴データ 
+    Route::get('csv/award', 'CsvController@uploadAward');
+    Route::post('csv/award', 'CsvController@importAward')->name('csv.importAward');    
     
 
     

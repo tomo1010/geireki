@@ -60,7 +60,7 @@
     <div class="form-group row">
         <label class="col-2 col-form-label">出身地:</label>
         <div class="col-10">
-            <select name="s_birthplace">
+            <select name="s_birthplace" class="form-control">
             <option value="" selected="selected">選択</option>
               @foreach($prefs as $index=>$name)
                 <option value="{{$name}}">{{$name}}</option>
@@ -72,8 +72,21 @@
 
     <div class="form-group row">
         <label class="col-2 col-form-label">人数:</label>
-        <div class="col-2">
-        {!! Form::select('s_pin', ['1' => 'ピン', '2' => 'コンビ', '3' => 'トリオ', 'グループ' => 'group'], 'null', ['placeholder' => '選択','class' => 'form-control']) !!}
+        <div class="col-10">
+
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('numberofpeople[]','1',false,['class'=>'col-md-0 form-check-input','id'=>'1'])}}
+                {{Form::label('1','ピン',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('numberofpeople[]','2',false,['class'=>'col-md-0 form-check-input','id'=>'2'])}}
+                {{Form::label('2','コンビ',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('numberofpeople[]','3',false,['class'=>'col-md-0 form-check-input','id'=>'3'])}}
+                {{Form::label('3','トリオ',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+
         </div>
     </div>
 
@@ -81,21 +94,21 @@
 
 
 
-    {{--Form::label('checkbox','人数:',['class' => 'col-2 col-form-label text-left'])}}
+    <!--{{Form::label('checkbox','人数:',['class' => 'col-2 col-form-label'])}}-->
 
-    <div class="form-check col-md-0 d-flex align-items-center pr-2">
-        {{Form::checkbox('numberofpeople','1',false,['class'=>'col-md-0 form-check-input','id'=>'1'])}}
-        {{Form::label('1','ピン',['class' => 'col-md-0 form-check-label text-left'])}}
-    </div>
-    <div class="form-check col-md-0 d-flex align-items-center pr-2">
-        {{Form::checkbox('numberofpeople','2',false,['class'=>'col-md-0 form-check-input','id'=>'2'])}}
-        {{Form::label('2','コンビ',['class' => 'col-md-0 form-check-label text-left'])}}
-    </div>
-    <div class="form-check col-md-0 d-flex align-items-center pr-2">
-        {{Form::checkbox('numberofpeople','3',false,['class'=>'col-md-0 form-check-input','id'=>'3'])}}
-        {{Form::label('3','トリオ',['class' => 'col-md-0 form-check-label text-left'])}}
-    </div>
---}}
+    <!--        <div class="form-check col-md-0 d-flex align-items-center pr-2">-->
+    <!--            {{Form::checkbox('numberofpeople[]','1',false,['class'=>'col-md-0 form-check-input','id'=>'1'])}}-->
+    <!--            {{Form::label('1','ピン',['class' => 'col-md-0 form-check-label text-left'])}}-->
+    <!--        </div>-->
+    <!--        <div class="form-check col-md-0 d-flex align-items-center pr-2">-->
+    <!--            {{Form::checkbox('numberofpeople[]','2',false,['class'=>'col-md-0 form-check-input','id'=>'2'])}}-->
+    <!--            {{Form::label('2','コンビ',['class' => 'col-md-0 form-check-label text-left'])}}-->
+    <!--        </div>-->
+    <!--        <div class="form-check col-md-0 d-flex align-items-center pr-2">-->
+    <!--            {{Form::checkbox('numberofpeople[]','3',false,['class'=>'col-md-0 form-check-input','id'=>'3'])}}-->
+    <!--            {{Form::label('3','トリオ',['class' => 'col-md-0 form-check-label text-left'])}}-->
+    <!--        </div>-->
+
 
 
         
@@ -127,7 +140,8 @@
                     <th>公式</th>
                     <th>年齢</th>
                     <th>芸歴</th>
-                    <th>コンビ名など</th>               
+                    <th>コンビ名など</th>
+                    <th>人数</th>                    
                     <th>事務所</th>                                   
                 </tr>
             </thead>
@@ -144,6 +158,7 @@
                     @endempty
                     
                     <td></td>
+                    
                     <td>{{ $value->oldname }}</td>
 
                     @empty($value->official)
@@ -157,6 +172,7 @@
                     <td nowrap>{{$now->diffInYears($value->active)}}年</td>
                     
                     <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
+                    <td>{{!empty($value->entertainer[0]->numberofpeople) ? $value->entertainer[0]->numberofpeople : '' }}</td>                      
                     <td>{{!empty($value->office->office) ? $value->office->office : '' }}</td>                      
                 </tr>
                 @else
@@ -171,7 +187,7 @@
                     @endempty                    
                     
                     <td>{{ $value->activeend }}</td>
-                    <td>{{ $value->master }}</td>
+
                     <td>{{ $value->oldname }}</td>
 
                     @empty($value->official)
@@ -180,14 +196,13 @@
                     <td><a href="{{ $value->official }}">公式</a></td>
                     @endempty
 
-                    @empty($value->youtube)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $value->youtube }}">Youtube</a></td>
-                    @endempty
-                    
                     <td>{{$now->diffInYears($value->birthday)}}歳</td>                    
                     <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                    
+                    
+                    <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
+                    <td>{{!empty($value->entertainer[0]->numberofpeople) ? $value->entertainer[0]->numberofpeople : '' }}</td>                      
+                    <td>{{!empty($value->office->office) ? $value->office->office : '' }}</td> 
                 </tr>
                 @endif
                 
@@ -195,9 +210,9 @@
             </tbody>
         </table>
 
-    {{-- ページネーションのリンク
+    ページネーションのリンク
     {{ $perfomers->appends(request()->query())->links() }}
- --}}
+
 
 
 

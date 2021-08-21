@@ -7,6 +7,7 @@ use App\Entertainer;
 use App\Office; 
 use App\Perfomer;
 use App\Member;
+use App\Award;
 
 use Carbon\Carbon; //芸歴計算
 
@@ -408,7 +409,83 @@ class ListsController extends Controller
         ]);
     }
     
+
+
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+
+    public function award()
+    {
+        
+        // 受賞年ごとに人数をカウントし一覧表示
+        $counts = array();
+        $years = array();
+        
+
+        for($i=1950; $i<=2038; $i++){
+            $years[] = $i;
+            $counts[] = Award::where('year','=', $i)->count(); 
+        }
+
+        
+        // ビューで表示
+        return view('lists.award', [
+            'years' => $years,    
+            'counts' => $counts,    
+            
+        ]);
+        
+    }
     
+
+    
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+
+    public function awardList($year)
+    {
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+        
+        
+        if($disband == '1'){
+            
+            $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->get();
+        
+        }
+        else{
+
+            $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->get();
+            
+        }
+
+
+        $m1 = Award::with(['entertainer.office'])->where('award','like', '%'.'M-1'.'%')->get();
+
+//dd($awards);
+
+
+        
+        // ビューで表示
+        return view('lists.awardList', [
+            'awards' => $awards,    
+            'year' => $year,                
+            'now' => new \Carbon\Carbon(),
+            'm1' => $m1,
+        ]);
+        
+    }
     
     
 }

@@ -17,6 +17,8 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         $query = Perfomer::with(['entertainer', 'office']);
+        
+        
 
         // 検索条件の値を取得
         $s_name = $request->input('s_name');
@@ -32,7 +34,7 @@ class SearchController extends Controller
         $s_month = $request->input('s_month'); 
         $s_day = $request->input('s_day');                
         
-            $s_pin = $request->input('s_pin');                
+        $s_pin = $request->input('numberofpeople');                
 
         $start = Carbon::now()->subYear($s_start)->format('Y-m-d'); //"2011-08-14"
         $end = Carbon::now()->subYear($s_end)->format('Y-m-d'); //"2001-08-14"
@@ -76,6 +78,7 @@ class SearchController extends Controller
         }
 
 
+        //名前、血液型、出身地検索
         if(!empty($s_name)) {
             $query->where('name', 'like', '%'.$s_name.'%');
         }
@@ -96,21 +99,30 @@ class SearchController extends Controller
         }        
 
 
-        
+//dd($s_pin);
+
+        //ピン、コンビ、トリオの条件指定        
         if(!empty($s_pin)) {
             //$query->entertainer()->where('numberofpeople','=', '1');
             //$query->office()->where('id','=', '1');       
             //$query->whereHas('entertainer', function ($que) use ($request) {
                 
-            $query = Perfomer::whereHas('entertainer', function ($que) use ($request) {
-                $que->where('numberofpeople', '=', $request->s_pin);
-                })->get();
-            }
-            
+            // $query = Perfomer::whereHas('entertainer', function ($que) use ($request) {
+            //     $que->where('numberofpeople', '=', $request->s_pin);
+            //     })->get();
+                
+            $query->whereHas('entertainer', function ($que) use ($request) {
+                // dd($request->numberofpeople);
+                $que->where('numberofpeople', '=', $request->numberofpeople);
+                });
+                
+            // $query->where('entertainers.numberofpeople', '=', $request->s_pin);
+                
+        }
 
 
-        //$perfomers = $query->paginate(15);
-        $perfomers = $query;        
+        $perfomers = $query->paginate(15);
+        //$perfomers = $query->get();        
         
        
         $now = new \Carbon\Carbon();

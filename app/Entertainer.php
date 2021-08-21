@@ -19,6 +19,7 @@ class Entertainer extends Model
         'activeend' //　追加する
     ];
     
+
     
     //この芸人が所属する事務所。
     public function office()
@@ -26,6 +27,7 @@ class Entertainer extends Model
         return $this->belongsTo(Office::class);
     }
     
+ 
     
     //このコンビに所属するメンバー（個人）
     public function perfomers()
@@ -36,11 +38,22 @@ class Entertainer extends Model
     }
     
     
+    
     //この芸人に紐付けされたYoutubeのURL
     public function youtubes()
     {
         return $this->hasMany(Youtube::class);
     }
+
+    
+    
+    //この芸人に紐付けされた受賞歴
+    Public function award()
+    {
+        // Profileモデルのデータを引っ張てくる
+        return $this->hasOne(Award::class);
+    }
+    
     
     
 }

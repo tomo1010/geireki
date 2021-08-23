@@ -77,6 +77,7 @@
             <div class="form-check col-md-0 d-flex align-items-center pr-2">
                 {{Form::checkbox('numberofpeople[]','1',false,['class'=>'col-md-0 form-check-input','id'=>'1'])}}
                 {{Form::label('1','ピン',['class' => 'col-md-0 form-check-label text-left'])}}
+                {{Form::label('4','ピン',['class' => 'col-md-0 form-check-label text-left'])}}                
             </div>
             <div class="form-check col-md-0 d-flex align-items-center pr-2">
                 {{Form::checkbox('numberofpeople[]','2',false,['class'=>'col-md-0 form-check-input','id'=>'2'])}}

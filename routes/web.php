@@ -32,6 +32,7 @@ Route::get('lists/pref', 'ListsController@pref')->name('lists.pref');
 Route::get('lists/pref/{pref}', 'ListsController@prefList')->name('lists.prefList');
 Route::get('lists/award', 'ListsController@award')->name('lists.award');
 Route::get('lists/award/{year}', 'ListsController@awardList')->name('lists.awardList');
+Route::get('lists/awardGp/{gp}', 'ListsController@awardGp')->name('lists.awardGp');
 
 
 //個人データ

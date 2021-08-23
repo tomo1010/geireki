@@ -434,19 +434,57 @@ class ListsController extends Controller
             $counts[] = Award::where('year','=', $i)->count(); 
         }
 
+        $m1_count = Award::where('award','like', '%'.'M-1'.'%')->count();       
+        $king_count = Award::where('award','like', '%'.'キングオブコント'.'%')->count();
+        $kamigata_count = Award::where('award','like', '%'.'上方漫才大賞'.'%')->count();        
         
         // ビューで表示
         return view('lists.award', [
             'years' => $years,    
-            'counts' => $counts,    
+            'counts' => $counts,
             
+            'm1_count' => $m1_count,
+            'king_count' => $king_count,
+            'kamigata_count' => $kamigata_count,            
         ]);
         
     }
     
 
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+
+    public function awardGp($gp)
+    {
+
+        $awards = Award::with(['entertainer.office'])->where('award','like', '%'.$gp.'%')->get();
+        
+
+
+        
+        // ビューで表示
+
+        return view('lists.awardGp', [
+            'now' => new \Carbon\Carbon(),
+            'awards' => $awards,
+            'gp' => $gp, 
+        ]);
+        
+    }
+
+
+
+
+
+
     
-        /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -471,21 +509,30 @@ class ListsController extends Controller
         }
 
 
-        $m1 = Award::with(['entertainer.office'])->where('award','like', '%'.'M-1'.'%')->get();
 
-//dd($awards);
-
-
-        
         // ビューで表示
         return view('lists.awardList', [
             'awards' => $awards,    
             'year' => $year,                
             'now' => new \Carbon\Carbon(),
-            'm1' => $m1,
+
         ]);
         
+        
+
     }
+    
+    
+    
+
+
+    
+
+        
+
+    
+    
+    
     
     
 }

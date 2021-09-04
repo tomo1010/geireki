@@ -77,7 +77,6 @@
             <div class="form-check col-md-0 d-flex align-items-center pr-2">
                 {{Form::checkbox('numberofpeople[]','1',false,['class'=>'col-md-0 form-check-input','id'=>'1'])}}
                 {{Form::label('1','ピン',['class' => 'col-md-0 form-check-label text-left'])}}
-                {{Form::label('4','ピン',['class' => 'col-md-0 form-check-label text-left'])}}                
             </div>
             <div class="form-check col-md-0 d-flex align-items-center pr-2">
                 {{Form::checkbox('numberofpeople[]','2',false,['class'=>'col-md-0 form-check-input','id'=>'2'])}}
@@ -91,6 +90,23 @@
         </div>
     </div>
 
+
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">その他:</label>
+        <div class="col-10">
+
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('etc','M-1',false,['class'=>'col-md-0 form-check-input','id'=>'M-1'])}}
+                {{Form::label('M-1','M-1ファイナリスト',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('etc[]','2',false,['class'=>'col-md-0 form-check-input','id'=>'2'])}}
+                {{Form::label('gp','受賞歴あり',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+
+        </div>
+    </div>
 
 
 
@@ -113,15 +129,23 @@
 
 
         
-    {{--年代:{!! Form::select('s_start', ['20' => '20代', '30' => '30代', '40' => '40代', '50' => '50代', '60' => '60代', '70' => '70代'], 'null', ['placeholder' => '選択']) !!}～
-         {!! Form::select('s_end', ['20' => '20代', '30' => '30代', '40' => '40代', '50' => '50代', '60' => '60代', '70' => '70代'], 'null', ['placeholder' => '選択']) !!}    
-    --}}
+    <!--年代:{!! Form::select('s_start', ['20' => '20代', '30' => '30代', '40' => '40代', '50' => '50代', '60' => '60代', '70' => '70代'], 'null', ['placeholder' => '選択']) !!}～-->
+    <!--     {!! Form::select('s_end', ['20' => '20代', '30' => '30代', '40' => '40代', '50' => '50代', '60' => '60代', '70' => '70代'], 'null', ['placeholder' => '選択']) !!}    -->
+    
     
     <div class="form-group row">
-        <div class="offset-2 col-10">        
+        <div class="offset-2 col-10">
         {!! Form::submit('検索',['class' => 'btn btn-primary btn-block']) !!}
         </div>
     </div>
+
+
+    <div class="form-group row">
+        <div class="offset-2 col-10">
+        {!! Form::reset('リセット', ['id' => 'reset-button', 'class' => 'btn btn-outline-success btn-lg']) !!}
+        </div>
+    </div>
+    
     
 {!! Form::close() !!}
 

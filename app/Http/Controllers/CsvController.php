@@ -350,9 +350,9 @@ class CsvController extends Controller
         foreach($dataList as $row){
             Award::insert([
                 //'id' => $row[0], 
-                'entertainer_id' => $row[0], 
-                'year' => $row[1],                
-                'award' => $row[1],                                
+                'entertainer_id' => $row[0],
+                'year' => $row[1],
+                'award' => $row[2],
                 ]);
             $count++;
         }

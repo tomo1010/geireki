@@ -34,14 +34,16 @@ class SearchController extends Controller
         $s_month = $request->input('s_month'); 
         $s_day = $request->input('s_day');                
         
-        $s_pin = $request->input('numberofpeople');                
+        $s_numberofpeople = $request->input('numberofpeople');
+        
+        $s_etc = $request->input('etc');        
 
         $start = Carbon::now()->subYear($s_start)->format('Y-m-d'); //"2011-08-14"
         $end = Carbon::now()->subYear($s_end)->format('Y-m-d'); //"2001-08-14"
         $from = Carbon::now()->subYear($s_ageStart)->format('Y-m-d');
         $to = Carbon::now()->subYear($s_ageEnd)->format('Y-m-d');
         
-        //dd($end);
+        //dd($s_pin);
 
 
         //芸歴検索
@@ -99,26 +101,59 @@ class SearchController extends Controller
         }        
 
 
-//dd($s_pin);
-
+//dd($request->numberofpeople);
+//dd($s_numberofpeople);
+                    
+                    
         //ピン、コンビ、トリオの条件指定        
-        if(!empty($s_pin)) {
-            //$query->entertainer()->where('numberofpeople','=', '1');
-            //$query->office()->where('id','=', '1');       
-            //$query->whereHas('entertainer', function ($que) use ($request) {
-                
-            // $query = Perfomer::whereHas('entertainer', function ($que) use ($request) {
-            //     $que->where('numberofpeople', '=', $request->s_pin);
-            //     })->get();
-                
-            $query->whereHas('entertainer', function ($que) use ($request) {
-                // dd($request->numberofpeople);
-                $que->where('numberofpeople', '=', $request->numberofpeople);
+        if(!empty($s_numberofpeople)) {
+            $i = 0;
+            foreach($s_numberofpeople as $value){
+                dd($value);
+                $query->whereHas('entertainer', function ($que) use ($value,$i) {
+                    if (empty($i)) {
+                        $where = 'where';
+                    }
+                    else{
+                        $where = 'orWhere';
+                    }
+                    $que->$where('numberofpeople', '=', $value);
+                    $i++;
+                //dd($i);    
                 });
-                
-            // $query->where('entertainers.numberofpeople', '=', $request->s_pin);
-                
+            }   
         }
+
+
+
+        //その他の条件指定        
+        if(!empty($s_etc)) {
+                $query->whereHas('entertainer.award', function ($que) use ($s_etc) {
+                    $que->Where('award', 'like', '%'.$s_etc.'%');
+                    });
+        }
+
+
+
+                //$where = ($i==0) ? 'where' : 'orWhere';
+
+        // //ピン、コンビ、トリオの条件指定        
+        // if(!empty($s_numberofpeople)) {
+        //     foreach($s_numberofpeople as $value){
+        //         $query->whereHas('entertainer', function ($que) use ($value) {
+        //             $que->orWhere('numberofpeople', '=', $value);
+        //         });
+        //     }   
+        // }
+
+
+
+        // //ピン、コンビ、トリオの条件指定        
+        // if(!empty($s_numberofpeople)) {
+        //         $query->whereHas('entertainer', function ($que) use ($request) {
+        //             $que->orWhere('numberofpeople', '=', $request->numberofpeople);
+        //             });
+        // }
 
 
         $perfomers = $query->paginate(15);

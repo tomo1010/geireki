@@ -423,6 +423,8 @@ class ListsController extends Controller
 
     public function award()
     {
+     
+         $awards = Award::with(['entertainer.office'])->orderBy('year', 'DESC')->paginate(15);
         
         // 受賞年ごとに人数をカウントし一覧表示
         $counts = array();
@@ -440,6 +442,8 @@ class ListsController extends Controller
         
         // ビューで表示
         return view('lists.award', [
+            'awards' => $awards,
+            'now' => new \Carbon\Carbon(),            
             'years' => $years,    
             'counts' => $counts,
             
@@ -463,10 +467,7 @@ class ListsController extends Controller
     public function awardGp($gp)
     {
 
-        $awards = Award::with(['entertainer.office'])->where('award','like', '%'.$gp.'%')->get();
-        
-
-
+        $awards = Award::with(['entertainer.office'])->where('award','like', '%'.$gp.'%')->orderBy('year', 'DESC')->get();
         
         // ビューで表示
 
@@ -499,12 +500,12 @@ class ListsController extends Controller
         
         if($disband == '1'){
             
-            $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->get();
+            $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->orderBy('year', 'DESC')->get();
         
         }
         else{
 
-            $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->get();
+            $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->orderBy('year', 'DESC')->get();
             
         }
 

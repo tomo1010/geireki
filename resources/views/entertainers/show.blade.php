@@ -58,10 +58,12 @@
         <tr>
             <th>活動終了時期</th>
 
-            @empty($entertainer->active)
+            @empty($entertainer->activeend)
             <td></td>
             @else
-            <td>{{ $entertainer->activeend}}</td>
+            <td>{{ $entertainer->activeend->format('Y年')}}　
+                （活動{{$now->diffInYears($entertainer->active)-$now->diffInYears($entertainer->activeend)}}年）</td>   
+            </td>
             @endempty
 
 

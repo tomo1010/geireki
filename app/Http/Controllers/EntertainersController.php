@@ -43,11 +43,13 @@ class EntertainersController extends Controller
 
 
         //本日・明日の誕生日を表示
-        $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->get();
         $today = Carbon::now();
         $tomorrow = Carbon::tomorrow();
         $birthday = array();
         $birthdayTomorrow = array();
+        //$limit = $today->subYear(90); 表示する年齢制限
+        
+        $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->get();
 
         foreach($perfomers as $value){
             $day = $value->birthday;

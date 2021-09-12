@@ -16,37 +16,38 @@
     <div class="form-group row">
         <label class="col-2 col-form-label">名前:</label>
         <div class="col-10">
-        {!! Form::text('s_name', $s_name, ['class' => 'form-control']) !!}
+
+        {!! Form::text('s_name', $request->input('s_name') ?? '', ['class' => 'form-control']) !!}
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-2 col-form-label">芸歴:</label>
         <div class="col-5">
-        {!! Form::selectRange('s_start', 0, 100,old('s_start'),['placeholder' => '●年から','class' => 'form-control']) !!}
+        {!! Form::selectRange('s_start', 0, 100, old('s_start'),['placeholder' => '●年から','class' => 'form-control']) !!}
         </div>
         <div class="col-5">
-        {!! Form::selectRange('s_end', 1, 100,old('s_end'),['placeholder' => '●年まで','class' => 'form-control']) !!} 
+        {!! Form::selectRange('s_end', 1, 100, old('s_end'),['placeholder' => '●年まで','class' => 'form-control']) !!} 
         </div>
     </div>
     
     <div class="form-group row">
         <label class="col-2 col-form-label">年齢:</label>
         <div class="col-5">
-        {!! Form::selectRange('s_ageStart', 18, 100,old('s_ageStart'),['placeholder' => '●歳から','class' => 'form-control']) !!} 
+        {!! Form::selectRange('s_ageStart', 18, 100, old('s_ageStart'),['placeholder' => '●歳から','class' => 'form-control']) !!} 
         </div>
         <div class="col-5">
-        {!! Form::selectRange('s_ageEnd', 19, 100,old('s_ageEnd'),['placeholder' => '●歳まで','class' => 'form-control']) !!} 
+        {!! Form::selectRange('s_ageEnd', 19, 100, old('s_ageEnd'),['placeholder' => '●歳まで','class' => 'form-control']) !!} 
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-2 col-form-label">誕生日:</label>
         <div class="col-5">
-        {!! Form::selectRange('s_month', 1, 12,old('s_month'),['placeholder' => '●月','class' => 'form-control']) !!}
+        {!! Form::selectRange('s_month', 1, 12, old('s_month'),['placeholder' => '●月','class' => 'form-control']) !!}
         </div>
         <div class="col-5">
-        {!! Form::selectRange('s_day', 1, 31,old('s_day'),['placeholder' => '●日','class' => 'form-control']) !!} 
+        {!! Form::selectRange('s_day', 1, 31, old('s_day'),['placeholder' => '●日','class' => 'form-control']) !!} 
         </div>
     </div>
 
@@ -72,7 +73,7 @@
 
     <div class="form-group row">
         <label class="col-2 col-form-label">人数:</label>
-        <div class="col-10">
+        <div class="col-10 form-inline">
 
             <div class="form-check col-md-0 d-flex align-items-center pr-2">
                 {{Form::checkbox('numberofpeople[]','1',false,['class'=>'col-md-0 form-check-input','id'=>'1'])}}
@@ -93,16 +94,55 @@
 
 
     <div class="form-group row">
+        <label class="col-2 col-form-label">内訳:</label>
+        <div class="col-10 form-inline">
+
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('gender[]','1',false,['class'=>'col-md-0 form-check-input','id'=>'1'])}}
+                {{Form::label('1','男',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('gender[]','2',false,['class'=>'col-md-0 form-check-input','id'=>'2'])}}
+                {{Form::label('2','女',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>            
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('gender[]','11',false,['class'=>'col-md-0 form-check-input','id'=>'11'])}}
+                {{Form::label('11','男男',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('gender[]','22',false,['class'=>'col-md-0 form-check-input','id'=>'22'])}}
+                {{Form::label('22','女女',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('gender[]','12',false,['class'=>'col-md-0 form-check-input','id'=>'12'])}}
+                {{Form::label('12','男女',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('gender[]','111',false,['class'=>'col-md-0 form-check-input','id'=>'111'])}}
+                {{Form::label('111','男男男',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>            
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('gender[]','222',false,['class'=>'col-md-0 form-check-input','id'=>'222'])}}
+                {{Form::label('222','女女女',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="form-group row">
         <label class="col-2 col-form-label">その他:</label>
         <div class="col-10">
 
             <div class="form-check col-md-0 d-flex align-items-center pr-2">
-                {{Form::checkbox('etc','M-1',false,['class'=>'col-md-0 form-check-input','id'=>'M-1'])}}
+                {{Form::checkbox('etc[]','M-1',false,['class'=>'col-md-0 form-check-input','id'=>'M-1'])}}
                 {{Form::label('M-1','M-1ファイナリスト',['class' => 'col-md-0 form-check-label text-left'])}}
             </div>
             <div class="form-check col-md-0 d-flex align-items-center pr-2">
-                {{Form::checkbox('etc[]','2',false,['class'=>'col-md-0 form-check-input','id'=>'2'])}}
-                {{Form::label('gp','受賞歴あり',['class' => 'col-md-0 form-check-label text-left'])}}
+                {{Form::checkbox('etc[]','キングオブコント',false,['class'=>'col-md-0 form-check-input','id'=>'king'])}}
+                {{Form::label('king','キングオブコント',['class' => 'col-md-0 form-check-label text-left'])}}
             </div>
 
         </div>

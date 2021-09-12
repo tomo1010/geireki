@@ -35,6 +35,7 @@ class SearchController extends Controller
         $s_day = $request->input('s_day');                
         
         $s_numberofpeople = $request->input('numberofpeople');
+        $s_gender = $request->input('gender');        
         
         $s_etc = $request->input('etc');        
 
@@ -102,36 +103,60 @@ class SearchController extends Controller
 
 
 //dd($request->numberofpeople);
-//dd($s_numberofpeople);
+// dd($s_numberofpeople);
                     
                     
         //ピン、コンビ、トリオの条件指定        
         if(!empty($s_numberofpeople)) {
-            $i = 0;
-            foreach($s_numberofpeople as $value){
-                dd($value);
-                $query->whereHas('entertainer', function ($que) use ($value,$i) {
-                    if (empty($i)) {
-                        $where = 'where';
+            
+                $query->whereHas('entertainer', function ($que) use ($s_numberofpeople) {
+                    if (count($s_numberofpeople) == 1) {
+                        $que->where('numberofpeople', '=', $s_numberofpeople[0]);
                     }
                     else{
-                        $where = 'orWhere';
+                        $que->whereIn('numberofpeople', $s_numberofpeople);
                     }
-                    $que->$where('numberofpeople', '=', $value);
-                    $i++;
-                //dd($i);    
                 });
-            }   
         }
 
 
+
+        //内訳の条件指定        
+        if(!empty($s_gender)) {
+            
+                $query->whereHas('entertainer', function ($que) use ($s_gender) {
+                    if (count($s_gender) == 1) {
+                        $que->where('gender', '=', $s_gender[0]);
+                    }
+                    else{
+                        $que->whereIn('gender', $s_gender);
+                    }
+                });
+        }
+
+
+//dd($s_etc);
 
         //その他の条件指定        
         if(!empty($s_etc)) {
+            
                 $query->whereHas('entertainer.award', function ($que) use ($s_etc) {
-                    $que->Where('award', 'like', '%'.$s_etc.'%');
-                    });
+                    if (count($s_etc) == 1) {
+                        $que->where('award', 'like', "%$s_etc[0]%");
+                    }
+                    else{
+                        $que->whereIn('award', 'like', '%'.implode($s_etc).'%');
+                    }
+                });
         }
+
+
+        // //その他の条件指定        
+        // if(!empty($s_etc)) {
+        //         $query->whereHas('entertainer.award', function ($que) use ($s_etc) {
+        //             $que->Where('award', 'like', '%'.$s_etc.'%');
+        //             });
+        // }
 
 
 
@@ -165,7 +190,7 @@ class SearchController extends Controller
         $offices = Office::get(); 
         //dd($offices);
 
-        return view('search', compact('perfomers','now','prefs'));
+        return view('search', compact('perfomers','now','prefs','request'));
 
     }
     

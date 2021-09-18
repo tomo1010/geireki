@@ -24,30 +24,30 @@
     <div class="form-group row">
         <label class="col-2 col-form-label">芸歴:</label>
         <div class="col-5">
-        {!! Form::selectRange('s_start', 0, 100, old('s_start'),['placeholder' => '●年から','class' => 'form-control']) !!}
+        {!! Form::selectRange('s_start', 0, 100, old('s_start'),['placeholder' => '年から','class' => 'form-control']) !!}
         </div>
         <div class="col-5">
-        {!! Form::selectRange('s_end', 1, 100, old('s_end'),['placeholder' => '●年まで','class' => 'form-control']) !!} 
+        {!! Form::selectRange('s_end', 1, 100, old('s_end'),['placeholder' => '年まで','class' => 'form-control']) !!} 
         </div>
     </div>
     
     <div class="form-group row">
         <label class="col-2 col-form-label">年齢:</label>
         <div class="col-5">
-        {!! Form::selectRange('s_ageStart', 18, 100, old('s_ageStart'),['placeholder' => '●歳から','class' => 'form-control']) !!} 
+        {!! Form::selectRange('s_ageStart', 18, 100, old('s_ageStart'),['placeholder' => '歳から','class' => 'form-control']) !!} 
         </div>
         <div class="col-5">
-        {!! Form::selectRange('s_ageEnd', 19, 100, old('s_ageEnd'),['placeholder' => '●歳まで','class' => 'form-control']) !!} 
+        {!! Form::selectRange('s_ageEnd', 19, 100, old('s_ageEnd'),['placeholder' => '歳まで','class' => 'form-control']) !!} 
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-2 col-form-label">誕生日:</label>
         <div class="col-5">
-        {!! Form::selectRange('s_month', 1, 12, old('s_month'),['placeholder' => '●月','class' => 'form-control']) !!}
+        {!! Form::selectRange('s_month', 1, 12, old('s_month'),['placeholder' => '月','class' => 'form-control']) !!}
         </div>
         <div class="col-5">
-        {!! Form::selectRange('s_day', 1, 31, old('s_day'),['placeholder' => '●日','class' => 'form-control']) !!} 
+        {!! Form::selectRange('s_day', 1, 31, old('s_day'),['placeholder' => '日','class' => 'form-control']) !!} 
         </div>
     </div>
 
@@ -199,83 +199,49 @@
             <thead>
                 <tr>
                     <th>芸人</th>
-                    <th>活動時期</th>
-                    <th>活動終了時期</th>
                     <th>旧名</th>
-                    <th>公式</th>
                     <th>年齢</th>
                     <th>芸歴</th>
                     <th>コンビ名など</th>
-                    <th>人数</th>                    
                     <th>事務所</th>                                   
                 </tr>
             </thead>
             
             <tbody>
                 @foreach ($perfomers as $value)
-                @if($value->activeend == NULL) {{--解散済みの場合はグレー文字--}}
-                <tr>
-                    <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    @empty($value->active)
-                    <td></td>
+                
+                    @if($value->activeend == NULL)
+                    <tr>
+                        <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+                        <td>{{ $value->oldname }}</td>
+    
+                        <!--<td>{{$now->diffInYears($value->birthday)}}歳</td>-->
+                        <td>{{!empty($value->birthday) ? $now->diffInYears($value->birthday) : '-' }}歳</td>                        
+                        <td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年</td>                    
+                        
+                        <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
+                        <td>{{!empty($value->office->office) ? $value->office->office : '' }}</td>                      
+                    </tr>
+    
                     @else
-                    <td>{{ $value->active }}</td>
-                    @endempty
-                    
-                    <td></td>
-                    
-                    <td>{{ $value->oldname }}</td>
-
-                    @empty($value->official)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $value->official }}">公式</a></td>
-                    @endempty
-
-                    
-                    <td>{{$now->diffInYears($value->birthday)}}歳</td>
-                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
-                    
-                    <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
-                    <td>{{!empty($value->entertainer[0]->numberofpeople) ? $value->entertainer[0]->numberofpeople : '' }}</td>                      
-                    <td>{{!empty($value->office->office) ? $value->office->office : '' }}</td>                      
-                </tr>
-                @else
-
-                <tr class="text-secondary">
-                    <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}（解散済）</td>
-                    
-                    @empty($value->active)
-                    <td></td>
-                    @else                    
-                    <td>{{ $value->active }}</td>
-                    @endempty                    
-                    
-                    <td>{{ $value->activeend }}</td>
-
-                    <td>{{ $value->oldname }}</td>
-
-                    @empty($value->official)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $value->official }}">公式</a></td>
-                    @endempty
-
-                    <td>{{$now->diffInYears($value->birthday)}}歳</td>                    
-                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
-                    
-                    
-                    <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
-                    <td>{{!empty($value->entertainer[0]->numberofpeople) ? $value->entertainer[0]->numberofpeople : '' }}</td>                      
-                    <td>{{!empty($value->office->office) ? $value->office->office : '' }}</td> 
-                </tr>
-                @endif
+                    <tr class="text-secondary">  {{--解散済みの場合はグレー文字--}}
+                        <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}（解散済）</td>
+                        <td>{{ $value->oldname }}</td>
+    
+                        <!--<td>{{$now->diffInYears($value->birthday)}}歳</td>                    -->
+                        <td>{{!empty($value->birthday) ? $now->diffInYears($value->birthday) : '-' }}歳</td>
+                        <td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年</td>                    
+                        
+                        <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
+                        <td>{{!empty($value->office->office) ? $value->office->office : '' }}</td> 
+                    </tr>
+                    @endif
                 
                 @endforeach
             </tbody>
         </table>
 
-    ページネーションのリンク
+    <!--ページネーションのリンク-->
     {{ $perfomers->appends(request()->query())->links() }}
 
 

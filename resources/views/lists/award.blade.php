@@ -21,7 +21,7 @@
                                 {{$year}}年
                                 </td>
                                 <td align="right">
-                                {!! link_to_route('lists.awardList', $counts[$loop->index], ['year' => $year]) !!}組（人）
+                                {!! link_to_route('lists.awardList', $counts[$loop->index], ['year' => $year]) !!}組
                                 </td>
                                 
                                 @endif

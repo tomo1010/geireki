@@ -391,12 +391,12 @@ class ListsController extends Controller
 
         if($disband == '1'){
             
-            $prefs = Perfomer::with(['entertainer.office'])->where('birthplace', 'like', '%'.$pref.'%')->paginate(15);
+            $prefs = Perfomer::with(['entertainer.office'])->where('birthplace', 'like', '%'.$pref.'%')->orderBy('active', 'desc')->paginate(15);
         
         }
         else{
             
-            $prefs = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where('birthplace', 'like', '%'.$pref.'%')->paginate(15);
+            $prefs = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where('birthplace', 'like', '%'.$pref.'%')->orderBy('active', 'desc')->paginate(15);
             
         }
 
@@ -527,13 +527,6 @@ class ListsController extends Controller
     
 
 
-    
-
-        
-
-    
-    
-    
     
     
 }

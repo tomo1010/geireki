@@ -16,9 +16,18 @@ class SearchController extends Controller
     
     public function search(Request $request)
     {
-        $query = Perfomer::with(['entertainer', 'office']);
-        
-        
+
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+
+        if($disband == '1'){
+            $query = Perfomer::with(['entertainer', 'office'])->orderBy('active', 'desc');
+        }
+        else{
+            $query = Perfomer::with(['entertainer', 'office'])->where('activeend', NULL)->orderByRaw('active desc, name desc');
+        }
+
+
 
         // 検索条件の値を取得
         $s_name = $request->input('s_name');
@@ -135,7 +144,6 @@ class SearchController extends Controller
         }
 
 
-//dd($s_etc);
 
         //その他の条件指定        
         if(!empty($s_etc)) {
@@ -145,7 +153,12 @@ class SearchController extends Controller
                         $que->where('award', 'like', "%$s_etc[0]%");
                     }
                     else{
-                        $que->whereIn('award', 'like', '%'.implode($s_etc).'%');
+                        $que->where(function ($query) use($s_etc) {
+                            foreach ($s_etc as $awd) {
+                                $query->orwhere('award', 'like', "%$awd%");
+                            }
+                        });
+                        // $que->where('award', 'like', '%'.implode($s_etc).'%');
                     }
                 });
         }
@@ -181,8 +194,8 @@ class SearchController extends Controller
         // }
 
 
+
         $perfomers = $query->paginate(15);
-        //$perfomers = $query->get();        
         
        
         $now = new \Carbon\Carbon();

@@ -97,7 +97,7 @@
             <thead>
                 <tr>
                     <th>名前</th>
-                    <th>活動終了時期</th>
+                    <!--<th>活動終了時期</th>-->
                     <th>旧名</th>
                     <th>芸歴</th>
                 </tr>
@@ -107,7 +107,7 @@
                 @foreach ($dissolutions as $dissolution)
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $dissolution->name, ['id' => $dissolution->id]) !!}</td>
-                    <td>{{ $dissolution->activeend->format('Y年m月d日') }}</td>
+                    <!--<td>{{ $dissolution->activeend->format('Y年m月d日') }}</td>-->
                     <td>{{ $dissolution->oldname }}</td>
                     
                     <td>{{$now->diffInYears($dissolution->active)}}年</td>

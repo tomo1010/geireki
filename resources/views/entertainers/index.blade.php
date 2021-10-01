@@ -3,17 +3,69 @@
 @section('content')
 
 <h3>キングオブコント2021　ファイナリストの芸歴から優勝予測！？同期芸人からも傾向がわかるかも！？</h3>
-
-・うるとらブギーズ　芸歴12年　<a href="https://www.geireki.net/entertainers/135#sync">同期芸人</a><br>
-・蛙亭　芸歴10年　<a href="https://www.geireki.net/entertainers/1555#sync">同期芸人</a><br>
-・空気階段　芸歴9年　<a href="https://www.geireki.net/entertainers/318#sync">同期芸人</a><br>
-・ザ・マミィ　芸歴3年　<a href="https://www.geireki.net/entertainers/433#sync">同期芸人</a><br>
-・ジェラードン　芸歴13年　<a href="https://www.geireki.net/entertainers/1759#sync">同期芸人</a><br>
-・そいつどいつ　芸歴6年　<a href="https://www.geireki.net/entertainers/600#sync">同期芸人</a><br>
-・男性ブランコ　芸歴10年　<a href="https://www.geireki.net/entertainers/674#sync">同期芸人</a><br>
-・ニッポンの社長　芸歴8年　<a href="https://www.geireki.net/entertainers/839#sync">同期芸人</a><br>
-・ニューヨーク　芸歴11年　<a href="https://www.geireki.net/entertainers/842#sync">同期芸人</a><br>
-・マヂカルラブリー　芸歴14年　<a href="https://www.geireki.net/entertainers/1118#sync">同期芸人</a><br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>芸人</th>
+                <th>芸歴</th>                                
+                <th>同期</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td nowrap>うるとらブギーズ</td>
+                <td>12年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/135#sync">同期芸人</a></td>
+            </tr>
+            <tr>
+                <td nowrap>蛙亭</td>
+                <td>10年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1555#sync">同期芸人</a></td>
+            </tr>
+            <tr>
+                <td nowrap>空気階段</td>
+                <td>9年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/318#sync">同期芸人</a></td>
+            </tr>
+            <tr>
+                <td nowrap>ザ・マミィ</td>
+                <td>3年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/433#sync">同期芸人</a></td>
+            </tr>
+            <tr>
+                <td nowrap>ジェラードン</td>
+                <td>13年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1759#sync">同期芸人</a></td>
+            </tr>            
+            <tr>
+                <td nowrap>そいつどいつ</td>
+                <td>6年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/600#sync">同期芸人</a></td>
+            </tr>            
+            <tr>
+                <td nowrap>男性ブランコ</td>
+                <td>10年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/674#sync">同期芸人</a></td>
+            </tr>            
+            <tr>
+                <td nowrap>ニッポンの社長</td>
+                <td>8年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/839#sync">同期芸人</a></td>
+            </tr>            
+            <tr>
+                <td nowrap>ニューヨーク</td>
+                <td>11年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/842#sync">同期芸人</a></td>
+            </tr>                        
+            <tr>
+                <td nowrap>マヂカルラブリー</td>
+                <td>14年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1118#sync">同期芸人</a></td>
+            </tr>                        
+        </tbody>
+    </table>
+<center><h2><a href="https://www.king-of-conte.com/2021/">2021年10月2日(土)よる7時からTBS系列にて生放 キングオブコント2021</a></h2></center>
 
 
     <div class="container">

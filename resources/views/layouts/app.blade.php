@@ -13,6 +13,15 @@
         <meta property="og:description" content="芸人さんの芸歴データベース。M1ラストイヤーの実力派芸人は誰？芸歴から芸人の関係性もみえてくる。" />
         <meta property="og:site_name" content="芸歴.net" />
         <meta property="og:image" content="" />
+        
+        <!--Twitterカード設定-->
+        <meta name="twitter:card" content="summary" /> <!--①-->
+        <meta name="twitter:site" content="@geireki_" /> <!--②-->
+        <meta property="og:url" content="https://www.geireki.net/" /> <!--③-->
+        <meta property="og:title" content="芸歴.net" /> <!--④-->
+        <meta property="og:description" content="芸人さんの芸歴をデータベースにしました。同期や先輩後輩、同い年芸人など" /> <!--⑤-->
+        <meta property="og:image" content="" /> <!--⑥-->
+        
 
 
         <!-- Global site tag (gtag.js) - Google Analytics -->

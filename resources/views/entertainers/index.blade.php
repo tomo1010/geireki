@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2>キングオブコント2021　ファイナリストの芸歴から優勝予測！？同期芸人からも傾向がわかるかも！？</h2>
+<h3>キングオブコント2021　ファイナリストの芸歴から優勝予測！？同期芸人からも傾向がわかるかも！？</h3>
 
 ・うるとらブギーズ　12年　<a href="https://www.geireki.net/entertainers/135#sync">同期芸人</a><br>
 ・蛙亭　10年　<a href="https://www.geireki.net/entertainers/1555#sync">同期芸人</a><br>
@@ -11,9 +11,9 @@
 ・ジェラードン　13年　<a href="https://www.geireki.net/entertainers/1759#sync">同期芸人</a><br>
 ・そいつどいつ　6年　<a href="https://www.geireki.net/entertainers/600#sync">同期芸人</a><br>
 ・男性ブランコ　10年　<a href="https://www.geireki.net/entertainers/674#sync">同期芸人</a><br>
-・ニッポンの社長　8年　<a href="https://www.geireki.net/entertainers/839#sync">芸歴.net</a><br>
-・ニューヨーク　11年　<a href="https://www.geireki.net/entertainers/842#sync">芸歴.net</a><br>
-・マヂカルラブリー　14年　<a href="https://www.geireki.net/entertainers/1118#sync">芸歴.net</a><br>
+・ニッポンの社長　8年　<a href="https://www.geireki.net/entertainers/839#sync">同期芸人</a><br>
+・ニューヨーク　11年　<a href="https://www.geireki.net/entertainers/842#sync">同期芸人</a><br>
+・マヂカルラブリー　14年　<a href="https://www.geireki.net/entertainers/1118#sync">同期芸人</a><br>
 
 
     <div class="container">

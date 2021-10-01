@@ -47,11 +47,11 @@
         </tr>
         <tr>
             <th>誕生日</th>
-            <td>{{ $perfomer->birthday }}</td>
+            <td>{{!empty($perfomer->birthday) ? $perfomer->birthday->format('Y年m月d日') : '-' }}</td>
         </tr>
         <tr>
             <th>没年月日</th>
-            <td>{{ $perfomer->deth }}</td>
+            <td>{{!empty($perfomer->deth) ? $perfomer->deth->format('Y年m月d日') : '-' }}</td>
         </tr>
         <tr>
             <th>出身地</th>
@@ -83,11 +83,11 @@
         </tr>        
         <tr>
             <th>活動時期</th>
-            <td>{{ $perfomer->active}}</td>
+            <td>{{!empty($perfomer->active) ? $perfomer->active->format('Y年～') : '-' }}</td>
         </tr>
         <tr>
             <th>活動終了時期</th>
-            <td>{{ $perfomer->activeend }}</td>
+            <td>{{!empty($perfomer->activeend) ? $perfomer->activeend->format('Y年～') : '-' }}</td>
         </tr>
         <tr>
             <th>配偶者</th>

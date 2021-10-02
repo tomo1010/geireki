@@ -47,7 +47,7 @@
       </div>
       <input type="submit" value="検索" class="btn btn-info">
     </form>
-
+　{!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-primary']) !!}
 
             
         </div>
@@ -85,7 +85,6 @@
         
 {{--一覧へのリンク--}}
 <p><br>
-{!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-primary']) !!}
 {!! link_to_route('lists.history', '芸歴', [], ['class' => 'btn btn-primary']) !!}
 {!! link_to_route('lists.office', '事務所', [], ['class' => 'btn btn-primary']) !!}
 {!! link_to_route('lists.age', '年代', [], ['class' => 'btn btn-primary']) !!}

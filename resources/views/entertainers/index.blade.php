@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h3>キングオブコント2021　空気階段優勝！おめでとうございます^^</h3>
+<center><h3>キングオブコント2021　空気階段優勝！おめでとうございます^^</h3></center>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -90,7 +90,7 @@
                             <tr>
                                 <th>芸人</th>
                                 <th>コンビ名など</th>                                
-                                <th>誕生日</th>
+                                <!--<th>誕生日</th>-->
                                 <th>年齢</th>                    
                                 <th>芸歴</th>
                             </tr>
@@ -101,7 +101,7 @@
                             <tr>
                                 <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
                                 <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>                                  
-                                <td>{{ $value->birthday->format('Y年 n/j')}}</td>
+                                <!--<td>{{ $value->birthday->format('Y年 n/j')}}</td>-->
                                 <td>{{$now->diffInYears($value->birthday)}}歳</td>
 
                                 @empty($value->active)
@@ -150,7 +150,6 @@
             <thead>
                 <tr>
                     <th>名前</th>
-                    <th>旧名</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -159,8 +158,7 @@
                 @foreach ($m1year as $value)
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td>{{ $value->oldname }}</td>
-                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                    <td>{{$now->diffInYears($value->active)}}年</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -176,7 +174,6 @@
                 <tr>
                     <th>名前</th>
                     <!--<th>活動終了時期</th>-->
-                    <th>旧名</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -186,8 +183,6 @@
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $dissolution->name, ['id' => $dissolution->id]) !!}</td>
                     <!--<td>{{ $dissolution->activeend->format('Y年m月d日') }}</td>-->
-                    <td>{{ $dissolution->oldname }}</td>
-                    
                     <td>{{$now->diffInYears($dissolution->active)}}年</td>
                 </tr>
                 @endforeach

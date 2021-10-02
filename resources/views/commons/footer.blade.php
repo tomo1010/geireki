@@ -16,7 +16,7 @@
 
     <nav class="navbar  navbar-dark bg-dark">
         <p class="text-light bg-dark">© 2021 芸歴.net</p> 
-        <p class="text-light bg-dark"><a href="mailto:info@geireki.net">メール</a></p> 
+        <p class="text-light bg-dark"><a href="mailto:info@geireki.net"><img src="../icon_mail.png" width="24"></a></p> 
     </nav>
 
 <!--SNSおまとめボタン-->

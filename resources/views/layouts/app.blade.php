@@ -42,7 +42,11 @@
         <!--AdSenseタグ-->
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
+        
         <!--<link rel="stylesheet" href="{{ asset('bootflat.github.io-master/css/bootstrap.min.css') }}">-->
+        <link rel="stylesheet" href="bootstrap-social.css" >       
 
     </head>
 
@@ -65,5 +69,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
+
+ 
     </body>
 </html>

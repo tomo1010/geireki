@@ -26,7 +26,7 @@
                     <tr>
                         <th>名前</th>
                         <th>出身地</th>
-                        <th>出身</th>
+                        <!--<th>出身</th>-->
                         <th>芸歴</th>
                     </tr>
                 </thead>
@@ -34,10 +34,10 @@
                 <tbody>
                     @foreach ($entertainer->perfomers as $value)
                     <tr>
-                        <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+                        <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
                         <td>{{ $value->birthplace }}</td>
-                        <td>{{ $value->school }}</td>
-                        <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                        <!--<td>{{ $value->school }}</td>-->
+                        <td>{{$now->diffInYears($value->active)}}年</td>
                     </tr>
                     @endforeach
                 </tbody>

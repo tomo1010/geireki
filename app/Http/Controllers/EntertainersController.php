@@ -342,10 +342,25 @@ class EntertainersController extends Controller
      */
     public function searchbox(Request $request)
     {
-           $search = $request->search;
-           $search_1 = Entertainer::where('name', 'like', "%$search%")->get();
-           $search_2 = Perfomer::where('name', 'like', "%$search%")->get();           
-           //dd($search);
+           
+        $search = $request->search;           
+
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        // $disband = request('disband');
+
+        // if($disband == '1'){
+        //     $search_1 = Entertainer::where('name', 'like', "%$search%")->get();
+        //     $search_2 = Perfomer::where('name', 'like', "%$search%")->get();           
+        // }
+        // else{
+        //     $search_1 = Entertainer::where('activeend', NULL)->where('name', 'like', "%$search%")->get();
+        //     $search_2 = Perfomer::where('activeend', NULL)->where('name', 'like', "%$search%")->get();           
+        // }
+
+           
+           
+          $search_1 = Entertainer::where('name', 'like', "%$search%")->get();
+          $search_2 = Perfomer::where('name', 'like', "%$search%")->get();           
         
             // 一覧ビューで表示
             return view('entertainers.searchbox', [

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<center><h3>キングオブコント2021　空気階段優勝！おめでとうございます^^</h3></center>
+<center><h3>キングオブコント2021　優勝 空気階段</h3></center>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -150,15 +150,15 @@
             <thead>
                 <tr>
                     <th>名前</th>
-                    <th>芸歴</th>
+                    <th>事務所</th>
                 </tr>
             </thead>
             
             <tbody>
                 @foreach ($m1year as $value)
                 <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td>{{$now->diffInYears($value->active)}}年</td>
+                    <td>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
+                    <td>{{$value->office->office}}</td>
                 </tr>
                 @endforeach
             </tbody>

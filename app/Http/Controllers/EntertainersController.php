@@ -77,7 +77,7 @@ class EntertainersController extends Controller
 
         //芸歴15年目の芸人の一覧
         $m1year = Carbon::now()->subYear(15); // １５年目を取得
-        $m1year = Entertainer::whereYear('active','=', $m1year)->where('activeend', '=', NULL)->where('numberofpeople', '=', '2')->get();
+        $m1year = Entertainer::with('office')->whereYear('active','=', $m1year)->where('activeend', '=', NULL)->where('numberofpeople', '=', '2')->get();
 
 
 

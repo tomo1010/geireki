@@ -25,9 +25,9 @@
                 <thead>
                     <tr>
                         <th>名前</th>
-                        <th>出身地</th>
+                        <th>年齢</th>
                         <!--<th>出身</th>-->
-                        <th>芸歴</th>
+                        <!--<th>芸歴</th>-->
                     </tr>
                 </thead>
                 
@@ -35,9 +35,9 @@
                     @foreach ($entertainer->perfomers as $value)
                     <tr>
                         <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                        <td>{{ $value->birthplace }}</td>
+                        <td>{{$now->diffInYears($value->birthday)}}歳</td>
                         <!--<td>{{ $value->school }}</td>-->
-                        <td>{{$now->diffInYears($value->active)}}年</td>
+                        <!--<td>{{$now->diffInYears($value->active)}}年</td>-->
                     </tr>
                     @endforeach
                 </tbody>

@@ -2,7 +2,12 @@
 
 @section('content')
 
-    <h1 class="mt-2 pb-2">芸歴{{$now->diffInYears($entertainer->active)}}年目：{{ $entertainer->name }} </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"><h1 class="mt-2 pb-2">芸歴{{$now->diffInYears($entertainer->active)}}年目：</h1></div>
+            <div class="col-lg-9"><h1 class="mt-2 pb-2">{{ $entertainer->name }} </h1></div>
+        </div>
+    </div>
 
     <table class="table table-bordered">
         <tr>
@@ -89,11 +94,19 @@
             <td>{!! link_to_route('lists.officeList', $office->office, [$entertainer->office_id]) !!}</td>
         </tr>
             <th>公式URL</th>
-            <td><a href="{{ $entertainer->official }}" target="new">{{ $entertainer->official }}</a></td>
+            @empty($entertainer->official)
+            <td></td>
+            @else
+            <td><a href="{{ $entertainer->official }}" target="new"><img src="../icon/web.png"></a></td>
+            @endempty
         </tr>
         <tr>
             <th>Youtubeチャンネル</th>
-            <td><a href="{{ $entertainer->youtube }}" target="new">{{ $entertainer->youtube }}</a></td>
+            @empty($entertainer->youtube)
+            <td></td>
+            @else
+            <td><a href="{{ $entertainer->youtube }}" target="new"><img src="../icon/youtube.png"></a></td>
+            @endempty
         </tr>
         <tr>
             <th>芸歴</th>

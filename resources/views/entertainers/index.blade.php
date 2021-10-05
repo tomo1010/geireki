@@ -2,7 +2,7 @@
 
 @section('content')
 
-<center><h3>キングオブコント2021　優勝 空気階段</h3></center>
+<center><h3>キングオブコント2021結果</h3></center>
     <table class="table table-striped">
         <thead>
             <tr>

@@ -106,11 +106,19 @@
             <td>{!! link_to_route('lists.officeList', $office->office, [$perfomer->office_id]) !!}</td>
         </tr>
             <th>公式URL</th>
-            <td><a href="{{ $perfomer->official }}" target="new">{{ $perfomer->official }}</a></td>
+            @empty($perfomer->official)
+            <td></td>
+            @else
+            <td><a href="{{ $perfomer->official }}" target="new"><img src="../icon/web.png"></a></td>
+            @endempty
         </tr>
         <tr>
             <th>Youtubeチャンネル</th>
-            <td><a href="{{ $perfomer->youtube }}" target="new">{{ $perfomer->youtube }}</a></td>
+            @empty($perfomer->youtube)
+            <td></td>
+            @else
+            <td><a href="{{ $perfomer->youtube }}" target="new"><img src="../icon/youtube.png"></a></td>
+            @endempty
         </tr>
             <th>芸歴</th>
             <td>{{$now->diffInYears($perfomer->active)}}年目</td>

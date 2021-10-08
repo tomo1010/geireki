@@ -199,9 +199,7 @@
             <thead>
                 <tr>
                     <th>芸人</th>
-                    <th>旧名</th>
                     <th>年齢</th>
-                    <th>芸歴</th>
                     <th>コンビ名など</th>
                     <th>事務所</th>                                   
                 </tr>
@@ -212,26 +210,18 @@
                 
                     @if($value->activeend == NULL)
                     <tr>
-                        <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                        <td>{{ $value->oldname }}</td>
-    
-                        <!--<td>{{$now->diffInYears($value->birthday)}}歳</td>-->
+                        <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
                         <td>{{!empty($value->birthday) ? $now->diffInYears($value->birthday) : '-' }}歳</td>                        
-                        <td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年</td>                    
-                        
+                        <!--<td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年</td>-->
                         <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
                         <td>{{!empty($value->office->office) ? $value->office->office : '' }}</td>                      
                     </tr>
     
                     @else
                     <tr class="text-secondary">  {{--解散済みの場合はグレー文字--}}
-                        <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}（解散済）</td>
-                        <td>{{ $value->oldname }}</td>
-    
-                        <!--<td>{{$now->diffInYears($value->birthday)}}歳</td>                    -->
+                        <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}（解散済）</td>
                         <td>{{!empty($value->birthday) ? $now->diffInYears($value->birthday) : '-' }}歳</td>
-                        <td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年</td>                    
-                        
+                        <!--<td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年</td>-->
                         <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
                         <td>{{!empty($value->office->office) ? $value->office->office : '' }}</td> 
                     </tr>

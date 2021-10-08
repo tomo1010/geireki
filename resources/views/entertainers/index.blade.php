@@ -2,86 +2,8 @@
 
 @section('content')
 
-<center><h3>キングオブコント2021結果</h3></center>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>順位</th>                
-                <th>芸人</th>
-                <th>芸歴</th>                                
-                <th>同期</th>
-            </tr>
-        </thead>
-        
-        <tbody>
-            <tr>
-                <td>1</td>                                                  
-                <td nowrap>空気階段</td>
-                <td>9年</td>                                  
-                <td><a href="https://www.geireki.net/entertainers/318#sync">同期芸人</a></td>
-            </tr>            
-            <tr>
-                <td>2</td>                                                  
-                <td nowrap>ザ・マミィ</td>
-                <td>3年</td>                                  
-                <td><a href="https://www.geireki.net/entertainers/433#sync">同期芸人</a></td>
-            </tr>
-            <tr>
-                <td>2</td>                                                  
-                <td nowrap>男性ブランコ</td>
-                <td>10年</td>                                  
-                <td><a href="https://www.geireki.net/entertainers/674#sync">同期芸人</a></td>
-            </tr>            
-            <tr>
-                <td>4</td>                                                  
-                <td nowrap>ニッポンの社長</td>
-                <td>8年</td>                                  
-                <td><a href="https://www.geireki.net/entertainers/839#sync">同期芸人</a></td>
-            </tr>            
 
-            <tr>
-                <td>5</td>                                                  
-                <td nowrap>ジェラードン</td>
-                <td>13年</td>                                  
-                <td><a href="https://www.geireki.net/entertainers/1759#sync">同期芸人</a></td>
-            </tr>    
-
-            <tr>
-                <td>6</td>                                                  
-                <td nowrap>蛙亭</td>
-                <td>10年</td>                                  
-                <td><a href="https://www.geireki.net/entertainers/1555#sync">同期芸人</a></td>
-            </tr>
-            <tr>
-                <td>7</td>                                                  
-                <td nowrap>うるとらブギーズ</td>
-                <td>12年</td>                                  
-                <td><a href="https://www.geireki.net/entertainers/135#sync">同期芸人</a></td>
-            </tr>
-            <tr>
-                <td>8</td>                                                  
-                <td nowrap>そいつどいつ</td>
-                <td>6年</td>                                  
-                <td><a href="https://www.geireki.net/entertainers/600#sync">同期芸人</a></td>
-            </tr>            
-            <tr>
-                <td>9</td>                                                  
-                <td nowrap>マヂカルラブリー</td>
-                <td>14年</td>                                  
-                <td><a href="https://www.geireki.net/entertainers/1118#sync">同期芸人</a></td>
-            </tr>                                
-
-            <tr>
-                <td>10</td>                                  
-                <td nowrap>ニューヨーク</td>
-                <td>11年</td>                                  
-                <td><a href="https://www.geireki.net/entertainers/842#sync">同期芸人</a></td>
-            </tr>                        
-
-        </tbody>
-    </table>
-
-    <div class="container">
+   <div class="container">
         <div class="row">
             <div class="col-lg-8">    
                 <h2 class="mt-2 pb-2" >本日誕生日の芸人</h2>    
@@ -190,7 +112,84 @@
         </table>
     
         
+<h2>キングオブコント2021結果</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>順位</th>                
+                <th>芸人</th>
+                <th>芸歴</th>                                
+                <th>同期</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td>1</td>                                                  
+                <td nowrap>空気階段</td>
+                <td>9年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/318#sync">同期芸人</a></td>
+            </tr>            
+            <tr>
+                <td>2</td>                                                  
+                <td nowrap>ザ・マミィ</td>
+                <td>3年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/433#sync">同期芸人</a></td>
+            </tr>
+            <tr>
+                <td>2</td>                                                  
+                <td nowrap>男性ブランコ</td>
+                <td>10年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/674#sync">同期芸人</a></td>
+            </tr>            
+            <tr>
+                <td>4</td>                                                  
+                <td nowrap>ニッポンの社長</td>
+                <td>8年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/839#sync">同期芸人</a></td>
+            </tr>            
 
+            <tr>
+                <td>5</td>                                                  
+                <td nowrap>ジェラードン</td>
+                <td>13年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1759#sync">同期芸人</a></td>
+            </tr>    
+
+            <tr>
+                <td>6</td>                                                  
+                <td nowrap>蛙亭</td>
+                <td>10年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1555#sync">同期芸人</a></td>
+            </tr>
+            <tr>
+                <td>7</td>                                                  
+                <td nowrap>うるとらブギーズ</td>
+                <td>12年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/135#sync">同期芸人</a></td>
+            </tr>
+            <tr>
+                <td>8</td>                                                  
+                <td nowrap>そいつどいつ</td>
+                <td>6年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/600#sync">同期芸人</a></td>
+            </tr>            
+            <tr>
+                <td>9</td>                                                  
+                <td nowrap>マヂカルラブリー</td>
+                <td>14年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1118#sync">同期芸人</a></td>
+            </tr>                                
+
+            <tr>
+                <td>10</td>                                  
+                <td nowrap>ニューヨーク</td>
+                <td>11年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/842#sync">同期芸人</a></td>
+            </tr>                        
+
+        </tbody>
+    </table>
 
 
     {{-- 作成ページへのリンク --}}

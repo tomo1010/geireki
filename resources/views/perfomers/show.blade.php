@@ -121,7 +121,12 @@
             @endempty
         </tr>
             <th>芸歴</th>
+            <!--<td>{{$now->diffInYears($perfomer->active)}}年目</td>-->
+            @empty($perfomer->active)
+            <td>-</td>
+            @else
             <td>{{$now->diffInYears($perfomer->active)}}年目</td>
+            @endempty
         </tr>
         </table>
     

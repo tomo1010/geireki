@@ -4,9 +4,9 @@
 
 
 
-<h1 class="mt-2 pb-2">芸歴 {{ $year }} 年目</h1>
+<center><h1 class="mt-2 pb-2">芸歴 {{ $year }} 年目</h1></center>
 <center><a href="#1">ピン芸人</a>｜<a href="#2">コンビ芸人</a>｜<a href="#3">トリオ芸人</a><br>
-　<<{!! link_to_route('lists.historyList', '1年先輩', ['year' => $plus]) !!}　{!! link_to_route('lists.historyList', '1年後輩', ['year' => $minus]) !!}>></center>
+{!! link_to_route('lists.historyList', '<<1年後輩', ['year' => $minus],['class' => 'btn btn-outline-success']) !!}　{!! link_to_route('lists.historyList', '1年先輩>>', ['year' => $plus],['class' => 'btn btn-outline-success']) !!}</center>
 
     <div class="container">
         <div class="row">
@@ -92,6 +92,6 @@
     </div>
         
 <center><a href="#1">ピン芸人</a>｜<a href="#2">コンビ芸人</a>｜<a href="#3">トリオ芸人</a><br>
-　<<{!! link_to_route('lists.historyList', '1年先輩', ['year' => $plus]) !!}　{!! link_to_route('lists.historyList', '1年後輩', ['year' => $minus]) !!}>></center>　    
+{!! link_to_route('lists.historyList', '<<1年後輩', ['year' => $minus],['class' => 'btn btn-outline-success']) !!}　{!! link_to_route('lists.historyList', '1年先輩>>', ['year' => $plus],['class' => 'btn btn-outline-success']) !!}</center>
 
 @endsection

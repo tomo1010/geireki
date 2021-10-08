@@ -166,7 +166,7 @@
     
     
     <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
-    <center><a href="#senior">先輩</a>｜<a href="#sync">同期</a>｜<a href="#junior">後輩</a></center>
+    <center><a href="#junior">後輩</a>｜<a href="#sync">同期</a>｜<a href="#senior">先輩</a></center>
     
     <div class="container">
         <div class="row">

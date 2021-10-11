@@ -27,8 +27,8 @@
                     {!! Form::text('height', null, ['class' => 'form-control']) !!}
                     {!! Form::label('dialect', '方言:') !!}
                     {!! Form::text('dialect', null, ['class' => 'form-control']) !!}
-                    {!! Form::label('education', '学歴:') !!}
-                    {!! Form::text('education', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('educational', '学歴:') !!}
+                    {!! Form::text('educational', null, ['class' => 'form-control']) !!}
                     {!! Form::label('master', '師匠:') !!}
                     {!! Form::text('master', null, ['class' => 'form-control']) !!}
                     {!! Form::label('school', '出身:') !!}
@@ -37,12 +37,16 @@
                     {!! Form::text('active', null, ['class' => 'form-control']) !!}
                     {!! Form::label('activeend', '活動終了時期:') !!}
                     {!! Form::text('activeend', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('spouse', '配偶者:') !!}
+                    {!! Form::text('spouse', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('relatives', '親族:') !!}
+                    {!! Form::text('relatives', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::label('disciple', '弟子:') !!}
+                    {!! Form::text('disciple', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('official', '公式URL:') !!}
                     {!! Form::text('official', null, ['class' => 'form-control']) !!}
                     {!! Form::label('youtube', 'Youtubeチャンネル:') !!}
                     {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
-                    {!! Form::label('entertainer_id', '芸人id:') !!}
-                    {!! Form::text('entertainer_id', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('office_id', '事務所id:') !!}
                     {!! Form::text('office_id', null, ['class' => 'form-control']) !!}                    
                 </div>

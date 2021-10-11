@@ -23,7 +23,6 @@
             <thead>
                 <tr>
                     <th>名前</th>
-                    <th>別名</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -32,7 +31,6 @@
                 @foreach ($perfomer->entertainer as $value)
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td>{{ $value->alias }}</td>
                     <td nowrap>{{$now->diffInYears($value->active)}}年</td>
                 </tr>
                 @endforeach
@@ -71,7 +69,7 @@
         </tr>
         <tr>
             <th>学歴</th>
-            <td>{{ $perfomer->education }}</td>
+            <td>{{ $perfomer->educational }}</td>
         </tr>        
         <tr>
             <th>師匠</th>
@@ -87,7 +85,7 @@
         </tr>
         <tr>
             <th>活動終了時期</th>
-            <td>{{!empty($perfomer->activeend) ? $perfomer->activeend->format('Y年～') : '-' }}</td>
+            <td>{{!empty($perfomer->activeend) ? $perfomer->activeend : '-' }}</td>
         </tr>
         <tr>
             <th>配偶者</th>

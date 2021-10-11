@@ -25,6 +25,10 @@
                     {!! Form::text('master', null, ['class' => 'form-control']) !!}
                     {!! Form::label('oldname', '旧名:') !!}
                     {!! Form::text('oldname', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('blain', 'ネタ制作者:') !!}
+                    {!! Form::text('blain', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::label('encounter', '出会い:') !!}
+                    {!! Form::text('encounter', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('official', '公式URL:') !!}
                     {!! Form::text('official', null, ['class' => 'form-control']) !!}
                     {!! Form::label('youtube', 'Youtubeチャンネル:') !!}

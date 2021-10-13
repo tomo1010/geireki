@@ -4,7 +4,7 @@
 
 
 
-<center><h1 class="mt-2 pb-2"> {{$pref}}出身の芸人一覧</h1></center>
+<center><h1 class="mt-2 pb-2">{{$pref}}出身の</h1><h1 class="mt-2 pb-2">芸人一覧</h1></center>
 
     <div class="container">
         <div class="row">

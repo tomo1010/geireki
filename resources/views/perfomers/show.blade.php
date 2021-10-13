@@ -2,7 +2,12 @@
 
 @section('content')
 
-    <h1>芸歴{{$now->diffInYears($perfomer->active)}}年目 {{ $perfomer->name }} の詳細ページ</h1>
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-3"><h1 class="mt-2 pb-2">芸歴{{$now->diffInYears($perfomer->active)}}年目</h1></div> 
+        <div class="col-lg-9"><h1 class="mt-2 pb-2">{{ $perfomer->name }}</h1></div>
+        </div>
+    </div>
 
     <table class="table table-bordered">
         <tr>
@@ -14,7 +19,7 @@
             <td>{{ $perfomer->realname }}</td>
         </tr>
         <tr>
-            <th>コンビ名、グループ名</th>
+            <th>コンビ名など</th>
         <td>    
         @empty($perfomer->entertainer)
         <td></td>
@@ -111,7 +116,7 @@
             @endempty
         </tr>
         <tr>
-            <th>Youtubeチャンネル</th>
+            <th>Youtube</th>
             @empty($perfomer->youtube)
             <td></td>
             @else

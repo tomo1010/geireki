@@ -4,8 +4,8 @@
 
 
 
-<center><h1 class="mt-2 pb-2"> {{ $office }} 所属の芸人一覧</h1></center>
-<a href="#1">ピン芸人</a>｜<a href="#2">コンビ芸人</a>｜<a href="#3">トリオ芸人</a>
+<center><h1 class="mt-2 pb-2">{{ $office }} 所属の</h1><h1 class="mt-2 pb-2">芸人一覧</h1></center>
+<center><a href="#1">ピン芸人</a>｜<a href="#2">コンビ芸人</a>｜<a href="#3">トリオ芸人</a></center>
 
     <div class="container">
         <div class="row">

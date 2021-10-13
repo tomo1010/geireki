@@ -167,9 +167,11 @@ class PerfomersController extends Controller
         $perfomer->school = $request->school;        
         $perfomer->active = $request->active;
         $perfomer->activeend = $request->activeend;
+        $perfomer->spouse = $request->spouse;
+        $perfomer->relatives = $request->relatives;
+        $perfomer->disciple = $request->disciple;        
         $perfomer->official = $request->official;
         $perfomer->youtube = $request->youtube;
-        $perfomer->entertainer_id = $request->entertainer_id;
         $perfomer->office_id = $request->office_id;
         $perfomer->save();
 

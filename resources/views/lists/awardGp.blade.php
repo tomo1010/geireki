@@ -4,7 +4,8 @@
 
 
 
-<center><h1 class="mt-2 pb-2"> {{$gp}}芸人一覧</h1></center>
+<center><h1 class="mt-2 pb-2">{{$gp}}</h1>
+<h1 class="mt-2 pb-2">芸人一覧</h1></center>
 
     <div class="container">
         <div class="row">
@@ -25,7 +26,7 @@
                         <tr>
                             <td>{{$value->year}}</td>                            
                             <td>{{$value->award}}</td>
-                            <td nowrap>{!! link_to_route('entertainers.show', $value->entertainer->name, [$value->entertainer->id]) !!}</td>
+                            <td>{!! link_to_route('entertainers.show', $value->entertainer->name, [$value->entertainer->id]) !!}</td>
                             <td>{{$value->entertainer->office->office}}</td>
                             <td>{{$now->diffInYears($value->entertainer->active)-$now->diffInYears($value->year.'-1-1')}}年目</td>   
                             <td>{{$now->diffInYears($value->entertainer->active)}}年目</td>  

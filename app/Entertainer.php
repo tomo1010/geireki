@@ -51,7 +51,7 @@ class Entertainer extends Model
     Public function award()
     {
         // Profileモデルのデータを引っ張てくる
-        return $this->hasOne(Award::class);
+        return $this->hasMany(Award::class);
     }
     
     

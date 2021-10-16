@@ -8,6 +8,7 @@ use App\Office;
 use App\Perfomer;
 use App\Youtube;
 use App\Member;
+use App\Award;
 
 use Carbon\Carbon; //芸歴計算
 
@@ -226,6 +227,11 @@ class EntertainersController extends Controller
         //所属事務所
         $office = Entertainer::find($id)->office;
 
+        //受賞歴
+        $award = Entertainer::find($id)->award;    
+        
+        //dd($award);
+
         //メンバー（個人）を取得
         //$perfomer = Entertainer::find($id)->perfomers();
         
@@ -241,6 +247,7 @@ class EntertainersController extends Controller
             'senior' => $senior,
             'now' => new \Carbon\Carbon(),
             'office' => $office,
+            'award' => $award,            
             //'perfomer' => $perfomer,
             'youtube' => $youtube,
         ]);
@@ -262,7 +269,9 @@ class EntertainersController extends Controller
     public function edit($id)
     {
         // idの値で検索して取得
-        $entertainer = Entertainer::findOrFail($id);
+        // $entertainer = Entertainer::findOrFail($id);
+        $entertainer = Entertainer::with('perfomers')->findOrFail($id);
+        // dd($entertainer);
 
         // 編集ビューでそれを表示
         return view('entertainers.edit', [
@@ -289,6 +298,7 @@ class EntertainersController extends Controller
         // メッセージを更新
         $entertainer->name = $request->name;
         $entertainer->numberofpeople = $request->numberofpeople;
+        $entertainer->gender = $request->gender;
         $entertainer->alias = $request->alias;
         $entertainer->active = $request->active;
         $entertainer->activeend = $request->activeend;

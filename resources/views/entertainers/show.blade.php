@@ -88,6 +88,30 @@
             <th>出会い</th>
             <td>{{ $entertainer->encounter }}</td>
         </tr>        
+        
+        
+        <tr>
+            <th>
+                受賞歴
+            </th>
+            <td>
+                <table>
+                @empty($award)
+                <td></td>
+                @else
+                    @foreach ($award as $value)
+                        <tr>
+                            <td>
+                                {{$value->award}}
+                            </td>
+                        </tr>
+                    @endforeach
+                @endempty
+                </table>
+            </td>
+        </tr>
+        
+        
         <tr>
             <th>事務所</th>
             <td>{!! link_to_route('lists.officeList', $office->office, [$entertainer->office_id]) !!}</td>
@@ -169,48 +193,7 @@
     
     <div class="container">
         <div class="row">
-                <div class="col-lg-4" id="senior"><h3 class="mt-2 pb-1">1年先輩</h3>
-                    <table class="table table-striped">
-                    <tbody>
-                        <tr>
-                            <td>名前</td><td>人数</td>
-                        </tr>    
-                        @foreach ($senior as $value)
-                        <tr>
-                            @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                                <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                            @else
-                                <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
-                            @endif
-
-                                @include('commons.gender')
-                                
-                        </tr>
-                        @endforeach
-                    </tbody>   
-                    </table>
-                </div>
-                <div class="col-lg-4" id="sync"><h3 class="mt-2 pb-1">同期</h3>
-                    <table class="table table-striped">
-                    <tbody>
-                        <tr>
-                            <td>名前</td><td>人数</td>
-                        </tr>                        
-                        @foreach ($sync as $value)
-                        <tr>
-                            @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                                <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
-                            @else
-                                <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
-                            @endif
-                            
-                                @include('commons.gender')
-                                
-                        </tr>
-                        @endforeach
-                    </tbody>   
-                    </table>
-                </div>    
+            
                 <div class="col-lg-4" id="junior"><h3 class="mt-2 pb-1">1年後輩</h3>
                     <table class="table table-striped">
                     <tbody>
@@ -232,6 +215,53 @@
                     </tbody>   
                     </table>                
                 </div>
+
+
+                <div class="col-lg-4" id="sync"><h3 class="mt-2 pb-1">同期</h3>
+                    <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>名前</td><td>人数</td>
+                        </tr>                        
+                        @foreach ($sync as $value)
+                        <tr>
+                            @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                                <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            @else
+                                <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
+                            @endif
+                            
+                                @include('commons.gender')
+                                
+                        </tr>
+                        @endforeach
+                    </tbody>   
+                    </table>
+                </div>    
+
+                <div class="col-lg-4" id="senior"><h3 class="mt-2 pb-1">1年先輩</h3>
+                    <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>名前</td><td>人数</td>
+                        </tr>    
+                        @foreach ($senior as $value)
+                        <tr>
+                            @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                                <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                            @else
+                                <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
+                            @endif
+
+                                @include('commons.gender')
+                                
+                        </tr>
+                        @endforeach
+                    </tbody>   
+                    </table>
+                </div>
+
+
         </div>
     </div>
     

@@ -25,8 +25,8 @@
                     {!! Form::text('master', null, ['class' => 'form-control']) !!}
                     {!! Form::label('oldname', '旧名:') !!}
                     {!! Form::text('oldname', null, ['class' => 'form-control']) !!}
-                    {!! Form::label('blain', 'ネタ制作者:') !!}
-                    {!! Form::text('blain', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::label('brain', 'ネタ制作者:') !!}
+                    {!! Form::text('brain', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('encounter', '出会い:') !!}
                     {!! Form::text('encounter', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('official', '公式URL:') !!}
@@ -35,6 +35,16 @@
                     {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
                     {!! Form::label('office_id', '事務所id:') !!}
                     {!! Form::text('office_id', null, ['class' => 'form-control']) !!}
+
+                    @empty($entertainer->perfomers)
+                    @else
+                        @foreach ($entertainer->perfomers as $value)
+                            <!--{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}-->
+                            {!! Form::label('perfomer_id[]', '個人id:') !!}
+                            {!! Form::text('perfomer_id[]', $value->id, ['class' => 'form-control']) !!}
+                        @endforeach
+                    @endempty
+                    
                     {!! Form::hidden('back_url', url()->previous()) !!}
                 </div>
 

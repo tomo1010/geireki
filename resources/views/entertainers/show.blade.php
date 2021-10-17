@@ -40,7 +40,8 @@
                         @foreach ($entertainer->perfomers as $value)
                         <tr>
                             <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                            <td>{{$now->diffInYears($value->birthday)}}歳</td>
+                            <td>{{!empty($value->birthday) ? $now->diffInYears($value->birthday) : '-' }}歳</td>
+                            <!--<td>{{$now->diffInYears($value->birthday)}}歳</td>-->
                             <!--<td>{{ $value->school }}</td>-->
                             <!--<td>{{$now->diffInYears($value->active)}}年</td>-->
                         </tr>

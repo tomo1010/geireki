@@ -103,6 +103,9 @@
                     @foreach ($award as $value)
                         <tr>
                             <td>
+                                {{$value->year}}年
+                            </td>
+                            <td>
                                 {{$value->award}}
                             </td>
                         </tr>

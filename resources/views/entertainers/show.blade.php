@@ -87,7 +87,7 @@
         </tr>
         <tr>
             <th>出会い</th>
-            <td>{{ $entertainer->encounter }}</td>
+            <td>{{ $entertainer->encouter }}</td>
         </tr>        
         
         
@@ -128,7 +128,7 @@
             @endempty
         </tr>
         <tr>
-            <th>Youtubeチャンネル</th>
+            <th>Youtube</th>
             @empty($entertainer->youtube)
             <td></td>
             @else

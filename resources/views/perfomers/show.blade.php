@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row">
-        <div class="col-lg-3"><h1 class="mt-2 pb-2">芸歴{{$now->diffInYears($perfomer->active)}}年目</h1></div> 
+        <div class="col-lg-3"><h1 class="mt-2 pb-2">芸歴{{$now->diffInYears($perfomer->active)}}年目：</h1></div> 
         <div class="col-lg-9"><h1 class="mt-2 pb-2">{{ $perfomer->name }}</h1></div>
         </div>
     </div>

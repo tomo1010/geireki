@@ -19,7 +19,7 @@
         <meta name="twitter:site" content="@geireki_" /> <!--②-->
         <meta property="og:url" content="https://www.geireki.net/" /> <!--③-->
         <meta property="og:title" content="芸歴.net" /> <!--④-->
-        <meta property="og:description" content="芸人さんの芸歴をデータベースにしました。同期や先輩後輩、同い年芸人など" /> <!--⑤-->
+        <meta property="og:description" content="芸歴データベース作りまいした。同期芸人一覧。先輩後輩、同い年、誕生日芸人など" /> <!--⑤-->
         <meta property="og:image" content="https://www.geireki.net/icon/icon.png" /> <!--⑥-->
         
 

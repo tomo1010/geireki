@@ -104,6 +104,51 @@ class PerfomersController extends Controller
         //コンビ名を取得
         //$entertainer = Perfomer::find($id)->entertainer();
 
+        // 活動開始年から芸歴を取得
+        $active = $perfomer->active;
+
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+
+
+        /*
+        関連芸人を取得　同期、1年先輩、1年後輩
+        */
+        
+        if($disband == '1'){
+        
+            // 同期芸人を取得
+            $sync = Perfomer::whereYear('active','=', $active)->where('id','!=',$id)->get();
+    
+            // 1年後輩を取得
+            $year = new Carbon($active);
+            $addYear = $year->addYear();
+            $junior = Perfomer::whereYear('active','=', $addYear)->get();
+    
+            // 1年先輩を取得
+            $year = new Carbon($active);
+            $subYear = $year->subYear();
+            $senior = Perfomer::whereYear('active','=', $subYear)->get();
+        }
+        
+        else{
+        
+            // 同期芸人を取得
+            $sync = Perfomer::where('activeend', NULL)->whereYear('active','=', $active)->where('id','!=',$id)->get();
+    
+            // 1年後輩を取得
+            $year = new Carbon($active);
+            $addYear = $year->addYear();
+            $junior = Perfomer::where('activeend', NULL)->whereYear('active','=', $addYear)->get();
+    
+            // 1年先輩を取得
+            $year = new Carbon($active);
+            $subYear = $year->subYear();
+            $senior = Perfomer::where('activeend', NULL)->whereYear('active','=', $subYear)->get();            
+        }
+
+
+
         
         // メッセージ詳細ビューでそれを表示
         return view('perfomers.show', [
@@ -111,6 +156,9 @@ class PerfomersController extends Controller
             'office' => $office,
             //'entertainer' => $entertainer,
             'now' => new \Carbon\Carbon(),
+            'sync' => $sync,
+            'junior' => $junior,
+            'senior' => $senior,
         ]);
     }
 

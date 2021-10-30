@@ -93,6 +93,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     // 事務所データ 
     Route::get('csv/office', 'CsvController@uploadOffice');
     Route::post('csv/office', 'CsvController@importOffice')->name('csv.importOffice');
+    Route::get('csv/office_dl', 'CsvController@exportOffice')->name('csv.exportOffice');
+    Route::get('csv/entertainer_dl', 'CsvController@exportEntertainer')->name('csv.exportEntertainer');    
+    
     
     // 個人データ 
     Route::get('csv/perfomer', 'CsvController@uploadPerfomer');

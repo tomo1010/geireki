@@ -14,6 +14,9 @@ use Goodby\CSV\Import\Standard\LexerConfig; //csvインポート
 use Goodby\CSV\Import\Standard\Lexer;
 use Goodby\CSV\Import\Standard\Interpreter;
 
+use Symfony\Component\HttpFoundation\StreamedResponse; //csvダウンロード
+
+
 
 
 class CsvController extends Controller
@@ -150,7 +153,6 @@ class CsvController extends Controller
         return redirect()->action('EntertainersController@index')->with('flash_message', $count . '件登録しました！');
     }
     
-
 
 
 
@@ -359,6 +361,110 @@ class CsvController extends Controller
  
         return redirect()->action('EntertainersController@index')->with('flash_message', $count . '件登録しました！');
     }
+
+
+
+
+
+
+
+
+    // ダウンロード処理
+    
+    
+    public function exportOffice(Request $request)
+    {
+        $post = $request->all(); // 本来ならここで、CSV出力のパラメータを受け取り、クエリで絞り込む
+        $response = new StreamedResponse(function () use ($request, $post) {
+            $stream = fopen('php://output','w');
+            // 文字化け回避
+            stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
+
+            // Officeテーブルの全データを取得
+            $results = Office::all();
+            if (empty($results[0])) {
+                    fputcsv($stream, [
+                        'データが存在しませんでした。',
+                    ]);
+            } else {
+                foreach ($results as $row) {
+                    fputcsv($stream, $this->_csvRow($row));
+                }
+            }
+            fclose($stream);
+        });
+        $response->headers->set('Content-Type', 'application/octet-stream'); 
+        $response->headers->set('content-disposition', 'attachment; filename=事務所一覧.csv');
+
+        return $response;
+    }
+
+
+        /*
+        * CSVの１行分のデータ　※本来はコントローラに書かない方が良い
+        */
+        private function _csvRow($row){
+                return [
+                    $row->id,
+                    $row->office,
+                ];
+            }
+
+
+
+
+
+
+
+    public function exportEntertainer(Request $request)
+    {
+        $post = $request->all(); // 本来ならここで、CSV出力のパラメータを受け取り、クエリで絞り込む
+        $response = new StreamedResponse(function () use ($request, $post) {
+            $stream = fopen('php://output','w');
+            // 文字化け回避
+            stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
+
+            // Officeテーブルの全データを取得
+            $results = Entertainer::all();
+            if (empty($results[0])) {
+                    fputcsv($stream, [
+                        'データが存在しませんでした。',
+                    ]);
+            } else {
+                foreach ($results as $row) {
+                    fputcsv($stream, $this->_csvEntertainer($row));
+                }
+            }
+            fclose($stream);
+        });
+        $response->headers->set('Content-Type', 'application/octet-stream'); 
+        $response->headers->set('content-disposition', 'attachment; filename=芸人一覧.csv');
+
+        return $response;
+    }
+
+
+        /*
+        * CSVの１行分のデータ　※本来はコントローラに書かない方が良い
+        */
+        private function _csvEntertainer($row){
+                return [
+                    $row->id,
+                    $row->office_id,
+                    $row->name,
+                    $row->gender,
+                    $row->ailias,
+                    $row->active,
+                    $row->activeend,
+                    $row->master,
+                    $row->oldname,
+                    $row->brain,
+                    $row->encounter,
+                    $row->official,
+                    $row->youtube,                    
+                ];
+            }
+
 
 
 

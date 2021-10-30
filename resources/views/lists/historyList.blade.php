@@ -91,6 +91,15 @@
         </div>
     </div>
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
 <center><a href="#1">ピン芸人</a>｜<a href="#2">コンビ芸人</a>｜<a href="#3">トリオ芸人</a><br>
 {!! link_to_route('lists.historyList', '<<1年後輩', ['year' => $minus],['class' => 'btn btn-outline-success']) !!}　{!! link_to_route('lists.historyList', '1年先輩>>', ['year' => $plus],['class' => 'btn btn-outline-success']) !!}</center>
 

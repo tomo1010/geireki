@@ -27,7 +27,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>名前</th>
+                    <th>芸人</th>
                     <th>芸歴</th>
                 </tr>
             </thead>

@@ -10,7 +10,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>芸人</th>
+                                <th>名前</th>
                                 <th>コンビ名など</th>
                                 <!--<th>誕生日</th>-->
                                 <th>年齢</th>                    
@@ -42,7 +42,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>芸人</th>
+                                <th>名前</th>
                                 <th>年齢</th>
                                 <th>芸歴</th>
                             </tr>
@@ -71,7 +71,7 @@
             <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>名前</th>
+                    <th>芸人</th>
                     <th>事務所</th>
                 </tr>
             </thead>
@@ -94,7 +94,7 @@
             <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>名前</th>
+                    <th>芸人</th>
                     <!--<th>活動終了時期</th>-->
                     <th>芸歴</th>
                 </tr>

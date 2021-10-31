@@ -11,7 +11,7 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>名前</th>
+            <th>芸人</th>
             <td>{{ $entertainer->name }}</td>
         </tr>
         <tr>
@@ -202,7 +202,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>名前</th><th>人数</th>
+                        <th>芸人</th><th>人数</th>
                     </tr>
                 </thead>                
                 <tbody>
@@ -229,7 +229,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>名前</th><th>人数</th>
+                        <th>芸人</th><th>人数</th>
                     </tr>                        
                 </thead>
                 <tbody>                
@@ -240,9 +240,7 @@
                         @else
                             <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
                         @endif
-                        
                             @include('commons.gender')
-                            
                     </tr>
                     @endforeach
                 </tbody>   
@@ -255,7 +253,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>名前</th><th>人数</th>
+                        <th>芸人</th><th>人数</th>
                     </tr>
                 </thead>
                 <tbody>                                

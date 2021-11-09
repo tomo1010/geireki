@@ -5,12 +5,13 @@
 
 
 <center><h1 class="mt-2 pb-2">芸歴 {{ $year }} 年目</h1></center>
-<center><a href="#1">ピン芸人</a>｜<a href="#2">コンビ芸人</a>｜<a href="#3">トリオ芸人</a><br>
-{!! link_to_route('lists.historyList', '<<1年後輩', ['year' => $minus],['class' => 'btn btn-outline-success']) !!}　{!! link_to_route('lists.historyList', '1年先輩>>', ['year' => $plus],['class' => 'btn btn-outline-success']) !!}</center>
+
+@include('commons.tab_combi')
+<br><center>{!! link_to_route('lists.historyList', '<<1年後輩', ['year' => $minus],['class' => 'btn btn-outline-success']) !!}　{!! link_to_route('lists.historyList', '1年先輩>>', ['year' => $plus],['class' => 'btn btn-outline-success']) !!}</center>
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-4" id="1"><h2 class="mt-2 pb-2 display-5">ピン芸人</h2>
+            <div id="1" class="col-lg-4"><h2 class="mt-2 pb-2 display-5">ピン芸人</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -36,7 +37,7 @@
                     </tbody>   
                 </table>
             </div>
-            <div class="col-lg-4" id="2"><h2 class="mt-2 pb-2 display-5">コンビ芸人</h2>
+            <div id="2" class="col-lg-4"><h2 class="mt-2 pb-2 display-5">コンビ芸人</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -62,7 +63,7 @@
                     </tbody>   
                 </table>
             </div>
-            <div class="col-lg-4" id="3"><h2 class="mt-2 pb-2 display-5">トリオ芸人</h2>
+            <div id="3" class="col-lg-4"><h2 class="mt-2 pb-2 display-5">トリオ芸人</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -92,15 +93,8 @@
     </div>
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-<center><a href="#1">ピン芸人</a>｜<a href="#2">コンビ芸人</a>｜<a href="#3">トリオ芸人</a><br>
-{!! link_to_route('lists.historyList', '<<1年後輩', ['year' => $minus],['class' => 'btn btn-outline-success']) !!}　{!! link_to_route('lists.historyList', '1年先輩>>', ['year' => $plus],['class' => 'btn btn-outline-success']) !!}</center>
+
+@include('commons.tab_combi')
+<br><center>{!! link_to_route('lists.historyList', '<<1年後輩', ['year' => $minus],['class' => 'btn btn-outline-success']) !!}　{!! link_to_route('lists.historyList', '1年先輩>>', ['year' => $plus],['class' => 'btn btn-outline-success']) !!}</center>
 
 @endsection

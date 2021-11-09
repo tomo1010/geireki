@@ -27,7 +27,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>名前</th>
+                    <th>芸人</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -144,10 +144,8 @@
     
     <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
 
-    @include('commons.sync3')
+    @include('commons.tab_sync')
     
-
-
     <div class="tab-content">
         <div id="senior" class="tab-pane">
             <h3 class="mt-2 pb-1">１年先輩</h3>

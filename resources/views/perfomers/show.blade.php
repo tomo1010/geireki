@@ -123,6 +123,14 @@
             <td><a href="{{ $perfomer->youtube }}" target="new"><img src="../icon/youtube.png"></a></td>
             @endempty
         </tr>
+        <tr>
+            <th>Twitter</th>
+            @empty($perfomer->twitter)
+            <td></td>
+            @else
+            <td><a href="{{ $perfomer->twitter }}" target="new"><img src="../icon/twitter.png"></a></td>
+            @endempty
+        </tr>        
             <th>芸歴</th>
             <!--<td>{{$now->diffInYears($perfomer->active)}}年目</td>-->
             @empty($perfomer->active)

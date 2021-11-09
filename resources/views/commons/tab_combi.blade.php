@@ -1,0 +1,1 @@
+<center><a href="#1">ピン芸人</a>　｜　<a href="#2">コンビ芸人</a>　｜　<a href="#3">トリオ芸人</a><br></center>

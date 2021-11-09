@@ -78,6 +78,7 @@ class PerfomersController extends Controller
         $perfomer->youtube = $request->youtube;
         $perfomer->entertainer_id = $request->entertainer_id;
         $perfomer->office_id = $request->office_id;
+        $perfomer->twitter = $request->twitter;        
         $perfomer->save();
 
         // トップページへリダイレクトさせる
@@ -221,6 +222,7 @@ class PerfomersController extends Controller
         $perfomer->official = $request->official;
         $perfomer->youtube = $request->youtube;
         $perfomer->office_id = $request->office_id;
+        $perfomer->twitter = $request->twitter;        
         $perfomer->save();
 
         // トップページへリダイレクトさせる

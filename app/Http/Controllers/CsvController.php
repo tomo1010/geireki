@@ -458,7 +458,7 @@ class CsvController extends Controller
                     $row->brain,
                     $row->encounter,
                     $row->official,
-                    $row->youtube,                    
+                    $row->youtube,          
                 ];
             }
 
@@ -490,7 +490,7 @@ class CsvController extends Controller
             fclose($stream);
         });
         $response->headers->set('Content-Type', 'application/octet-stream'); 
-        $response->headers->set('content-disposition', 'attachment; filename=芸人一覧.csv');
+        $response->headers->set('content-disposition', 'attachment; filename=個人一覧.csv');
 
         return $response;
     }
@@ -521,7 +521,7 @@ class CsvController extends Controller
                     $row->disciple,
                     $row->official,
                     $row->youtube,
-                    $row->twitter,                    
+                    $row->twitter,                                                            
                 ];
             }
 

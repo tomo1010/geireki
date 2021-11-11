@@ -15,6 +15,7 @@
                                 <!--<th>誕生日</th>-->
                                 <th>年齢</th>                    
                                 <th>芸歴</th>
+                                <th>SNS</th>                                
                             </tr>
                         </thead>
                         
@@ -30,6 +31,12 @@
                                     <td>-</td>
                                 @else
                                 <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                                @endempty
+
+                                @empty($value->twitter)
+                                <td></td>
+                                @else
+                                <td><a href="{{ $value->twitter }}" target="new"><img src="../icon/twitter.png" width="30"></a></td>
                                 @endempty
  
                             </tr>

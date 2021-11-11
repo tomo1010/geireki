@@ -81,6 +81,7 @@ class EntertainersController extends Controller
         $m1year = Entertainer::with('office')->whereYear('active','=', $m1year)->where('activeend', '=', NULL)->where('numberofpeople', '=', '2')->get();
 
 
+//dd($birthday);
 
 
         // 一覧ビューで表示

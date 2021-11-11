@@ -13,6 +13,7 @@
 
     {!! link_to_route('csv.exportOffice', 'DL事務所csv', [], ['class' => 'nav-link']) !!}
     {!! link_to_route('csv.exportEntertainer', 'DL芸人csv', [], ['class' => 'nav-link']) !!}    
+    {!! link_to_route('csv.exportPerfomer', 'DL個人csv', [], ['class' => 'nav-link']) !!}        
 
 
 

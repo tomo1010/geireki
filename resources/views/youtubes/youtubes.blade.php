@@ -15,6 +15,18 @@
                         <p class="mb-0">{!! nl2br(e($youtube->youtube)) !!}</p>
                         {!! link_to_route('entertainers.show', $youtube->entertainer->name, ['id' => $youtube->entertainer->id]) !!}
                     </div>
+                    
+                    
+                    <div>
+                        @if (Auth::id() == $youtube->user_id)
+                            {{-- 投稿削除ボタンのフォーム --}}
+                            {!! Form::open(['route' => ['youtubes.destroy', $youtube->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::close() !!}
+                        @endif
+                    </div>
+                    
+                    
                 </div>
             </li>
         @endforeach

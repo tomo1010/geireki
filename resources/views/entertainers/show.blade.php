@@ -146,7 +146,7 @@
     <a href="https://forms.gle/PayWcxWhphTi36zRA" class="btn btn-success">修正依頼はこちら</a>
     </p></center>
     
-    {{--
+
     <h2 class="mt-5 pb-2">関連Youtube</h2>
         <table class="table table-striped">
             <thead>
@@ -167,7 +167,7 @@
         </table>
     
     @if (Auth::check())    
-        {{-- 投稿フォーム --
+        {{-- 投稿フォーム --}}
         {!! Form::open(['route' => 'youtubes.store']) !!}
             <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
             <div class="form-group row">
@@ -185,11 +185,11 @@
             </div>
         {!! Form::close() !!} 
     @else
-        {{-- ログインページへのリンク 
+        {{-- ログインページへのリンク --}} 
         ※YoutubeのURLを投稿するには{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}が必要です。
     @endif
 
-    --}}
+
     
     
     <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
@@ -275,17 +275,20 @@
     </div>    
 
 
+    @can('admin-only') {{-- システム管理者権限のみに表示される --}}
 
-    {{-- 作成ページへのリンク --}}
-    @if (Auth::check())
-    {{-- 編集ページへのリンク --}}
-    {!! link_to_route('entertainers.edit', 'このメッセージを編集', ['id' => $entertainer->id], ['class' => 'btn btn-light']) !!}
-
-    {{-- 削除フォーム --}}
-    {!! Form::model($entertainer, ['route' => ['entertainers.destroy', $entertainer->id], 'method' => 'delete']) !!}
-        {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
-    {!! Form::close() !!}
-    @else
-    @endif
+        {{-- 作成ページへのリンク --}}
+        <!--@if (Auth::check())-->
+        {{-- 編集ページへのリンク --}}
+        {!! link_to_route('entertainers.edit', 'このメッセージを編集', ['id' => $entertainer->id], ['class' => 'btn btn-light']) !!}
+    
+        {{-- 削除フォーム --}}
+        {!! Form::model($entertainer, ['route' => ['entertainers.destroy', $entertainer->id], 'method' => 'delete']) !!}
+            {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
+        <!--@else-->
+        <!--@endif-->
+        
+    @endcan
 
 @endsection

@@ -27,14 +27,14 @@
                             </ul>
                     </li>
 
-                <!--    {{-- ユーザ登録ページへのリンク --}}-->
-                <!--    <li class="nav-item">{!! link_to_route('signup.get', 'Signup', [], ['class' => 'nav-link']) !!}</li>-->
+                    {{-- ユーザ登録ページへのリンク --}}
+                    <li class="nav-item">{!! link_to_route('signup.get', 'Signup', [], ['class' => 'nav-link']) !!}</li>
 
-                <!--@else-->
-                <!--    {{-- ログインページへのリンク--}}-->
-                <!--    <li class="nav-item">{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}</li>-->
+                @else
+                    {{-- ログインページへのリンク--}}
+                    <li class="nav-item">{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}</li>
  
-                <!--@endif-->
+                @endif
             </ul>
             
 

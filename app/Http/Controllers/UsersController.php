@@ -33,6 +33,9 @@ class UsersController extends Controller
         // ユーザの投稿一覧を作成日時の降順で取得
         $youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
 
+
+//dd($youtubes);
+
         // ユーザ詳細ビューでそれらを表示
         return view('users.show', [
             'user' => $user,

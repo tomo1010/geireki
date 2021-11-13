@@ -15,7 +15,7 @@ class AddTwitterToPerfomersTable extends Migration
     {
         Schema::table('perfomers', function (Blueprint $table) {
             //
-            $table->string('twitter');
+            $table->string('twitter')->nullable();
         });
     }
 

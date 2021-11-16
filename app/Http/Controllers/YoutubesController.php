@@ -51,9 +51,19 @@ class YoutubesController extends Controller
     {
         // バリデーション
         $request->validate([
-            'youtube' => 'required|max:255',
-            'time' => 'required|max:255',
+            'youtube' => 'required|max:255|starts_with:https://youtu.be/|unique:youtubes,youtube',
+            'time' => 'required|max:50',
         ]);
+        
+
+        //URL件数の制限        
+        $user = \Auth::user();  // 認証済みユーザを取得
+        $counts = $user->youtubes()->with(['entertainer'])->count();
+        
+        if($counts > 3){
+            return back()->with('message', '登録件数が3件を超えてます');
+        }
+
 
         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
         $request->user()->youtubes()->create([

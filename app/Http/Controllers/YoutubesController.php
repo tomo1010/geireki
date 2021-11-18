@@ -60,8 +60,8 @@ class YoutubesController extends Controller
         $user = \Auth::user();  // 認証済みユーザを取得
         $counts = $user->youtubes()->with(['entertainer'])->count();
         
-        if($counts > 3){
-            return back()->with('message', '登録件数が3件を超えてます');
+        if($counts >= 3){
+            return back()->with('message', 'おすすめネタ動画は1芸人につき3件までとなります');
         }
 
 

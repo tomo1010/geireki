@@ -164,7 +164,8 @@
             <thead>
                 <tr>
                     <th>URL</th>
-                    <th>時間</th>
+                    <th>コメント</th>
+                    <th>投稿者</th>                    
                 </tr>
             </thead>
             
@@ -173,6 +174,7 @@
                 <tr>
                     <td>{{ $value->youtube }}</td>
                     <td>{{ $value->time }}</td>
+                    <td>{{ $value->user->name }}</td>                    
                 </tr>
                 @endforeach
             </tbody>

@@ -2,6 +2,14 @@
 
 @section('content')
 
+
+@if (session('message'))
+    <div class="alert alert-danger">
+        {{ session('message') }}
+    </div>
+@endif
+
+
     <div class="container">
         <div class="row">
             <div class="col-lg-3"><h1 class="mt-2 pb-2">芸歴{{$now->diffInYears($entertainer->active)}}年目：</h1></div>
@@ -147,12 +155,17 @@
     </p></center>
     
 
+
+
+    {{--Youtube表示＆投稿フォーム--}}
+
     <h2 class="mt-5 pb-2">関連Youtube</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>URL</th>
-                    <th>時間</th>
+                    <th>コメント</th>
+                    <th>投稿者</th>                    
                 </tr>
             </thead>
             
@@ -161,10 +174,12 @@
                 <tr>
                     <td>{{ $value->youtube }}</td>
                     <td>{{ $value->time }}</td>
+                    <td>{{ $value->user->name }}</td>                    
                 </tr>
                 @endforeach
             </tbody>
         </table>
+    
     
     @if (Auth::check())    
         {{-- 投稿フォーム --}}

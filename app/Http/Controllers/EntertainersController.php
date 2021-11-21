@@ -235,9 +235,36 @@ class EntertainersController extends Controller
 
         //メンバー（個人）を取得
         //$perfomer = Entertainer::find($id)->perfomers();
+
         
         //Youtubeを取得
-        $youtube = Entertainer::find($id)->youtubes;
+        $youtubes = Entertainer::find($id)->youtubes;
+
+        //Youtubeのサムネイルを取得
+        $iflame = array();          
+        
+        foreach($youtubes as $value){
+            
+            if (strpos($value->youtube, "watch") != false) //ページURL?
+        	
+        	{
+        		/** コード変換 */
+            	$code = htmlspecialchars($value->youtube, ENT_QUOTES);        		
+        		$code = substr($value->youtube, (strpos($code, "=")+1));
+        	}
+        	else
+        	{
+        		/** 短縮URL用に変換 */
+            	$code = htmlspecialchars($value->youtube, ENT_QUOTES);
+        		$code = substr($value->youtube, (strpos($code, "youtu.be/")+9));
+        	}
+        
+            //$iframe[] = "<iframe width=\"100%\" height=\"400\" src=\"https://www.youtube.com/embed/{$code}\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+            $iframe[] = "http://img.youtube.com/vi/{$code}/2.jpg";
+        }
+            
+        
+        
 
 
         // メッセージ詳細ビューでそれを表示
@@ -250,7 +277,8 @@ class EntertainersController extends Controller
             'office' => $office,
             'award' => $award,            
             //'perfomer' => $perfomer,
-            'youtube' => $youtube,
+            'youtubes' => $youtubes,
+            'iframe' => $iframe,
         ]);
     }
 

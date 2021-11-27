@@ -25,4 +25,14 @@ class Youtube extends Model
     ];
     
     
+    
+    /**
+    * このyoutube動画をお気に入りにしたユーザ。
+    */
+    public function favoritesUser()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'youtube_id', 'user_id')->withTimestamps();
+    }
+    
+    
 }

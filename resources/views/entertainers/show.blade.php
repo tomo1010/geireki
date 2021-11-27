@@ -173,7 +173,7 @@
                 @foreach ($youtubes as $value)
                 <tr>
                     {{--<td>{{ $iframe[$loop->index] }}</td>--}}
-                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a></td>
+                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('commons.favorite')</td>
                     <td>{{ $value->time }}</td>
                     <td>{{ $value->user->name }}</td>                    
                 </tr>

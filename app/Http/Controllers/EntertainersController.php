@@ -9,6 +9,7 @@ use App\Perfomer;
 use App\Youtube;
 use App\Member;
 use App\Award;
+use App\User;
 
 use Carbon\Carbon; //芸歴計算
 
@@ -265,6 +266,13 @@ class EntertainersController extends Controller
             
         
         
+        
+        if (\Auth::check()) {
+            $user = \Auth::user();  // 認証済みユーザを取得
+        } 
+        
+        
+        
 
 
         // メッセージ詳細ビューでそれを表示
@@ -279,6 +287,7 @@ class EntertainersController extends Controller
             //'perfomer' => $perfomer,
             'youtubes' => $youtubes,
             'iframe' => $iframe,
+            'user' => $user,
         ]);
     }
 

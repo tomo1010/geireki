@@ -56,8 +56,13 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 //ユーザのみ
 Route::group(['middleware' => ['auth']], function () {
+    
+    Route::group(['prefix' => 'users/{id}'], function () {
+        Route::post('favorite', 'FavoriteController@store')->name('user.favorite');
+        Route::delete('unfavorite', 'FavoriteController@destroy')->name('user.unfavorite');
+    });    
+    
     Route::resource('users', 'UsersController', ['only' => ['index', 'show',]]);
-    //Route::get('users/{id}', 'UsersController@show')->name('users.show');
     Route::resource('youtubes', 'YoutubesController');
     });
 

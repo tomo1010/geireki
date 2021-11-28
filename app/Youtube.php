@@ -35,4 +35,15 @@ class Youtube extends Model
     }
     
     
+    
+    /**
+     * このyoutub動画のお気に入り件数をロードする。
+     */
+    public function loadRelationshipCounts()
+    {
+        $this->loadCount('users');
+    }
+    
+    
+    
 }

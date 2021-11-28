@@ -58,8 +58,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::group(['middleware' => ['auth']], function () {
     
     Route::group(['prefix' => 'users/{id}'], function () {
-        Route::post('favorite', 'FavoriteController@store')->name('user.favorite');
-        Route::delete('unfavorite', 'FavoriteController@destroy')->name('user.unfavorite');
+        Route::get('favorite', 'FavoriteController@store')->name('user.favorite');
+        Route::get('unfavorite', 'FavoriteController@destroy')->name('user.unfavorite');
     });    
     
     Route::resource('users', 'UsersController', ['only' => ['index', 'show',]]);

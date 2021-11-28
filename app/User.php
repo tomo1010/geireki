@@ -70,7 +70,7 @@ class User extends Authenticatable
     /**
     * $youtube_idで指定されたyoutube動画をお気に入り登録する。
     *
-    * @param int $userId
+    * @param int $youtubeId
     * @return bool
     */
     public function favorite($youtubeId)
@@ -99,7 +99,7 @@ class User extends Authenticatable
     /**
     * $youtube_idで指定されたYouutbe動画をのお気に入り登録を外す。
     *
-    * @param int $userId
+    * @param int $youtubeId
     * @return bool
     */
     public function unfavorite($youtubeId)

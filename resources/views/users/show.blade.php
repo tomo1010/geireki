@@ -15,14 +15,20 @@
         </aside>
         <div class="col-sm-8">
             <ul class="nav nav-tabs nav-justified mb-3">
-                {{-- ユーザ詳細タブ --}}
+                {{-- 投稿Youtube一覧タブ --}}
                 <li class="nav-item">
                     <a href="{{ route('users.show', ['user' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.show') ? 'active' : '' }}">
                         Youtube
                         <span class="badge badge-secondary">{{ $user->youtubes_count }}</span>
                     </a>
                 </li>
-                
+                <!--{{-- お気に入りYoutube一覧タブ --}}-->
+                <!--<li class="nav-item">-->
+                <!--    <a href="{{ route('users.show', ['user' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.show') ? 'active' : '' }}">-->
+                <!--        お気に入り-->
+                <!--        <span class="badge badge-secondary">{{ $user->favoritesyoutubes()->count() }}</span>-->
+                <!--    </a>-->
+                <!--</li>                -->
                 
                 {{-- フォロー一覧タブ --}}
                 <li class="nav-item"><a href="#" class="nav-link">Followings</a></li>

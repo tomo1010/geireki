@@ -74,6 +74,35 @@
     </div>        
 
 
+
+    <h2 class="mt-5 pb-2">おすすめネタ動画（Youtube）</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>芸人</th>                    
+                    <th>投稿者</th>
+                    <th>投稿日</th>                    
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($youtubes as $value)
+                <tr>
+                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('commons.favorite')</td>
+                    <td>{!! link_to_route('entertainers.show', $value->entertainer->name, ['id' => $value->entertainer->id]) !!}
+                    <!--{{ $value->entertainer->name }}</td>-->
+                    <td>{{ $value->user->name }}</td>
+                    <td>{{ $value->created_at }}</td>                    
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+
+
+
+
 <h2 class="mt-2 pb-2">M1ラストイヤーの芸人</h2>    
             <table class="table table-striped">
             <thead>

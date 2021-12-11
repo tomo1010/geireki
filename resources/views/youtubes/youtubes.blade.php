@@ -12,7 +12,13 @@
                     </div>
                     <div>
                         {{-- 投稿内容 --}}
-                        <p class="mb-0">{!! nl2br(e($youtube->youtube)) !!}</p>
+                        <p class="mb-0">{!! nl2br(e($youtube->youtube)) !!}                        
+                        
+                        <button type="" class="btn btn-primary">
+                          <span class="badge bg-secondary">{{ $youtube->favoritesUser()->count() }}</span> いいね
+                        </button>
+                        
+                		</p>
                         {!! link_to_route('entertainers.show', $youtube->entertainer->name, ['id' => $youtube->entertainer->id]) !!}
                     </div>
                     
@@ -21,7 +27,7 @@
                         @if (Auth::id() == $youtube->user_id)
                             {{-- 投稿削除ボタンのフォーム --}}
                             {!! Form::open(['route' => ['youtubes.destroy', $youtube->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                                {!! Form::submit('削除', ['class' => 'btn btn-danger btn-sm']) !!}
                             {!! Form::close() !!}
                         @endif
                     </div>

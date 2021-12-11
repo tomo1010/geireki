@@ -72,6 +72,49 @@ class EntertainersController extends Controller
         }
 
 
+
+        //最新のYoutube動画一覧
+        $youtubes = Youtube::latest()->take(3)->get();
+        $count = $youtubes->count();        
+//dd($youtubes);
+
+        //Youtubeのサムネイルを取得
+        if (empty($count)) {
+            //nullの場合何もしない
+            $iflame = array();     //初期化
+                $iframe[] = "-";
+            
+        }else{
+            $iflame = array();     //初期化     
+            
+            foreach($youtubes as $value){
+                
+                if (strpos($value->youtube, "watch") != false) //ページURL?
+            	
+            	{
+            		/** コード変換 */
+                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);        		
+            		$code = substr($value->youtube, (strpos($code, "=")+1));
+            	}
+            	else
+            	{
+            		/** 短縮URL用に変換 */
+                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);
+            		$code = substr($value->youtube, (strpos($code, "youtu.be/")+9));
+            	}
+            
+                //$iframe[] = "<iframe width=\"100%\" height=\"400\" src=\"https://www.youtube.com/embed/{$code}\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+                $iframe[] = "http://img.youtube.com/vi/{$code}/2.jpg";
+            }            
+        }
+
+
+
+
+
+
+
+
         //今年解散した芸人の一覧
         $lastyear = Carbon::now()->subYear(0); // 今年を取得
         $dissolutions = Entertainer::whereYear('activeend','=', $lastyear)->orderBy('active', 'asc')->get();
@@ -92,6 +135,8 @@ class EntertainersController extends Controller
             'm1year' => $m1year,
             'birthday' => $birthday,
             'birthdayTomorrow' => $birthdayTomorrow,
+            'youtubes' => $youtubes,
+            'iframe' => $iframe,            
         ]);
         
 

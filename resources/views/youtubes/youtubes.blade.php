@@ -13,10 +13,11 @@
                     <div>
                         {{-- 投稿内容 --}}
                         <p class="mb-0">{!! nl2br(e($youtube->youtube)) !!}                        
-                        
-                        <button type="" class="btn btn-primary">
-                          <span class="badge bg-secondary">{{ $youtube->favoritesUser()->count() }}</span> いいね
-                        </button>
+
+@include('commons.favorite',['value' => $youtube])                        
+                        <!--<button type="" class="btn btn-primary">-->
+                        <!--  <span class="badge bg-secondary">{{ $youtube->favoritesUser()->count() }}</span> いいね-->
+                        <!--</button>-->
                         
                 		</p>
                         {!! link_to_route('entertainers.show', $youtube->entertainer->name, ['id' => $youtube->entertainer->id]) !!}

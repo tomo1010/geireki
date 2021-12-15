@@ -16,7 +16,7 @@
 //芸人データ
 Route::get('/', 'EntertainersController@index');
 Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertainers.show');
-Route::get('searchbox', 'EntertainersController@searchbox')->name('entertainers.searchbox');
+Route::get('searchbox', 'EntertainersController@searchbox')->name('searchbox');
 
 
 //一覧表示
@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::resource('users', 'UsersController', ['only' => ['index', 'show',]]);
     Route::resource('youtubes', 'YoutubesController');
+    // Route::put('youtubes', 'YoutubesController@store')->name('youtubes.store');    
 
     });
 

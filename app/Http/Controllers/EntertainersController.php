@@ -129,7 +129,7 @@ class EntertainersController extends Controller
 
 
         // 一覧ビューで表示
-        return view('entertainers.index', [
+        return view('index', [
             'now' => new \Carbon\Carbon(),
             'dissolutions' => $dissolutions,
             'm1year' => $m1year,
@@ -475,7 +475,7 @@ class EntertainersController extends Controller
           $search_2 = Perfomer::where('name', 'like', "%$search%")->get();           
         
             // 一覧ビューで表示
-            return view('entertainers.searchbox', [
+            return view('searchbox', [
             'search_1' => $search_1,
             'search_2' => $search_2,            
             'now' => new \Carbon\Carbon(),

@@ -35,7 +35,10 @@ class CreatePerfomersTables extends Migration
             $table->string('relatives')->nullable();
             $table->string('disciple')->nullable();            
             $table->string('official')->nullable();
-            $table->string('youtube')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('blog')->nullable();            
             
             $table->timestamps();
             

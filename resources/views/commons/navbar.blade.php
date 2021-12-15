@@ -15,24 +15,24 @@
                 @if (Auth::check())
                     
                     {{-- ユーザ一覧ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('users.index', 'Users', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('users.index', 'ユーザ', [], ['class' => 'nav-link']) !!}</li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 {{-- ユーザ詳細ページへのリンク --}}
-                                <li class="dropdown-item">{!! link_to_route('users.show', 'My profile', ['user' => Auth::id()]) !!}</li>
+                                <li class="dropdown-item">{!! link_to_route('users.show', 'プロフィール', ['user' => Auth::id()]) !!}</li>
                                 <li class="dropdown-divider"></li>
                                 {{-- ログアウトへのリンク --}}
-                                <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
+                                <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
                             </ul>
                     </li>
 
                     {{-- ユーザ登録ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('signup.get', 'Signup', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('signup.get', 'サインアップ', [], ['class' => 'nav-link']) !!}</li>
 
                 @else
                     {{-- ログインページへのリンク--}}
-                    <li class="nav-item">{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
  
                 @endif
             </ul>
@@ -41,13 +41,13 @@
 
     {{--検索BOX--}}
  
-    <form class="form-inline my-2 my-lg-0 ml-2" action="{{ route('entertainers.searchbox')}}">
+    <form class="form-inline my-2 my-lg-0 ml-2" action="{{ route('searchbox')}}">
       <div class="form-group">
       <input type="search" class="form-control mr-sm-2" name="search"  value="{{request('search')}}" placeholder="キーワードを入力" aria-label="検索...">
       </div>
-      <input type="submit" value="検索" class="btn btn-info">
+      　<input type="submit" value="検索" class="btn btn-info">
     </form>
-　{!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-primary']) !!}
+　</br>{!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-link']) !!}
 
             
         </div>
@@ -56,7 +56,10 @@
         {{--解散済み表示非表示のチェックBOX--}}
         <p style="text-align: right">
         <input type="checkbox" name="disband" value="1" onchange="myfunc(this.value)"  {{ request()->input('disband') ? 'checked' : '' }}/> 解散済みを含める　
+
         </p>
+
+
         <script>
             function myfunc(value) {
                 let element = document.getElementsByName('disband');
@@ -67,6 +70,8 @@
                 }
             }
         </script>
+
+
 
         
         <center><p>

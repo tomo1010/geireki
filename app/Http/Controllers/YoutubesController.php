@@ -52,23 +52,28 @@ class YoutubesController extends Controller
         // バリデーション
         $request->validate([
             'youtube' => 'required|max:255|starts_with:https://youtu.be/|unique:youtubes,youtube',
-            'time' => 'required|max:50',
+            'comment' => 'required|max:50',
         ]);
         
 
-        //URL件数の制限        
+//dd($request);
+
+        //URL件数の制限   
+        $id = $request->entertainer_id;
+
         $user = \Auth::user();  // 認証済みユーザを取得
-        $counts = $user->youtubes()->with(['entertainer'])->count();
+        $counts = $user->youtubes()->where('entertainer_id', $id)->count();
+
+        // $counts = $user->youtubes()->with(['entertainer'])->count();
         
         if($counts >= 3){
             return back()->with('message', 'おすすめネタ動画は1芸人につき3件までとなります');
         }
 
-
         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
         $request->user()->youtubes()->create([
             'youtube' => $request->youtube,
-            'time' => $request->time,
+            'comment' => $request->comment,
             'entertainer_id' => $request->entertainer_id,
             
         ]);

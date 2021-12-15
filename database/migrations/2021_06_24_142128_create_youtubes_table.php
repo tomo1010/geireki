@@ -18,7 +18,7 @@ class CreateYoutubesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('entertainer_id');            
             $table->string('youtube');
-            $table->string('time');
+            $table->string('comment')->nullable();
             
             $table->timestamps();
             

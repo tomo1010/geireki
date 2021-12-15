@@ -29,6 +29,7 @@ class CreateEntertainersTable extends Migration
             $table->string('encouter')->nullable();            
             $table->string('official')->nullable();
             $table->string('youtube')->nullable();
+            $table->string('tiktok')->nullable();            
             
             $table->timestamps();
             

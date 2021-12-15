@@ -173,7 +173,7 @@
                 @foreach ($youtubes as $value)
                 <tr>
                     <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('commons.favorite')</td>
-                    <td>{{ $value->time }}</td>
+                    <td>{{ $value->comment }}</td>
                     <td>{{ $value->user->name }}</td>                    
                 </tr>
                 @endforeach
@@ -192,7 +192,7 @@
                 </div>
                 <label class="col-2 col-form-label">コメント:</label>
                 <div class="col-10">
-                {!! Form::textarea('time', null, ['class' => 'form-control', 'rows' => '2']) !!}
+                {!! Form::textarea('comment', null, ['class' => 'form-control', 'rows' => '2']) !!}
                 </div>
                 <div class="offset-2 col-10">
                 {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) !!}

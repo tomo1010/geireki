@@ -85,6 +85,7 @@ class CsvController extends Controller
                 'encouter' => $row[11],                
                 'official' => $row[12] == '' ? NULL : $row[12],
                 'youtube' => $row[13] == '' ? NULL : $row[13],
+                'tiktok' => $row[13] == '' ? NULL : $row[14],                
                 ]);
             $count++;
         }
@@ -227,7 +228,10 @@ class CsvController extends Controller
                 'disciple' => $row[18] == '' ? NULL : $row[18],                
                 
                 'official' => $row[19] == '' ? NULL : $row[19],
-                'youtube' => $row[20] == '' ? NULL : $row[20],
+                'twitter' => $row[20] == '' ? NULL : $row[20],
+                'instagram' => $row[21] == '' ? NULL : $row[21],
+                'facebook' => $row[22] == '' ? NULL : $row[22],
+                'blog' => $row[23] == '' ? NULL : $row[23],                
 
                 ]);
             $count++;

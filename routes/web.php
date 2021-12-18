@@ -77,7 +77,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     
     Route::get('/', function () {
     return view('users.admin');
-    });
+    })->name('admin');
     
     //芸人データ編集その他
     Route::post('entertainer', 'EntertainersController@store')->name('entertainers.store');

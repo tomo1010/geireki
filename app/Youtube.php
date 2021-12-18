@@ -21,7 +21,7 @@ class Youtube extends Model
     
     
     protected $fillable = [
-        'youtube', 'time', 'entertainer_id',
+        'youtube', 'comment', 'entertainer_id',
     ];
     
     

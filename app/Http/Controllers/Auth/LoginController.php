@@ -36,7 +36,7 @@ class LoginController extends Controller
         if($admin_flag == 1){
             return '/admin';
         }else{
-            return '/user';
+            return '/';
         }
     }
     

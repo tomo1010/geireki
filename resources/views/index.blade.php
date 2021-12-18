@@ -3,6 +3,80 @@
 @section('content')
 
 
+<h2>M1グランプリ2021ファイナリスト</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <!--<th>順位</th>                -->
+                <th>芸人</th>
+                <th>芸歴</th>                                
+                <th>同期</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <!--<td>1</td>                                                  -->
+                <td nowrap><a href="https://www.geireki.net/entertainers/109">インディアンス</a></td>
+                <td>12年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/109#sync">同期芸人</a></td>
+            </tr>            
+            <tr>
+                <!--<td>2</td>                                                  -->
+                <td nowrap><a href="https://www.geireki.net/entertainers/187">オズワルド</a></td>
+                <td>7年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/187#sync">同期芸人</a></td>
+            </tr>
+            <tr>
+                <!--<td>2</td>                                                  -->
+                <td nowrap><a href="https://www.geireki.net/entertainers/537">真空ジェシカ</a></td>
+                <td>10年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/537#sync">同期芸人</a></td>
+            </tr>            
+            <tr>
+                <!--<td>4</td>                                                  -->
+                <td nowrap><a href="https://www.geireki.net/entertainers/830">錦鯉</a></td>
+                <td>9年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/830#sync">同期芸人</a></td>
+            </tr>            
+
+            <tr>
+                <!--<td>5</td>                                                  -->
+                <td nowrap><a href="https://www.geireki.net/entertainers/1178">モグライダー</a></td>
+                <td>12年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1178#sync">同期芸人</a></td>
+            </tr>    
+
+            <tr>
+                <!--<td>6</td>                                                  -->
+                <td nowrap><a href="https://www.geireki.net/entertainers/1188">もも</a></td>
+                <td>4年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1188#sync">同期芸人</a></td>
+            </tr>
+            <tr>
+                <!--<td>7</td>                                                  -->
+                <td nowrap><a href="https://www.geireki.net/entertainers/1628">ゆにばーす</a></td>
+                <td>8年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1628#sync">同期芸人</a></td>
+            </tr>
+            <tr>
+                <!--<td>8</td>                                                  -->
+                <td nowrap><a href="https://www.geireki.net/entertainers/1257">ランジャタイ</a></td>
+                <td>14年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1257#sync">同期芸人</a></td>
+            </tr>            
+            <tr>
+                <!--<td>9</td>                                                  -->
+                <td nowrap><a href="https://www.geireki.net/entertainers/1312">ロングコートダディ</a></td>
+                <td>14年</td>                                  
+                <td><a href="https://www.geireki.net/entertainers/1312#sync">同期芸人</a></td>
+            </tr>                                
+
+        </tbody>
+    </table>
+
+
+
    <div class="container">
         <div class="row">
             <div class="col-lg-8">    

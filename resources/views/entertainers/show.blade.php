@@ -159,11 +159,11 @@
 
     {{--Youtube表示＆投稿フォーム--}}
 
-    <h2 class="mt-5 pb-2">おすすめネタ動画（Youtube）</h2>
+    <h2 class="mt-5 pb-2">おすすめネタ動画</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>URL</th>
+                    <th>Youtube</th>
                     <th>コメント</th>
                     <th>投稿者</th>                    
                 </tr>
@@ -172,7 +172,7 @@
             <tbody>
                 @foreach ($youtubes as $value)
                 <tr>
-                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('commons.favorite')</td>
+                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('youtubes.favorite')</td>
                     <td>{{ $value->comment }}</td>
                     <td>{{ $value->user->name }}</td>                    
                 </tr>

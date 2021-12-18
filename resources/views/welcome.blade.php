@@ -11,11 +11,9 @@
     {!! link_to_route('csv.importMember', '芸人個人の中間テーブルcsv', [], ['class' => 'nav-link']) !!}
     {!! link_to_route('csv.importAward', '受賞歴テーブルcsv', [], ['class' => 'nav-link']) !!}
 
-    {!! link_to_route('csv.exportOffice', 'DL事務所csv', [], ['class' => 'nav-link']) !!}
-    {!! link_to_route('csv.exportEntertainer', 'DL芸人csv', [], ['class' => 'nav-link']) !!}    
-    {!! link_to_route('csv.exportPerfomer', 'DL個人csv', [], ['class' => 'nav-link']) !!}        
-
-
+    {!! link_to_route('csv.exportOffice', 'ダウンロード事務所csv', [], ['class' => 'nav-link']) !!}
+    {!! link_to_route('csv.exportEntertainer', 'ダウンロード芸人csv', [], ['class' => 'nav-link']) !!}    
+    {!! link_to_route('csv.exportPerfomer', 'ダウンロード個人csv', [], ['class' => 'nav-link']) !!}        
 
 
 @endsection

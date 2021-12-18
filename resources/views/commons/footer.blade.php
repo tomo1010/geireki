@@ -1,22 +1,22 @@
 <footer class="footer">
 
-        <center><p>
-{{--一覧へのリンク--}}
-<p><br>
-{!! link_to_route('lists.history', '芸歴', [], ['class' => 'btn btn-primary']) !!}
-{!! link_to_route('lists.office', '事務所', [], ['class' => 'btn btn-primary']) !!}
-{!! link_to_route('lists.age', '年代', [], ['class' => 'btn btn-primary']) !!}
-{!! link_to_route('lists.pref', '出身', [], ['class' => 'btn btn-primary']) !!}
-{!! link_to_route('lists.award', '受賞歴', [], ['class' => 'btn btn-primary']) !!}
-　{!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-primary']) !!}
-</p>
+<center><p>
+    {{--一覧へのリンク--}}
+    <p><br>
+        {!! link_to_route('lists.history', '芸歴', [], ['class' => 'btn btn-primary']) !!}
+        {!! link_to_route('lists.office', '事務所', [], ['class' => 'btn btn-primary']) !!}
+        {!! link_to_route('lists.age', '年代', [], ['class' => 'btn btn-primary']) !!}
+        {!! link_to_route('lists.pref', '出身', [], ['class' => 'btn btn-primary']) !!}
+        {!! link_to_route('lists.award', '受賞歴', [], ['class' => 'btn btn-primary']) !!}
+    </p>
+        {!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-light']) !!}
 
-
-        </p></center>
+</p></center>
 
     <nav class="navbar  navbar-dark bg-dark">
-        <p class="text-light bg-dark">© 2021 芸歴.net</p> 
+
         <p class="text-light bg-dark"><a href="mailto:info@geireki.net"><img src="/icon/icon_mail.png" width="24"></a></p> 
+        <p class="text-light bg-dark">© 2021 芸歴.net</p> 
     </nav>
 
 <!--SNSおまとめボタン-->

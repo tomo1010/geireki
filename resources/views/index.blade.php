@@ -75,11 +75,11 @@
 
 
 
-    <h2 class="mt-5 pb-2">おすすめネタ動画（Youtube）</h2>
+    <h2 class="mt-5 pb-2">おすすめネタ動画</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>URL</th>
+                    <th>Youtube</th>
                     <th>芸人</th>                    
                     <th>投稿者</th>
                     <th>投稿日</th>                    
@@ -89,7 +89,7 @@
             <tbody>
                 @foreach ($youtubes as $value)
                 <tr>
-                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('commons.favorite')</td>
+                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('youtubes.favorite')</td>
                     <td>{!! link_to_route('entertainers.show', $value->entertainer->name, ['id' => $value->entertainer->id]) !!}
                     <!--{{ $value->entertainer->name }}</td>-->
                     <td>{{ $value->user->name }}</td>
@@ -227,14 +227,5 @@
         </tbody>
     </table>
 
-
-    {{-- 作成ページへのリンク --}}
-    @if (Auth::check())
-    {!! link_to_route('entertainers.create', '新規メッセージの投稿', [], ['class' => 'btn btn-primary']) !!}
-
-    {{-- ユーザ登録ページへのリンク --}}
-    {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
-    @else
-    @endif
 
 @endsection

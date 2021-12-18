@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="text-center">
-        <h1>サインアップ</h1>
+        <h1>アカウントを作成</h1>
     </div>
 
     <div class="row">
@@ -31,6 +31,12 @@
 
                 {!! Form::submit('サインアップ', ['class' => 'btn btn-primary btn-block']) !!}
             {!! Form::close() !!}
+
+        {{-- ログインページへのリンク --}}
+        <p class="mt-2">
+             <center>アカウントをお持ちの方は{!! link_to_route('login', 'ログイン') !!}</center>
+        </p>
+
         </div>
     </div>
 @endsection

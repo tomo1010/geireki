@@ -21,6 +21,9 @@ use Goodby\CSV\Import\Standard\Interpreter;
 
 class EntertainersController extends Controller
 {
+    
+    
+    
     /**
      * Display a listing of the resource.
      *
@@ -483,6 +486,47 @@ class EntertainersController extends Controller
             
 
     }
+
+
+
+
+
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+  
+  
+    public function all()
+    {
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+
+        if($disband == '1'){
+            // 一覧を取得
+            $entertainers = Entertainer::sortable()->orderBy('active', 'desc')->paginate(15);
+        }
+        else{
+            //解散済みを除いて取得
+            $entertainers = Entertainer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(15);
+        }
+        
+        
+        // ビューで表示
+        return view('entertainers.all', [
+            'entertainers' => $entertainers,
+            'now' => new \Carbon\Carbon(),
+        ]);
+        
+    }
+
+
+
+
+
 
 
 }

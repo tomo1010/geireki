@@ -23,7 +23,6 @@ class EntertainersController extends Controller
 {
     
     
-    
     /**
      * Display a listing of the resource.
      *
@@ -199,8 +198,8 @@ class EntertainersController extends Controller
         $entertainer->activeend = $request->activeend;
         $entertainer->master = $request->master;
         $entertainer->oldname = $request->oldname;
-        $entertainer->blain = $request->blain;
-        $entertainer->encounter = $request->encounter;        
+        $entertainer->brain = $request->brain;
+        $entertainer->encouter = $request->encouter;        
         $entertainer->official = $request->official;
         $entertainer->youtube = $request->youtube;
         $entertainer->office_id = $request->office_id;        
@@ -370,9 +369,7 @@ class EntertainersController extends Controller
     public function edit($id)
     {
         // idの値で検索して取得
-        // $entertainer = Entertainer::findOrFail($id);
         $entertainer = Entertainer::with('perfomers')->findOrFail($id);
-        // dd($entertainer);
 
         // 編集ビューでそれを表示
         return view('entertainers.edit', [
@@ -405,14 +402,15 @@ class EntertainersController extends Controller
         $entertainer->activeend = $request->activeend;
         $entertainer->master = $request->master;
         $entertainer->oldname = $request->oldname;
-        $entertainer->blain = $request->blain;        
-        $entertainer->encounter = $request->encounter;                
+        $entertainer->brain = $request->brain;        
+        $entertainer->encouter = $request->encouter;                
         $entertainer->official = $request->official;
         $entertainer->youtube = $request->youtube;
+        $entertainer->tiktok = $request->tiktok;        
         $entertainer->office_id = $request->office_id;
         $entertainer->save();
 
-        // トップページへリダイレクトさせる
+        // 元のページへリダイレクトさせる
         //return redirect('/');
         //return back();
         return redirect($request->back_url);

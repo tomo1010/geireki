@@ -14,10 +14,9 @@
             <ul class="navbar-nav">
                 @if (Auth::check())
                     
-                    <!--@can('admin-only') {{-- システム管理者権限のみに表示される --}}-->
-                    <!--{{-- ユーザ一覧ページへのリンク --}}-->
-                    <!--<li class="nav-item">{!! link_to_route('users.index', '管理者ページ', [], ['class' => 'nav-link']) !!}</li>-->
-                    <!--@endcan-->
+                    @can('admin-only') {{-- システム管理者権限のみに表示される --}}
+                    <li class="nav-item">{!! link_to_route('admin', '管理者ページ', [], ['class' => 'nav-link']) !!}</li>
+                    @endcan
     
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
@@ -30,6 +29,7 @@
                                 <li class="dropdown-divider"></li>
                                 {{-- ログアウトへのリンク --}}
                                 <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
+                                <li class="dropdown-divider"></li>
                             </ul>
                     </li>
 

@@ -26,14 +26,16 @@
                     {!! Form::text('master', null, ['class' => 'form-control']) !!}
                     {!! Form::label('oldname', '旧名:') !!}
                     {!! Form::text('oldname', null, ['class' => 'form-control']) !!}
-                    {!! Form::label('blain', 'ネタ制作者:') !!}                    
-                    {!! Form::text('blain', null, ['class' => 'form-control']) !!}                    
-                    {!! Form::label('encounter', '出会い:') !!}                    
-                    {!! Form::text('oldname', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('brain', 'ネタ制作者:') !!}                    
+                    {!! Form::text('brain', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::label('encouter', '出会い:') !!}                    
+                    {!! Form::text('encouter', null, ['class' => 'form-control']) !!}
                     {!! Form::label('official', '公式URL:') !!}
                     {!! Form::text('official', null, ['class' => 'form-control']) !!}
                     {!! Form::label('youtube', 'Youtubeチャンネル:') !!}
                     {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('tiktok', 'TikTokチャンネル:') !!}
+                    {!! Form::text('tiktok', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('office_id', '事務所id:') !!}
                     {!! Form::text('office_id', null, ['class' => 'form-control']) !!}
                 </div>

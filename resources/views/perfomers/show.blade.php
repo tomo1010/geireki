@@ -116,21 +116,37 @@
             @endempty
         </tr>
         <tr>
-            <th>Youtube</th>
-            @empty($perfomer->youtube)
-            <td></td>
-            @else
-            <td><a href="{{ $perfomer->youtube }}" target="new"><img src="../icon/youtube.png"></a></td>
-            @endempty
-        </tr>
-        <tr>
             <th>Twitter</th>
             @empty($perfomer->twitter)
             <td></td>
             @else
             <td><a href="{{ $perfomer->twitter }}" target="new"><img src="../icon/twitter.png"></a></td>
             @endempty
+        </tr>
+        <tr>
+            <th>Instagram</th>
+            @empty($perfomer->instagram)
+            <td></td>
+            @else
+            <td><a href="{{ $perfomer->instagram }}" target="new"><img src="../icon/instagram.png"></a></td>
+            @endempty
         </tr>        
+        <tr>
+            <th>Facebook</th>
+            @empty($perfomer->facebook)
+            <td></td>
+            @else
+            <td><a href="{{ $perfomer->facebook }}" target="new"><img src="../icon/facebook.png"></a></td>
+            @endempty
+        </tr>
+        <tr>
+            <th>Blog</th>
+            @empty($perfomer->blog)
+            <td></td>
+            @else
+            <td><a href="{{ $perfomer->blog }}" target="new"><img src="../icon/blog.png"></a></td>
+            @endempty
+        </tr>                
             <th>芸歴</th>
             <!--<td>{{$now->diffInYears($perfomer->active)}}年目</td>-->
             @empty($perfomer->active)
@@ -235,7 +251,7 @@
     {{-- 作成ページへのリンク --}}
     @if (Auth::check())
     {{-- 編集ページへのリンク --}}
-    {!! link_to_route('perfomers.edit', 'このメッセージを編集', ['id' => $perfomer->id], ['class' => 'btn btn-light']) !!}
+    {!! link_to_route('perfomers.edit', 'この個人を編集', ['id' => $perfomer->id], ['class' => 'btn btn-light']) !!}
 
     {{-- 削除フォーム --}}
     {!! Form::model($perfomer, ['route' => ['perfomers.destroy', $perfomer->id], 'method' => 'delete']) !!}

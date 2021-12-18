@@ -15,12 +15,12 @@
 
 //芸人データ
 Route::get('/', 'EntertainersController@index');
+Route::get('entertainers/all', 'EntertainersController@all')->name('entertainers.all');
 Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertainers.show');
 Route::get('searchbox', 'EntertainersController@searchbox')->name('searchbox');
 
 
 //一覧表示
-Route::get('lists/all', 'ListsController@all')->name('lists.all');
 Route::get('lists/history', 'ListsController@history')->name('lists.history');
 Route::get('lists/history/{year}', 'ListsController@historyList')->name('lists.historyList');
 Route::post('/', 'ListsController@selectYear')->name('lists.select');
@@ -36,6 +36,7 @@ Route::get('lists/awardGp/{gp}', 'ListsController@awardGp')->name('lists.awardGp
 
 
 //個人データ
+Route::get('perfomers/all', 'PerfomersController@all')->name('perfomers.all');
 Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');
 //Route::post('age', 'PerfomersController@age')->name('perfomers.age');
 
@@ -54,6 +55,7 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
+
 //ユーザのみ
 Route::group(['middleware' => ['auth']], function () {
     
@@ -65,7 +67,6 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::resource('users', 'UsersController', ['only' => ['index', 'show',]]);
     Route::resource('youtubes', 'YoutubesController');
-    // Route::put('youtubes', 'YoutubesController@store')->name('youtubes.store');    
 
     });
 
@@ -74,9 +75,8 @@ Route::group(['middleware' => ['auth']], function () {
 // 管理者のみ
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], function () {
     
-    //Route::get('admin', 'AdminController@index')->name('users.admin');
     Route::get('/', function () {
-    return view('welcome');
+    return view('users.admin');
     });
     
     //芸人データ編集その他

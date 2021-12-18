@@ -23,7 +23,7 @@
                 @foreach ($perfomers as $perfomer)
                 @if($perfomer->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                 <tr>
-                    <td nowrap>{!! link_to_route('perfomers.show', $perfomer->name, ['perfomer' => $perfomer->id]) !!}</td>
+                    <td nowrap>{!! link_to_route('perfomers.show', $perfomer->name, ['id' => $perfomer->id]) !!}</td>
                     <td>{{ $perfomer->active }}</td>
                     <td></td>
                     <td>{{ $perfomer->master }}</td>
@@ -46,7 +46,7 @@
                 @else
 
                 <tr class="text-secondary">
-                    <td nowrap>{!! link_to_route('perfomers.show', $perfomer->name, ['perfomer' => $perfomer->id]) !!}（解散済）</td>
+                    <td nowrap>{!! link_to_route('perfomers.show', $perfomer->name, ['id' => $perfomer->id]) !!}（解散済）</td>
                     <td>{{ $perfomer->active}}</td>
                     <td>{{ $perfomer->activeend }}</td>
                     <td>{{ $perfomer->master }}</td>

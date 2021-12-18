@@ -17,13 +17,13 @@ class PerfomersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function all()
     {
         //一覧取得
         $perfomers = Perfomer::paginate(10);
         
         // 一覧ビューで表示
-        return view('perfomers.index', [
+        return view('perfomers.all', [
             'perfomers' => $perfomers,
             'now' => new \Carbon\Carbon(),
         ]);

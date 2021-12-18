@@ -144,6 +144,14 @@
             @endempty
         </tr>
         <tr>
+            <th>TikTok</th>
+            @empty($entertainer->tiktok)
+            <td></td>
+            @else
+            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png"></a></td>
+            @endempty
+        </tr>        
+        <tr>
             <th>芸歴</th>
             <td>{{$now->diffInYears($entertainer->active)}}年目</td>
         </tr>
@@ -295,7 +303,7 @@
         {{-- 作成ページへのリンク --}}
         <!--@if (Auth::check())-->
         {{-- 編集ページへのリンク --}}
-        {!! link_to_route('entertainers.edit', 'このメッセージを編集', ['id' => $entertainer->id], ['class' => 'btn btn-light']) !!}
+        {!! link_to_route('entertainers.edit', 'この芸人データを編集', ['id' => $entertainer->id], ['class' => 'btn btn-light']) !!}
     
         {{-- 削除フォーム --}}
         {!! Form::model($entertainer, ['route' => ['entertainers.destroy', $entertainer->id], 'method' => 'delete']) !!}

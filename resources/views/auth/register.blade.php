@@ -29,6 +29,7 @@
                     {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                 </div>
 
+
                 {!! Form::submit('サインアップ', ['class' => 'btn btn-primary btn-block']) !!}
             {!! Form::close() !!}
 

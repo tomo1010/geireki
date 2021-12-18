@@ -14,7 +14,7 @@
                         {{-- 投稿内容 --}}
                         <p class="mb-0">{!! nl2br(e($youtube->youtube)) !!}                        
 
-@include('commons.favorite',['value' => $youtube])                        
+@include('youtubes.favorite',['value' => $youtube])                        
                         <!--<button type="" class="btn btn-primary">-->
                         <!--  <span class="badge bg-secondary">{{ $youtube->favoritesUser()->count() }}</span> いいね-->
                         <!--</button>-->

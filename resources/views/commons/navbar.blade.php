@@ -14,25 +14,31 @@
             <ul class="navbar-nav">
                 @if (Auth::check())
                     
-                    {{-- ユーザ一覧ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('users.index', 'ユーザ', [], ['class' => 'nav-link']) !!}</li>
+                    <!--@can('admin-only') {{-- システム管理者権限のみに表示される --}}-->
+                    <!--{{-- ユーザ一覧ページへのリンク --}}-->
+                    <!--<li class="nav-item">{!! link_to_route('users.index', '管理者ページ', [], ['class' => 'nav-link']) !!}</li>-->
+                    <!--@endcan-->
+    
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 {{-- ユーザ詳細ページへのリンク --}}
                                 <li class="dropdown-item">{!! link_to_route('users.show', 'プロフィール', ['user' => Auth::id()]) !!}</li>
                                 <li class="dropdown-divider"></li>
+                                {{-- ユーザ一覧ページへのリンク --}}
+                                <li class="dropdown-item">{!! link_to_route('users.index', 'ユーザ一覧') !!}</li>
+                                <li class="dropdown-divider"></li>
                                 {{-- ログアウトへのリンク --}}
                                 <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
                             </ul>
                     </li>
 
-                    {{-- ユーザ登録ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('signup.get', 'サインアップ', [], ['class' => 'nav-link']) !!}</li>
-
                 @else
                     {{-- ログインページへのリンク--}}
                     <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
+
+                    {{-- ユーザ登録ページへのリンク --}}
+                    <li class="nav-item">{!! link_to_route('signup.get', 'サインアップ', [], ['class' => 'nav-link']) !!}</li>
  
                 @endif
             </ul>
@@ -47,8 +53,6 @@
       </div>
       　<input type="submit" value="検索" class="btn btn-info">
     </form>
-　</br>{!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-link']) !!}
-
             
         </div>
     </nav>
@@ -75,6 +79,7 @@
 
         
         <center><p>
+            
         {{--芸歴リストへのセレクトBOX--}}
         
         <form method="post" action="{{ route('lists.select')}}">

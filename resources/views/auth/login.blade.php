@@ -23,7 +23,9 @@
             {!! Form::close() !!}
 
             {{-- ユーザ登録ページへのリンク --}}
-            <p class="mt-2">ユーザ登録は {!! link_to_route('signup.get', 'こちら') !!}から</p>
+            <p class="mt-2">
+                 <center>{!! link_to_route('signup.get', 'アカウントを作成') !!}</center>
+            </p>
         </div>
     </div>
 @endsection

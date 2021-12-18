@@ -15,7 +15,6 @@
                 @if (Auth::check())
                     
                     <!--@can('admin-only') {{-- システム管理者権限のみに表示される --}}-->
-                    <!--{{-- ユーザ一覧ページへのリンク --}}-->
                     <!--<li class="nav-item">{!! link_to_route('users.index', '管理者ページ', [], ['class' => 'nav-link']) !!}</li>-->
                     <!--@endcan-->
     

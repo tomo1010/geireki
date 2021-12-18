@@ -370,9 +370,7 @@ class EntertainersController extends Controller
     public function edit($id)
     {
         // idの値で検索して取得
-        // $entertainer = Entertainer::findOrFail($id);
         $entertainer = Entertainer::with('perfomers')->findOrFail($id);
-        // dd($entertainer);
 
         // 編集ビューでそれを表示
         return view('entertainers.edit', [

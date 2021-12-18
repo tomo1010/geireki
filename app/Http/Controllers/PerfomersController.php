@@ -81,6 +81,7 @@ class PerfomersController extends Controller
         $perfomer->blog = $request->blog;        
 
         $perfomer->office_id = $request->office_id;
+        $perfomer->entertainer_id = $request->entertainer_id;        
         
         $perfomer->save();
 
@@ -180,7 +181,7 @@ class PerfomersController extends Controller
     public function edit($id)
     {
         // idの値で検索して取得
-        $perfomer = Perfomer::findOrFail($id);
+        $perfomer = Perfomer::with('entertainer')->findOrFail($id);
 
         // 編集ビューでそれを表示
         return view('perfomers.edit', [
@@ -235,8 +236,8 @@ class PerfomersController extends Controller
 
         // 元のページへリダイレクトさせる
         //return redirect('/');
-         return back();
-        //return redirect($request->back_url);        
+        //return back();
+        return redirect($request->back_url);        
     }
 
 

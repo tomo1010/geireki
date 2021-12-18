@@ -56,6 +56,19 @@
                     
                     {!! Form::label('office_id', '事務所id:') !!}
                     {!! Form::text('office_id', null, ['class' => 'form-control']) !!}                    
+
+                    @empty($perfomer->entertainer)
+                    @else
+                        @foreach ($perfomer->entertainer as $value)
+                            <!--{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}-->
+                            {!! Form::label('entertainer_id[]', '芸人id:') !!}
+                            {!! Form::text('entertainer_id[]', $value->id, ['class' => 'form-control']) !!}
+                        @endforeach
+                    @endempty
+                    
+                    {!! Form::hidden('back_url', url()->previous()) !!}
+
+
                 </div>
 
                 {!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}

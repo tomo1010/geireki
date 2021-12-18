@@ -45,10 +45,15 @@
                     {!! Form::text('disciple', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('official', '公式URL:') !!}
                     {!! Form::text('official', null, ['class' => 'form-control']) !!}
-                    {!! Form::label('youtube', 'Youtubeチャンネル:') !!}
-                    {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
                     {!! Form::label('twitter', 'Twitter:') !!}
-                    {!! Form::text('twitter', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::text('twitter', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('instagram', 'Instagram:') !!}
+                    {!! Form::text('instagram', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('facebook', 'Facebook:') !!}
+                    {!! Form::text('facebook', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('blog', 'Blog:') !!}
+                    {!! Form::text('blog', null, ['class' => 'form-control']) !!}                    
+                    
                     {!! Form::label('office_id', '事務所id:') !!}
                     {!! Form::text('office_id', null, ['class' => 'form-control']) !!}                    
                 </div>

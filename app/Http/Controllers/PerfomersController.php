@@ -75,10 +75,13 @@ class PerfomersController extends Controller
         $perfomer->active = $request->active;
         $perfomer->activeend = $request->activeend;
         $perfomer->official = $request->official;
-        $perfomer->youtube = $request->youtube;
-        $perfomer->entertainer_id = $request->entertainer_id;
+        $perfomer->twitter = $request->twitter;
+        $perfomer->instagram = $request->instagram;
+        $perfomer->facebook = $request->facebook;
+        $perfomer->blog = $request->blog;        
+
         $perfomer->office_id = $request->office_id;
-        $perfomer->twitter = $request->twitter;        
+        
         $perfomer->save();
 
         // トップページへリダイレクトさせる
@@ -220,14 +223,20 @@ class PerfomersController extends Controller
         $perfomer->relatives = $request->relatives;
         $perfomer->disciple = $request->disciple;        
         $perfomer->official = $request->official;
-        $perfomer->youtube = $request->youtube;
-        $perfomer->office_id = $request->office_id;
+
         $perfomer->twitter = $request->twitter;        
+        $perfomer->instagram = $request->instagram;        
+        $perfomer->facebook = $request->facebook;        
+        $perfomer->blog = $request->blog;        
+        
+        $perfomer->office_id = $request->office_id;
+
         $perfomer->save();
 
-        // トップページへリダイレクトさせる
+        // 元のページへリダイレクトさせる
         //return redirect('/');
-        return back();
+         return back();
+        //return redirect($request->back_url);        
     }
 
 

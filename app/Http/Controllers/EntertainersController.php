@@ -413,7 +413,7 @@ class EntertainersController extends Controller
         $entertainer->office_id = $request->office_id;
         $entertainer->save();
 
-        // トップページへリダイレクトさせる
+        // 元のページへリダイレクトさせる
         //return redirect('/');
         //return back();
         return redirect($request->back_url);

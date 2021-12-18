@@ -38,7 +38,7 @@
     </span>
 
 @else
-        ※お気に入りにするには{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}が必要です。
+        {{--※お気に入りにするには{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}が必要です。--}}
 @endif
 
 

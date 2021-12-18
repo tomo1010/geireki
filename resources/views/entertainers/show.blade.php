@@ -208,8 +208,8 @@
             </div>
         {!! Form::close() !!} 
     @else
-        {{-- ログインページへのリンク --}} 
-        ※YoutubeのURLを投稿するには{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}が必要です。
+        {{-- ログインページへのリンク 
+        ※YoutubeのURLを投稿するには{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}が必要です。--}} 
     @endif
 
 

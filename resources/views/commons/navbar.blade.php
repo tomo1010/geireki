@@ -34,12 +34,12 @@
                     </li>
 
                 @else
-                    {{-- ログインページへのリンク--}}
+                    {{-- ログインページへのリンク
                     <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
-
-                    {{-- ユーザ登録ページへのリンク --}}
+--}}
+                    {{-- ユーザ登録ページへのリンク 
                     <li class="nav-item">{!! link_to_route('signup.get', 'サインアップ', [], ['class' => 'nav-link']) !!}</li>
- 
+ --}}
                 @endif
             </ul>
             

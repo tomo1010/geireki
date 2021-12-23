@@ -532,6 +532,48 @@ class CsvController extends Controller
 
 
 
+    //受賞歴
+
+    public function exportAward(Request $request)
+    {
+        $post = $request->all(); // 本来ならここで、CSV出力のパラメータを受け取り、クエリで絞り込む
+        $response = new StreamedResponse(function () use ($request, $post) {
+            $stream = fopen('php://output','w');
+            // 文字化け回避
+            stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
+
+            // Officeテーブルの全データを取得
+            $results = Award::all();
+            if (empty($results[0])) {
+                    fputcsv($stream, [
+                        'データが存在しませんでした。',
+                    ]);
+            } else {
+                foreach ($results as $row) {
+                    fputcsv($stream, $this->_csvAward($row));
+                }
+            }
+            fclose($stream);
+        });
+        $response->headers->set('Content-Type', 'application/octet-stream'); 
+        $response->headers->set('content-disposition', 'attachment; filename=受賞歴一覧.csv');
+
+        return $response;
+    }
+
+        /*
+        * CSVの１行分のデータ　※本来はコントローラに書かない方が良い
+        */
+        private function _csvAward($row){
+                return [
+                    $row->id,
+                    $row->entertainer_id,
+                    $row->year,
+                    $row->award,
+                ];
+            }
+
+
 
 
 

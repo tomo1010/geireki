@@ -92,33 +92,39 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     Route::put('perfomers/{id}', 'PerfomersController@update')->name('perfomers.update');
     Route::delete('perfomers/{id}', 'PerfomersController@destroy')->name('perfomers.destroy');
     Route::get('perfomers/{id}/edit', 'PerfomersController@edit')->name('perfomers.edit');
+
     
-    //csv処理
+    /*
+    csv処理
+    */
+    
     // 芸人データ 
     Route::get('csv/entertainer', 'CsvController@uploadEntertainer');
     Route::post('csv/entertainer', 'CsvController@importEntertainer')->name('csv.importEntertainer');
+    Route::get('csv/entertainer_dl', 'CsvController@exportEntertainer')->name('csv.exportEntertainer'); 
+    
     
     // 事務所データ 
     Route::get('csv/office', 'CsvController@uploadOffice');
     Route::post('csv/office', 'CsvController@importOffice')->name('csv.importOffice');
-
     Route::get('csv/office_dl', 'CsvController@exportOffice')->name('csv.exportOffice');
-    Route::get('csv/entertainer_dl', 'CsvController@exportEntertainer')->name('csv.exportEntertainer'); 
-    Route::get('csv/perfomer_dl', 'CsvController@exportPerfomer')->name('csv.exportPerfomer');     
     
     
     // 個人データ 
     Route::get('csv/perfomer', 'CsvController@uploadPerfomer');
     Route::post('csv/perfomer', 'CsvController@importPerfomer')->name('csv.importPerfomer');
+    Route::get('csv/perfomer_dl', 'CsvController@exportPerfomer')->name('csv.exportPerfomer');     
+
 
     // 芸人個人（中間）データ 
     Route::get('csv/member', 'CsvController@uploadMember');
     Route::post('csv/member', 'CsvController@importMember')->name('csv.importMember');
     
+    
     // 受賞歴データ 
     Route::get('csv/award', 'CsvController@uploadAward');
     Route::post('csv/award', 'CsvController@importAward')->name('csv.importAward');    
-    
+    Route::get('csv/award_dl', 'CsvController@exportAward')->name('csv.exportAward');         
 
     
 

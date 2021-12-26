@@ -26,7 +26,7 @@ class CreateEntertainersTable extends Migration
             $table->string('master')->nullable();
             $table->string('oldname')->nullable();
             $table->string('brain')->nullable();
-            $table->string('encouter')->nullable();            
+            $table->string('encounter')->nullable();            
             $table->string('official')->nullable();
             $table->string('youtube')->nullable();
             $table->string('tiktok')->nullable();            

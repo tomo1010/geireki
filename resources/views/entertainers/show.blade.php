@@ -95,7 +95,7 @@
         </tr>
         <tr>
             <th>出会い</th>
-            <td>{{ $entertainer->encouter }}</td>
+            <td>{{ $entertainer->encounter }}</td>
         </tr>        
         
         

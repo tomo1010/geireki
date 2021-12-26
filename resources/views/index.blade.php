@@ -97,7 +97,6 @@
                             <tr>
                                 <th>名前</th>
                                 <th>コンビ名など</th>
-                                <!--<th>誕生日</th>-->
                                 <th>年齢</th>                    
                                 <th>芸歴</th>
                                 <th>SNS</th>                                
@@ -107,9 +106,10 @@
                         <tbody>
                             @foreach ($birthday as $value)
                             <tr>
-                                <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!} </td>
+                                <td nowrap>
+                                    {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
+                                </td>
                                 <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>
-                                <!--<td>{{ $value->birthday->format('Y年 n/j')}}</td>-->
                                 <td>{{$now->diffInYears($value->birthday)}}歳</td>
 
                                 @empty($value->active)

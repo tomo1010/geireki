@@ -17,5 +17,6 @@
     {!! link_to_route('csv.exportOffice', '事務所csv', [], ['class' => 'nav-link']) !!}
     {!! link_to_route('csv.exportEntertainer', '芸人csv', [], ['class' => 'nav-link']) !!}    
     {!! link_to_route('csv.exportPerfomer', '個人csv', [], ['class' => 'nav-link']) !!}        
+    {!! link_to_route('csv.exportAward', '受賞歴csv', [], ['class' => 'nav-link']) !!}            
 
 @endsection

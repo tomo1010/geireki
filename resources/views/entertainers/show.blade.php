@@ -148,7 +148,7 @@
             @empty($entertainer->tiktok)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png"></a></td>
+            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px"></a></td>
             @endempty
         </tr>        
         <tr>

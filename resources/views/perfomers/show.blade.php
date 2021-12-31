@@ -128,7 +128,7 @@
             @empty($perfomer->instagram)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->instagram }}" target="new"><img src="../icon/instagram.png"></a></td>
+            <td><a href="{{ $perfomer->instagram }}" target="new"><img src="../icon/instagram.png" width="64px"></a></td>
             @endempty
         </tr>        
         <tr>
@@ -136,7 +136,7 @@
             @empty($perfomer->facebook)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->facebook }}" target="new"><img src="../icon/facebook.png"></a></td>
+            <td><a href="{{ $perfomer->facebook }}" target="new"><img src="../icon/facebook.png" width="64px"></a></td>
             @endempty
         </tr>
         <tr>
@@ -144,7 +144,7 @@
             @empty($perfomer->blog)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->blog }}" target="new"><img src="../icon/blog.png"></a></td>
+            <td><a href="{{ $perfomer->blog }}" target="new"><img src="../icon/blog.png" width="64px"></a></td>
             @endempty
         </tr>                
             <th>芸歴</th>

@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+</br>
                                 M-1グランプリ{!! link_to_route('lists.awardGp', $m1_count ,['gp' => 'M-1'] ) !!}組｜
                                 キングオブコント{!! link_to_route('lists.awardGp', $king_count ,['gp' => 'キングオブコント'] ) !!}組｜
                                 上方漫才大賞{!! link_to_route('lists.awardGp', $kamigata_count ,['gp' => '上方漫才大賞'] ) !!}組
@@ -11,7 +11,7 @@
         <div class="row">
 
             {{--年別一覧--}}
-            <div class="col-lg-3"><h2 class="mt-2 pb-2 display-5 border-bottom">年別一覧</h2>
+            <div class="col-lg-3"><h2 class="mt-5 pb-2 display-5 border-bottom">年別一覧</h2>
                 <table class="table table-striped">
                     <tbody>
                         @foreach ($years as $year)
@@ -32,7 +32,7 @@
                 </table>    
             </div>    
             {{--受賞年一覧--}}
-            <div class="col-lg-9"><h2 class="mt-2 pb-2 display-5 border-bottom">受賞年一覧</h2>
+            <div class="col-lg-9"><h2 class="mt-5 pb-2 display-5 border-bottom">受賞年一覧</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>

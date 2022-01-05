@@ -2,15 +2,15 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
-        <title>芸歴.net</title>
-        <meta content="芸人さんの芸歴データベース。M1ラストイヤーの実力派芸人は誰？芸歴から芸人の関係性もみえてくる。" name="description">
+        <title>芸人データベース｜芸歴.net</title>
+        <meta content="芸人さんの芸歴データベース。同期芸人、先輩芸人、後輩芸人もひと目で分かる。事務所別芸人一覧、年代別芸人一覧、出身別芸人一覧。M1ラストイヤーの芸人一覧？芸歴から芸人の関係性もみえてくる。" name="description">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta charset=”UTF-8″>
 
         <meta property="og:url" content="http://www.geireki.net/" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="芸歴.net" />
-        <meta property="og:description" content="芸人さんの芸歴データベース。M1ラストイヤーの実力派芸人は誰？芸歴から芸人の関係性もみえてくる。" />
+        <meta property="og:description" content="芸人さんの芸歴データベース。同期芸人、先輩芸人、後輩芸人もひと目で分かる。事務所別芸人一覧、年代別芸人一覧、出身別芸人一覧。M1ラストイヤーの芸人一覧？芸歴から芸人の関係性もみえてくる。" />
         <meta property="og:site_name" content="芸歴.net" />
         <meta property="og:image" content="" />
         
@@ -19,7 +19,7 @@
         <meta name="twitter:site" content="@geireki_" /> <!--②-->
         <meta property="og:url" content="https://www.geireki.net/" /> <!--③-->
         <meta property="og:title" content="芸歴.net" /> <!--④-->
-        <meta property="og:description" content="芸歴データベース作りまいした。同期芸人一覧。先輩後輩、同い年、誕生日芸人など" /> <!--⑤-->
+        <meta property="og:description" content="芸人さんの芸歴データベース。同期芸人一覧。先輩芸人、後輩芸人、同い年、今日誕生日の芸人さん" /> <!--⑤-->
         <meta property="og:image" content="https://www.geireki.net/icon/icon.png" /> <!--⑥-->
         
 

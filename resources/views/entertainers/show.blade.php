@@ -12,8 +12,8 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-3"><h1 class="mt-2 pb-2">芸歴{{$now->diffInYears($entertainer->active)}}年目：</h1></div>
-            <div class="col-lg-9"><h1 class="mt-2 pb-2">{{ $entertainer->name }} </h1></div>
+            <div class="col-lg-3"><h1 class="mt-3 pb-0">芸歴{{$now->diffInYears($entertainer->active)}}年目：</h1></div>
+            <div class="col-lg-9"><h1 class="mt-3 pb-2"><strong>{{ $entertainer->name }}</strong></h1></div>
         </div>
     </div>
 
@@ -148,7 +148,7 @@
             @empty($entertainer->tiktok)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png"></a></td>
+            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px"></a></td>
             @endempty
         </tr>        
         <tr>
@@ -213,15 +213,14 @@
     @endif
 
 
-    
-    
-    <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
+
+</br></br>    
     
     @include('commons.tab_sync')
     
     <div class="tab-content">
     <div id="senior" class="tab-pane">
-        <h3 class="mt-2 pb-1">1年先輩</h3>
+        <h2 class="mt-4 pb-1">1年先輩</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -248,7 +247,7 @@
     
     
     <div id="sync"  class="tab-pane active">
-        <h3 class="mt-2 pb-1">同期</h3>
+        <h2 class="mt-4 pb-1">同期芸人</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -272,7 +271,7 @@
     
     
     <div id="junior" class="tab-pane">
-        <h3 class="mt-2 pb-1">1年後輩</h3>
+        <h2 class="mt-4 pb-1">1年後輩</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>

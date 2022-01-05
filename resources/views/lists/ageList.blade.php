@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <center><h1 class="mt-2 pb-2">{{$year}}代の芸人一覧</h1></center>
+    <center><h1 class="mt-5 pb-2">{{$year}}代の芸人一覧</h1></center>
 
     <div class="container">
         <div class="row">
@@ -45,6 +45,7 @@
 
 
     {{-- ページネーションのリンク --}}
-    {{ $perfomer->appends(request()->query())->links() }}        
+
+        {{ $perfomer->appends(request()->query())->links() }}        
 
 @endsection

@@ -10,7 +10,7 @@
    <div class="container">
         <div class="row">
             <div class="col-lg-8">    
-                <h2 class="mt-2 pb-2" >本日誕生日の芸人</h2>    
+                <h2 class="mt-5 pb-2" >本日誕生日の芸人</h2>    
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -49,7 +49,7 @@
                     </table>
             </div>
             <div class="col-lg-4">        
-                <h2 class="mt-2 pb-2" >明日誕生日</h2>    
+                <h2 class="mt-5 pb-2" >明日誕生日</h2>    
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -107,7 +107,7 @@
 
 
 
-<h2 class="mt-2 pb-2">M1ラストイヤーの芸人</h2>    
+<h2 class="mt-5 pb-2">M1ラストイヤーの芸人（芸歴15年目）</h2>    
             <table class="table table-striped">
             <thead>
                 <tr>
@@ -130,7 +130,7 @@
 
 
     
-<h2 class="mt-2 pb-2">今年解散した芸人</h2>    
+<h2 class="mt-5 pb-2">今年解散した芸人</h2>    
             <table class="table table-striped">
             <thead>
                 <tr>
@@ -153,7 +153,7 @@
 
 
 
-<h2>M1グランプリ2021 結果</h2>
+<h2 class="mt-5 pb-2">M1グランプリ2021 結果</h2>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -238,7 +238,7 @@
 
     
         
-<h2>キングオブコント2021結果</h2>
+<h2 class="mt-5 pb-2">キングオブコント2021結果</h2>
     <table class="table table-striped">
         <thead>
             <tr>

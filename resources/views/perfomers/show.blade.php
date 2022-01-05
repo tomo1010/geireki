@@ -4,8 +4,8 @@
 
     <div class="container">
         <div class="row">
-        <div class="col-lg-3"><h1 class="mt-2 pb-2">芸歴{{$now->diffInYears($perfomer->active)}}年目：</div> 
-        <div class="col-lg-9">{{ $perfomer->name }}</h1></div>
+        <div class="col-lg-3"><h1 class="mt-3 pb-0">芸歴{{$now->diffInYears($perfomer->active)}}年目：</h1></div> 
+        <div class="col-lg-9"><h1 class="mt-3 pb-2"><strong>{{ $perfomer->name }}</strong></h1></div>
         </div>
     </div>
 
@@ -164,15 +164,13 @@
     
     
     
-    
-    
-    <h2 class="mt-5 pb-2 border-bottom">関連芸人</h2>
+</br></br>    
 
     @include('commons.tab_sync')
     
     <div class="tab-content">
         <div id="senior" class="tab-pane">
-            <h3 class="mt-2 pb-1">１年先輩</h3>
+            <h2 class="mt-4 pb-1">１年先輩</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -196,7 +194,7 @@
         </div>        
         
         <div id="sync"  class="tab-pane active">
-            <h3 class="mt-2 pb-1">同期</h3>
+            <h2 class="mt-4 pb-1">同期芸人</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -220,7 +218,7 @@
         </div>
         
         <div id="junior" class="tab-pane">
-            <h3 class="mt-2 pb-1">1年後輩</h3>
+            <h2 class="mt-4 pb-1">1年後輩</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>

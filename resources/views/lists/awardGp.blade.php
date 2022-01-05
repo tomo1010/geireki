@@ -4,7 +4,7 @@
 
 
 
-<center><h1 class="mt-2 pb-2">{{$gp}}</h1>
+<center><h1 class="mt-5 pb-2">{{$gp}}</h1>
 <h1 class="mt-2 pb-2">芸人一覧</h1></center>
 
     <div class="container">

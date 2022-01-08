@@ -17,7 +17,7 @@
                                 <th>名前</th>
                                 <th>コンビ名など</th>
                                 <th>年齢</th>                    
-                                <th>芸歴</th>
+                                <th><strong>{!! link_to_route('lists.history', '芸歴') !!}<strong></th>
                                 <th>SNS</th>                                
                             </tr>
                         </thead>
@@ -28,8 +28,12 @@
                                 <td nowrap>
                                     {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
                                 </td>
-                                <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>
-                                <td>{{$now->diffInYears($value->birthday)}}歳</td>
+                                <td>
+                                    {{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}
+                                </td>
+                                <td>
+                                    {{$now->diffInYears($value->birthday)}}歳
+                                </td>
 
                                 @empty($value->active)
                                     <td>-</td>
@@ -40,7 +44,7 @@
                                 @empty($value->twitter)
                                 <td></td>
                                 @else
-                                <td><a href="{{ $value->twitter }}" target="new"><img src="../icon/twitter.png" width="30"></a></td>
+                                <td><a href="{{ $value->twitter }}" target="new"><img src="../icon/twitter.png" width="30" alt="芸人さんの公式Twitter"></a></td>
                                 @endempty
  
                             </tr>
@@ -55,7 +59,7 @@
                             <tr>
                                 <th>名前</th>
                                 <th>年齢</th>
-                                <th>芸歴</th>
+                                <th><strong>芸歴</strong></th>
                             </tr>
                         </thead>
                         
@@ -93,7 +97,7 @@
             <tbody>
                 @foreach ($youtubes as $value)
                 <tr>
-                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('youtubes.favorite')</td>
+                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }} alt="芸人さんの公式youtubeチャンネル"></a>@include('youtubes.favorite')</td>
                     <td>{!! link_to_route('entertainers.show', $value->entertainer->name, ['id' => $value->entertainer->id]) !!}
                     <!--{{ $value->entertainer->name }}</td>-->
                     <td>{{ $value->user->name }}</td>
@@ -107,7 +111,7 @@
 
 
 
-<h2 class="mt-5 pb-2">M1ラストイヤーの芸人（芸歴15年目）</h2>    
+<h2 class="mt-5 pb-2">M1ラストイヤーの芸人<strong>（芸歴15年目）</strong></h2>    
             <table class="table table-striped">
             <thead>
                 <tr>
@@ -136,7 +140,7 @@
                 <tr>
                     <th>芸人</th>
                     <!--<th>活動終了時期</th>-->
-                    <th>芸歴</th>
+                    <th><strong>芸歴</strong></th>
                 </tr>
             </thead>
             
@@ -159,7 +163,7 @@
             <tr>
                 <th>順位
                 <th>芸人</th>
-                <th>芸歴</th>                                
+                <th><strong>芸歴</strong></th>                                
                 <th>同期</th>
             </tr>
         </thead>
@@ -244,7 +248,7 @@
             <tr>
                 <th>順位</th>                
                 <th>芸人</th>
-                <th>芸歴</th>                                
+                <th><strong>芸歴</strong></th>                                
                 <th>同期</th>
             </tr>
         </thead>

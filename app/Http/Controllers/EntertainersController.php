@@ -53,7 +53,7 @@ class EntertainersController extends Controller
         $birthdayTomorrow = array();
         //$limit = $today->subYear(90); 表示する年齢制限
         
-        $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->get();
+        $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->orderBy('active', 'desc')->get();
 
         foreach($perfomers as $value){
             $day = $value->birthday;
@@ -78,6 +78,7 @@ class EntertainersController extends Controller
         //最新のYoutube動画一覧
         $youtubes = Youtube::latest()->take(3)->get();
         $count = $youtubes->count();        
+
 //dd($youtubes);
 
         //Youtubeのサムネイルを取得

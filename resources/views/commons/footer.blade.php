@@ -15,7 +15,10 @@
 
     <nav class="navbar  navbar-dark bg-dark">
 
-        <p class="text-light bg-dark"><a href="mailto:info@geireki.net"><img src="/icon/icon_mail.png" width="24"></a></p> 
+        <p class="text-light bg-dark">{!! link_to_route('entertainers.all', '芸人一覧', ) !!}</p>
+        <p class="text-light bg-dark">{!! link_to_route('perfomers.all', '個人一覧', ) !!}</p>        
+        <p class="text-light bg-dark">{!! link_to_route('search', '詳細検索', ) !!}</p>                
+        <p class="text-light bg-dark"><a href="mailto:info@geireki.net"><img src="/icon/icon_mail.png" width="24" alt="メール｜芸歴.net"></a></p> 
         <p class="text-light bg-dark">© 2021 芸歴.net</p> 
     </nav>
 

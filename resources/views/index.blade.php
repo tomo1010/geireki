@@ -97,7 +97,7 @@
             <tbody>
                 @foreach ($youtubes as $value)
                 <tr>
-                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }} alt="芸人さんの公式youtubeチャンネル"></a>@include('youtubes.favorite')</td>
+                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }} alt="芸人さんの公式youtubeチャンネル""></a>@include('youtubes.favorite')</td>
                     <td>{!! link_to_route('entertainers.show', $value->entertainer->name, ['id' => $value->entertainer->id]) !!}
                     <!--{{ $value->entertainer->name }}</td>-->
                     <td>{{ $value->user->name }}</td>

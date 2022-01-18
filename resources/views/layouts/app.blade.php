@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
+        
+        
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2272724-34"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-2272724-34');
+            </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        
+        
+        
         <meta charset="utf-8">
         <title>芸人データベース｜芸歴.net</title>
         <meta content="芸人さんの芸歴データベース。芸歴一覧検索、お笑い芸人の芸歴検索、同期芸人一覧。先輩芸人、後輩芸人、同い年、今日誕生日の芸人さん。お笑い芸人ランキング。M-1ファイナリスト芸歴、キングオブコントファイナリスト芸歴" name="description">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta charset=”UTF-8″>
 
+        <!--Facebook設定-->
         <meta property="og:url" content="http://www.geireki.net/" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="芸人さんの芸歴データベース｜芸歴.net" />
@@ -24,30 +40,12 @@
         
 
 
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W3B7H8TZFM"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'G-W3B7H8TZFM');
-        </script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-
-
         <!--AdSenseタグ-->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8272433810922720"
         crossorigin="anonymous"></script>
         <!--AdSenseタグ-->
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-        
-        
-        <!--<link rel="stylesheet" href="{{ asset('bootflat.github.io-master/css/bootstrap.min.css') }}">-->
-        <link rel="stylesheet" href="bootstrap-social.css" >       
-        <span style="color: #000000;"><head> <link rel="canonical" href="https://www.geireki.net/"> </head></span>
 
     </head>
 

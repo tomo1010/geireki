@@ -11,11 +11,10 @@
             <thead>
                 <tr>
                     <th>@sortablelink('name', '芸人')</th>
-                    <th>@sortablelink('active', '活動時期')</th>
-                    <th>活動終了時期</th>
-                    <th>旧名</th>
-                    <th>公式</th>
-                    <th>Youtube</th>
+                    <th>活動時期</th>
+                    <th>メンバー</th>
+                    <th>SNS</th>
+                    <th>事務所</th>                    
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -25,20 +24,13 @@
                 @if($entertainer->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}</td>
+
                     @empty($entertainer->active)
                     <td></td>
                     @else
                     <td>{{ $entertainer->active->format('Y年～') }}</td>
                     @endempty
                     
-                    <td></td>
-                    <td>{{ $entertainer->oldname }}</td>
-
-                    @empty($entertainer->official)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $entertainer->official }}">公式</a></td>
-                    @endempty
 
                     @empty($entertainer->youtube)
                     <td></td>

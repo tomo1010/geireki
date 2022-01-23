@@ -80,8 +80,8 @@ class PerfomersController extends Controller
         $perfomer->facebook = $request->facebook;
         $perfomer->blog = $request->blog;        
 
+        // $perfomer->entertainer_id = $request->entertainer_id;
         $perfomer->office_id = $request->office_id;
-        $perfomer->entertainer_id = $request->entertainer_id;        
         
         $perfomer->save();
 
@@ -229,7 +229,8 @@ class PerfomersController extends Controller
         $perfomer->instagram = $request->instagram;        
         $perfomer->facebook = $request->facebook;        
         $perfomer->blog = $request->blog;        
-        
+
+        // $perfomer->entertainer_id = $request->entertainer_id;        
         $perfomer->office_id = $request->office_id;
 
         $perfomer->save();

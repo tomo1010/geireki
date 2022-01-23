@@ -407,7 +407,7 @@ class EntertainersController extends Controller
         $entertainer->encounter = $request->encounter;                
         $entertainer->official = $request->official;
         $entertainer->youtube = $request->youtube;
-        $entertainer->tiktok = $request->tiktok;        
+        $entertainer->tiktok = $request->tiktok;      
         $entertainer->office_id = $request->office_id;
         $entertainer->save();
 

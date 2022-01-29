@@ -194,7 +194,7 @@
         </div>        
         
         <div id="sync"  class="tab-pane active">
-            <h2 class="mt-4 pb-1">同期芸人</h2>
+            <h2 class="mt-4 pb-1">同期芸人（個人）</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>

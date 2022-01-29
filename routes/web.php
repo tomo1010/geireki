@@ -92,6 +92,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     Route::put('perfomers/{id}', 'PerfomersController@update')->name('perfomers.update');
     Route::delete('perfomers/{id}', 'PerfomersController@destroy')->name('perfomers.destroy');
     Route::get('perfomers/{id}/edit', 'PerfomersController@edit')->name('perfomers.edit');
+    
+    //メンバー（中間テーブル）データ編集その他    
+    //Route::resource('members', 'MembersController');
+    // Route::get('members/create', 'MembersController@create')->name('members.create');    
 
     
     /*

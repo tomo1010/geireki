@@ -58,13 +58,16 @@
 
                     @if($entertainer->perfomers->isEmpty())
                         {!! Form::label('perfomer_id[]', '個人id:') !!}
-                        {!! Form::text('perfomer_id', null, ['class' => 'form-control']) !!}
+                        {!! Form::text('perfomer_id[]', null, ['class' => 'form-control']) !!}
+                        
                     @else
                         @foreach ($entertainer->perfomers as $value)
                             {!! Form::label('perfomer_id[]', '個人id:') !!}
                             {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!} //個人名表示
                             {!! Form::text('perfomer_id[]', $value->id, ['class' => 'form-control']) !!}
                         @endforeach
+                            {!! Form::label('perfomer_id[]', '個人id:') !!}　//空テキストBOX
+                            {!! Form::text('perfomer_id[]', null, ['class' => 'form-control']) !!}     
                     @endif
                     
                     {!! Form::hidden('back_url', url()->previous()) !!}

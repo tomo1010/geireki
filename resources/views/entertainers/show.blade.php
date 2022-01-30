@@ -3,6 +3,24 @@
 @section('content')
 
 
+    @can('admin-only') {{-- システム管理者権限のみに表示される --}}
+
+        {{-- 作成ページへのリンク --}}
+        <!--@if (Auth::check())-->
+
+        {{-- 編集ページへのリンク --}}
+        {!! link_to_route('entertainers.edit', 'この芸人データを編集', ['id' => $entertainer->id], ['class' => 'btn btn-light']) !!}
+
+        {{-- 削除フォーム --}}
+        {!! Form::model($entertainer, ['route' => ['entertainers.destroy', $entertainer->id], 'method' => 'delete']) !!}
+            {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
+        <!--@else-->
+        <!--@endif-->
+        
+    @endcan
+
+
 @if (session('message'))
     <div class="alert alert-danger">
         {{ session('message') }}
@@ -297,22 +315,6 @@
     </div>    
 
 
-    @can('admin-only') {{-- システム管理者権限のみに表示される --}}
 
-        {{-- 作成ページへのリンク --}}
-        <!--@if (Auth::check())-->
-
-        {{-- 編集ページへのリンク --}}
-        {!! link_to_route('entertainers.edit', 'この芸人データを編集', ['id' => $entertainer->id], ['class' => 'btn btn-light']) !!}
-
-        
-        {{-- 削除フォーム --}}
-        {!! Form::model($entertainer, ['route' => ['entertainers.destroy', $entertainer->id], 'method' => 'delete']) !!}
-            {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
-        <!--@else-->
-        <!--@endif-->
-        
-    @endcan
 
 @endsection

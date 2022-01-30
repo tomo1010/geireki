@@ -50,8 +50,8 @@
                     {!! Form::label('blog', 'Blog:') !!}
                     {!! Form::text('blog', null, ['class' => 'form-control']) !!}                    
 
-                    <!--{!! Form::label('enteriner_id', '芸人id:') !!}-->
-                    <!--{!! Form::text('enteriner_id', null, ['class' => 'form-control']) !!}-->
+                    <!--{!! Form::label('entertainer_id', '芸人id:') !!}-->
+                    <!--{!! Form::text('entertainer_id', null, ['class' => 'form-control']) !!}-->
                     {!! Form::label('office_id', '事務所id:') !!}
                     {!! Form::text('office_id', null, ['class' => 'form-control']) !!}                    
                 </div>

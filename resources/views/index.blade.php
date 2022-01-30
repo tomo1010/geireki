@@ -17,7 +17,7 @@
                                 <th>名前</th>
                                 <th>コンビ名など</th>
                                 <th>年齢</th>                    
-                                <th><strong>{!! link_to_route('lists.history', '芸歴') !!}<strong></th>
+                                <th>芸歴</th>
                                 <th>SNS</th>                                
                             </tr>
                         </thead>
@@ -38,7 +38,7 @@
                                 @empty($value->active)
                                     <td>-</td>
                                 @else
-                                <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                                <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
                                 @endempty
 
                                 @empty($value->twitter)
@@ -71,7 +71,7 @@
                                 @empty($value->active)
                                     <td>-</td>
                                 @else
-                                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+                                    <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
                                 @endempty
                             </tr>
                             @endforeach
@@ -97,7 +97,7 @@
             <tbody>
                 @foreach ($youtubes as $value)
                 <tr>
-                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }} alt="芸人さんの公式youtubeチャンネル"></a>@include('youtubes.favorite')</td>
+                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}" alt="芸人さんの公式youtubeチャンネル"></a>@include('youtubes.favorite')</td>
                     <td>{!! link_to_route('entertainers.show', $value->entertainer->name, ['id' => $value->entertainer->id]) !!}
                     <!--{{ $value->entertainer->name }}</td>-->
                     <td>{{ $value->user->name }}</td>

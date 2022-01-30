@@ -38,14 +38,37 @@
                     {!! Form::label('office_id', '事務所id:') !!}
                     {!! Form::text('office_id', null, ['class' => 'form-control']) !!}
 
-                    @empty($entertainer->perfomers)
+
+
+
+                        <!--@foreach ($entertainer->perfomers as $value)-->
+
+                        <!--    @isset($value)-->
+                        <!--        {!! Form::label('perfomer_id[]', '個人id:') !!}-->
+                        <!--        {!! Form::text('perfomer_id', null, ['class' => 'form-control']) !!}-->
+                        <!--    @else-->
+                        <!--        {!! Form::label('perfomer_id[]', '個人id:') !!}-->
+                        <!--        {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!} //個人名表示-->
+                        <!--        {!! Form::text('perfomer_id[]', $value->id, ['class' => 'form-control']) !!}-->
+                        <!--    @endisset-->
+
+                        <!--@endforeach-->
+    
+
+
+                    @if($entertainer->perfomers->isEmpty())
+                        {!! Form::label('perfomer_id[]', '個人id:') !!}
+                        {!! Form::text('perfomer_id[]', null, ['class' => 'form-control']) !!}
+                        
                     @else
                         @foreach ($entertainer->perfomers as $value)
-                            <!--{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}-->
                             {!! Form::label('perfomer_id[]', '個人id:') !!}
+                            {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!} //個人名表示
                             {!! Form::text('perfomer_id[]', $value->id, ['class' => 'form-control']) !!}
                         @endforeach
-                    @endempty
+                            {!! Form::label('perfomer_id[]', '個人id:') !!}　//空テキストBOX
+                            {!! Form::text('perfomer_id[]', null, ['class' => 'form-control']) !!}     
+                    @endif
                     
                     {!! Form::hidden('back_url', url()->previous()) !!}
                 </div>

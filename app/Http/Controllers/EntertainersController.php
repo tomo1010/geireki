@@ -115,9 +115,6 @@ class EntertainersController extends Controller
 
 
 
-
-
-
         //今年解散した芸人の一覧
         $lastyear = Carbon::now()->subYear(0); // 今年を取得
         $dissolutions = Entertainer::whereYear('activeend','=', $lastyear)->orderBy('active', 'asc')->get();
@@ -371,10 +368,14 @@ class EntertainersController extends Controller
     {
         // idの値で検索して取得
         $entertainer = Entertainer::with('perfomers')->findOrFail($id);
+        $member = Member::where('entertainer_id',$id)->get();
+
+//dd($member);
 
         // 編集ビューでそれを表示
         return view('entertainers.edit', [
             'entertainer' => $entertainer,
+            'member' => $member,
         ]);
         
     }
@@ -394,6 +395,8 @@ class EntertainersController extends Controller
     {
         // idの値でメッセージを検索して取得
         $entertainer = Entertainer::findOrFail($id);
+        //$member = array();
+        
         // メッセージを更新
         $entertainer->name = $request->name;
         $entertainer->numberofpeople = $request->numberofpeople;
@@ -407,9 +410,19 @@ class EntertainersController extends Controller
         $entertainer->encounter = $request->encounter;                
         $entertainer->official = $request->official;
         $entertainer->youtube = $request->youtube;
-        $entertainer->tiktok = $request->tiktok;        
+        $entertainer->tiktok = $request->tiktok;      
         $entertainer->office_id = $request->office_id;
+        //$member = $request->perfomer_id;
+
+//dd($request->perfomer_id);
+
+        $entertainer->perfomers()->sync($request->perfomer_id); //中間テーブルを更新した時        
+        
         $entertainer->save();
+
+
+
+
 
         // 元のページへリダイレクトさせる
         //return redirect('/');

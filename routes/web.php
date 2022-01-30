@@ -56,6 +56,15 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 
+// sitemap-indexのルート
+Route::get('sitemap.xml', 'SitemapController@index')->name('sitemap');
+Route::group(['prefix' => 'sitemaps'], function() {
+// sitemapのルート
+Route::get('basics.xml', 'SitemapController@basics')->name('sitemap-basics');
+// sitemapを増やす場合はココに追記していく。
+});
+
+
 //ユーザのみ
 Route::group(['middleware' => ['auth']], function () {
     

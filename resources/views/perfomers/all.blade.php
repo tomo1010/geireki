@@ -3,19 +3,16 @@
 @section('content')
 
 
-<h1>芸人一覧</h1>
+<h1>個人一覧</h1>
     
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>@sortablelink('name', '芸人')</th>
-                    <th>@sortablelink('active', '活動時期')</th>
-                    <th>活動終了時期</th>
-                    <th>師匠</th>
-                    <th>旧名</th>
-                    <th>公式</th>
-                    <th>Youtube</th>
+                    <th>名前</th>
+                    <th>コンビ名など</th>
+                    <th>@sortablelink('birthday', '年齢')</th>                    
                     <th>芸歴</th>
+                    <th>SNS</th>                                
                 </tr>
             </thead>
             
@@ -23,25 +20,47 @@
                 @foreach ($perfomers as $perfomer)
                 @if($perfomer->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                 <tr>
-                    <td nowrap>{!! link_to_route('perfomers.show', $perfomer->name, ['id' => $perfomer->id]) !!}</td>
-                    <td>{{ $perfomer->active }}</td>
-                    <td></td>
-                    <td>{{ $perfomer->master }}</td>
-                    <td>{{ $perfomer->oldname }}</td>
+                    <td nowrap>
+                        {!! link_to_route('perfomers.show', $perfomer->name, ['id' => $perfomer->id]) !!}
+                    </td>
+                    <td>
+                        
+                        {{--コンビ名もリンク--}}
+                        @if(!empty($perfomer->entertainer[0]->name))
+                            {!! link_to_route('entertainers.show', $perfomer->entertainer[0]->name, $perfomer->entertainer[0]->id) !!}
+                        @else
+                        @endif
+                
+                    </td>
+                    <td>
+                        {{$now->diffInYears($perfomer->birthday)}}歳
+                    </td>
 
-                    @empty($perfomer->official)
-                    <td></td>
+                    <td nowrap>
+                    @empty($perfomer->active)
                     @else
-                    <td><a href="{{ $perfomer->official }}">公式</a></td>
+                    {!! link_to_route('lists.historyList', $now->diffInYears($perfomer->active), ['year' => $now->diffInYears($perfomer->active)]) !!}年
                     @endempty
+                    </td>
 
-                    @empty($perfomer->youtube)
-                    <td></td>
+                    <td>
+                    @empty($perfomer->twitter)
                     @else
-                    <td><a href="{{ $perfomer->youtube }}">Youtube</a></td>
+                    <a href="{{ $perfomer->twitter }}" target="new"><img src="../icon/twitter.png" width="30" alt="芸人さんの公式Twitter"></a>
                     @endempty
-                    
-                    <td nowrap>{{$now->diffInYears($perfomer->active)}}年</td>
+                    @empty($perfomer->instagram)
+                    @else
+                    <a href="{{ $perfomer->instagram }}" target="new"><img src="../icon/instagram.png" width="30" alt="芸人さんの公式Instagram"></a>
+                    @endempty
+                    @empty($perfomer->facebook)
+                    @else
+                    <a href="{{ $perfomer->facebook }}" target="new"><img src="../icon/facebook.png" width="30" alt="芸人さんの公式Facebook"></a>
+                    @endempty
+                    @empty($perfomer->blog)
+                    @else
+                    <a href="{{ $perfomer->blog }}" target="new"><img src="../icon/blog.png" width="30" alt="芸人さんの公式blog"></a>
+                    @endempty
+                    </td>
                 </tr>
                 @else
 

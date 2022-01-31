@@ -20,7 +20,20 @@ class PerfomersController extends Controller
     public function all()
     {
         //一覧取得
-        $perfomers = Perfomer::paginate(10);
+        // $perfomers = Perfomer::paginate(30);
+        
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+
+        if($disband == '1'){
+            // 一覧を取得
+            $perfomers = Perfomer::sortable()->orderBy('active', 'desc')->paginate(50);
+        }
+        else{
+            //解散済みを除いて取得
+            $perfomers = Perfomer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(50);
+        }
+        
         
         // 一覧ビューで表示
         return view('perfomers.all', [

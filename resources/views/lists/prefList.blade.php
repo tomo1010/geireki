@@ -23,7 +23,15 @@
                         @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
                         <tr>
                             <td nowrap>{!! link_to_route('perfomers.show', $value->name, [$value->id]) !!}</td>
-                            <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>                              
+
+                            {{--コンビ名もリンク--}}
+                            <td>
+                            @if(!empty($value->entertainer[0]->name))
+                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                            @else
+                            @endif    
+                            </td>
+
                             <td>{{$value->birthplace}}</td>
                             <td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年目</td>
 
@@ -31,7 +39,15 @@
                         @else
                         <tr class="text-secondary">
                             <td nowrap>{!! link_to_route('perfomers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>                              
+
+                            {{--コンビ名もリンク--}}
+                            <td>
+                            @if(!empty($value->entertainer[0]->name))
+                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                            @else
+                            @endif    
+                            </td>
+
                             <td>{{$value->birthplace}}</td>
                             <td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年目</td>
                         </tr>

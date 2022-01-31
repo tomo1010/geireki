@@ -519,11 +519,11 @@ class EntertainersController extends Controller
 
         if($disband == '1'){
             // 一覧を取得
-            $entertainers = Entertainer::sortable()->orderBy('active', 'desc')->paginate(15);
+            $entertainers = Entertainer::sortable()->orderBy('active', 'desc')->paginate(50);
         }
         else{
             //解散済みを除いて取得
-            $entertainers = Entertainer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(15);
+            $entertainers = Entertainer::where('activeend', NULL)->sortable()->orderBy('active', 'desc')->paginate(50);
         }
         
         

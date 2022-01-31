@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable; // 追加
 
 class Perfomer extends Model
 {
+    
+    use Sortable; // 追加
+    public $sortable = ['name', 'active']; // 追加
+    
     //この個人が所属するコンビ名。
     public function entertainer()
     {

@@ -11,11 +11,9 @@
             <thead>
                 <tr>
                     <th>@sortablelink('name', '芸人')</th>
-                    <th>活動時期</th>
-                    <th>メンバー</th>
-                    <th>SNS</th>
-                    <th>事務所</th>                    
-                    <th>芸歴</th>
+                    <th>事務所</th>
+                    <th>SNS</th>                
+                    <th>芸歴</th>                    
                 </tr>
             </thead>
             
@@ -24,50 +22,39 @@
                 @if($entertainer->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}</td>
+                    <td>{!! link_to_route('lists.officeList', $entertainer->office->office, ['id' => $entertainer->office->id]) !!}</td>
 
-                    @empty($entertainer->active)
-                    <td></td>
-                    @else
-                    <td>{{ $entertainer->active->format('Y年～') }}</td>
-                    @endempty
+                    <td>
+                        @empty($entertainer->youtube)
+                        @else
+                            <a href="{{ $entertainer->youtube }}" target="new"><img src="../icon/youtube.png" width="30" alt="芸人さんの公式Youtube"></a>                        
+                        @endempty 
+                        @empty($entertainer->tiktok)
+                        @else
+                            <a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="30" alt="芸人さんの公式Tiktok"></a>                        
+                        @endempty  
+                    </td>
                     
-
-                    @empty($entertainer->youtube)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
-                    @endempty
-                    
-                    <td nowrap>{{$now->diffInYears($entertainer->active)}}年</td>
+                    <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($entertainer->active), ['year' => $now->diffInYears($entertainer->active)]) !!}年</td>
                 </tr>
                 @else
 
                 <tr class="text-secondary">
                     <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}（解散済）</td>
-                    
-                    @empty($entertainer->active)
-                    <td></td>
-                    @else                    
-                    <td>{{ $entertainer->active->format('Y年～') }}</td>
-                    @endempty                    
-                    
-                    <td>{{ $entertainer->activeend->format('Y年') }}</td>
-                    <td>{{ $entertainer->master }}</td>
-                    <td>{{ $entertainer->oldname }}</td>
+                    <td>{!! link_to_route('lists.officeList', $entertainer->office->office, ['id' => $entertainer->office->id]) !!}</td>
 
-                    @empty($entertainer->official)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $entertainer->official }}">公式</a></td>
-                    @endempty
-
-                    @empty($entertainer->youtube)
-                    <td></td>
-                    @else
-                    <td><a href="{{ $entertainer->youtube }}">Youtube</a></td>
-                    @endempty
+                    <td>
+                        @empty($entertainer->youtube)
+                        @else
+                            <a href="{{ $entertainer->youtube }}" target="new"><img src="../icon/youtube.png" width="30" alt="芸人さんの公式Youtube"></a>                        
+                        @endempty 
+                        @empty($entertainer->tiktok)
+                        @else
+                            <a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="30" alt="芸人さんの公式Tiktok"></a>                        
+                        @endempty  
+                    </td>
                     
-                    <td nowrap>{{$now->diffInYears($entertainer->active)}}年</td>
+                    <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($entertainer->active), ['year' => $now->diffInYears($entertainer->active)]) !!}年</td>
                 </tr>
                 @endif
                 

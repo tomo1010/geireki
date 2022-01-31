@@ -29,7 +29,14 @@
                                     {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
                                 </td>
                                 <td>
-                                    {{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}
+                                    
+                                    {{--コンビ名もリンク--}}
+                                    @if(!empty($value->entertainer[0]->name))
+                                        {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                                    @else
+                                    @endif
+                            
+                                    <!--{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}-->
                                 </td>
                                 <td>
                                     {{$now->diffInYears($value->birthday)}}歳

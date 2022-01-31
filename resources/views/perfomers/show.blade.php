@@ -207,7 +207,15 @@
                     <tr>
                         @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
                             <td>{!! link_to_route('perfomers.show', $value->name, $value->id) !!}</td>
-                            <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>
+                            
+                            {{--コンビ名もリンク--}}
+                            <td>
+                            @if(!empty($value->entertainer[0]->name))
+                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                            @else
+                            @endif    
+                            </td>
+                            
                         @else
                             <td class="text-secondary">{!! link_to_route('perfomers.show', $value->name, $value->id) !!}（解散済）</td>
                         @endif

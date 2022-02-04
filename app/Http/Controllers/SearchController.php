@@ -38,7 +38,78 @@ class SearchController extends Controller
         $s_end = $request->input('s_end');         
 
         $s_ageStart = $request->input('s_ageStart'); 
-        $s_ageEnd = $request->input('s_ageEnd');        
+        $s_ageEnd = $request->input('s_ageEnd');
+        
+        $s_age = $request->input('s_age'); 
+            if($s_age == '10b'){
+                $s_ageStart = 1;
+                $s_ageEnd = 19;
+            }    
+            elseif($s_age == '20a'){
+                $s_ageStart = 20;
+                $s_ageEnd = 24;
+            }
+            elseif($s_age == '20b'){
+                $s_ageStart = 25;
+                $s_ageEnd = 29;
+            }
+            elseif($s_age == '30a'){
+                $s_ageStart = 30;
+                $s_ageEnd = 34;
+            }
+            elseif($s_age == '30b'){
+                $s_ageStart = 35;
+                $s_ageEnd = 39;
+            }
+            elseif($s_age == '40a'){
+                $s_ageStart = 40;
+                $s_ageEnd = 44;
+            }
+            elseif($s_age == '40b'){
+                $s_ageStart = 45;
+                $s_ageEnd = 49;
+            }            
+            elseif($s_age == '50a'){
+                $s_ageStart = 50;
+                $s_ageEnd = 54;
+            }
+            elseif($s_age == '50b'){
+                $s_ageStart = 55;
+                $s_ageEnd = 59;
+            }
+            elseif($s_age == '60a'){
+                $s_ageStart = 60;
+                $s_ageEnd = 64;
+            }            
+            elseif($s_age == '60b'){
+                $s_ageStart = 65;
+                $s_ageEnd = 69;
+            }
+            elseif($s_age == '70a'){
+                $s_ageStart = 70;
+                $s_ageEnd = 74;
+            }
+            elseif($s_age == '70b'){
+                $s_ageStart = 75;
+                $s_ageEnd = 79;
+            }            
+            elseif($s_age == '80a'){
+                $s_ageStart = 80;
+                $s_ageEnd = 84;
+            }
+            elseif($s_age == '80b'){
+                $s_ageStart = 85;
+                $s_ageEnd = 89;
+            }
+            elseif($s_age == '90a'){
+                $s_ageStart = 90;
+                $s_ageEnd = 94;
+            }
+            elseif($s_age == '90b'){
+                $s_ageStart = 95;
+                $s_ageEnd = 99;
+            }
+        //dd($s_ageStart,$s_ageEnd);            
 
         $s_month = $request->input('s_month'); 
         $s_day = $request->input('s_day');                
@@ -46,14 +117,20 @@ class SearchController extends Controller
         $s_numberofpeople = $request->input('numberofpeople');
         $s_gender = $request->input('gender');        
         
+        $s_office = $request->input('office');        
+        
         $s_etc = $request->input('etc');        
 
+
+
+        //日付フォーマットへ変換
         $start = Carbon::now()->subYear($s_start)->format('Y-m-d'); //"2011-08-14"
         $end = Carbon::now()->subYear($s_end)->format('Y-m-d'); //"2001-08-14"
+        
         $from = Carbon::now()->subYear($s_ageStart)->format('Y-m-d');
         $to = Carbon::now()->subYear($s_ageEnd)->format('Y-m-d');
         
-        //dd($s_pin);
+        //dd($from,$to);
 
 
         //芸歴検索
@@ -145,6 +222,28 @@ class SearchController extends Controller
 
 
 
+
+        //事務所        
+        if(!empty($s_office)) {
+            
+                $query->whereHas('office', function ($que) use ($s_office) {
+                    if (count($s_office) == 1) {
+                        $que->where('office', 'like', "%$s_etc[0]%");
+                    }
+                    else{
+                        $que->where(function ($query) use($s_office) {
+                            foreach ($s_office as $awd) {
+                                $query->orwhere('office', 'like', "%$awd%");
+                            }
+                        });
+                        // $que->where('award', 'like', '%'.implode($s_etc).'%');
+                    }
+                });
+        }
+        
+        
+        
+
         //その他の条件指定        
         if(!empty($s_etc)) {
             
@@ -203,7 +302,7 @@ class SearchController extends Controller
         $offices = Office::get(); 
         //dd($offices);
 
-        return view('search', compact('perfomers','now','prefs','request'));
+        return view('search', compact('perfomers','now','prefs','offices','request'));
 
     }
     

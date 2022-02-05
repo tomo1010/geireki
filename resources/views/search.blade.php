@@ -171,16 +171,36 @@
 
 {{--事務所--}}
     <div class="form-group row">
-        <label class="col-2 col-form-label">事務所:</label>
-        <div class="col-10">
-            <select name="s_officeIn" class="form-control">
-            <option value="" selected="selected">選択</option>
-              @foreach($offices as $index=>$office)
-                <option value="{{$office}}">{{$office}}</option>
-              @endforeach
-            </select>
+        <label class="col-2 col-form-label">誕生日:</label>
+        <div class="col-5">
+        {!! Form::selectRange('s_month', 1, 12, old('s_month'),['placeholder' => '月','class' => 'form-control']) !!}
+        </div>
+        <div class="col-5">
+        {!! Form::selectRange('s_day', 1, 31, old('s_day'),['placeholder' => '日','class' => 'form-control']) !!} 
         </div>
     </div>
+    
+    
+    
+    <div class="form-group row">
+        <label class="col-2 col-form-label">事務所:</label>
+        
+        <div class="col-5">
+        <select class="form-control" name="office_id">
+            <option value="" selected="selected">選択</option>
+            @foreach ($offices as $office)
+                <option value="{{ $office->id }}">{{ $office->office }}</option>
+            @endforeach
+        </select>
+        </div>
+        
+        <div class="col-2">
+        {!! Form::select('judge', ['in' => 'のみ', 'notin' => '以外',], 'null', ['placeholder' => '選択','class' => 'form-control']) !!}
+        </div>
+        
+    </div>
+      
+      
 
 
 {{--その他--}}

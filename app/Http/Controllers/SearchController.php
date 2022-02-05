@@ -117,7 +117,10 @@ class SearchController extends Controller
         $s_numberofpeople = $request->input('numberofpeople');
         $s_gender = $request->input('gender');        
         
-        $s_office = $request->input('office');        
+        $office_id = $request->input('office_id');
+        $s_judge = $request->input('judge');
+        
+        //dd($office_id,$s_judge);
         
         $s_etc = $request->input('etc');        
 
@@ -224,21 +227,18 @@ class SearchController extends Controller
 
 
         //事務所        
-        if(!empty($s_office)) {
+        if(!empty($office_id)) {
             
-                $query->whereHas('office', function ($que) use ($s_office) {
-                    if (count($s_office) == 1) {
-                        $que->where('office', 'like', "%$s_etc[0]%");
-                    }
-                    else{
-                        $que->where(function ($query) use($s_office) {
-                            foreach ($s_office as $awd) {
-                                $query->orwhere('office', 'like', "%$awd%");
-                            }
-                        });
-                        // $que->where('award', 'like', '%'.implode($s_etc).'%');
-                    }
+            if($s_judge == 'notin'){
+                $query->whereHas('office', function ($que) use ($office_id) {
+                    $que->whereNotIn('id', [$office_id]);
                 });
+            }
+            else{
+                $query->whereHas('office', function ($que) use ($office_id) {
+                    $que->whereIn('id', [$office_id]);
+                });
+            }    
         }
         
         

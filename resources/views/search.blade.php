@@ -169,7 +169,7 @@
 
 
 
-{{--事務所--}}
+{{--誕生日--}}
     <div class="form-group row">
         <label class="col-2 col-form-label">誕生日:</label>
         <div class="col-5">
@@ -182,6 +182,7 @@
     
     
     
+{{--事務所--}}    
     <div class="form-group row">
         <label class="col-2 col-form-label">事務所:</label>
         
@@ -197,9 +198,29 @@
         <div class="col-2">
         {!! Form::select('judge', ['in' => 'のみ', 'notin' => '以外',], 'null', ['placeholder' => '選択','class' => 'form-control']) !!}
         </div>
-        
     </div>
       
+
+
+{{--NSC出身?--}}    
+    <div class="form-group row">
+        <label class="col-2 col-form-label">お笑い養成所:</label>
+        <div class="col-10">
+
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('nsc[]','NSC',false,['class'=>'col-md-0 form-check-input','id'=>'nsc'])}}
+                {{Form::label('nsc','NSC出身',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+
+            {{--
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('etc[]','キングオブコント',false,['class'=>'col-md-0 form-check-input','id'=>'king'])}}
+                {{Form::label('king','キングオブコント',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>
+--}}
+
+        </div>
+    </div>
       
 
 
@@ -212,6 +233,7 @@
                 {{Form::checkbox('etc[]','M-1',false,['class'=>'col-md-0 form-check-input','id'=>'M-1'])}}
                 {{Form::label('M-1','M-1ファイナリスト',['class' => 'col-md-0 form-check-label text-left'])}}
             </div>
+
             <div class="form-check col-md-0 d-flex align-items-center pr-2">
                 {{Form::checkbox('etc[]','キングオブコント',false,['class'=>'col-md-0 form-check-input','id'=>'king'])}}
                 {{Form::label('king','キングオブコント',['class' => 'col-md-0 form-check-label text-left'])}}

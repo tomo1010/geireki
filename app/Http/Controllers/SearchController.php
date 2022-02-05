@@ -121,6 +121,9 @@ class SearchController extends Controller
         $s_judge = $request->input('judge');
         
         //dd($office_id,$s_judge);
+
+        $nsc = $request->input('nsc');  
+        //dd($nsc);
         
         $s_etc = $request->input('etc');        
 
@@ -242,6 +245,20 @@ class SearchController extends Controller
         }
         
         
+
+        //NSC出身？
+        
+        if(!empty($nsc)) {
+            if (count($nsc) == 1) {
+                $query->where('school', 'like', "%$nsc[0]%");
+            }
+            else{
+                foreach ($nsc as $value) {
+                    $query->orwhere('school', 'like', "%$value%");
+                }
+            }
+        }
+
         
 
         //その他の条件指定        

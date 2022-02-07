@@ -16,7 +16,7 @@
         <label class="col-2 col-form-label">名前:</label>
         <div class="col-10">
 
-        {!! Form::text('s_name', $request->input('s_name') ?? '', ['class' => 'form-control']) !!}
+        {!! Form::text('s_name', $request->input('s_name') ?? '', ['class' => 'form-control']) !!}        
         </div>
     </div>
 
@@ -102,6 +102,32 @@
               @foreach($prefs as $index=>$name)
                 <option value="{{$name}}">{{$name}}</option>
               @endforeach
+            </select>
+        </div>
+    </div>
+
+
+{{--地方--}}
+    <div class="form-group row">
+        <label class="col-2 col-form-label">出身地方:</label>
+        <div class="col-10">
+            <select name="local" class="form-control">
+            <option value="" selected="selected">選択（※は単一の都道府県で検索）</option>
+
+                <option value="1">北海道※</option>
+                <option value="2">東北</option>
+                <option value="3">北関東</option>
+                <option value="4">南関東</option>
+                <option value="5">東京※</option>
+                <option value="6">北陸信越</option>
+                <option value="7">東海</option>
+                <option value="8">近畿</option>
+                <option value="9">大阪※</option>
+                <option value="10">中国</option>
+                <option value="11">四国</option>
+                <option value="12">九州</option>
+                <option value="13">沖縄※</option>
+
             </select>
         </div>
     </div>
@@ -288,6 +314,9 @@
 
 
     <h2 class="mt-2 pb-2">芸人一覧</h1>
+    
+    
+    {{--検索条件：{{$request->s_name}}{{$request->s_start}}--}}
     
         <table class="table table-striped">
             <thead>

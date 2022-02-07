@@ -28,11 +28,16 @@ class SearchController extends Controller
         }
 
 
+        $prefs = config('pref');
+
 
         // 検索条件の値を取得
         $s_name = $request->input('s_name');
         $s_bloodtype = $request->input('s_bloodtype');
         $s_birthplace = $request->input('s_birthplace');
+        
+        //地方
+        $local = $request->input('local');
 
         $s_start = $request->input('s_start'); 
         $s_end = $request->input('s_end');         
@@ -183,7 +188,100 @@ class SearchController extends Controller
         if(!empty($s_birthplace)) {
             $query->where('birthplace', 'like', '%'.$s_birthplace.'%');
         }
+
+
+//dd($prefs[1]);
+//dd($local);
+
+
+        // //出身地方        
+        if(!empty($local)) {
+            //北海道
+            if($local == '1'){
+                $query->where('birthplace', 'like', '%'.$prefs[1].'%');
+            }
+            //東北
+            elseif($local == '2'){
+                $query->where('birthplace', 'like', '%'.$prefs[2].'%');
+                for($i = 3; $i<= 7; $i++){
+                    $query->orWhere('birthplace', 'like', '%'.$prefs[$i].'%');
+                }
+            }
+            //北関東
+            elseif($local == '3'){
+                $query->where('birthplace', 'like', '%'.$prefs[8].'%');
+                for($i = 9; $i<= 11; $i++){
+                    $query->orWhere('birthplace', 'like', '%'.$prefs[$i].'%');
+                }
+            }
+            //南関東
+            elseif($local == '4'){
+                $query->where('birthplace', 'like', '%'.$prefs[12].'%');
+                $query->orWhere('birthplace', 'like', '%'.$prefs[14].'%');
+                $query->orWhere('birthplace', 'like', '%'.$prefs[19].'%');                
+            }
+            //東京
+            elseif($local == '5'){
+                $query->where('birthplace', 'like', '%'.$prefs[13].'%');
+            }
+            //北陸信越
+            elseif($local == '6'){
+                $query->where('birthplace', 'like', '%'.$prefs[15].'%');
+                $query->orWhere('birthplace', 'like', '%'.$prefs[20].'%');                
+                for($i = 16; $i<= 18; $i++){
+                    $query->orWhere('birthplace', 'like', '%'.$prefs[$i].'%');
+                }
+            }
+            //東海
+            elseif($local == '7'){
+                $query->where('birthplace', 'like', '%'.$prefs[21].'%');
+                for($i = 22; $i<= 24; $i++){
+                    $query->orWhere('birthplace', 'like', '%'.$prefs[$i].'%');
+                }
+            }
+            //近畿
+            elseif($local == '8'){
+                $query->where('birthplace', 'like', '%'.$prefs[25].'%');
+                $query->orWhere('birthplace', 'like', '%'.$prefs[26].'%');                
+                for($i = 28; $i<= 30; $i++){
+                    $query->orWhere('birthplace', 'like', '%'.$prefs[$i].'%');
+                }
+            }
+            //大阪
+            elseif($local == '9'){
+                $query->where('birthplace', 'like', '%'.$prefs[27].'%');
+            }
+            //中国
+            elseif($local == '10'){
+                $query->where('birthplace', 'like', '%'.$prefs[31].'%');
+                for($i = 32; $i<= 35; $i++){
+                    $query->orWhere('birthplace', 'like', '%'.$prefs[$i].'%');
+                }
+            }            
+            //四国
+            elseif($local == '11'){
+                $query->where('birthplace', 'like', '%'.$prefs[36].'%');
+                for($i = 37; $i<= 39; $i++){
+                    $query->orWhere('birthplace', 'like', '%'.$prefs[$i].'%');
+                }
+            }
+            //九州
+            elseif($local == '12'){
+                $query->where('birthplace', 'like', '%'.$prefs[40].'%');
+                for($i = 41; $i<= 46; $i++){
+                    $query->orWhere('birthplace', 'like', '%'.$prefs[$i].'%');
+                }
+            }            
+            //沖縄
+            elseif($local == '13'){
+                $query->where('birthplace', 'like', '%'.$prefs[47].'%');
+            }            
+        }    
         
+
+
+
+ //dd($query);       
 
         //誕生日検索
         if(!empty($s_month)) {

@@ -28,6 +28,7 @@ Route::get('lists/office', 'ListsController@office')->name('lists.office');
 Route::get('lists/office/{id}', 'ListsController@officeList')->name('lists.officeList');
 Route::get('lists/age', 'ListsController@age')->name('lists.age');
 Route::get('lists/age/{year}', 'ListsController@ageList')->name('lists.ageList');
+Route::get('lists/age2/{yearsOld}', 'ListsController@age2List')->name('lists.age2List');
 Route::get('lists/pref', 'ListsController@pref')->name('lists.pref');
 Route::get('lists/pref/{pref}', 'ListsController@prefList')->name('lists.prefList');
 Route::get('lists/award', 'ListsController@award')->name('lists.award');

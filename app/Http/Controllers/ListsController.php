@@ -274,8 +274,45 @@ class ListsController extends Controller
             'now' => new \Carbon\Carbon(),
         ]);
     }    
+  
+  
     
-    
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+    public function age2List($yearsOld)
+    {
+        
+        $from = Carbon::now()->subYear($yearsOld)->format('Y-m-d');
+        $to = Carbon::now()->subYear($yearsOld+1)->format('Y-m-d');
+
+
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+
+        if($disband == '1'){
+
+            $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+
+        }else{
+            
+            $perfomer = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+        }
+ 
+
+        
+        // 一覧ビューで表示
+        return view('lists.age2List', [
+            'perfomer' => $perfomer,
+            'yearsOld' => $yearsOld,
+            'now' => new \Carbon\Carbon(),
+        ]);
+    }    
+        
     
     
     

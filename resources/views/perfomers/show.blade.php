@@ -140,6 +140,14 @@
             @endempty
         </tr>
         <tr>
+            <th>TikTok</th>
+            @empty($perfomer->tiktok)
+            <td></td>
+            @else
+            <td><a href="{{ $perfomer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px"></a></td>
+            @endempty
+        </tr>        
+        <tr>
             <th>Blog</th>
             @empty($perfomer->blog)
             <td></td>

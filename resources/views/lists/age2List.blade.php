@@ -5,6 +5,8 @@
 
     <center><h1 class="mt-5 pb-2">{{$yearsOld}}歳の芸人一覧</h1></center>
 
+<p><center>{!! link_to_route('lists.age2List', '<<1歳年上', ['yearsOld' => $yearsOld+1],['class' => 'btn btn-outline-success']) !!}　{!! link_to_route('lists.age2List', '1歳年下>>', ['yearsOld' => $yearsOld-1],['class' => 'btn btn-outline-success']) !!}</center></p>
+
     <div class="container">
         <div class="row">
 

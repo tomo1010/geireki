@@ -9,6 +9,8 @@ use App\Office;
 use App\Perfomer; 
 use App\Member; 
 use App\Award; 
+use App\Youtube;
+use App\Favorite;
 
 use Goodby\CSV\Import\Standard\LexerConfig; //csvインポート
 use Goodby\CSV\Import\Standard\Lexer;
@@ -72,7 +74,6 @@ class CsvController extends Controller
             Entertainer::insert([
                 'id' => $row[0], 
                 'office_id' => $row[1] == '' ? NULL : $row[1],
-                
                 'name' => $row[2], 
                 'numberofpeople' => $row[3],
                 'gender' => $row[4],
@@ -83,9 +84,10 @@ class CsvController extends Controller
                 'oldname' => $row[9],
                 'brain' => $row[10],
                 'encounter' => $row[11],                
-                'official' => $row[12] == '' ? NULL : $row[12],
-                'youtube' => $row[13] == '' ? NULL : $row[13],
-                'tiktok' => $row[13] == '' ? NULL : $row[14],                
+                'named' => $row[12] == '' ? NULL : $row[12],                                
+                'official' => $row[13] == '' ? NULL : $row[13],
+                'youtube' => $row[14] == '' ? NULL : $row[14],
+                'tiktok' => $row[15] == '' ? NULL : $row[15],                
                 ]);
             $count++;
         }
@@ -231,7 +233,8 @@ class CsvController extends Controller
                 'twitter' => $row[20] == '' ? NULL : $row[20],
                 'instagram' => $row[21] == '' ? NULL : $row[21],
                 'facebook' => $row[22] == '' ? NULL : $row[22],
-                'blog' => $row[23] == '' ? NULL : $row[23],                
+                'tiktok' => $row[23] == '' ? NULL : $row[23],                
+                'blog' => $row[24] == '' ? NULL : $row[24],                
 
                 ]);
             $count++;
@@ -353,10 +356,71 @@ class CsvController extends Controller
         $count = 0;
         foreach($dataList as $row){
             Award::insert([
-                //'id' => $row[0], 
-                'entertainer_id' => $row[0],
-                'year' => $row[1],
-                'award' => $row[2],
+                'id' => $row[0], 
+                'entertainer_id' => $row[1],
+                'year' => $row[2],
+                'award' => $row[3],
+                ]);
+            $count++;
+        }
+ 
+        return redirect()->action('EntertainersController@index')->with('flash_message', $count . '件登録しました！');
+    }
+
+
+
+
+
+    // おすすめYoutubeアップロード画面
+
+    public function uploadYoutube()
+    {
+        return view("csv.youtube");
+    }
+
+
+    // おすすめYoutubeインポート処理
+
+    public function importYoutube(Request $request)
+    {
+        // CSV ファイル保存
+        $tmpName = mt_rand().".".$request->file('csv')->guessExtension(); //TMPファイル名
+        $request->file('csv')->move(public_path()."/csv/tmp",$tmpName);
+        $tmpPath = public_path()."/csv/tmp/".$tmpName;
+ 
+        //Goodby CSVのconfig設定
+        $config = new LexerConfig();
+        $interpreter = new Interpreter();
+        $lexer = new Lexer($config);
+ 
+        //CharsetをUTF-8に変換、CSVのヘッダー行を無視
+        $config->setToCharset("UTF-8");
+        $config->setFromCharset("sjis-win");
+        $config->setIgnoreHeaderLine(true);
+ 
+        $dataList = [];
+     
+        // 新規Observerとして、$dataList配列に値を代入
+        $interpreter->addObserver(function (array $row) use (&$dataList){
+            // 各列のデータを取得
+            $dataList[] = $row;
+        });
+ 
+        // CSVデータをパース
+        $lexer->parse($tmpPath, $interpreter);
+ 
+        // TMPファイル削除
+        unlink($tmpPath);
+ 
+        // ★★登録処理
+        $count = 0;
+        foreach($dataList as $row){
+            Youtube::insert([
+                'id' => $row[0], 
+                'user_id' => $row[1],                
+                'entertainer_id' => $row[2],
+                'youtube' => $row[3],
+                'comment' => $row[4],
                 ]);
             $count++;
         }
@@ -369,12 +433,77 @@ class CsvController extends Controller
 
 
 
+    // お気に入りYoutube（favorite）アップロード画面
+
+    public function uploadFavorite()
+    {
+        return view("csv.favorite");
+    }
+
+
+    // お気に入りYoutubeインポート処理
+
+    public function importFavorite(Request $request)
+    {
+        // CSV ファイル保存
+        $tmpName = mt_rand().".".$request->file('csv')->guessExtension(); //TMPファイル名
+        $request->file('csv')->move(public_path()."/csv/tmp",$tmpName);
+        $tmpPath = public_path()."/csv/tmp/".$tmpName;
+ 
+        //Goodby CSVのconfig設定
+        $config = new LexerConfig();
+        $interpreter = new Interpreter();
+        $lexer = new Lexer($config);
+ 
+        //CharsetをUTF-8に変換、CSVのヘッダー行を無視
+        $config->setToCharset("UTF-8");
+        $config->setFromCharset("sjis-win");
+        $config->setIgnoreHeaderLine(true);
+ 
+        $dataList = [];
+     
+        // 新規Observerとして、$dataList配列に値を代入
+        $interpreter->addObserver(function (array $row) use (&$dataList){
+            // 各列のデータを取得
+            $dataList[] = $row;
+        });
+ 
+        // CSVデータをパース
+        $lexer->parse($tmpPath, $interpreter);
+ 
+        // TMPファイル削除
+        unlink($tmpPath);
+ 
+        // ★★登録処理
+        $count = 0;
+        foreach($dataList as $row){
+            Favorite::insert([
+                //'id' => $row[0], 
+                'user_id' => $row[1],                
+                'youtube_id' => $row[2],
+                ]);
+            $count++;
+        }
+ 
+        return redirect()->action('EntertainersController@index')->with('flash_message', $count . '件登録しました！');
+    }
+    
+    
+    
+    
+    
+
+
+
+
+
 
     /*
     // ダウンロード処理
     */
 
 
+    //ダウンロード
     //事務所
     
     public function exportOffice(Request $request)
@@ -399,7 +528,7 @@ class CsvController extends Controller
             fclose($stream);
         });
         $response->headers->set('Content-Type', 'application/octet-stream'); 
-        $response->headers->set('content-disposition', 'attachment; filename=事務所一覧.csv');
+        $response->headers->set('content-disposition', 'attachment; filename=事務所.csv');
 
         return $response;
     }
@@ -416,6 +545,8 @@ class CsvController extends Controller
             }
 
 
+
+    //ダウンロード
     //芸人
 
     public function exportEntertainer(Request $request)
@@ -426,7 +557,7 @@ class CsvController extends Controller
             // 文字化け回避
             stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
 
-            // Officeテーブルの全データを取得
+            // Entertainerテーブルの全データを取得
             $results = Entertainer::all();
             if (empty($results[0])) {
                     fputcsv($stream, [
@@ -440,7 +571,7 @@ class CsvController extends Controller
             fclose($stream);
         });
         $response->headers->set('Content-Type', 'application/octet-stream'); 
-        $response->headers->set('content-disposition', 'attachment; filename=芸人一覧.csv');
+        $response->headers->set('content-disposition', 'attachment; filename=芸人.csv');
 
         return $response;
     }
@@ -452,7 +583,9 @@ class CsvController extends Controller
                 return [
                     $row->id,
                     $row->office_id,
+                    
                     $row->name,
+                    $row->numberofpeople,                    
                     $row->gender,
                     $row->ailias,
                     $row->active,
@@ -461,15 +594,17 @@ class CsvController extends Controller
                     $row->oldname,
                     $row->brain,
                     $row->encounter,
+                    $row->named,                    
                     $row->official,
                     $row->youtube,          
+                    $row->tiktok,                              
                 ];
             }
 
 
 
 
-
+    //ダウンロード
     //個人
 
     public function exportPerfomer(Request $request)
@@ -480,7 +615,7 @@ class CsvController extends Controller
             // 文字化け回避
             stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
 
-            // Officeテーブルの全データを取得
+            // Perfomerテーブルの全データを取得
             $results = Perfomer::all();
             if (empty($results[0])) {
                     fputcsv($stream, [
@@ -494,7 +629,7 @@ class CsvController extends Controller
             fclose($stream);
         });
         $response->headers->set('Content-Type', 'application/octet-stream'); 
-        $response->headers->set('content-disposition', 'attachment; filename=個人一覧.csv');
+        $response->headers->set('content-disposition', 'attachment; filename=個人.csv');
 
         return $response;
     }
@@ -524,14 +659,65 @@ class CsvController extends Controller
                     $row->relatives,
                     $row->disciple,
                     $row->official,
-                    $row->youtube,
                     $row->twitter,                                                            
+                    $row->instagram,
+                    $row->facebook,                                                                                
+                    $row->tiktok,                                                                                
+                    $row->blog,                                                                                
                 ];
             }
 
 
 
 
+
+    //ダウンロード　
+    //中間テーブル
+
+    public function exportMember(Request $request)
+    {
+        $post = $request->all(); // 本来ならここで、CSV出力のパラメータを受け取り、クエリで絞り込む
+        $response = new StreamedResponse(function () use ($request, $post) {
+            $stream = fopen('php://output','w');
+            // 文字化け回避
+            stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
+
+            // Memberテーブルの全データを取得
+            $results = Member::all();
+            if (empty($results[0])) {
+                    fputcsv($stream, [
+                        'データが存在しませんでした。',
+                    ]);
+            } else {
+                foreach ($results as $row) {
+                    fputcsv($stream, $this->_csvMember($row));
+                }
+            }
+            fclose($stream);
+        });
+        $response->headers->set('Content-Type', 'application/octet-stream'); 
+        $response->headers->set('content-disposition', 'attachment; filename=メンバー（中間テーブル）.csv');
+
+        return $response;
+    }
+
+        /*
+        * CSVの１行分のデータ　※本来はコントローラに書かない方が良い
+        */
+        private function _csvMember($row){
+                return [
+                    //$row->id,
+                    $row->entertainer_id,
+                    $row->perfomer_id,                    
+                ];
+            }
+
+
+
+
+
+
+    //ダウンロード　
     //受賞歴
 
     public function exportAward(Request $request)
@@ -542,7 +728,7 @@ class CsvController extends Controller
             // 文字化け回避
             stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
 
-            // Officeテーブルの全データを取得
+            // Awardテーブルの全データを取得
             $results = Award::all();
             if (empty($results[0])) {
                     fputcsv($stream, [
@@ -556,7 +742,7 @@ class CsvController extends Controller
             fclose($stream);
         });
         $response->headers->set('Content-Type', 'application/octet-stream'); 
-        $response->headers->set('content-disposition', 'attachment; filename=受賞歴一覧.csv');
+        $response->headers->set('content-disposition', 'attachment; filename=受賞歴.csv');
 
         return $response;
     }
@@ -573,6 +759,100 @@ class CsvController extends Controller
                 ];
             }
 
+
+
+
+
+    //ダウンロード　
+    //おすすめyoutubeテーブル
+
+    public function exportYoutube(Request $request)
+    {
+        $post = $request->all(); // 本来ならここで、CSV出力のパラメータを受け取り、クエリで絞り込む
+        $response = new StreamedResponse(function () use ($request, $post) {
+            $stream = fopen('php://output','w');
+            // 文字化け回避
+            stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
+
+            // Youtubeテーブルの全データを取得
+            $results = Youtube::all();
+            if (empty($results[0])) {
+                    fputcsv($stream, [
+                        'データが存在しませんでした。',
+                    ]);
+            } else {
+                foreach ($results as $row) {
+                    fputcsv($stream, $this->_csvYoutube($row));
+                }
+            }
+            fclose($stream);
+        });
+        $response->headers->set('Content-Type', 'application/octet-stream'); 
+        $response->headers->set('content-disposition', 'attachment; filename=おすすめYoutube.csv');
+
+        return $response;
+    }
+
+        /*
+        * CSVの１行分のデータ　※本来はコントローラに書かない方が良い
+        */
+        private function _csvYoutube($row){
+                return [
+                    $row->id,
+                    $row->user_id,
+                    $row->entertainer_id,                    
+                    $row->youtube,                    
+                    $row->comment,                        
+                    
+                ];
+            }
+
+
+
+
+    //ダウンロード　
+    //お気に入りYoutube
+
+    public function exportFavorite(Request $request)
+    {
+        $post = $request->all(); // 本来ならここで、CSV出力のパラメータを受け取り、クエリで絞り込む
+        $response = new StreamedResponse(function () use ($request, $post) {
+            $stream = fopen('php://output','w');
+            // 文字化け回避
+            stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
+
+            // Favoriteテーブルの全データを取得
+            $results = Favorite::all();
+            if (empty($results[0])) {
+                    fputcsv($stream, [
+                        'データが存在しませんでした。',
+                    ]);
+            } else {
+                foreach ($results as $row) {
+                    fputcsv($stream, $this->_csvFavorite($row));
+                }
+            }
+            fclose($stream);
+        });
+        $response->headers->set('Content-Type', 'application/octet-stream'); 
+        $response->headers->set('content-disposition', 'attachment; filename=お気に入りYoutube（中間テーブル）.csv');
+
+//dd($response);
+
+        return $response;
+    }
+
+        /*
+        * CSVの１行分のデータ　※本来はコントローラに書かない方が良い
+        */
+        private function _csvFavorite($row){
+                return [
+                    //$row->id,
+                    $row->user_id,
+                    $row->entertainer_id,
+
+                ];
+            }
 
 
 

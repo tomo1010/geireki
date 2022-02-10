@@ -133,13 +133,25 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     // 芸人個人（中間）データ 
     Route::get('csv/member', 'CsvController@uploadMember');
     Route::post('csv/member', 'CsvController@importMember')->name('csv.importMember');
+    Route::get('csv/member_dl', 'CsvController@exportMember')->name('csv.exportMember');         
     
     
     // 受賞歴データ 
     Route::get('csv/award', 'CsvController@uploadAward');
     Route::post('csv/award', 'CsvController@importAward')->name('csv.importAward');    
     Route::get('csv/award_dl', 'CsvController@exportAward')->name('csv.exportAward');         
+ 
+    
+    // おすすめYouutbeデータ 
+    Route::get('csv/youtube', 'CsvController@uploadYoutube');
+    Route::post('csv/youtube', 'CsvController@importYoutube')->name('csv.importYoutube');    
+    Route::get('csv/youtube_dl', 'CsvController@exportYoutube')->name('csv.exportYoutube');             
 
+
+    // お気に入りYouutbeデータ(Favorite)
+    Route::get('csv/favorite', 'CsvController@uploadFavorite');
+    Route::post('csv/favorite', 'CsvController@importFavorite')->name('csv.importFavorite');    
+    Route::get('csv/favorite_dl', 'CsvController@exportFavorite')->name('csv.exportFavorite'); 
     
 
 });

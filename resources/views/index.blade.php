@@ -29,25 +29,27 @@
                                     {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
                                 </td>
                                 <td>
-                                    
-                                    {{--コンビ名もリンク--}}
+                                    {{--コンビ名リンク--}}
                                     @if(!empty($value->entertainer[0]->name))
                                         {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
                                     @else
                                     @endif
-                            
-                                    <!--{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}-->
                                 </td>
+                                
                                 <td>
-                                    {{$now->diffInYears($value->birthday)}}歳
+                                    {{--年齢リンク--}}
+                                {!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳
+                                    <!--{{$now->diffInYears($value->birthday)}}歳-->
                                 </td>
 
+                                    {{--芸歴リンク--}}
                                 @empty($value->active)
-                                    <td>-</td>
+                                <td>-</td>
                                 @else
                                 <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
                                 @endempty
 
+                                    {{--SNSリンク--}}
                                 @empty($value->twitter)
                                 <td></td>
                                 @else
@@ -74,7 +76,7 @@
                             @foreach ($birthdayTomorrow as $value)
                             <tr>
                                 <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                                <td>{{$now->diffInYears($value->birthday)}}歳</td>
+                                <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
                                 @empty($value->active)
                                     <td>-</td>
                                 @else

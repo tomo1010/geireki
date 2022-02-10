@@ -11,7 +11,7 @@
 
     <div class="container">
         <div class="row">
-            <div id="1" class="col-lg-4"><h2 class="mt-5 pb-2 display-5">ピン芸人</h2>
+            <div id="1" class="col-lg-4"><h2 class="mt-4 pb-2 display-5">ピン芸人</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>

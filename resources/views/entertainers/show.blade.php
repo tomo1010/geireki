@@ -115,6 +115,10 @@
             <th>出会い</th>
             <td>{{ $entertainer->encounter }}</td>
         </tr>        
+        <tr>
+            <th>コンビ名の由来</th>
+            <td>{{ $entertainer->named }}</td>
+        </tr> 
         
         
         <tr>

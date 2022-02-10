@@ -289,7 +289,7 @@ class PerfomersController extends Controller
     {
         // yearの値で検索して取得
         $perfomer = Perfomer::whereBetween('office_id', [$year])->get();
-dd($perfomer);
+//dd($perfomer);
 
         // 編集ビューでそれを表示
         return view('perfomers.edit', [

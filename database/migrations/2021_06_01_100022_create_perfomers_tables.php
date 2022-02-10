@@ -16,7 +16,6 @@ class CreatePerfomersTables extends Migration
         Schema::create('perfomers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('office_id');
-
             $table->string('name');
             $table->string('realname')->nullable();
             $table->string('alias')->nullable();
@@ -38,6 +37,7 @@ class CreatePerfomersTables extends Migration
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
             $table->string('facebook')->nullable();
+            $table->string('tiktok')->nullable();            
             $table->string('blog')->nullable();            
             
             $table->timestamps();

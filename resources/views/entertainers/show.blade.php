@@ -57,8 +57,7 @@
                         <tr>
                             <th>名前</th>
                             <th>年齢</th>
-                            <!--<th>出身</th>-->
-                            <!--<th>芸歴</th>-->
+                            <th>芸歴</th>
                         </tr>
                     </thead>
                     
@@ -66,10 +65,16 @@
                         @foreach ($entertainer->perfomers as $value)
                         <tr>
                             <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                            <td>{{!empty($value->birthday) ? $now->diffInYears($value->birthday) : '-' }}歳</td>
-                            <!--<td>{{$now->diffInYears($value->birthday)}}歳</td>-->
-                            <!--<td>{{ $value->school }}</td>-->
-                            <!--<td>{{$now->diffInYears($value->active)}}年</td>-->
+                            @empty($value->birthday)
+                            <td>-</td>
+                            @else
+                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
+                            @endempty
+                            @empty($value->active)
+                            <td>-</td>
+                            @else
+                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                            @endempty
                         </tr>
                         @endforeach
                     </tbody>

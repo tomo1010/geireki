@@ -33,7 +33,13 @@
                             </td>
 
                             <td>{{$value->birthplace}}</td>
-                            <td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年目</td>
+                        
+                            {{--芸歴リンク--}}
+                            @empty($value->active)
+                            <td>-</td>
+                            @else
+                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                            @endempty
 
                         </tr>
                         @else

@@ -11,6 +11,7 @@ class Perfomer extends Model
     use Sortable; // 追加
     public $sortable = ['name', 'active']; // 追加
     
+    
     //この個人が所属するコンビ名。
     public function entertainer()
     {
@@ -26,5 +27,5 @@ class Perfomer extends Model
     }
     
     //carbonで使えるように設定
-    protected $dates   = ['birthday','active'];
+    protected $dates   = ['birthday','deth','active','activeend'];
 }

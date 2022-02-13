@@ -28,32 +28,32 @@
                                 <td nowrap>
                                     {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
                                 </td>
+
+                                {{--コンビ名リンク--}}                                
                                 <td>
-                                    {{--コンビ名リンク--}}
                                     @if(!empty($value->entertainer[0]->name))
                                         {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
                                     @else
                                     @endif
                                 </td>
                                 
+                                {{--年齢リンク--}}
                                 <td>
-                                    {{--年齢リンク--}}
                                 {!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳
-                                    <!--{{$now->diffInYears($value->birthday)}}歳-->
                                 </td>
 
-                                    {{--芸歴リンク--}}
+                                {{--芸歴リンク--}}
                                 @empty($value->active)
-                                <td>-</td>
+                                    <td>-</td>
                                 @else
-                                <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                                    <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
                                 @endempty
 
-                                    {{--SNSリンク--}}
+                                {{--SNSリンク--}}
                                 @empty($value->twitter)
-                                <td></td>
+                                    <td></td>
                                 @else
-                                <td><a href="{{ $value->twitter }}" target="new"><img src="../icon/twitter.png" width="30" alt="芸人さんの公式Twitter"></a></td>
+                                    <td><a href="{{ $value->twitter }}" target="new"><img src="../icon/twitter.png" width="30" alt="芸人さんの公式Twitter"></a></td>
                                 @endempty
  
                             </tr>
@@ -133,7 +133,13 @@
                 @foreach ($m1year as $value)
                 <tr>
                     <td>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td>{{$value->office->office}}</td>
+
+                    {{--事務所リンク--}}                                
+                    @empty($value->office->office)
+                    <td>-</td>
+                    @else
+                    <td>{!! link_to_route('lists.officeList', $value->office->office, [$value->office->id]) !!}</td>
+                    @endempty
                 </tr>
                 @endforeach
             </tbody>

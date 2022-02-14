@@ -30,9 +30,20 @@
                             @else
                             @endif    
                             </td>
+                            
+                            {{--年齢もリンク--}}
+                            @empty($value->birthday)
+                            <td>-</td>
+                            @else
+                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
+                            @endempty
 
-                            <td>{{$now->diffInYears($value->birthday)}}歳</td>
-                            <td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年目</td>
+                            {{--芸歴もリンク--}}                            
+                            @empty($value->active)
+                            <td>-</td>
+                            @else
+                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                            @endempty
                         </tr>
                         @else
                         <tr class="text-secondary">
@@ -46,8 +57,19 @@
                             @endif    
                             </td>
                             
-                            <td>{{$now->diffInYears($value->birthday)}}歳</td>
-                            <td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年目</td>
+                            {{--年齢もリンク--}}
+                            @empty($value->birthday)
+                            <td>-</td>
+                            @else
+                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
+                            @endempty
+
+                            {{--芸歴もリンク--}}                            
+                            @empty($value->active)
+                            <td>-</td>
+                            @else
+                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                            @endempty
                         </tr>
                         @endif
                         @endforeach

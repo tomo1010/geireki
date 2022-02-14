@@ -43,20 +43,6 @@
                 @endif
             </ul>
             
-            
-            
-
-
-    {{--検索BOX--}}
- 
-    <form class="form-inline my-2 my-lg-0 ml-2" action="{{ route('searchbox')}}">
-      <div class="form-group">
-      <input type="search" class="form-control mr-sm-2" name="search"  value="{{old('search')}}" placeholder="キーワードを入力" aria-label="検索...">
-
-      </div>
-      　<input type="submit" value="検索" class="btn btn-info">
-    </form>
-            
         </div>
     </nav>
 
@@ -65,7 +51,6 @@
         <input type="checkbox" name="disband" value="1" onchange="myfunc(this.value)"  {{ request()->input('disband') ? 'checked' : '' }}/> 解散済みを含める　
 
         </p>
-
 
         <script>
             function myfunc(value) {
@@ -78,10 +63,24 @@
             }
         </script>
 
-
-
+    <center><p>
         
-        <center><p>
+        
+    {{--検索BOX--}}
+ 
+<form class="input-group col-md-5" action="{{ route('searchbox')}}"> 
+  <input type="search" name="search" class="form-control input-group-prepend" placeholder="キーワードを入力"></input>
+  <span class="input-group-btn input-group-append">
+    <submit type="submit" class="btn btn-primary"><i class="fas fa-search"></i> 検索</submit>
+  </span>
+</form>
+ 
+    <!--<form class="form-inline my-2 my-lg-0 ml-2" action="{{ route('searchbox')}}">-->
+    <!--  <div class="form-group">-->
+　   <!--   <input type="search" class="form-control mr-sm-2" name="search"  value="{{old('search')}}" placeholder="キーワードを入力" aria-label="検索...">-->
+    <!--  </div><i class="fas fa-search"></i>-->
+    <!--  　<input type="submit" value="検索" class="btn btn-info">-->
+    <!--</form>-->
             
         {{--芸歴リストへのセレクトBOX--}}
         

@@ -334,10 +334,32 @@
                     @if($value->activeend == NULL)
                     <tr>
                         <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                        <td>{{!empty($value->birthday) ? $now->diffInYears($value->birthday) : '-' }}歳</td>                        
+
+                        {{--年齢もリンク--}}
+                        @empty($value->birthday)
+                        <td>-</td>
+                        @else
+                        <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
+                        @endempty
+                        <!--<td>{{!empty($value->birthday) ? $now->diffInYears($value->birthday) : '-' }}歳</td>                        -->
                         <!--<td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年</td>-->
-                        <td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  
-                        <td>{{!empty($value->office->office) ? $value->office->office : '' }}</td>                      
+                       
+                        {{--コンビ名リンク--}}                                
+                        <td>
+                            @if(!empty($value->entertainer[0]->name))
+                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                            @else
+                            @endif
+                        </td>                       
+                        <!--<td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  -->
+
+                        {{--事務所リンク--}}                                
+                        @empty($value->office->office)
+                        <td>-</td>
+                        @else
+                        <td>{!! link_to_route('lists.officeList', $value->office->office, [$value->office->id]) !!}</td>
+                        @endempty
+                        <!--<td>{{!empty($value->office->office) ? $value->office->office : '' }}</td>                      -->
                     </tr>
     
                     @else

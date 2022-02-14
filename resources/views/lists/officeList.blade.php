@@ -27,17 +27,22 @@
                             <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
                             @include('commons.gender')                            
 
+                            {{--芸歴もリンク--}}                            
+                            @empty($value->active)
+                            <td>-</td>
+                            @else
+                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                            @endempty
+                        </tr>
+                        @else
+                        <tr class="text-secondary">
+                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
+                            @include('commons.gender')                            
                             @empty($value->active)
                             <td></td>
                             @else
                             <td>{{$now->diffInYears($value->active)}}年目</td>
                             @endempty
-                        </tr>
-                        @else
-                        <tr class="text-secondary">
-                            <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            <td>{{ $value->active }}</td>
-                            <td>{{ $value->activeend }}</td>
                         </tr>
                         @endif
                         @endforeach
@@ -63,9 +68,9 @@
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
                             @include('commons.gender')                            
                             @empty($value->active)
-                            <td></td>
+                            <td>-</td>
                             @else
-                            <td>{{$now->diffInYears($value->active)}}年目</td>
+                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
                             @endempty
                             
                         </tr>
@@ -104,18 +109,21 @@
                             @include('commons.gender')
 
                             @empty($value->active)
-                            <td></td>
+                            <td>-</td>
                             @else
-                            <td>{{$now->diffInYears($value->active)}}年目</td>
+                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
                             @endempty
                             
                         </tr>
                         @else
                         <tr class="text-secondary">
                             <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            @include('commons.gender')  
-
-                            <td>{{ $value->active }}</td>
+                            @include('commons.gender')                            
+                            @empty($value->active)
+                            <td></td>
+                            @else
+                            <td>{{$now->diffInYears($value->active)}}年目</td>
+                            @endempty
                         </tr>
                         @endif
                         @endforeach

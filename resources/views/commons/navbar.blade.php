@@ -68,10 +68,10 @@
         
     {{--検索BOX--}}
  
-<form class="input-group col-md-10" action="{{ route('searchbox')}}" method="GET"> 
+<form class="input-group col-md-5" action="{{ route('searchbox')}}" method="GET"> 
   <input type="search" name="search" class="form-control input-group-prepend" placeholder="キーワードを入力"></input>
   <span class="input-group-btn input-group-append">
-    <submit type="submit" class="btn btn-primary"><i class="fas fa-search"></i>検索</submit>
+    <input type="submit" class="btn btn-primary"  value="検索">
   </span>
 </form>
 

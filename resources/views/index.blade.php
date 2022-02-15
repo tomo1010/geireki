@@ -51,7 +51,7 @@
 
                                 {{--SNSリンク--}}
                                 <td>
-                                <a href="https://twitter.com/intent/tweet?hashtags={{$value->name}},{{$value->entertainer[0]->name}},誕生日,誕生日おめでとう" class="twitter-hashtags-btn" target="_blank">
+                                <a href="https://twitter.com/intent/tweet?hashtags={{$value->name}},誕生日,誕生日おめでとう" class="twitter-hashtags-btn" target="_blank">
                                   <img src="../icon/twitter.png" width="30" alt="Twitterでお祝いメッセージを">
                                 </a>
                                 </td>

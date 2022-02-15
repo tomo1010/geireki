@@ -68,12 +68,18 @@
         
     {{--検索BOX--}}
  
-<form class="input-group col-md-5" action="{{ route('searchbox')}}"> 
+<form class="input-group col-md-10" action="{{ route('searchbox')}}" method="GET"> 
   <input type="search" name="search" class="form-control input-group-prepend" placeholder="キーワードを入力"></input>
   <span class="input-group-btn input-group-append">
-    <submit type="submit" class="btn btn-primary"><i class="fas fa-search"></i> 検索</submit>
+    <submit type="submit" class="btn btn-primary"><i class="fas fa-search"></i>検索</submit>
   </span>
 </form>
+
+
+        <!--<form class="input-group col-md-10" action="{{ route('searchbox')}}" method="GET">-->
+        <!--    <label><input type="search" class="form-control" name="search" required  placeholder="キーワードを入力"></label>-->
+        <!--    <submit type="submit" value="検索" class="btn btn-primary"><i class="fas fa-search"></i> 検索</submit>-->
+        <!--</form>-->
  
     <!--<form class="form-inline my-2 my-lg-0 ml-2" action="{{ route('searchbox')}}">-->
     <!--  <div class="form-group">-->
@@ -86,7 +92,7 @@
         
         <form method="post" action="{{ route('lists.select')}}">
             @csrf
-            <select name="year" onchange="submit(this.form)">
+            <select name="year" onchange="submit(this.form)" >
                 @for($i = 0; $i < 70; $i++)
                       <option value="{{$i}}">芸歴{{$i}}年目</option>
                 @endfor

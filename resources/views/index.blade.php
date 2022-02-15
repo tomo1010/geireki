@@ -60,6 +60,23 @@
                         </tbody>
                     </table>
             </div>
+            
+            
+    @can('admin-only') {{-- システム管理者権限のみに表示される --}}
+
+        本日誕生日の芸人さん、おめでとうございます^^
+            @foreach ($birthday as $value)
+                    #{{$value->name}}
+                    @if(!empty($value->entertainer[0]->name))
+                        #{{$value->entertainer[0]->name}}
+                    @else
+                    @endif
+            @endforeach
+        #芸歴 #誕生日 #誕生日おめでとう https://www.geireki.net/
+    @endcan
+            
+            
+            
             <div class="col-lg-4">        
                 <h2 class="mt-5 pb-2" >明日誕生日</h2>    
                     <table class="table table-striped">
@@ -88,24 +105,6 @@
             </div>
         </div>    
     </div>        
-
-
-
-
-                    @can('admin-only') {{-- システム管理者権限のみに表示される --}}
-
-今日誕生日の芸人さん！おめでとうございます！
-                            @foreach ($birthday as $value)
-                                    #{{$value->name}}
-                                    @if(!empty($value->entertainer[0]->name))
-                                        #{{$value->entertainer[0]->name}}
-                                    @else
-                                    @endif
-                            @endforeach
-#芸歴 https://www.geireki.net/
-                    @endcan
-
-
 
     <h2 class="mt-5 pb-2">おすすめネタ動画</h2>
         <table class="table table-striped">

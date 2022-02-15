@@ -53,7 +53,7 @@ class EntertainersController extends Controller
         $birthdayTomorrow = array();
         //$limit = $today->subYear(90); 表示する年齢制限
         
-        $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->orderBy('active', 'desc')->get();
+        $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->orderBy('birthday', 'asc')->get();
 
         foreach($perfomers as $value){
             $day = $value->birthday;
@@ -496,6 +496,8 @@ class EntertainersController extends Controller
             'now' => new \Carbon\Carbon(),
         ]);
             
+            
+
 
     }
 

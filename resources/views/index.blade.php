@@ -50,12 +50,11 @@
                                 @endempty
 
                                 {{--SNSリンク--}}
-                                @empty($value->twitter)
-                                    <td></td>
-                                @else
-                                    <td><a href="{{ $value->twitter }}" target="new"><img src="../icon/twitter.png" width="30" alt="芸人さんの公式Twitter"></a></td>
-                                @endempty
- 
+                                <td>
+                                <a href="https://twitter.com/intent/tweet?hashtags={{$value->name}},{{$value->entertainer[0]->name}},誕生日,誕生日おめでとう" class="twitter-hashtags-btn" target="_blank">
+                                  <img src="../icon/twitter.png" width="30" alt="Twitterでお祝いメッセージを">
+                                </a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -89,6 +88,22 @@
             </div>
         </div>    
     </div>        
+
+
+
+
+                    @can('admin-only') {{-- システム管理者権限のみに表示される --}}
+
+今日誕生日の芸人さん！おめでとうございます！
+                            @foreach ($birthday as $value)
+                                    #{{$value->name}}
+                                    @if(!empty($value->entertainer[0]->name))
+                                        #{{$value->entertainer[0]->name}}
+                                    @else
+                                    @endif
+                            @endforeach
+#芸歴 https://www.geireki.net/
+                    @endcan
 
 
 

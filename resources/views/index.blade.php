@@ -15,7 +15,6 @@
                         <thead>
                             <tr>
                                 <th>名前</th>
-                                <th>コンビ名など</th>
                                 <th>年齢</th>                    
                                 <th>芸歴</th>
                                 <th>SNS</th>                                
@@ -24,16 +23,17 @@
                         
                         <tbody>
                             @foreach ($birthday as $value)
+                            
                             <tr>
                                 <td nowrap>
                                     {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
-                                </td>
 
-                                {{--コンビ名リンク--}}                                
-                                <td>
+                                    {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
                                     @if(!empty($value->entertainer[0]->name))
-                                        {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                                    @if (strcmp($value->entertainer[0]->name, $value->name) == 0 )
                                     @else
+                                        </br><font size="small">{!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}</font>
+                                    @endif
                                     @endif
                                 </td>
                                 
@@ -50,17 +50,33 @@
                                 @endempty
 
                                 {{--SNSリンク--}}
-                                @empty($value->twitter)
-                                    <td></td>
-                                @else
-                                    <td><a href="{{ $value->twitter }}" target="new"><img src="../icon/twitter.png" width="30" alt="芸人さんの公式Twitter"></a></td>
-                                @endempty
- 
+                                <td>
+                                <a href="https://twitter.com/intent/tweet?hashtags={{$value->name}},誕生日,誕生日おめでとう" class="twitter-hashtags-btn" target="_blank">
+                                  <img src="../icon/twitter.png" width="30" alt="Twitterでお祝いメッセージを">
+                                </a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
             </div>
+            
+            
+    @can('admin-only') {{-- システム管理者権限のみに表示される --}}
+
+        本日誕生日の芸人さん、おめでとうございます^^
+            @foreach ($birthday as $value)
+                    #{{$value->name}}
+                    @if(!empty($value->entertainer[0]->name))
+                        #{{$value->entertainer[0]->name}}
+                    @else
+                    @endif
+            @endforeach
+        #芸歴 #誕生日 #誕生日おめでとう https://www.geireki.net/
+    @endcan
+            
+            
+            
             <div class="col-lg-4">        
                 <h2 class="mt-5 pb-2" >明日誕生日</h2>    
                     <table class="table table-striped">
@@ -91,7 +107,6 @@
     </div>        
 
 
-
     <h2 class="mt-5 pb-2">おすすめネタ動画</h2>
         <table class="table table-striped">
             <thead>
@@ -115,7 +130,7 @@
                 @endforeach
             </tbody>
         </table>
-
+    Youtube動画を紹介するには<a href="{{route('login')}}">ログイン</a>が必要です。
 
 
 

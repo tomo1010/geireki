@@ -53,7 +53,7 @@ class EntertainersController extends Controller
         $birthdayTomorrow = array();
         //$limit = $today->subYear(90); 表示する年齢制限
         
-        $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->orderBy('active', 'desc')->get();
+        $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->orderBy('birthday', 'asc')->get();
 
         foreach($perfomers as $value){
             $day = $value->birthday;
@@ -78,8 +78,6 @@ class EntertainersController extends Controller
         //最新のYoutube動画一覧
         $youtubes = Youtube::latest()->take(3)->get();
         $count = $youtubes->count();        
-
-//dd($youtubes);
 
         //Youtubeのサムネイルを取得
         if (empty($count)) {
@@ -128,6 +126,8 @@ class EntertainersController extends Controller
 //dd($birthday);
 
 
+
+
         // 一覧ビューで表示
         return view('index', [
             'now' => new \Carbon\Carbon(),
@@ -136,7 +136,9 @@ class EntertainersController extends Controller
             'birthday' => $birthday,
             'birthdayTomorrow' => $birthdayTomorrow,
             'youtubes' => $youtubes,
-            'iframe' => $iframe,            
+            'iframe' => $iframe,   
+
+            
         ]);
         
 
@@ -496,6 +498,8 @@ class EntertainersController extends Controller
             'now' => new \Carbon\Carbon(),
         ]);
             
+            
+
 
     }
 

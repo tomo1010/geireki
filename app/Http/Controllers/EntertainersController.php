@@ -79,8 +79,6 @@ class EntertainersController extends Controller
         $youtubes = Youtube::latest()->take(3)->get();
         $count = $youtubes->count();        
 
-//dd($youtubes);
-
         //Youtubeのサムネイルを取得
         if (empty($count)) {
             //nullの場合何もしない
@@ -128,6 +126,8 @@ class EntertainersController extends Controller
 //dd($birthday);
 
 
+
+
         // 一覧ビューで表示
         return view('index', [
             'now' => new \Carbon\Carbon(),
@@ -136,7 +136,9 @@ class EntertainersController extends Controller
             'birthday' => $birthday,
             'birthdayTomorrow' => $birthdayTomorrow,
             'youtubes' => $youtubes,
-            'iframe' => $iframe,            
+            'iframe' => $iframe,   
+
+            
         ]);
         
 

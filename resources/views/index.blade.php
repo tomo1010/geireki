@@ -106,6 +106,7 @@
         </div>    
     </div>        
 
+
     <h2 class="mt-5 pb-2">おすすめネタ動画</h2>
         <table class="table table-striped">
             <thead>
@@ -129,7 +130,7 @@
                 @endforeach
             </tbody>
         </table>
-
+    Youtube動画を紹介するには<a href="{{route('login')}}">ログイン</a>が必要です。
 
 
 

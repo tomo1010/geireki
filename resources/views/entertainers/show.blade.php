@@ -214,7 +214,7 @@
                 @endforeach
             </tbody>
         </table>
-    Youtube動画を投稿するには<a href="{{route('login')}}">ログイン</a>が必要です。
+    Youtube動画を紹介するには<a href="{{route('login')}}">ログイン</a>が必要です。
     
     @if (Auth::check())    
         {{-- 投稿フォーム --}}

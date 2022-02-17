@@ -40,7 +40,7 @@
                 @foreach ($search_2 as $value)
                     @if($value->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                     <tr>
-                        <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+                        <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}（個人）</td>
                         <td>{{$now->diffInYears($value->active)}}年</td>
                     </tr>
                     @else

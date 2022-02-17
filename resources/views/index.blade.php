@@ -15,7 +15,6 @@
                         <thead>
                             <tr>
                                 <th>名前</th>
-                                <th>コンビ名など</th>
                                 <th>年齢</th>                    
                                 <th>芸歴</th>
                                 <th>SNS</th>                                
@@ -24,16 +23,17 @@
                         
                         <tbody>
                             @foreach ($birthday as $value)
+                            
                             <tr>
                                 <td nowrap>
                                     {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
-                                </td>
 
-                                {{--コンビ名リンク--}}                                
-                                <td>
+                                    {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
                                     @if(!empty($value->entertainer[0]->name))
-                                        {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                                    @if (strcmp($value->entertainer[0]->name, $value->name) == 0 )
                                     @else
+                                        </br><font size="small">{!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}</font>
+                                    @endif
                                     @endif
                                 </td>
                                 

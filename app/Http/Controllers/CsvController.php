@@ -85,9 +85,11 @@ class CsvController extends Controller
                 'brain' => $row[10],
                 'encounter' => $row[11],                
                 'named' => $row[12] == '' ? NULL : $row[12],                                
-                'official' => $row[13] == '' ? NULL : $row[13],
-                'youtube' => $row[14] == '' ? NULL : $row[14],
-                'tiktok' => $row[15] == '' ? NULL : $row[15],                
+                'memmo' => $row[13] == '' ? NULL : $row[13],                                                
+                'official' => $row[14] == '' ? NULL : $row[14],
+                'twitter' => $row[15] == '' ? NULL : $row[15],
+                'youtube' => $row[16] == '' ? NULL : $row[16],
+                'tiktok' => $row[17] == '' ? NULL : $row[17],                
                 ]);
             $count++;
         }
@@ -228,13 +230,15 @@ class CsvController extends Controller
                 'spouse' => $row[16] == '' ? NULL : $row[16],            
                 'relatives' => $row[17] == '' ? NULL : $row[17],    
                 'disciple' => $row[18] == '' ? NULL : $row[18],                
+                'memo' => $row[19] == '' ? NULL : $row[19],     
                 
-                'official' => $row[19] == '' ? NULL : $row[19],
-                'twitter' => $row[20] == '' ? NULL : $row[20],
-                'instagram' => $row[21] == '' ? NULL : $row[21],
-                'facebook' => $row[22] == '' ? NULL : $row[22],
-                'tiktok' => $row[23] == '' ? NULL : $row[23],                
-                'blog' => $row[24] == '' ? NULL : $row[24],                
+                'official' => $row[20] == '' ? NULL : $row[20],
+                'twitter' => $row[21] == '' ? NULL : $row[21],
+                'instagram' => $row[22] == '' ? NULL : $row[22],
+                'facebook' => $row[23] == '' ? NULL : $row[23],
+                'youtube' => $row[24] == '' ? NULL : $row[24],                                
+                'tiktok' => $row[25] == '' ? NULL : $row[25],                
+                'blog' => $row[26] == '' ? NULL : $row[26],                
 
                 ]);
             $count++;
@@ -595,7 +599,9 @@ class CsvController extends Controller
                     $row->brain,
                     $row->encounter,
                     $row->named,                    
+                    $row->memo,                                        
                     $row->official,
+                    $row->twitter,                                        
                     $row->youtube,          
                     $row->tiktok,                              
                 ];
@@ -658,10 +664,12 @@ class CsvController extends Controller
                     $row->spouse,
                     $row->relatives,
                     $row->disciple,
+                    $row->memo,
                     $row->official,
                     $row->twitter,                                                            
                     $row->instagram,
-                    $row->facebook,                                                                                
+                    $row->facebook,
+                    $row->youtube,                    
                     $row->tiktok,                                                                                
                     $row->blog,                                                                                
                 ];

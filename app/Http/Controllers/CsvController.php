@@ -85,7 +85,7 @@ class CsvController extends Controller
                 'brain' => $row[10],
                 'encounter' => $row[11],                
                 'named' => $row[12] == '' ? NULL : $row[12],                                
-                'memmo' => $row[13] == '' ? NULL : $row[13],                                                
+                'memo' => $row[13] == '' ? NULL : $row[13],                                                
                 'official' => $row[14] == '' ? NULL : $row[14],
                 'twitter' => $row[15] == '' ? NULL : $row[15],
                 'youtube' => $row[16] == '' ? NULL : $row[16],

@@ -30,8 +30,14 @@
                     {!! Form::text('brain', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('encounter', '出会い:') !!}                    
                     {!! Form::text('encounter', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('named', '名前の由来:') !!}                    
+                    {!! Form::text('named', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::label('memo', 'メモ:') !!}                    
+                    {!! Form::text('memo', null, ['class' => 'form-control']) !!}
                     {!! Form::label('official', '公式URL:') !!}
                     {!! Form::text('official', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('twitter', 'Twitter:') !!}                    
+                    {!! Form::text('twitter', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('youtube', 'Youtubeチャンネル:') !!}
                     {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
                     {!! Form::label('tiktok', 'TikTokチャンネル:') !!}

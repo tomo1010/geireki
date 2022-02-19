@@ -200,7 +200,10 @@ class EntertainersController extends Controller
         $entertainer->oldname = $request->oldname;
         $entertainer->brain = $request->brain;
         $entertainer->encounter = $request->encounter;        
+        $entertainer->named = $request->named;
+        $entertainer->memo = $request->memo;                
         $entertainer->official = $request->official;
+        $entertainer->twitter = $request->twitter;                
         $entertainer->youtube = $request->youtube;
         $entertainer->office_id = $request->office_id;        
         $entertainer->save();

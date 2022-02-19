@@ -124,6 +124,10 @@
             <th>コンビ名の由来</th>
             <td>{{ $entertainer->named }}</td>
         </tr> 
+        <tr>
+            <th>メモ</th>
+            <td>{{ $entertainer->memo }}</td>
+        </tr>         
         
         
         <tr>
@@ -162,6 +166,15 @@
             <td><a href="{{ $entertainer->official }}" target="new"><img src="../icon/web.png"></a></td>
             @endempty
         </tr>
+        <tr>
+            <th>Twitter</th>
+            @empty($entertainer->twitter)
+            <td></td>
+            @else
+            <td><a href="{{ $entertainer->twitter }}" target="new"><img src="../icon/twitter.png"></a></td>
+            @endempty
+        </tr>
+
         <tr>
             <th>Youtube</th>
             @empty($entertainer->youtube)

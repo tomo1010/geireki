@@ -33,10 +33,12 @@ class CreatePerfomersTables extends Migration
             $table->string('spouse')->nullable();
             $table->string('relatives')->nullable();
             $table->string('disciple')->nullable();            
+            $table->text('memo')->nullable();                        
             $table->string('official')->nullable();
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
             $table->string('facebook')->nullable();
+            $table->string('youtube')->nullable();                        
             $table->string('tiktok')->nullable();            
             $table->string('blog')->nullable();            
             

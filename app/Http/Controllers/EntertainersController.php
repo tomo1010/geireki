@@ -200,7 +200,10 @@ class EntertainersController extends Controller
         $entertainer->oldname = $request->oldname;
         $entertainer->brain = $request->brain;
         $entertainer->encounter = $request->encounter;        
+        $entertainer->named = $request->named;
+        $entertainer->memo = $request->memo;                
         $entertainer->official = $request->official;
+        $entertainer->twitter = $request->twitter;                
         $entertainer->youtube = $request->youtube;
         $entertainer->office_id = $request->office_id;        
         $entertainer->save();
@@ -410,7 +413,10 @@ class EntertainersController extends Controller
         $entertainer->oldname = $request->oldname;
         $entertainer->brain = $request->brain;        
         $entertainer->encounter = $request->encounter;                
+        $entertainer->named = $request->named;  
+        $entertainer->memo = $request->memo;          
         $entertainer->official = $request->official;
+        $entertainer->twitter = $request->twitter;  
         $entertainer->youtube = $request->youtube;
         $entertainer->tiktok = $request->tiktok;      
         $entertainer->office_id = $request->office_id;
@@ -418,7 +424,14 @@ class EntertainersController extends Controller
 
 //dd($request->perfomer_id);
 
-        $entertainer->perfomers()->sync($request->perfomer_id); //中間テーブルを更新した時        
+
+        
+
+        $entertainer->perfomers()->sync($request->perfomer_id); //中間テーブルを更新した時
+        
+        if(!empty($request->newPerfomer_id)){
+            $entertainer->perfomers()->attach($request->newPerfomer_id); //中間テーブルを更新した時
+        }
         
         $entertainer->save();
 

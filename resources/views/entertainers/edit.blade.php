@@ -29,8 +29,14 @@
                     {!! Form::text('brain', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('encounter', '出会い:') !!}
                     {!! Form::text('encounter', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::label('named', '名前の由来:') !!}
+                    {!! Form::text('named', null, ['class' => 'form-control']) !!}                                        
+                    {!! Form::label('memo', 'メモ:') !!}
+                    {!! Form::text('memo', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('official', '公式URL:') !!}
                     {!! Form::text('official', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('twitter', 'Twitter:') !!}
+                    {!! Form::text('twitter', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('youtube', 'Youtubeチャンネル:') !!}
                     {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
                     {!! Form::label('tiktok', 'TikTokチャンネル:') !!}
@@ -66,8 +72,8 @@
                             {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!} //個人名表示
                             {!! Form::text('perfomer_id[]', $value->id, ['class' => 'form-control']) !!}
                         @endforeach
-                            {!! Form::label('perfomer_id[]', '個人id:') !!}　//空テキストBOX
-                            {!! Form::text('perfomer_id[]', null, ['class' => 'form-control']) !!}     
+                            {!! Form::label('newPerfomer_id', '個人id:') !!}　//空テキストBOX
+                            {!! Form::text('newPerfomer_id', null, ['class' => 'form-control']) !!}     
                     @endif
                     
                     {!! Form::hidden('back_url', url()->previous()) !!}

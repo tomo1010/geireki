@@ -87,10 +87,16 @@ class PerfomersController extends Controller
         $perfomer->school = $request->school;        
         $perfomer->active = $request->active;
         $perfomer->activeend = $request->activeend;
+        $perfomer->spouse = $request->spouse;
+        $perfomer->relatives = $request->relatives;
+        $perfomer->disciple = $request->disciple;
+        $perfomer->memo = $request->memo;        
         $perfomer->official = $request->official;
         $perfomer->twitter = $request->twitter;
         $perfomer->instagram = $request->instagram;
         $perfomer->facebook = $request->facebook;
+        $perfomer->youtube = $request->youtube;
+        $perfomer->tiktok = $request->tiktok;        
         $perfomer->blog = $request->blog;        
 
         // $perfomer->entertainer_id = $request->entertainer_id;
@@ -236,11 +242,14 @@ class PerfomersController extends Controller
         $perfomer->spouse = $request->spouse;
         $perfomer->relatives = $request->relatives;
         $perfomer->disciple = $request->disciple;        
+        $perfomer->memo = $request->memo;                
         $perfomer->official = $request->official;
 
         $perfomer->twitter = $request->twitter;        
         $perfomer->instagram = $request->instagram;        
         $perfomer->facebook = $request->facebook;        
+        $perfomer->youtube = $request->youtube;        
+        $perfomer->tiktok = $request->tiktok;                
         $perfomer->blog = $request->blog;        
 
         // $perfomer->entertainer_id = $request->entertainer_id;        

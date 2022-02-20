@@ -103,7 +103,11 @@
         <tr>
             <th>弟子</th>
             <td>{{ $perfomer->disciple }}</td>
-        </tr>        
+        </tr> 
+        <tr>
+            <th>メモ</th>
+            <td>{{ $perfomer->memo }}</td>
+        </tr>                
         <tr>
             <th>事務所</th>
             <td>{!! link_to_route('lists.officeList', $office->office, [$perfomer->office_id]) !!}</td>
@@ -139,6 +143,15 @@
             <td><a href="{{ $perfomer->facebook }}" target="new"><img src="../icon/facebook.png" width="64px"></a></td>
             @endempty
         </tr>
+        <tr>
+            <th>Youtbe</th>
+            @empty($perfomer->youtube)
+            <td></td>
+            @else
+            <td><a href="{{ $perfomer->youtube }}" target="new"><img src="../icon/youtube.png" width="64px"></a></td>
+            @endempty
+        </tr>        
+        <tr>
         <tr>
             <th>TikTok</th>
             @empty($perfomer->tiktok)

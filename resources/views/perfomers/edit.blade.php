@@ -42,7 +42,9 @@
                     {!! Form::label('relatives', '親族:') !!}
                     {!! Form::text('relatives', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('disciple', '弟子:') !!}
-                    {!! Form::text('disciple', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::text('disciple', null, ['class' => 'form-control']) !!} 
+                    {!! Form::label('memo', 'メモ:') !!}
+                    {!! Form::text('memo', null, ['class' => 'form-control']) !!}                     
                     {!! Form::label('official', '公式URL:') !!}
                     {!! Form::text('official', null, ['class' => 'form-control']) !!}
                     {!! Form::label('twitter', 'Twitter:') !!}
@@ -51,6 +53,10 @@
                     {!! Form::text('instagram', null, ['class' => 'form-control']) !!}
                     {!! Form::label('facebook', 'Facebook:') !!}
                     {!! Form::text('facebook', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('youtube', 'Youtube:') !!}
+                    {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('tiktok', 'Tiktok:') !!}
+                    {!! Form::text('tiktok', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('blog', 'Blog:') !!}
                     {!! Form::text('blog', null, ['class' => 'form-control']) !!}                    
                     

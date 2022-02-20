@@ -72,8 +72,8 @@
                             {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!} //個人名表示
                             {!! Form::text('perfomer_id[]', $value->id, ['class' => 'form-control']) !!}
                         @endforeach
-                            {!! Form::label('perfomer_id[]', '個人id:') !!}　//空テキストBOX
-                            {!! Form::text('perfomer_id[]', null, ['class' => 'form-control']) !!}     
+                            {!! Form::label('newPerfomer_id', '個人id:') !!}　//空テキストBOX
+                            {!! Form::text('newPerfomer_id', null, ['class' => 'form-control']) !!}     
                     @endif
                     
                     {!! Form::hidden('back_url', url()->previous()) !!}

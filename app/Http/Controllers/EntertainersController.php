@@ -75,7 +75,7 @@ class EntertainersController extends Controller
 
 
 
-        //最新のYoutube動画一覧
+        //おすすめネタ動画　Youtube動画一覧
         $youtubes = Youtube::latest()->take(3)->get();
         $count = $youtubes->count();        
 
@@ -424,8 +424,6 @@ class EntertainersController extends Controller
 
 //dd($request->perfomer_id);
 
-
-        
 
         $entertainer->perfomers()->sync($request->perfomer_id); //中間テーブルを更新した時
         

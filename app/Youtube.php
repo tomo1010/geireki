@@ -12,13 +12,13 @@ class Youtube extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     
     //Entertainerモデルとの関係を定義
     public function entertainer()
     {
         return $this->belongsTo(Entertainer::class);
     }
-    
     
     protected $fillable = [
         'youtube', 'comment', 'entertainer_id',

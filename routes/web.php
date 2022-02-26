@@ -36,6 +36,17 @@ Route::get('lists/award/{year}', 'ListsController@awardList')->name('lists.award
 Route::get('lists/awardGp/{gp}', 'ListsController@awardGp')->name('lists.awardGp');
 
 
+//ランキング
+Route::get('ranking/index', 'RankingController@index')->name('ranking.index');
+Route::get('ranking/yearDiff', 'RankingController@yearDiff')->name('ranking.yearDiff');
+Route::get('ranking/favorite', 'RankingController@favorite')->name('ranking.favorite');
+Route::get('ranking/youtubeCount', 'RankingController@youtubeCount')->name('ranking.youtubeCount');
+Route::get('ranking/tall', 'RankingController@tall')->name('ranking.tall');
+Route::get('ranking/short', 'RankingController@short')->name('ranking.short');
+Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
+
+
+
 //個人データ
 Route::get('perfomers/all', 'PerfomersController@all')->name('perfomers.all');
 Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');

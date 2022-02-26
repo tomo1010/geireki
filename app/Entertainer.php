@@ -28,7 +28,6 @@ class Entertainer extends Model
     }
     
  
-    
     //このコンビに所属するメンバー（個人）
     public function perfomers()
     {

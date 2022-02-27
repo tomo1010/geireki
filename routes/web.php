@@ -15,6 +15,7 @@
 
 //芸人データ
 Route::get('/', 'EntertainersController@index');
+Route::get('entertainers/gacha', 'EntertainersController@gacha')->name('gacha');
 Route::get('entertainers/all', 'EntertainersController@all')->name('entertainers.all');
 Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertainers.show');
 Route::get('searchbox', 'EntertainersController@searchbox')->name('searchbox');

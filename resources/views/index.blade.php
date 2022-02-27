@@ -3,8 +3,15 @@
 @section('content')
 
 
+{{--<form action="gacha" method="get">
+  <button type="submit" class="btn"><i class="fas fa-paper-plane"></i></button>
+</form>--}}
 
+<form class="input-group col-md-5" action="{{ route('gacha')}}" method="GET"> 
 
+    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i></button>
+
+</form>
 
 
    <div class="container">

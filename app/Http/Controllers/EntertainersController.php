@@ -28,7 +28,7 @@ class EntertainersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
 
@@ -123,7 +123,7 @@ class EntertainersController extends Controller
         $m1year = Entertainer::with('office')->whereYear('active','=', $m1year)->where('activeend', '=', NULL)->where('numberofpeople', '=', '2')->get();
 
 
-//dd($birthday);
+
 
 
 
@@ -551,6 +551,45 @@ class EntertainersController extends Controller
     }
 
 
+
+
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function gacha(Request $request)
+    {
+           
+        $id = rand(0,1000);         
+        
+        //dd($id);
+           
+        // $gacha = $request->gacha;     
+        // if($gacha != 'null'){
+        //     $id = rand(0,1000);            
+        // }
+
+          $gacha_1 = Entertainer::where('id', '=', $id)->first();
+          $gacha_2 = Perfomer::where('id', '=', $id)->first();           
+        
+        //dd($gacha_1);
+        
+            // 一覧ビューで表示
+            return view('entertainers.gacha', [
+            'gacha_1' => $gacha_1,
+            'gacha_2' => $gacha_2,            
+            'now' => new \Carbon\Carbon(),
+        ]);
+            
+            
+
+
+    }
 
 
 

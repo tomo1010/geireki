@@ -565,17 +565,16 @@ class EntertainersController extends Controller
     public function gacha(Request $request)
     {
            
-        $id = rand(0,1000);         
-        
-        //dd($id);
-           
-        // $gacha = $request->gacha;     
-        // if($gacha != 'null'){
-        //     $id = rand(0,1000);            
-        // }
+        $entertainer_id = Entertainer::count();
+        $perfomer_id = Perfomer::count();    
 
-          $gacha_1 = Entertainer::where('id', '=', $id)->first();
-          $gacha_2 = Perfomer::where('id', '=', $id)->first();           
+//dd($entertainer_id);
+        
+        $entertainer_id = rand(0,$entertainer_id);         
+        $perfomer_id = rand(0,$perfomer_id);                 
+
+        $gacha_1 = Entertainer::where('id', '=', $entertainer_id)->first();
+        $gacha_2 = Perfomer::where('id', '=', $perfomer_id)->first();           
         
         //dd($gacha_1);
         

@@ -564,24 +564,217 @@ class EntertainersController extends Controller
      */
     public function gacha(Request $request)
     {
-           
-        $entertainer_id = Entertainer::count();
-        $perfomer_id = Perfomer::count();    
 
-//dd($entertainer_id);
-        
-        $entertainer_id = rand(0,$entertainer_id);         
-        $perfomer_id = rand(0,$perfomer_id);                 
 
-        $gacha_1 = Entertainer::where('id', '=', $entertainer_id)->first();
-        $gacha_2 = Perfomer::where('id', '=', $perfomer_id)->first();           
+        /*本日のガチャ
+        */
+
+        // //ランダムのidを取得
+        // $entertainer_id = rand(0,$entertainer_id);         
+        // $perfomer_id = rand(0,$perfomer_id);
+    
+        $entertainer_id = Entertainer::inRandomOrder()->first();
+        $perfomer_id = Perfomer::inRandomOrder()->first();    
+
+        $gacha_1 = $entertainer_id;
+        $gacha_2 = $perfomer_id;           
         
+        
+        
+        /*ひな壇ガチャ
+        */
+    
+    
+        $query = Perfomer::with(['entertainer', 'office'])->where('active', '!=' ,NULL)->where('activeend', NULL)->orderByRaw('active desc, name desc');
+        //dd($query);
+        
+
+        //芸歴
+        $start = $request->input('start'); 
+            if($start == null){
+                $start = 1;
+            }
+            
+        $end = $request->input('end');                
+            if($end == null){
+                $end = 100;
+            }
+
+        
+        
+        //年代
+        $age = $request->input('age'); 
+        
+
+            if($age == null){
+                $ageStart = 1;
+                $ageEnd = 99;
+            }    
+            elseif($age == '10b'){
+                $ageStart = 1;
+                $ageEnd = 19;                
+            }    
+            elseif($age == '20a'){
+                $ageStart = 20;
+                $ageEnd = 24;
+            }
+            elseif($age == '20b'){
+                $ageStart = 25;
+                $ageEnd = 29;
+            }
+            elseif($age == '30a'){
+                $ageStart = 30;
+                $ageEnd = 34;
+            }
+            elseif($age == '30b'){
+                $ageStart = 35;
+                $ageEnd = 39;
+            }
+            elseif($age == '40a'){
+                $ageStart = 40;
+                $ageEnd = 44;
+            }
+            elseif($age == '40b'){
+                $ageStart = 45;
+                $ageEnd = 49;
+            }            
+            elseif($age == '50a'){
+                $ageStart = 50;
+                $ageEnd = 54;
+            }
+            elseif($age == '50b'){
+                $ageStart = 55;
+                $ageEnd = 59;
+            }
+            elseif($age == '60a'){
+                $ageStart = 60;
+                $ageEnd = 64;
+            }            
+            elseif($age == '60b'){
+                $ageStart = 65;
+                $ageEnd = 69;
+            }
+            elseif($age == '70a'){
+                $ageStart = 70;
+                $ageEnd = 74;
+            }
+            elseif($age == '70b'){
+                $ageStart = 75;
+                $ageEnd = 79;
+            }            
+            elseif($age == '80a'){
+                $ageStart = 80;
+                $ageEnd = 84;
+            }
+            elseif($age == '80b'){
+                $ageStart = 85;
+                $ageEnd = 89;
+            }
+            elseif($age == '90a'){
+                $ageStart = 90;
+                $ageEnd = 94;
+            }
+            elseif($age == '90b'){
+                $ageStart = 95;
+                $ageEnd = 99;
+            }
+        //dd($ageStart,$ageEnd);              
+        
+        
+        /*日付フォーマットへ変換
+        */
+        
+        //芸歴
+        $start = Carbon::now()->subYear($start)->format('Y-m-d'); //"2011-08-14"
+        $end = Carbon::now()->subYear($end)->format('Y-m-d'); //"2001-08-14"
+        
+        //年代
+        $from = Carbon::now()->subYear($ageStart)->format('Y-m-d');
+        $to = Carbon::now()->subYear($ageEnd)->format('Y-m-d');        
+        
+        
+        
+        // //ピン、コンビ、トリオの条件指定        
+        // if(!empty($numberofpeople)) {
+            
+        //         $query->whereHas('entertainer', function ($que) use ($numberofpeople) {
+        //             if (count($numberofpeople) == 1) {
+        //                 $que->where('numberofpeople', '=', $numberofpeople[0]);
+        //             }
+        //             else{
+        //                 $que->whereIn('numberofpeople', $numberofpeople);
+        //             }
+        //         });
+        // }        
+        
+        
+        
+        /*検索クエリー作成
+        */
+        
+        //芸歴
+        if(!empty($start) && !empty($end) && $start != $end) { //startとendが空じゃない場合は、startからendまで
+            $query->whereBetween('active', [$end,$start]);
+        }    
+        elseif(!empty($start) && !empty($end) && $start == $end){ //startとendが空じゃななく、startとendが同じ場合
+            $query->whereYear('active', '=' ,$start);
+        }
+        elseif(!empty($start) && empty($end)){ //startのみ選択でendが空の場合
+            $query->where('active', '<=' ,$start);
+        }
+        elseif(empty($start) && !empty($end)){ //startが空でendのみ選択の場合
+            $query->where('active', '>=' ,$end);
+        }
+   
+   
+   //dd($start,$end);     
+   
+   
+
+        //年齢
+        if(!empty($ageStart) && !empty($ageEnd) && $ageStart != $ageEnd) {
+            $query->whereBetween('birthday', [$to,$from]);
+        }
+        elseif(!empty($ageStart) && !empty($ageEnd) && $ageStart == $ageEnd){
+            $ageStart = $request->input('ageStart')+1; 
+            $ageEnd = $request->input('ageEnd')+1;                
+            $from = Carbon::now()->subYear($ageStart)->format('Y-m-d');
+            $to = Carbon::now()->subYear($ageEnd)->modify('+1 year')->format('Y-m-d');
+            $query->whereBetween('birthday', [$from,$to]);
+        }
+        elseif(!empty($ageStart) && empty($ageEnd)){
+            $query->where('birthday', '<=' ,$from);
+        }
+        elseif(empty($ageStart) && !empty($ageEnd)){
+            $query->where('birthday', '>=' ,$to);
+        }
+
+
+        // //ピン、コンビ、トリオ    
+        // if(!empty($numberofpeople)) {
+            
+        //         $query->whereHas('entertainer', function ($que) use ($numberofpeople) {
+        //             if (count($numberofpeople) == 1) {
+        //                 $que->where('numberofpeople', '=', $numberofpeople[0]);
+        //             }
+        //             else{
+        //                 $que->whereIn('numberofpeople', $numberofpeople);
+        //             }
+        //         });
+        // }        
+
+        
+        $perfomers = $query->get();
+        $perfomers = $perfomers->random(1);        
+        
+        //dd($perfomers);
         //dd($gacha_1);
-        
+
             // 一覧ビューで表示
             return view('entertainers.gacha', [
             'gacha_1' => $gacha_1,
-            'gacha_2' => $gacha_2,            
+            'gacha_2' => $gacha_2,
+            'perfomers' => $perfomers,
             'now' => new \Carbon\Carbon(),
         ]);
             

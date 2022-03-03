@@ -573,11 +573,8 @@ class EntertainersController extends Controller
         // $entertainer_id = rand(0,$entertainer_id);         
         // $perfomer_id = rand(0,$perfomer_id);
     
-        $entertainer_id = Entertainer::inRandomOrder()->first();
         $perfomer_id = Perfomer::inRandomOrder()->first();    
-
-        $gacha_1 = $entertainer_id;
-        $gacha_2 = $perfomer_id;           
+        $gacha_1 = $perfomer_id;           
         
         
         
@@ -750,31 +747,24 @@ class EntertainersController extends Controller
         }
 
 
-        // //ピン、コンビ、トリオ    
-        // if(!empty($numberofpeople)) {
-            
-        //         $query->whereHas('entertainer', function ($que) use ($numberofpeople) {
-        //             if (count($numberofpeople) == 1) {
-        //                 $que->where('numberofpeople', '=', $numberofpeople[0]);
-        //             }
-        //             else{
-        //                 $que->whereIn('numberofpeople', $numberofpeople);
-        //             }
-        //         });
-        // }        
+
+        //コンビ    
+            $query->whereHas('entertainer', function ($que) {
+                $que->where('numberofpeople', '=', 2);
+            });
 
         
         $perfomers = $query->get();
-        $perfomers = $perfomers->random(1);        
+        $perfomers = $perfomers->random(1)->first();        
         
         //dd($perfomers);
         //dd($gacha_1);
 
             // 一覧ビューで表示
             return view('entertainers.gacha', [
-            'gacha_1' => $gacha_1,
-            'gacha_2' => $gacha_2,
-            'perfomers' => $perfomers,
+            'gacha' => $gacha_1,
+//            'gacha_2' => $gacha_2,
+            'hinaGacha' => $perfomers,
             'now' => new \Carbon\Carbon(),
         ]);
             

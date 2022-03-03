@@ -3,9 +3,62 @@
 @section('content')
 
 
-{!! Form::open(['action' => 'EntertainersController@gacha','method' => 'get']) !!}
+    <h2 class="mt-5 pb-2" >本日のガチャ芸人</h2>    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>名前</th>
+                    <th>年齢</th>                    
+                    <th>芸歴</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    @empty($gacha)
+                        <td>-</td>
+                    @else
+                        <td nowrap>
+                            {!! link_to_route('perfomers.show', $gacha->name, ['id' => $gacha->id]) !!}
+        
+                            {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
+                            @if(!empty($gacha->entertainer[0]->name))
+                            @if (strcmp($gacha->entertainer[0]->name, $gacha->name) == 0 )
+                            @else
+                                </br><font size="small">{!! link_to_route('entertainers.show', $gacha->entertainer[0]->name, $gacha->entertainer[0]->id) !!}</font>
+                            @endif
+                            @endif
+                        </td>
+                    @endempty
+                    
+                    {{--年齢リンク--}}
+                    @empty($gacha)
+                        <td>-</td>
+                    @else
+                        <td>
+                        {!! link_to_route('lists.age2List', $now->diffInYears($gacha->birthday), ['yearsOld' => $now->diffInYears($gacha->birthday)]) !!}歳
+                        </td>
+                    @endempty
+                    
+                    {{--芸歴リンク--}}
+                    @empty($gacha)
+                        <td>-</td>
+                    @else
+                        @empty($gacha->active)
+                            <td>-</td>
+                        @else
+                            <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($gacha->active), ['year' => $now->diffInYears($gacha->active)]) !!}年</td>
+                        @endempty
+                    @endempty
+                </tr>
+    
+            </tbody>
+        </table>
+        
+{!! Form::open(['action' => 'EntertainersController@index','method' => 'get']) !!}
         {!! Form::submit('ガチャ',['class' => 'btn btn-success btn-block']) !!}
 {!! Form::close() !!}
+
 
 
    <div class="container">

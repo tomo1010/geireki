@@ -124,6 +124,15 @@ class EntertainersController extends Controller
 
 
 
+        /*本日のガチャ
+        */
+    
+        $perfomer_id = Perfomer::inRandomOrder()->first();    
+        $gacha = $perfomer_id;           
+        
+        
+
+
 
 
 
@@ -137,7 +146,7 @@ class EntertainersController extends Controller
             'birthdayTomorrow' => $birthdayTomorrow,
             'youtubes' => $youtubes,
             'iframe' => $iframe,   
-
+            'gacha' => $gacha,
             
         ]);
         
@@ -568,15 +577,30 @@ class EntertainersController extends Controller
 
         /*本日のガチャ
         */
-
-        // //ランダムのidを取得
-        // $entertainer_id = rand(0,$entertainer_id);         
-        // $perfomer_id = rand(0,$perfomer_id);
     
         $perfomer_id = Perfomer::inRandomOrder()->first();    
-        $gacha_1 = $perfomer_id;           
+        $gacha = $perfomer_id;           
         
         
+        // 一覧ビューで表示
+        return view('index', [
+        'gacha' => $gacha,
+        'now' => new \Carbon\Carbon(),
+        ]);
+            
+    }
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function hinaGacha(Request $request)
+    {
+
         
         /*ひな壇ガチャ
         */
@@ -902,21 +926,28 @@ class EntertainersController extends Controller
         
         
         $perfomers = $query->get();
-        $perfomers = $perfomers->random(1)->first();        
-        
-        
+        //dd($perfomers);
+        if($perfomers->isEmpty()){
+            $perfomers = null;
+        }else{
+            $perfomers = $perfomers->random(1)->first();                    
+        }
+
         $perfomers_2 = $query_2->get();
-        $perfomers_2 = $perfomers_2->random(1)->first();    
+        if($perfomers_2->isEmpty()){
+            $perfomers_2= null;
+        }else{
+            $perfomers_2 = $perfomers_2->random(1)->first();    
+        }
+
         
 
             // 一覧ビューで表示
             return view('entertainers.gacha', [
-            'gacha' => $gacha_1,
             'hinaGacha' => $perfomers,        
             'hinaGacha_2' => $perfomers_2,
             'now' => new \Carbon\Carbon(),
         ]);
-            
             
 
 

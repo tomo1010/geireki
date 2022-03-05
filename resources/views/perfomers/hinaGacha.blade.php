@@ -3,61 +3,10 @@
 @section('content')
 
 
-    <h2 class="mt-5 pb-2" >本日のガチャ芸人</h2>    
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>名前</th>
-                    <th>年齢</th>                    
-                    <th>芸歴</th>
-                    <th>SNS</th>                                
-                </tr>
-            </thead>
-            
-            <tbody>
-                <tr>
-                    <td nowrap>
-                        {!! link_to_route('perfomers.show', $gacha->name, ['id' => $gacha->id]) !!}
-    
-                        {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
-                        @if(!empty($gacha->entertainer[0]->name))
-                        @if (strcmp($gacha->entertainer[0]->name, $gacha->name) == 0 )
-                        @else
-                            </br><font size="small">{!! link_to_route('entertainers.show', $gacha->entertainer[0]->name, $gacha->entertainer[0]->id) !!}</font>
-                        @endif
-                        @endif
-                    </td>
-                    
-                    {{--年齢リンク--}}
-                    <td>
-                    {!! link_to_route('lists.age2List', $now->diffInYears($gacha->birthday), ['yearsOld' => $now->diffInYears($gacha->birthday)]) !!}歳
-                    </td>
-    
-                    {{--芸歴リンク--}}
-                    @empty($gacha->active)
-                        <td>-</td>
-                    @else
-                        <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($gacha->active), ['year' => $now->diffInYears($gacha->active)]) !!}年</td>
-                    @endempty
-    
-                    {{--SNSリンク--}}
-                    <td>
-                    <a href="https://twitter.com/intent/tweet?hashtags={{$gacha->name}},誕生日,誕生日おめでとう" class="twitter-hashtags-btn" target="_blank">
-                      <img src="../icon/twitter.png" width="30" alt="Twitterでお祝いメッセージを">
-                    </a>
-                    </td>
-                </tr>
-    
-            </tbody>
-        </table>
-
-
-
-
     <h2 class="mt-5 pb-2" >ひな壇芸人ガチャ</h2>    
     
     
-    {!! Form::open(['action' => 'EntertainersController@gacha','method' => 'get']) !!}
+
 
 一人目
 {{--芸歴--}}
@@ -138,8 +87,9 @@
         </div>
     </div>        
 
-        {!! Form::submit('ガチャ',['class' => 'btn btn-primary btn-block']) !!}
 
+{!! Form::open(['action' => 'EntertainersController@hinaGacha','method' => 'get']) !!}
+        {!! Form::submit('ガチャ',['class' => 'btn btn-success btn-block']) !!}
 {!! Form::close() !!}
     
     

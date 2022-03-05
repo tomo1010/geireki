@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <h2 class="mt-5 pb-2" >本日のガチャ芸人</h2>    
+    <h2 class="mt-5 pb-2" >本日の芸人ガチャ</h2>    
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -23,10 +23,10 @@
         
                             {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
                             @if(!empty($gacha->entertainer[0]->name))
-                            @if (strcmp($gacha->entertainer[0]->name, $gacha->name) == 0 )
-                            @else
-                                </br><font size="small">{!! link_to_route('entertainers.show', $gacha->entertainer[0]->name, $gacha->entertainer[0]->id) !!}</font>
-                            @endif
+                                @if (strcmp($gacha->entertainer[0]->name, $gacha->name) == 0 )
+                                @else
+                                    </br><font size="small">{!! link_to_route('entertainers.show', $gacha->entertainer[0]->name, $gacha->entertainer[0]->id) !!}</font>
+                                @endif
                             @endif
                         </td>
                     @endempty
@@ -35,9 +35,11 @@
                     @empty($gacha)
                         <td>-</td>
                     @else
-                        <td>
-                        {!! link_to_route('lists.age2List', $now->diffInYears($gacha->birthday), ['yearsOld' => $now->diffInYears($gacha->birthday)]) !!}歳
-                        </td>
+                        @empty($gacha->birthday)
+                        <td>-</td>
+                        @else
+                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($gacha->birthday), ['yearsOld' => $now->diffInYears($gacha->birthday)]) !!}歳</td>
+                        @endempty
                     @endempty
                     
                     {{--芸歴リンク--}}
@@ -58,6 +60,8 @@
 {!! Form::open(['action' => 'EntertainersController@index','method' => 'get']) !!}
         {!! Form::submit('ガチャ',['class' => 'btn btn-success btn-block']) !!}
 {!! Form::close() !!}
+
+{{--<a href="{{ route('hinaGacha') }}">その他のガチャ</a>--}}
 
 
 

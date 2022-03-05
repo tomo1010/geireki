@@ -13,12 +13,24 @@
 
 
 
-//芸人データ
+
+//トップページ
 Route::get('/', 'EntertainersController@index');
-Route::get('entertainers/gacha', 'EntertainersController@gacha')->name('gacha');
+Route::get('searchbox', 'EntertainersController@searchbox')->name('searchbox');
+
+
+//芸人データ
 Route::get('entertainers/all', 'EntertainersController@all')->name('entertainers.all');
 Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertainers.show');
-Route::get('searchbox', 'EntertainersController@searchbox')->name('searchbox');
+
+
+//個人データ
+Route::get('perfomers/all', 'PerfomersController@all')->name('perfomers.all');
+Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');
+
+
+//ガチャ
+Route::get('perfomers/hinaGacha', 'PerfomersController@hinaGacha')->name('hinaGacha');
 
 
 //一覧表示
@@ -47,11 +59,6 @@ Route::get('ranking/short', 'RankingController@short')->name('ranking.short');
 Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
 
 
-
-//個人データ
-Route::get('perfomers/all', 'PerfomersController@all')->name('perfomers.all');
-Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');
-//Route::post('age', 'PerfomersController@age')->name('perfomers.age');
 
 
 //検索

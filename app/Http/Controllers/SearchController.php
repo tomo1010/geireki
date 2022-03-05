@@ -27,11 +27,13 @@ class SearchController extends Controller
             $query = Perfomer::with(['entertainer', 'office'])->where('activeend', NULL)->orderByRaw('active desc, name desc');
         }
 
+//dd($query);
 
         $prefs = config('pref');
 
 
-        // 検索条件の値を取得
+        /* 検索条件の値を取得
+        */
         $s_name = $request->input('s_name');
         $s_bloodtype = $request->input('s_bloodtype');
         $s_birthplace = $request->input('s_birthplace');
@@ -39,12 +41,15 @@ class SearchController extends Controller
         //地方
         $local = $request->input('local');
 
+        //芸歴
         $s_start = $request->input('s_start'); 
         $s_end = $request->input('s_end');         
 
+        //年齢
         $s_ageStart = $request->input('s_ageStart'); 
         $s_ageEnd = $request->input('s_ageEnd');
-        
+
+        //年代        
         $s_age = $request->input('s_age'); 
             if($s_age == '10b'){
                 $s_ageStart = 1;
@@ -144,7 +149,10 @@ class SearchController extends Controller
         //dd($from,$to);
 
 
-        //芸歴検索
+
+
+        /*検索クエリー作成
+        */
         if(!empty($s_start) && !empty($s_end) && $s_start != $s_end) {
             $query->whereBetween('active', [$end,$start]);
         }    

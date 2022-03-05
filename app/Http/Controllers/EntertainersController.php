@@ -28,7 +28,7 @@ class EntertainersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
 
@@ -123,8 +123,10 @@ class EntertainersController extends Controller
         $m1year = Entertainer::with('office')->whereYear('active','=', $m1year)->where('activeend', '=', NULL)->where('numberofpeople', '=', '2')->get();
 
 
-//dd($birthday);
 
+        //本日のガチャ
+
+        $gacha = Perfomer::inRandomOrder()->first();    
 
 
 
@@ -137,7 +139,7 @@ class EntertainersController extends Controller
             'birthdayTomorrow' => $birthdayTomorrow,
             'youtubes' => $youtubes,
             'iframe' => $iframe,   
-
+            'gacha' => $gacha,
             
         ]);
         
@@ -549,7 +551,6 @@ class EntertainersController extends Controller
         ]);
         
     }
-
 
 
 

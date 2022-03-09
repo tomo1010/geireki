@@ -91,6 +91,7 @@ class PerfomersController extends Controller
         $perfomer->relatives = $request->relatives;
         $perfomer->disciple = $request->disciple;
         $perfomer->memo = $request->memo;        
+        $perfomer->gag = $request->gag;                
         $perfomer->official = $request->official;
         $perfomer->twitter = $request->twitter;
         $perfomer->instagram = $request->instagram;
@@ -242,7 +243,8 @@ class PerfomersController extends Controller
         $perfomer->spouse = $request->spouse;
         $perfomer->relatives = $request->relatives;
         $perfomer->disciple = $request->disciple;        
-        $perfomer->memo = $request->memo;                
+        $perfomer->memo = $request->memo;
+        $perfomer->gag = $request->gag;        
         $perfomer->official = $request->official;
 
         $perfomer->twitter = $request->twitter;        

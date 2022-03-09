@@ -231,14 +231,15 @@ class CsvController extends Controller
                 'relatives' => $row[17] == '' ? NULL : $row[17],    
                 'disciple' => $row[18] == '' ? NULL : $row[18],                
                 'memo' => $row[19] == '' ? NULL : $row[19],     
+                'gag' => $row[20] == '' ? NULL : $row[20],     
                 
-                'official' => $row[20] == '' ? NULL : $row[20],
-                'twitter' => $row[21] == '' ? NULL : $row[21],
-                'instagram' => $row[22] == '' ? NULL : $row[22],
-                'facebook' => $row[23] == '' ? NULL : $row[23],
-                'youtube' => $row[24] == '' ? NULL : $row[24],                                
-                'tiktok' => $row[25] == '' ? NULL : $row[25],                
-                'blog' => $row[26] == '' ? NULL : $row[26],                
+                'official' => $row[21] == '' ? NULL : $row[21],
+                'twitter' => $row[22] == '' ? NULL : $row[22],
+                'instagram' => $row[23] == '' ? NULL : $row[23],
+                'facebook' => $row[24] == '' ? NULL : $row[24],
+                'youtube' => $row[25] == '' ? NULL : $row[25],                                
+                'tiktok' => $row[26] == '' ? NULL : $row[26],                
+                'blog' => $row[27] == '' ? NULL : $row[27],                
 
                 ]);
             $count++;
@@ -665,6 +666,7 @@ class CsvController extends Controller
                     $row->relatives,
                     $row->disciple,
                     $row->memo,
+                    $row->gag,                    
                     $row->official,
                     $row->twitter,                                                            
                     $row->instagram,

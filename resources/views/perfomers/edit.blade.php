@@ -45,6 +45,8 @@
                     {!! Form::text('disciple', null, ['class' => 'form-control']) !!} 
                     {!! Form::label('memo', 'メモ:') !!}
                     {!! Form::text('memo', null, ['class' => 'form-control']) !!}                     
+                    {!! Form::label('gag', 'ギャグ:') !!}
+                    {!! Form::text('gag', null, ['class' => 'form-control']) !!}                                         
                     {!! Form::label('official', '公式URL:') !!}
                     {!! Form::text('official', null, ['class' => 'form-control']) !!}
                     {!! Form::label('twitter', 'Twitter:') !!}

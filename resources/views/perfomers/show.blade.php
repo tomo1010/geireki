@@ -109,6 +109,10 @@
             <td>{{ $perfomer->memo }}</td>
         </tr>                
         <tr>
+            <th>ギャグ</th>
+            <td>{{ $perfomer->gag }}</td>
+        </tr>                        
+        <tr>
             <th>事務所</th>
             <td>{!! link_to_route('lists.officeList', $office->office, [$perfomer->office_id]) !!}</td>
         </tr>

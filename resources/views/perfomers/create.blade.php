@@ -28,8 +28,8 @@
                     {!! Form::text('height', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('dialect', '方言:') !!}
                     {!! Form::text('dialect', null, ['class' => 'form-control']) !!}                   
-                    {!! Form::label('education', '学歴:') !!}
-                    {!! Form::text('education', null, ['class' => 'form-control']) !!}                   
+                    {!! Form::label('educational', '学歴:') !!}
+                    {!! Form::text('educational', null, ['class' => 'form-control']) !!}                   
                     {!! Form::label('master', '師匠:') !!}
                     {!! Form::text('master', null, ['class' => 'form-control']) !!}
                     {!! Form::label('school', '出身:') !!}
@@ -38,15 +38,30 @@
                     {!! Form::text('active', null, ['class' => 'form-control']) !!}
                     {!! Form::label('activeend', '活動終了時期:') !!}
                     {!! Form::text('activeend', null, ['class' => 'form-control']) !!}
+
+                    {!! Form::label('spouse', '配偶者:') !!}
+                    {!! Form::text('spouse', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('relatives', '親族:') !!}
+                    {!! Form::text('relatives', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('disciple', '弟子:') !!}
+                    {!! Form::text('disciple', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('memo', 'メモ:') !!}
+                    {!! Form::text('memo', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('gag', 'ギャグ:') !!}
+                    {!! Form::text('gag', null, ['class' => 'form-control']) !!}
+                    
                     {!! Form::label('official', '公式URL:') !!}
                     {!! Form::text('official', null, ['class' => 'form-control']) !!}
                     {!! Form::label('twitter', 'Twitter:') !!}
                     {!! Form::text('twitter', null, ['class' => 'form-control']) !!}                    
                     {!! Form::label('instagram', 'Instagram:') !!}
                     {!! Form::text('instagram', null, ['class' => 'form-control']) !!}                  
-                
                     {!! Form::label('facebook', 'Facebook:') !!}
-                    {!! Form::text('facebook', null, ['class' => 'form-control']) !!}                    
+                    {!! Form::text('facebook', null, ['class' => 'form-control']) !!}                   
+                    {!! Form::label('youtube', 'Youtube:') !!}
+                    {!! Form::text('youtube', null, ['class' => 'form-control']) !!}        
+                    {!! Form::label('tiktok', 'Tiktok:') !!}
+                    {!! Form::text('tiktok', null, ['class' => 'form-control']) !!}                                      
                     {!! Form::label('blog', 'Blog:') !!}
                     {!! Form::text('blog', null, ['class' => 'form-control']) !!}                    
 

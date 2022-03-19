@@ -63,6 +63,7 @@
 
 {{--<a href="{{ route('hinaGacha') }}">その他のガチャ</a>--}}
 
+{{--{{$gag->gag}}--}}
 
 
    <div class="container">
@@ -126,9 +127,11 @@
             @foreach ($birthday as $value)
                     #{{$value->name}}
                     @if(!empty($value->entertainer[0]->name))
-                        #{{$value->entertainer[0]->name}}
+                    @if (strcmp($value->entertainer[0]->name, $value->name) == 0 )
                     @else
+                        #{{$value->entertainer[0]->name}}
                     @endif
+                    @endif                    
             @endforeach
         #芸歴 #誕生日 #誕生日おめでとう https://www.geireki.net/
     @endcan

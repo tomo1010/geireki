@@ -125,8 +125,25 @@ class EntertainersController extends Controller
 
 
         //本日のガチャ
+       //dd($request);
+        
+        if(empty($request->files)){
+            $gacha = null;
+        }else{
+            $gacha = Perfomer::inRandomOrder()->first();    
+        }
 
-        $gacha = Perfomer::inRandomOrder()->first();    
+
+
+        //本日のギャグガチャ
+       //dd($request);
+        
+        if(empty($request->files)){
+            $gag = null;
+        }else{
+            $gag = Perfomer::inRandomOrder()->whereNotNull('gag')->first();    
+        }
+
 
 
 
@@ -140,6 +157,7 @@ class EntertainersController extends Controller
             'youtubes' => $youtubes,
             'iframe' => $iframe,   
             'gacha' => $gacha,
+            'gag' => $gag,            
             
         ]);
         

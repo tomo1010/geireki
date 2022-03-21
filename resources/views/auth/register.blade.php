@@ -33,6 +33,19 @@
                     {!! Form::label('birthday', 'Birthday') !!}
                     {!! Form::date('birthday', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
                 </div>
+                
+                <div class="form-group">
+                    {!! Form::label('birthplace', 'Birthplace') !!}
+                        <select name="birthplace" class="form-control">
+                        <option value="" selected="selected">選択</option>
+                          @foreach(config('pref') as $index=>$name)
+                            <option value="{{$name}}">{{$name}}</option>
+                          @endforeach
+                        </select>
+                </div>       
+                
+                
+                
 
 
                 {!! Form::submit('サインアップ', ['class' => 'btn btn-primary btn-block']) !!}

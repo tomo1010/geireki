@@ -42,7 +42,7 @@
                             <option value="{{$name}}">{{$name}}</option>
                           @endforeach
                         </select>
-                </div>       
+                </div>  
                 
                 
                 

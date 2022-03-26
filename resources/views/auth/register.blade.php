@@ -30,12 +30,12 @@
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('birthday', 'Birthday') !!}
+                    {!! Form::label('birthday', '誕生日') !!}
                     {!! Form::date('birthday', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
                 </div>
                 
                 <div class="form-group">
-                    {!! Form::label('birthplace', 'Birthplace') !!}
+                    {!! Form::label('birthplace', '出身地') !!}
                         <select name="birthplace" class="form-control">
                         <option value="" selected="selected">選択</option>
                           @foreach(config('pref') as $index=>$name)

@@ -89,10 +89,10 @@
 
                                     {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
                                     @if(!empty($value->entertainer[0]->name))
-                                    @if (strcmp($value->entertainer[0]->name, $value->name) == 0 )
-                                    @else
-                                        </br><font size="small">{!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}</font>
-                                    @endif
+                                        @if (strcmp($value->entertainer[0]->name, $value->name) == 0 )
+                                        @else
+                                            </br><font size="small">{!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}</font>
+                                        @endif
                                     @endif
                                 </td>
                                 

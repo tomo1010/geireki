@@ -36,7 +36,13 @@
                 @foreach ($perfomer->entertainer as $value)
                 <tr>
                     <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
-                    <td nowrap>{{$now->diffInYears($value->active)}}年</td>
+
+                    @empty($value->active)
+                    <td>-</td>
+                    @else
+                    <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                    @endempty
+
                 </tr>
                 @endforeach
             </tbody>
@@ -50,7 +56,7 @@
         </tr>
         <tr>
             <th>誕生日</th>
-            <td>{{!empty($perfomer->birthday) ? $perfomer->birthday->format('Y年m月d日') : '-' }}</td>
+            <td>{{!empty($perfomer->birthday) ? $perfomer->birthday->format('Y年m月d日') : '-' }}　{{ link_to_route('lists.age2List', $now->diffInYears($perfomer->birthday), ['yearsOld' => $now->diffInYears($perfomer->birthday)]) }}歳</td>
         </tr>
         <tr>
             <th>没年月日</th>
@@ -61,7 +67,7 @@
             <td>{{ $perfomer->birthplace }}</td>
         </tr>
         <tr>
-            <th>血液型</th>
+            <th>血液型</th歳
             <td>{{ $perfomer->bloodtype }}</td>
         </tr>        
         <tr>

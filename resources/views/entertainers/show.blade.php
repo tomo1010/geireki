@@ -65,11 +65,13 @@
                         @foreach ($entertainer->perfomers as $value)
                         <tr>
                             <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+
                             @empty($value->birthday)
                             <td>-</td>
                             @else
                             <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
                             @endempty
+
                             @empty($value->active)
                             <td>-</td>
                             @else
@@ -121,7 +123,7 @@
             <td>{{ $entertainer->encounter }}</td>
         </tr>        
         <tr>
-            <th>コンビ名の由来</th>
+            <th>名前の由来</th>
             <td>{{ $entertainer->named }}</td>
         </tr> 
         <tr>

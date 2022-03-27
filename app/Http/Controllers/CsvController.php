@@ -71,7 +71,7 @@ class CsvController extends Controller
         // 登録処理
         $count = 0;
         foreach($dataList as $row){
-            Entertainer::insert([
+            Entertainer::create([
                 'id' => $row[0], 
                 'office_id' => $row[1] == '' ? NULL : $row[1],
                 'name' => $row[2], 

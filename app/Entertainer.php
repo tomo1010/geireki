@@ -17,12 +17,12 @@ class Entertainer extends Model
     
     
     //dates（formatメソッドを使用できるようにする）
-    // protected $dates = [
-    //     'created_at',
-    //     'updated_at',
-    //     'active', //　追加する
-    //     'activeend' //　追加する
-    // ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'active', //　追加する
+        'activeend' //　追加する
+    ];
     
 
     

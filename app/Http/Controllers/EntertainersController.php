@@ -127,7 +127,8 @@ class EntertainersController extends Controller
         //本日のガチャ
        //dd($request);
         
-        if(empty($request->files)){
+        //if(empty($request->files)){
+        if(empty($request)){            
             $gacha = null;
         }else{
             $gacha = Perfomer::inRandomOrder()->first();    

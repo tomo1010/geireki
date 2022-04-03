@@ -70,27 +70,39 @@ class CsvController extends Controller
  
         // 登録処理
         $count = 0;
+        
         foreach($dataList as $row){
+            // dd(count($dataList),$row);
             Entertainer::create([
                 'id' => $row[0], 
-                'office_id' => $row[1] == '' ? NULL : $row[1],
+                //'office_id' => $row[1] == '' ? NULL : $row[1],
+                'office_id' => $row[1],                
                 'name' => $row[2], 
                 'numberofpeople' => $row[3],
                 'gender' => $row[4],
                 'alias' => $row[5],
                 'active' => $row[6] == '' ? NULL : $row[6],
+                // 'active' => $row[6],                
                 'activeend' => $row[7] == '' ? NULL : $row[7],
+                // 'activeend' => $row[7],                
                 'master' => $row[8],
                 'oldname' => $row[9],
                 'brain' => $row[10],
                 'encounter' => $row[11],                
                 'named' => $row[12] == '' ? NULL : $row[12],                                
+                // 'named' => $row[12],                                                
                 'memo' => $row[13] == '' ? NULL : $row[13],                                                
+                // 'memo' => $row[13],                                                                
                 'official' => $row[14] == '' ? NULL : $row[14],
+                // 'official' => $row[14],                
                 'twitter' => $row[15] == '' ? NULL : $row[15],
+                // 'twitter' => $row[15],                
                 'youtube' => $row[16] == '' ? NULL : $row[16],
-                'tiktok' => $row[17] == '' ? NULL : $row[17],                
-                ]);
+                // 'youtube' => $row[16],                
+                'tiktok' => $row[17] == '' ? NULL : $row[17],
+                // 'tiktok' => $row[17],
+                // 'tiktok' => '',
+            ]);
             $count++;
         }
  
@@ -847,8 +859,6 @@ class CsvController extends Controller
         $response->headers->set('Content-Type', 'application/octet-stream'); 
         $response->headers->set('content-disposition', 'attachment; filename=お気に入りYoutube（中間テーブル）.csv');
 
-//dd($response);
-
         return $response;
     }
 
@@ -857,9 +867,8 @@ class CsvController extends Controller
         */
         private function _csvFavorite($row){
                 return [
-                    //$row->id,
                     $row->user_id,
-                    $row->entertainer_id,
+                    $row->youtube_id,
 
                 ];
             }

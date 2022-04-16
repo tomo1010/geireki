@@ -221,7 +221,7 @@ class CsvController extends Controller
         $count = 0;
         foreach($dataList as $row){
             Perfomer::insert([
-                'id' => $row[0], 
+                //'id' => $row[0], 
                 'office_id' => $row[1] == '' ? NULL : $row[1],
                 
                 'name' => $row[2], 

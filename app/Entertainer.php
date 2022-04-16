@@ -16,13 +16,13 @@ class Entertainer extends Model
     public $sortable = ['name', 'active']; // 追加
     
     
-    // //dates（formatメソッドを使用できるようにする）
-    // protected $dates = [
-    //     'created_at',
-    //     'updated_at',
-    //     'active', //　追加する
-    //     'activeend' //　追加する
-    // ];
+    //dates（formatメソッドを使用できるようにする）
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'active', //　追加する
+        'activeend' //　追加する
+    ];
     
 
     

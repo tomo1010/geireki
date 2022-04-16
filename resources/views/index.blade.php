@@ -56,10 +56,10 @@
     
             </tbody>
         </table>
-        
-{!! Form::open(['action' => 'EntertainersController@index','method' => 'get']) !!}
-        {!! Form::submit('ガチャ',['class' => 'btn btn-success btn-block']) !!}
-{!! Form::close() !!}
+
+{!! link_to_route('top', 'ガチャ', ['gacha'=>1]) !!}
+
+
 
 {{--<a href="{{ route('hinaGacha') }}">その他のガチャ</a>--}}
 

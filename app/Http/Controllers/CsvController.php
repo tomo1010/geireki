@@ -74,7 +74,7 @@ class CsvController extends Controller
         foreach($dataList as $row){
             // dd(count($dataList),$row);
             Entertainer::create([
-                'id' => $row[0], 
+                //'id' => $row[0], 
                 //'office_id' => $row[1] == '' ? NULL : $row[1],
                 'office_id' => $row[1],                
                 'name' => $row[2], 

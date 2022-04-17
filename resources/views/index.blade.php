@@ -57,7 +57,7 @@
             </tbody>
         </table>
 
-{!! link_to_route('top', 'ガチャ', ['gacha'=>1]) !!}
+{!! link_to_route('top', 'ガチャ', ['gacha'=>1], ['class' => 'btn btn-outline-primary btn-block']) !!}
 
 
 

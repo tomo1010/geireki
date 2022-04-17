@@ -92,7 +92,6 @@
             @else
             <td>{{ $entertainer->active->format('Y年～')}}</td>
             @endempty
-            
         </tr>
         <tr>
             <th>活動終了時期</th>

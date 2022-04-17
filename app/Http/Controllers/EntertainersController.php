@@ -46,7 +46,10 @@ class EntertainersController extends Controller
         */
 
 
-        //本日・明日の誕生日を表示
+        /*
+        本日・明日の誕生日を表示
+        */
+        
         $today = Carbon::now();
         $tomorrow = Carbon::tomorrow();
         $birthday = array();
@@ -55,6 +58,8 @@ class EntertainersController extends Controller
         
         $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->orderBy('birthday', 'asc')->get();
 
+
+        //本日誕生日を取得
         foreach($perfomers as $value){
             $day = $value->birthday;
             if($day !== NULL){
@@ -63,7 +68,8 @@ class EntertainersController extends Controller
                 }
             }
         }    
-        
+
+        //明日誕生日を取得        
         foreach($perfomers as $value){
             $day = $value->birthday;
             if($day !== NULL){

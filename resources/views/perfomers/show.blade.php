@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <table class="table table-bordered">
+    <table class="table">
         <tr>
             <th>名前</th>
             <td>{{ $perfomer->name }}</td>
@@ -24,7 +24,7 @@
         @empty($perfomer->entertainer)
         <td></td>
         @else
-        <table class="table table-striped">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>芸人</th>

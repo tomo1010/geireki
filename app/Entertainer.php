@@ -7,11 +7,16 @@ use Kyslik\ColumnSortable\Sortable; // 追加
 
 class Entertainer extends Model
 {
+    
+    protected $fillable = [
+        'id', 'office_id', 'name', 'numberofpeople','gender','birthday','alias', 'active','activeend' ,'master' ,'oldname' ,'brain' ,'encounter' ,'named' ,'memo' ,'official' ,'twitter' ,'youtube' ,'tiktok',
+    ];
+    
     use Sortable; // 追加
     public $sortable = ['name', 'active']; // 追加
     
     
-    // dates（formatメソッドを使用できるようにする）
+    //dates（formatメソッドを使用できるようにする）
     protected $dates = [
         'created_at',
         'updated_at',

@@ -15,7 +15,7 @@
 
 
 //トップページ
-Route::get('/', 'EntertainersController@index');
+Route::get('/', 'EntertainersController@index')->name('top');
 Route::get('searchbox', 'EntertainersController@searchbox')->name('searchbox');
 
 

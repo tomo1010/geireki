@@ -125,12 +125,12 @@ class EntertainersController extends Controller
 
 
         //本日のガチャ
-       //dd($request);
-        
-        if(empty($request->files)){
-            $gacha = null;
+        $gacha = request('gacha');
+
+        if($gacha == '1'){
+            $gacha = Perfomer::inRandomOrder()->first();
         }else{
-            $gacha = Perfomer::inRandomOrder()->first();    
+            $gacha = null;
         }
 
 
@@ -247,7 +247,8 @@ class EntertainersController extends Controller
     public function show($id)
     {
         // idの値でメッセージを検索して取得
-        $entertainer = Entertainer::with('perfomers')->findOrFail($id);
+        $entertainer = Entertainer::findOrFail($id);
+        //$entertainer = Entertainer::with('perfomers')->findOrFail($id);        
         // $entertainer = Entertainer::with(['perfomers.office', 'office'])->findOrFail($id);
         //dd($entertainer);
 

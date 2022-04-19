@@ -449,11 +449,12 @@ class ListsController extends Controller
         
 
         for($i=1950; $i<=2038; $i++){
+
             $years[] = $i;
             $counts[] = Award::where('year','=', $i)->count(); 
         }
 
-        $m1_count = Award::where('award','like', '%'.'M-1'.'%')->count();       
+        $m1_count = Award::where('award','like', '%'.'M-1グランプリ'.'%')->count();       
         $king_count = Award::where('award','like', '%'.'キングオブコント'.'%')->count();
         $kamigata_count = Award::where('award','like', '%'.'上方漫才大賞'.'%')->count();        
         

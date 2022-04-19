@@ -21,7 +21,7 @@
             <tbody>
                 
                 {{--芸人の検索結果--}}
-                @foreach ($search_1 as $value)
+                @foreach ($entertainer as $value)
                     @if($value->activeend == NULL) {{--解散済みの場合はグレー文字--}}
                     <tr>
                         <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
@@ -37,8 +37,8 @@
                 @endforeach
                 
                 {{--個人の検索結果--}}                
-                @foreach ($search_2 as $value)
-                    @if($value->activeend == NULL) {{--解散済みの場合はグレー文字--}}
+                @foreach ($perfomer as $value)
+                    @if($value->deth == NULL) {{--故人の場合はグレー文字--}}
                     <tr>
                         <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}（個人）</td>
                         <td>{{$now->diffInYears($value->active)}}年</td>
@@ -46,7 +46,7 @@
                     @else
     
                     <tr class="text-secondary">
-                        <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}（解散済）</td>
+                        <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}（故人）</td>
                         <td>{{$now->diffInYears($value->active)}}年</td>
                     </tr>
                     @endif

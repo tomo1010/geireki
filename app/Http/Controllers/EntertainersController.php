@@ -46,7 +46,10 @@ class EntertainersController extends Controller
         */
 
 
-        //本日・明日の誕生日を表示
+        /*
+        本日・明日の誕生日を表示
+        */
+        
         $today = Carbon::now();
         $tomorrow = Carbon::tomorrow();
         $birthday = array();
@@ -55,6 +58,8 @@ class EntertainersController extends Controller
         
         $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->orderBy('birthday', 'asc')->get();
 
+
+        //本日誕生日を取得
         foreach($perfomers as $value){
             $day = $value->birthday;
             if($day !== NULL){
@@ -63,7 +68,8 @@ class EntertainersController extends Controller
                 }
             }
         }    
-        
+
+        //明日誕生日を取得        
         foreach($perfomers as $value){
             $day = $value->birthday;
             if($day !== NULL){
@@ -506,27 +512,13 @@ class EntertainersController extends Controller
            
         $search = $request->search;           
 
-        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
-        // $disband = request('disband');
-
-        // if($disband == '1'){
-        //     $search_1 = Entertainer::where('name', 'like', "%$search%")->get();
-        //     $search_2 = Perfomer::where('name', 'like', "%$search%")->get();           
-        // }
-        // else{
-        //     $search_1 = Entertainer::where('activeend', NULL)->where('name', 'like', "%$search%")->get();
-        //     $search_2 = Perfomer::where('activeend', NULL)->where('name', 'like', "%$search%")->get();           
-        // }
-
-           
-           
-          $search_1 = Entertainer::where('name', 'like', "%$search%")->get();
-          $search_2 = Perfomer::where('name', 'like', "%$search%")->get();           
+          $entertainer = Entertainer::where('name', 'like', "%$search%")->get();
+          $perfomer = Perfomer::where('name', 'like', "%$search%")->get();           
         
             // 一覧ビューで表示
             return view('searchbox', [
-            'search_1' => $search_1,
-            'search_2' => $search_2,            
+            'entertainer' => $entertainer,
+            'perfomer' => $perfomer,            
             'now' => new \Carbon\Carbon(),
         ]);
             

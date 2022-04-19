@@ -3,7 +3,7 @@
 @section('content')
 
 </br>
-                                M-1グランプリ{!! link_to_route('lists.awardGp', $m1_count ,['gp' => 'M-1'] ) !!}組｜
+                                M-1グランプリ{!! link_to_route('lists.awardGp', $m1_count ,['gp' => 'M-1グランプリ'] ) !!}組｜
                                 キングオブコント{!! link_to_route('lists.awardGp', $king_count ,['gp' => 'キングオブコント'] ) !!}組｜
                                 上方漫才大賞{!! link_to_route('lists.awardGp', $kamigata_count ,['gp' => '上方漫才大賞'] ) !!}組
 

@@ -38,7 +38,7 @@
     <table class="table table-bordered">
         <tr>
             <th>芸人</th>
-            <td>{{ $entertainer->name }}</td>
+            <td>{{ $entertainer->name }}{{!empty($entertainer->activeend) ? '（解散済）' : '' }}</td>
         </tr>
         <tr>
             <th>別名</th>
@@ -64,7 +64,7 @@
                     <tbody>
                         @foreach ($entertainer->perfomers as $value)
                         <tr>
-                            <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+                            <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}{{!empty($value->deth) ? '（故人）' : '' }}</td>
 
                             @empty($value->birthday)
                             <td>-</td>
@@ -99,8 +99,8 @@
             @empty($entertainer->activeend)
             <td></td>
             @else
-            <td>{{ $entertainer->activeend->format('Y年')}}　
-                （活動{{$now->diffInYears($entertainer->active)-$now->diffInYears($entertainer->activeend)}}年）</td>   
+            <td>{{ $entertainer->activeend->format('Y年')}}　（活動芸歴{{link_to_route('lists.historyList', $entertainer->active->diffInYears($entertainer->activeend), ['year' => $entertainer->active->diffInYears($entertainer->activeend)])}}年）
+            </td>   
             </td>
             @endempty
             

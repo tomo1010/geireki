@@ -4,15 +4,15 @@
 
     <div class="container">
         <div class="row">
-        <div class="col-lg-3"><h1 class="mt-3 pb-0">芸歴{{$now->diffInYears($perfomer->active)}}年目：</h1></div> 
-        <div class="col-lg-9"><h1 class="mt-3 pb-2"><strong>{{ $perfomer->name }}</strong></h1></div>
+            <div class="col-lg-4"><h1 class="mt-3 pb-0">芸歴{{$now->diffInYears($perfomer->active)}}年目：</h1></div> 
+            <div class="col-lg-8"><h1 class="mt-3 pb-2"><strong>{{ $perfomer->name }}</strong></h1></div>
         </div>
     </div>
 
     <table class="table">
         <tr>
             <th>名前</th>
-            <td>{{ $perfomer->name }}</td>
+            <td>{{ $perfomer->name }}{{!empty($perfomer->deth) ? '（故人）' : '' }}</td>
         </tr>
         <tr>
             <th>本名</th>
@@ -25,27 +25,38 @@
         <td></td>
         @else
         <table class="table table-bordered">
+            {{--
             <thead>
                 <tr>
                     <th>芸人</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
-            
+            --}}
             <tbody>
                 @foreach ($perfomer->entertainer as $value)
-                <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
-
-                    @empty($value->active)
-                    <td>-</td>
-                    @else
-                    <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                    @empty($value->activeend)
+                    <tr>
+                        <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
+                        @empty($value->active)
+                        <td>-</td>
+                        @else
+                        <td>芸歴{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                        @endempty
+                    </tr>
+                    @else                
+                    <tr>
+                        <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}（解散済）</td>
+                        @empty($value->active)
+                        <td>-</td>
+                        @else
+                        <td>活動{{link_to_route('lists.historyList', $value->active->diffInYears($value->activeend), ['year' => $value->active->diffInYears($value->activeend)])}}年</td>
+                        @endempty
+                    </tr>
                     @endempty
-
-                </tr>
                 @endforeach
             </tbody>
+            
         </table>
         @endempty
         </td>
@@ -56,18 +67,32 @@
         </tr>
         <tr>
             <th>誕生日</th>
-            <td>{{!empty($perfomer->birthday) ? $perfomer->birthday->format('Y年m月d日') : '-' }}　{{ link_to_route('lists.age2List', $now->diffInYears($perfomer->birthday), ['yearsOld' => $now->diffInYears($perfomer->birthday)]) }}歳</td>
+            <td>{{!empty($perfomer->birthday) ? $perfomer->birthday->format('Y年m月d日') : '-' }}　
+
+            {{--享年表示--}}
+                @empty($perfomer->deth)
+                    {{ link_to_route('lists.age2List', $now->diffInYears($perfomer->birthday), ['yearsOld' => $now->diffInYears($perfomer->birthday)]) }}歳</td>
+                @else
+                    （{{ link_to_route('lists.age2List', $now->diffInYears($perfomer->birthday), ['yearsOld' => $now->diffInYears($perfomer->birthday)]) }}歳）</td>
+                @endempty
         </tr>
         <tr>
             <th>没年月日</th>
-            <td>{{!empty($perfomer->deth) ? $perfomer->deth->format('Y年m月d日') : '-' }}</td>
+            <td>{{!empty($perfomer->deth) ? $perfomer->deth->format('Y年m月d日') : '-' }}
+
+            {{--享年表示--}}
+                @empty($perfomer->deth)
+                    </td>
+                @else
+                    　享年{{link_to_route('lists.age2List', $perfomer->birthday->diffInYears($perfomer->deth), ['yearsOld' => $perfomer->birthday->diffInYears($perfomer->deth)])}}歳</td>
+                @endempty
         </tr>
         <tr>
             <th>出身地</th>
             <td>{{ $perfomer->birthplace }}</td>
         </tr>
         <tr>
-            <th>血液型</th歳
+            <th>血液型</th>
             <td>{{ $perfomer->bloodtype }}</td>
         </tr>        
         <tr>
@@ -96,7 +121,7 @@
         </tr>
         <tr>
             <th>活動終了時期</th>
-            <td>{{!empty($perfomer->activeend) ? $perfomer->activeend : '-' }}</td>
+            <td>{{!empty($perfomer->activeend) ? $perfomer->activeend->format('Y年') : '-' }}</td>
         </tr>
         <tr>
             <th>配偶者</th>

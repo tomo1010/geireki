@@ -512,27 +512,13 @@ class EntertainersController extends Controller
            
         $search = $request->search;           
 
-        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
-        // $disband = request('disband');
-
-        // if($disband == '1'){
-        //     $search_1 = Entertainer::where('name', 'like', "%$search%")->get();
-        //     $search_2 = Perfomer::where('name', 'like', "%$search%")->get();           
-        // }
-        // else{
-        //     $search_1 = Entertainer::where('activeend', NULL)->where('name', 'like', "%$search%")->get();
-        //     $search_2 = Perfomer::where('activeend', NULL)->where('name', 'like', "%$search%")->get();           
-        // }
-
-           
-           
-          $search_1 = Entertainer::where('name', 'like', "%$search%")->get();
-          $search_2 = Perfomer::where('name', 'like', "%$search%")->get();           
+          $entertainer = Entertainer::where('name', 'like', "%$search%")->get();
+          $perfomer = Perfomer::where('name', 'like', "%$search%")->get();           
         
             // 一覧ビューで表示
             return view('searchbox', [
-            'search_1' => $search_1,
-            'search_2' => $search_2,            
+            'entertainer' => $entertainer,
+            'perfomer' => $perfomer,            
             'now' => new \Carbon\Carbon(),
         ]);
             

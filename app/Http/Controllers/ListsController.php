@@ -299,18 +299,18 @@ class ListsController extends Controller
 
         if($disband == '1'){
 
-            $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+            $perfomers = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
 
         }else{
             
-            $perfomer = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+            $perfomers = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
         }
  
 
         
         // 一覧ビューで表示
         return view('lists.age2List', [
-            'perfomer' => $perfomer,
+            'perfomers' => $perfomers,
             'yearsOld' => $yearsOld,
             'now' => new \Carbon\Carbon(),
         ]);
@@ -423,7 +423,7 @@ class ListsController extends Controller
         
         // 一覧ビューで表示
         return view('lists.prefList', [
-            'perfomer' => $prefs,
+            'perfomers' => $prefs,
             'pref' => $pref,            
             'now' => new \Carbon\Carbon(),            
         ]);

@@ -10,6 +10,33 @@
     <div class="container">
         <div class="row">
 
+            {{--受賞年一覧--}}
+            <div class="col-lg-9"><h2 class="mt-5 pb-2 display-5 border-bottom">受賞年一覧</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>年</th>
+                            <th>大会名</th>
+                            <th>コンビ名</th>                                                   
+                            <th>当時の芸歴</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($awards as $award)
+                        <tr>
+                            <td>{{$award->year}}</td>                            
+                            <td>{{$award->award}}</td>
+                            <td nowrap>{!! link_to_route('entertainers.show', $award->entertainer->name, [$award->entertainer->id]) !!}</td>
+                            <td>{{$now->diffInYears($award->entertainer->active)-$now->diffInYears($award->year.'-1-1')}}年目</td>   
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            {{-- ページネーションのリンク --}}
+            {{ $awards->appends(request()->query())->links() }}
+
+
             {{--年別一覧--}}
             <div class="col-lg-3"><h2 class="mt-5 pb-2 display-5 border-bottom">年別一覧</h2>
                 <table class="table table-striped">
@@ -23,40 +50,14 @@
                                 <td align="right">
                                 {!! link_to_route('lists.awardList', $counts[$loop->index], ['year' => $year]) !!}組
                                 </td>
-                                
                                 @endif
                             </tr>
-            
                         @endforeach
                     </tbody>
                 </table>    
-            </div>    
-            {{--受賞年一覧--}}
-            <div class="col-lg-9"><h2 class="mt-5 pb-2 display-5 border-bottom">受賞年一覧</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>年</th>
-                            <th>大会名</th>
-                            <th>コンビ名</th>                                                   
-                            <th>当時の芸歴</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($awards as $value)
-                        <tr>
-                            <td>{{$value->year}}</td>                            
-                            <td>{{$value->award}}</td>
-                            <td nowrap>{!! link_to_route('entertainers.show', $value->entertainer->name, [$value->entertainer->id]) !!}</td>
-                            <td>{{$now->diffInYears($value->entertainer->active)-$now->diffInYears($value->year.'-1-1')}}年目</td>   
+            </div>
 
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                
-                    {{-- ページネーションのリンク --}}
-                    {{ $awards->appends(request()->query())->links() }}
+
                 
             </div>
         </div>

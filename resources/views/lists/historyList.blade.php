@@ -3,9 +3,7 @@
 @section('content')
 
 
-
 <center><h1 class="mt-5 pb-2">芸歴 {{ $year }} 年目</h1></center>
-
 
 @include('commons.tab_combi')
 <br><center>{!! link_to_route('lists.historyList', '<<1年後輩', ['year' => $minus],['class' => 'btn btn-outline-success']) !!}　{!! link_to_route('lists.historyList', '1年先輩>>', ['year' => $plus],['class' => 'btn btn-outline-success']) !!}</center>
@@ -22,18 +20,8 @@
                     </thead>
                      
                     <tbody>
-                        @foreach ($results_1 as $value)
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                        <tr>
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                            @include('commons.gender')
-                        </tr>
-                        @else
-                        <tr class="text-secondary">
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            <td>@include('commons.gender')</td>
-                        </tr>
-                        @endif
+                        @foreach ($pin as $entertainer)
+                            @include('lists.history_common')
                         @endforeach
                     </tbody>   
                 </table>
@@ -48,18 +36,8 @@
                     </thead>
                      
                     <tbody>
-                        @foreach ($results_2 as $value)
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                        <tr>
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                            @include('commons.gender')
-                        </tr>
-                        @else
-                        <tr class="text-secondary">
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            @include('commons.gender')
-                        </tr>
-                        @endif
+                        @foreach ($combi as $entertainer)
+                            @include('lists.history_common')
                         @endforeach
                     </tbody>   
                 </table>
@@ -74,18 +52,8 @@
                     </thead>
                      
                     <tbody>
-                        @foreach ($results_3 as $value)
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                        <tr>
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                            @include('commons.gender')
-                        </tr>
-                        @else
-                        <tr class="text-secondary">
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            @include('commons.gender')
-                        </tr>
-                        @endif
+                        @foreach ($trio as $entertainer)
+                            @include('lists.history_common')
                         @endforeach
                     </tbody>   
                 </table>

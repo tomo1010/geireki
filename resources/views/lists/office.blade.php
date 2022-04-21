@@ -3,16 +3,16 @@
 @section('content')
 
         {{--事務所一覧--}}
-        <div class="col-lg-6"><h2 class="mt-5 pb-2 display-5 border-bottom">事務所一覧</h2>
+        <div class="col-lg-12"><h2 class="mt-5 pb-2 display-5 border-bottom">事務所一覧</h2>
             <table class="table table-striped">
                 <tbody>
-                   @foreach ($office as $value)
+                   @foreach ($offices as office)
                         <tr>
                             <td>
-                            {{$value->office}}
+                            {{$office->office}}
                             </td>
                             <td align="right">
-                            <a href="{{ route('lists.officeList', ['id'=>$value->id]) }}">{{$office = $value->entertainers_count}}</a>人
+                            <a href="{{ route('lists.officeList', ['id'=>$office->id]) }}">{{$office = $office->entertainers_count}}</a>人
                             </td>
                         </tr>
                     @endforeach

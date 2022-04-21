@@ -11,10 +11,6 @@
 
     <table class="table">
         <tr>
-            <th>名前</th>
-            <td>{{ $perfomer->name }}{{!empty($perfomer->deth) ? '（故人）' : '' }}</td>
-        </tr>
-        <tr>
             <th>本名</th>
             <td>{{ $perfomer->realname }}</td>
         </tr>

@@ -6,7 +6,7 @@
         <div class="col-lg-12"><h2 class="mt-5 pb-2 display-5 border-bottom">事務所一覧</h2>
             <table class="table table-striped">
                 <tbody>
-                   @foreach ($offices as office)
+                   @foreach ($offices as $office)
                         <tr>
                             <td>
                             {{$office->office}}

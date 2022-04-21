@@ -21,30 +21,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($results_1 as $value)
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                        <tr>
-                            <td nowrap>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                            @include('commons.gender')                            
-
-                            {{--芸歴もリンク--}}                            
-                            @empty($value->active)
-                            <td>-</td>
-                            @else
-                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
-                            @endempty
-                        </tr>
-                        @else
-                        <tr class="text-secondary">
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            @include('commons.gender')                            
-                            @empty($value->active)
-                            <td></td>
-                            @else
-                            <td>{{$now->diffInYears($value->active)}}年目</td>
-                            @endempty
-                        </tr>
-                        @endif
+                        @foreach ($pin as $entertainer)
+                            @include('lists.office_common')
                         @endforeach
                     </tbody>   
                 </table>
@@ -62,29 +40,8 @@
                     </thead>
                      
                     <tbody>
-                        @foreach ($results_2 as $value)
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                        <tr>
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                            @include('commons.gender')                            
-                            @empty($value->active)
-                            <td>-</td>
-                            @else
-                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
-                            @endempty
-                            
-                        </tr>
-                        @else
-                        <tr class="text-secondary">
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            @include('commons.gender')                            
-                            @empty($value->active)
-                            <td></td>
-                            @else
-                            <td>{{$now->diffInYears($value->active)}}年目</td>
-                            @endempty
-                        </tr>
-                        @endif
+                        @foreach ($combi as $entertainer)
+                            @include('lists.office_common')
                         @endforeach
                     </tbody>   
                 </table>
@@ -102,30 +59,8 @@
                     </thead>
                      
                     <tbody>
-                        @foreach ($results_3 as $value)
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                        <tr>
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}</td>
-                            @include('commons.gender')
-
-                            @empty($value->active)
-                            <td>-</td>
-                            @else
-                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
-                            @endempty
-                            
-                        </tr>
-                        @else
-                        <tr class="text-secondary">
-                            <td>{!! link_to_route('entertainers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            @include('commons.gender')                            
-                            @empty($value->active)
-                            <td></td>
-                            @else
-                            <td>{{$now->diffInYears($value->active)}}年目</td>
-                            @endempty
-                        </tr>
-                        @endif
+                        @foreach ($trio as $entertainer)
+                            @include('lists.office_common')
                         @endforeach
                     </tbody>   
                 </table>

@@ -150,7 +150,7 @@ class ListsController extends Controller
     
         //事務所別に人数を表示
         $offices = Office::all();
-        foreach($office as $value){
+        foreach($offices as $value){
             $value->loadRelationshipCounts();  // 件数をロード
         }
     
@@ -183,16 +183,16 @@ class ListsController extends Controller
 
         if($disband == '1'){
             
-            $results_1 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
-            $results_2 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
-            $results_3 = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
+            $pin = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
+            $combi = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
+            $trio = Entertainer::where('office_id','=', $id)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
 
         }
         else{
 
-            $results_1 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
-            $results_2 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
-            $results_3 = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
+            $pin = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '1')->orderBy('active','desc')->get();
+            $combi = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '2')->orderBy('active','desc')->get();
+            $trio = Entertainer::where('office_id','=', $id)->where('activeend', NULL)->where('numberofpeople','=', '3')->orderBy('active','desc')->get();
             
         }
 
@@ -200,9 +200,9 @@ class ListsController extends Controller
         
         // 一覧ビューで表示
         return view('lists.officeList', [
-            'results_1' => $results_1,
-            'results_2' => $results_2,
-            'results_3' => $results_3,
+            'pin' => $pin,
+            'combi' => $combi,
+            'trio' => $trio,
             'office' => $office->office,
             'now' => new \Carbon\Carbon(),
         ]);
@@ -223,18 +223,18 @@ class ListsController extends Controller
     public function age()
     {
 
-        $age = array();
+        $ages = array();
         
         for($i = 1; $i < 8; $i++){
         $from = Carbon::now()->subYear($i*10)->format('Y-m-d');
         $to = Carbon::now()->subYear(($i*10)+10)->format('Y-m-d');
-        $age[] = Perfomer::where([['birthday', '<=', $from],['birthday', '>', $to]],)->count();
+        $ages[] = Perfomer::where([['birthday', '<=', $from],['birthday', '>', $to]],)->count();
         }
 
 
         // 一覧ビューで表示
         return view('lists.age', [
-            'age' => $age,
+            'ages' => $ages,
         ]);
     }
     
@@ -261,18 +261,18 @@ class ListsController extends Controller
 
         if($disband == '1'){
 
-            $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+            $perfomers = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
 
         }else{
             
-            $perfomer = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+            $perfomers = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
         }
  
 
         
         // 一覧ビューで表示
         return view('lists.ageList', [
-            'perfomer' => $perfomer,
+            'perfomers' => $perfomers,
             'year' => $year,
             'now' => new \Carbon\Carbon(),
         ]);

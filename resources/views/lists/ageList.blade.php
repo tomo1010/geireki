@@ -18,57 +18,57 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($perfomer as $value)
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                        @foreach ($perfomers as $perfomer)
+                        @if($perfomer->activeend == NULL){{--解散済みの場合はグレー文字--}}
                         <tr>
-                            <td nowrap>{!! link_to_route('perfomers.show', $value->name, [$value->id]) !!}</td>
+                            {{--名前リンク--}}
+                            <td nowrap>@include('commons.perfomer_name')</td>
 
-                            {{--コンビ名もリンク--}}
-                            <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
-                            @else
-                            @endif    
-                            </td>
-                            
-                            {{--年齢もリンク--}}
-                            @empty($value->birthday)
+                            {{--コンビ名リンク--}}
+                            @empty($perfomer->entertainer[0]->name)
                             <td>-</td>
                             @else
-                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
+                                <td>@include('commons.perfomer_combiName')</td>
+                            @endempty
+                            
+                            {{--年齢リンク--}}
+                            @empty($perfomer->birthday)
+                            <td>-</td>
+                            @else
+                            <td>@include('commons.perfomer_age')歳</td>
                             @endempty
 
-                            {{--芸歴もリンク--}}                            
-                            @empty($value->active)
+                            {{--芸歴リンク--}}                            
+                            @empty($perfomer->active)
                             <td>-</td>
                             @else
-                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                            <td>@include('commons.perfomer_history')年</td>
                             @endempty
                         </tr>
                         @else
                         <tr class="text-secondary">
-                            <td nowrap>{!! link_to_route('perfomers.show', $value->name, [$value->id]) !!}（解散済）</td>
+                            <td nowrap>{!! link_to_route('perfomers.show', $perfomer->name, [$perfomer->id]) !!}（解散済）</td>
                             
                             {{--コンビ名もリンク--}}
                             <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                            @if(!empty($perfomer->entertainer[0]->name))
+                                {!! link_to_route('entertainers.show', $perfomer->entertainer[0]->name, $perfomer->entertainer[0]->id) !!}
                             @else
                             @endif    
                             </td>
                             
                             {{--年齢もリンク--}}
-                            @empty($value->birthday)
+                            @empty($perfomer->birthday)
                             <td>-</td>
                             @else
-                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
+                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($perfomer->birthday), ['yearsOld' => $now->diffInYears($perfomer->birthday)]) !!}歳</td>
                             @endempty
 
                             {{--芸歴もリンク--}}                            
-                            @empty($value->active)
+                            @empty($perfomer->active)
                             <td>-</td>
                             @else
-                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($perfomer->active), ['year' => $now->diffInYears($perfomer->active)]) !!}年</td>
                             @endempty
                         </tr>
                         @endif
@@ -84,6 +84,6 @@
 
     {{-- ページネーションのリンク --}}
 
-        {{ $perfomer->appends(request()->query())->links() }}        
+        {{ $perfomers->appends(request()->query())->links() }}        
 
 @endsection

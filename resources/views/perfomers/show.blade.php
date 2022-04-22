@@ -30,23 +30,23 @@
             </thead>
             --}}
             <tbody>
-                @foreach ($perfomer->entertainer as $value)
-                    @empty($value->activeend)
+                @foreach ($perfomer->entertainer as $entertainer)
+                    @empty($entertainer->activeend)
                     <tr>
-                        <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
-                        @empty($value->active)
+                        <td nowrap>@include('commons.entertainer_name')</td>
+                        @empty($entertainer->active)
                         <td>-</td>
                         @else
-                        <td>芸歴{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                        <td>芸歴@include('commons.entertainer_history')年</td>
                         @endempty
                     </tr>
                     @else                
                     <tr>
-                        <td nowrap>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}（解散済）</td>
-                        @empty($value->active)
+                        <td nowrap>@include('commons.entertainer_name')（解散済）</td>
+                        @empty($entertainer->active)
                         <td>-</td>
                         @else
-                        <td>活動{{link_to_route('lists.historyList', $value->active->diffInYears($value->activeend), ['year' => $value->active->diffInYears($value->activeend)])}}年</td>
+                        <td>活動芸歴 {{link_to_route('lists.historyList', $entertainer->active->diffInYears($entertainer->activeend), ['year' => $entertainer->active->diffInYears($entertainer->activeend)])}}年</td>
                         @endempty
                     </tr>
                     @endempty
@@ -65,11 +65,11 @@
             <th>誕生日</th>
             <td>{{!empty($perfomer->birthday) ? $perfomer->birthday->format('Y年m月d日') : '-' }}　
 
-            {{--享年表示--}}
+            {{--故人はカッコ表示--}}
                 @empty($perfomer->deth)
-                    {{ link_to_route('lists.age2List', $now->diffInYears($perfomer->birthday), ['yearsOld' => $now->diffInYears($perfomer->birthday)]) }}歳</td>
+                    @include('commons.perfomer_age')歳</td>
                 @else
-                    （{{ link_to_route('lists.age2List', $now->diffInYears($perfomer->birthday), ['yearsOld' => $now->diffInYears($perfomer->birthday)]) }}歳）</td>
+                    （@include('commons.perfomer_age')歳）</td>
                 @endempty
         </tr>
         <tr>

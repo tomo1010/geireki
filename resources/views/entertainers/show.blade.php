@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     @can('admin-only') {{-- システム管理者権限のみに表示される --}}
 
         {{-- 作成ページへのリンク --}}
@@ -20,13 +19,11 @@
         
     @endcan
 
-
 @if (session('message'))
     <div class="alert alert-danger">
         {{ session('message') }}
     </div>
 @endif
-
 
     <div class="container">
         <div class="row">
@@ -95,7 +92,7 @@
             @endempty
         </tr>
         <tr>
-            <th>活動終了時期</th>
+            <th nowrap>活動終了時期</th>
 
             @empty($entertainer->activeend)
             <td></td>
@@ -128,13 +125,9 @@
         <tr>
             <th>メモ</th>
             <td>{{ $entertainer->memo }}</td>
-        </tr>         
-        
-        
+        </tr>
         <tr>
-            <th>
-                受賞歴
-            </th>
+            <th>受賞歴</th>
             <td>
                 <table>
                 @empty($award)
@@ -142,20 +135,14 @@
                 @else
                     @foreach ($award as $value)
                         <tr>
-                            <td>
-                                {{$value->year}}年
-                            </td>
-                            <td>
-                                {{$value->award}}
-                            </td>
+                            <td nowrap>{{$value->year}}年</td>
+                            <td>{{$value->award}}</td>
                         </tr>
                     @endforeach
                 @endempty
                 </table>
             </td>
         </tr>
-        
-        
         <tr>
             <th>事務所</th>
             <td>{!! link_to_route('lists.officeList', $office->office, [$entertainer->office_id]) !!}</td>
@@ -164,7 +151,7 @@
             @empty($entertainer->official)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->official }}" target="new"><img src="../icon/web.png"></a></td>
+            <td><a href="{{ $entertainer->official }}" target="new"><img src="../icon/web.png" width="64" alt="芸人さんの公式サイト"></a></td>
             @endempty
         </tr>
         <tr>
@@ -172,7 +159,7 @@
             @empty($entertainer->twitter)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->twitter }}" target="new"><img src="../icon/twitter.png"></a></td>
+            <td><a href="{{ $entertainer->twitter }}" target="new"><img src="../icon/twitter.png" width="64" alt="芸人さんの公式Twitter"></a></td>
             @endempty
         </tr>
         <tr>
@@ -180,7 +167,7 @@
             @empty($entertainer->youtube)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->youtube }}" target="new"><img src="../icon/youtube.png"></a></td>
+            <td><a href="{{ $entertainer->youtube }}" target="new"><img src="../icon/youtube.png" width="64" alt="芸人さんの公式Instagram"></a></td>
             @endempty
         </tr>
         <tr>
@@ -188,14 +175,14 @@
             @empty($entertainer->tiktok)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px"></a></td>
+            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px" width="64" alt="芸人さんの公式Tiktok"></a></td>
             @endempty
         </tr>        
         <tr>
             <th>芸歴</th>
             <td>@include('commons.entertainer_history')年目</td>
         </tr>
-        </table>
+    </table>
         
     {{-- 修正依頼ページへのリンク --}}
     <p><center>
@@ -254,9 +241,8 @@
 
     <div class="tab-content">
     
-        /*
-        先輩芸人
-        */
+        {{--先輩芸人--}}
+
         <div id="senior" class="tab-pane">
             <h2 class="mt-4 pb-1">1年先輩</h2>
             <table class="table table-striped">
@@ -280,10 +266,10 @@
                 </tbody>   
             </table>
         </div>
+
     
-        /*
-        同期芸人
-        */    
+        {{--同期芸人--}}
+
         <div id="sync"  class="tab-pane active">
             <h2 class="mt-4 pb-1">同期芸人</h2>
             <table class="table table-striped">
@@ -308,9 +294,9 @@
             </table>
         </div>
     
-        /*
-        後輩芸人
-        */    
+
+        {{--後輩芸人--}}
+
         <div id="junior" class="tab-pane">
             <h2 class="mt-4 pb-1">1年後輩</h2>
             <table class="table table-striped">

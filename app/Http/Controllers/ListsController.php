@@ -299,11 +299,11 @@ class ListsController extends Controller
 
         if($disband == '1'){
 
-            $perfomers = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+            $perfomers = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->paginate(15);
 
         }else{
             
-            $perfomers = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+            $perfomers = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->paginate(15);
         }
  
 

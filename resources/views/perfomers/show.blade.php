@@ -116,7 +116,7 @@
             <td>{{!empty($perfomer->active) ? $perfomer->active->format('Y年～') : '-' }}</td>
         </tr>
         <tr>
-            <th>活動終了時期</th>
+            <th nowrap>活動終了時期</th>
             <td>{{!empty($perfomer->activeend) ? $perfomer->activeend->format('Y年') : '-' }}</td>
         </tr>
         <tr>
@@ -147,7 +147,7 @@
             @empty($perfomer->official)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->official }}" target="new"><img src="../icon/web.png"></a></td>
+            <td><a href="{{ $perfomer->official }}" target="new"><img src="../icon/web.png" width="64" alt="芸人さんの公式サイ"ト></a></td>
             @endempty
         </tr>
         <tr>
@@ -155,7 +155,7 @@
             @empty($perfomer->twitter)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->twitter }}" target="new"><img src="../icon/twitter.png"></a></td>
+            <td><a href="{{ $perfomer->twitter }}" target="new"><img src="../icon/twitter.png" width="64" alt="芸人さんの公式Twitter"></a></td>
             @endempty
         </tr>
         <tr>
@@ -163,7 +163,7 @@
             @empty($perfomer->instagram)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->instagram }}" target="new"><img src="../icon/instagram.png" width="64px"></a></td>
+            <td><a href="{{ $perfomer->instagram }}" target="new"><img src="../icon/instagram.png" width="64px alt="芸人さんの公式Instagram""></a></td>
             @endempty
         </tr>        
         <tr>
@@ -171,7 +171,7 @@
             @empty($perfomer->facebook)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->facebook }}" target="new"><img src="../icon/facebook.png" width="64px"></a></td>
+            <td><a href="{{ $perfomer->facebook }}" target="new"><img src="../icon/facebook.png" width="64px" alt="芸人さんの公式Facebook"></a></td>
             @endempty
         </tr>
         <tr>
@@ -179,16 +179,15 @@
             @empty($perfomer->youtube)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->youtube }}" target="new"><img src="../icon/youtube.png" width="64px"></a></td>
+            <td><a href="{{ $perfomer->youtube }}" target="new"><img src="../icon/youtube.png"  width="64" alt="芸人さんの公式Youtube"></a></td>
             @endempty
         </tr>        
-        <tr>
         <tr>
             <th>TikTok</th>
             @empty($perfomer->tiktok)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px"></a></td>
+            <td><a href="{{ $perfomer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px" alt="芸人さんの公式TikTok"></a></td>
             @endempty
         </tr>        
         <tr>
@@ -196,15 +195,14 @@
             @empty($perfomer->blog)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->blog }}" target="new"><img src="../icon/blog.png" width="64px"></a></td>
+            <td><a href="{{ $perfomer->blog }}" target="new"><img src="../icon/blog.png" width="64" alt="芸人さんの公式blog"></a></td>
             @endempty
         </tr>                
             <th>芸歴</th>
-            <!--<td>{{$now->diffInYears($perfomer->active)}}年目</td>-->
             @empty($perfomer->active)
-            <td>-</td>
+            <td></td>
             @else
-            <td>{{$now->diffInYears($perfomer->active)}}年目</td>
+            <td>@include('commons.perfomer_history')年目</td>
             @endempty
         </tr>
         </table>
@@ -222,7 +220,7 @@
     
     <div class="tab-content">
         <div id="senior" class="tab-pane">
-            <h2 class="mt-4 pb-1">１年先輩</h2>
+            <h2 class="mt-4 pb-1">１年先輩（個人）</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -231,20 +229,20 @@
                     </tr>
                 </thead>                        
                 <tbody>                        
-                    @foreach ($senior as $value)
+                    @foreach ($senior as $perfomer)
                     <tr>
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                            <td>{!! link_to_route('perfomers.show', $value->name, $value->id) !!}</td>
+                        @if($perfomer->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                            <td>@include('commons.perfomer_name')</td>
 
                             {{--コンビ名もリンク--}}
                             <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                            @if(!empty($perfomer->entertainer[0]->name))
+                                @include('commons.perfomer_combiName')
                             @else
                             @endif    
                             </td>
                         @else
-                            <td class="text-secondary">{!! link_to_route('perfomers.show', $value->name, $value->id) !!}（解散済）</td>
+                            <td class="text-secondary">@include('commons.perfomer_combiName')（解散済）</td>
                         @endif
                     </tr>
                     @endforeach
@@ -262,21 +260,20 @@
                     </tr>
                 </thead>                        
                 <tbody>                        
-                    @foreach ($sync as $value)
+                    @foreach ($sync as $perfomer)
                     <tr>
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                            <td>{!! link_to_route('perfomers.show', $value->name, $value->id) !!}</td>
+                        @if($perfomer->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                            <td>@include('commons.perfomer_name')</td>
                             
                             {{--コンビ名もリンク--}}
                             <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                            @if(!empty($perfomer->entertainer[0]->name))
+                                @include('commons.perfomer_combiName')
                             @else
                             @endif    
                             </td>
-                            
                         @else
-                            <td class="text-secondary">{!! link_to_route('perfomers.show', $value->name, $value->id) !!}（解散済）</td>
+                            <td class="text-secondary">@include('commons.perfomer_name')（解散済）</td>
                         @endif
                     </tr>
                     @endforeach
@@ -285,7 +282,7 @@
         </div>
         
         <div id="junior" class="tab-pane">
-            <h2 class="mt-4 pb-1">1年後輩</h2>
+            <h2 class="mt-4 pb-1">１年後輩（個人）</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -294,19 +291,19 @@
                     </tr>
                 </thead>                        
                 <tbody>                        
-                    @foreach ($junior as $value)
+                    @foreach ($junior as $perfomer)
                     <tr>
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                            <td>{!! link_to_route('perfomers.show', $value->name, $value->id) !!}</td>
+                        @if($perfomer->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                            <td>@include('commons.perfomer_name')</td>
                             {{--コンビ名もリンク--}}
                             <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                            @if(!empty($perfomer->entertainer[0]->name))
+                                @include('commons.perfomer_combiName')
                             @else
                             @endif    
                             </td>
                         @else
-                            <td class="text-secondary">{!! link_to_route('perfomers.show', $value->name, $value->id) !!}（解散済）</td>
+                            <td class="text-secondary">@include('commons.perfomer_name')（解散済）</td>
                         @endif
                     </tr>
                     @endforeach

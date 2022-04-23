@@ -1,0 +1,1 @@
+{!! link_to_route('lists.officeList', $entertainer->office->office, ['id' => $entertainer->office->id]) !!}

@@ -147,7 +147,7 @@
             @empty($perfomer->official)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->official }}" target="new"><img src="../icon/web.png" width="64" alt="芸人さんの公式サイ"ト></a></td>
+            <td><a href="{{ $perfomer->official }}" target="new"><img src="../icon/web.png" width="64" alt="{{$perfomer->name}}公式サイ"ト></a></td>
             @endempty
         </tr>
         <tr>
@@ -155,7 +155,7 @@
             @empty($perfomer->twitter)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->twitter }}" target="new"><img src="../icon/twitter.png" width="64" alt="芸人さんの公式Twitter"></a></td>
+            <td><a href="{{ $perfomer->twitter }}" target="new"><img src="../icon/twitter.png" width="64" alt="{{$perfomer->name}}公式Twitter"></a></td>
             @endempty
         </tr>
         <tr>
@@ -163,7 +163,7 @@
             @empty($perfomer->instagram)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->instagram }}" target="new"><img src="../icon/instagram.png" width="64px alt="芸人さんの公式Instagram""></a></td>
+            <td><a href="{{ $perfomer->instagram }}" target="new"><img src="../icon/instagram.png" width="64px alt="{{$perfomer->name}}公式Instagram""></a></td>
             @endempty
         </tr>        
         <tr>
@@ -171,7 +171,7 @@
             @empty($perfomer->facebook)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->facebook }}" target="new"><img src="../icon/facebook.png" width="64px" alt="芸人さんの公式Facebook"></a></td>
+            <td><a href="{{ $perfomer->facebook }}" target="new"><img src="../icon/facebook.png" width="64px" alt="{{$perfomer->name}}公式Facebook"></a></td>
             @endempty
         </tr>
         <tr>
@@ -179,7 +179,7 @@
             @empty($perfomer->youtube)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->youtube }}" target="new"><img src="../icon/youtube.png"  width="64" alt="芸人さんの公式Youtube"></a></td>
+            <td><a href="{{ $perfomer->youtube }}" target="new"><img src="../icon/youtube.png"  width="64" alt="{{$perfomer->name}}公式Youtube"></a></td>
             @endempty
         </tr>        
         <tr>
@@ -187,7 +187,7 @@
             @empty($perfomer->tiktok)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px" alt="芸人さんの公式TikTok"></a></td>
+            <td><a href="{{ $perfomer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px" alt="{{$perfomer->name}}公式TikTok"></a></td>
             @endempty
         </tr>        
         <tr>
@@ -195,7 +195,7 @@
             @empty($perfomer->blog)
             <td></td>
             @else
-            <td><a href="{{ $perfomer->blog }}" target="new"><img src="../icon/blog.png" width="64" alt="芸人さんの公式blog"></a></td>
+            <td><a href="{{ $perfomer->blog }}" target="new"><img src="../icon/blog.png" width="64" alt="{{$perfomer->name}}公式blog"></a></td>
             @endempty
         </tr>                
             <th>芸歴</th>

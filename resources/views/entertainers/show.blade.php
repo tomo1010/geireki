@@ -151,7 +151,7 @@
             @empty($entertainer->official)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->official }}" target="new"><img src="../icon/web.png" width="64" alt="芸人さんの公式サイト"></a></td>
+            <td><a href="{{ $entertainer->official }}" target="new"><img src="../icon/web.png" width="64" alt="{{$entertainer->name}}の公式サイト"></a></td>
             @endempty
         </tr>
         <tr>
@@ -159,7 +159,7 @@
             @empty($entertainer->twitter)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->twitter }}" target="new"><img src="../icon/twitter.png" width="64" alt="芸人さんの公式Twitter"></a></td>
+            <td><a href="{{ $entertainer->twitter }}" target="new"><img src="../icon/twitter.png" width="64" alt="{{$entertainer->name}}の公式Twitter"></a></td>
             @endempty
         </tr>
         <tr>
@@ -167,7 +167,7 @@
             @empty($entertainer->youtube)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->youtube }}" target="new"><img src="../icon/youtube.png" width="64" alt="芸人さんの公式Instagram"></a></td>
+            <td><a href="{{ $entertainer->youtube }}" target="new"><img src="../icon/youtube.png" width="64" alt="{{$entertainer->name}}の公式Instagram"></a></td>
             @endempty
         </tr>
         <tr>
@@ -175,7 +175,7 @@
             @empty($entertainer->tiktok)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px" width="64" alt="芸人さんの公式Tiktok"></a></td>
+            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px" width="64" alt="{{$entertainer->name}}の公式Tiktok"></a></td>
             @endempty
         </tr>        
         <tr>

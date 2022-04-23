@@ -1,0 +1,1 @@
+{!! link_to_route('entertainers.show', $entertainer->name, [$entertainer->id]) !!}

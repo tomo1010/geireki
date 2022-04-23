@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     @can('admin-only') {{-- システム管理者権限のみに表示される --}}
 
         {{-- 作成ページへのリンク --}}
@@ -20,13 +19,11 @@
         
     @endcan
 
-
 @if (session('message'))
     <div class="alert alert-danger">
         {{ session('message') }}
     </div>
 @endif
-
 
     <div class="container">
         <div class="row">
@@ -45,9 +42,7 @@
             <td>{{ $entertainer->alias }}</td>
         </tr>
         <tr>
-            <th>
-                メンバー
-            </th>
+            <th>メンバー</th>
             <td>
                 @empty($entertainer->perfomers)
                 <td></td>
@@ -62,20 +57,23 @@
                     </thead>
                     
                     <tbody>
-                        @foreach ($entertainer->perfomers as $value)
+                        @foreach ($entertainer->perfomers as $perfomer)
                         <tr>
-                            <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}{{!empty($value->deth) ? '（故人）' : '' }}</td>
-
-                            @empty($value->birthday)
+                            {{--メンバー名前--}}
+                            <td>@include('commons.perfomer_name'){{!empty($perfomer->deth) ? '（故人）' : '' }}</td>
+                            
+                            {{--メンバー年齢--}}                            
+                            @empty($perfomer->birthday)
                             <td>-</td>
                             @else
-                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
+                            <td>@include('commons.perfomer_age')歳</td>
                             @endempty
-
-                            @empty($value->active)
+                            
+                            {{--メンバー芸歴--}}
+                            @empty($perfomer->active)
                             <td>-</td>
                             @else
-                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                            <td>@include('commons.perfomer_history')年</td>
                             @endempty
                         </tr>
                         @endforeach
@@ -94,13 +92,12 @@
             @endempty
         </tr>
         <tr>
-            <th>活動終了時期</th>
+            <th nowrap>活動終了時期</th>
 
             @empty($entertainer->activeend)
             <td></td>
             @else
-            <td>{{ $entertainer->activeend->format('Y年')}}　（活動芸歴{{link_to_route('lists.historyList', $entertainer->active->diffInYears($entertainer->activeend), ['year' => $entertainer->active->diffInYears($entertainer->activeend)])}}年）
-            </td>   
+            <td>{{ $entertainer->activeend->format('Y年')}}　（活動芸歴 {{link_to_route('lists.historyList', $entertainer->active->diffInYears($entertainer->activeend), ['year' => $entertainer->active->diffInYears($entertainer->activeend)])}}年）
             </td>
             @endempty
             
@@ -128,13 +125,9 @@
         <tr>
             <th>メモ</th>
             <td>{{ $entertainer->memo }}</td>
-        </tr>         
-        
-        
+        </tr>
         <tr>
-            <th>
-                受賞歴
-            </th>
+            <th>受賞歴</th>
             <td>
                 <table>
                 @empty($award)
@@ -142,20 +135,14 @@
                 @else
                     @foreach ($award as $value)
                         <tr>
-                            <td>
-                                {{$value->year}}年
-                            </td>
-                            <td>
-                                {{$value->award}}
-                            </td>
+                            <td nowrap>{{$value->year}}年</td>
+                            <td>{{$value->award}}</td>
                         </tr>
                     @endforeach
                 @endempty
                 </table>
             </td>
         </tr>
-        
-        
         <tr>
             <th>事務所</th>
             <td>{!! link_to_route('lists.officeList', $office->office, [$entertainer->office_id]) !!}</td>
@@ -164,7 +151,7 @@
             @empty($entertainer->official)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->official }}" target="new"><img src="../icon/web.png"></a></td>
+            <td><a href="{{ $entertainer->official }}" target="new"><img src="../icon/web.png" width="64" alt="{{$entertainer->name}}の公式サイト"></a></td>
             @endempty
         </tr>
         <tr>
@@ -172,16 +159,15 @@
             @empty($entertainer->twitter)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->twitter }}" target="new"><img src="../icon/twitter.png"></a></td>
+            <td><a href="{{ $entertainer->twitter }}" target="new"><img src="../icon/twitter.png" width="64" alt="{{$entertainer->name}}の公式Twitter"></a></td>
             @endempty
         </tr>
-
         <tr>
             <th>Youtube</th>
             @empty($entertainer->youtube)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->youtube }}" target="new"><img src="../icon/youtube.png"></a></td>
+            <td><a href="{{ $entertainer->youtube }}" target="new"><img src="../icon/youtube.png" width="64" alt="{{$entertainer->name}}の公式Instagram"></a></td>
             @endempty
         </tr>
         <tr>
@@ -189,25 +175,21 @@
             @empty($entertainer->tiktok)
             <td></td>
             @else
-            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px"></a></td>
+            <td><a href="{{ $entertainer->tiktok }}" target="new"><img src="../icon/tiktok.png" width="64px" width="64" alt="{{$entertainer->name}}の公式Tiktok"></a></td>
             @endempty
         </tr>        
         <tr>
             <th>芸歴</th>
-            <td>{{$now->diffInYears($entertainer->active)}}年目</td>
+            <td>@include('commons.entertainer_history')年目</td>
         </tr>
-        </table>
+    </table>
         
     {{-- 修正依頼ページへのリンク --}}
     <p><center>
     <a href="https://forms.gle/PayWcxWhphTi36zRA" class="btn btn-success">修正依頼はこちら</a>
     </p></center>
     
-
-
-
     {{--Youtube表示＆投稿フォーム--}}
-
     <h2 class="mt-5 pb-2">おすすめネタ動画</h2>
         <table class="table table-striped">
             <thead>
@@ -219,11 +201,11 @@
             </thead>
             
             <tbody>
-                @foreach ($youtubes as $value)
+                @foreach ($youtubes as $youtube)
                 <tr>
-                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('youtubes.favorite')</td>
-                    <td>{{ $value->comment }}</td>
-                    <td>{{ $value->user->name }}</td>                    
+                    <td><a href="{{$youtube->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('youtubes.favorite')</td>
+                    <td>{{ $youtube->comment }}</td>
+                    <td>{{ $youtube->user->name }}</td>                    
                 </tr>
                 @endforeach
             </tbody>
@@ -253,91 +235,92 @@
         ※YoutubeのURLを投稿するには{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}が必要です。--}} 
     @endif
 
-
-
 </br></br>    
     
     @include('commons.tab_sync')
-    
+
     <div class="tab-content">
-    <div id="senior" class="tab-pane">
-        <h2 class="mt-4 pb-1">1年先輩</h2>
+    
+        {{--先輩芸人--}}
+
+        <div id="senior" class="tab-pane">
+            <h2 class="mt-4 pb-1">1年先輩</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>芸人</th><th>人数</th>
+                        <th>芸人</th>
+                        <th>人数</th>
                     </tr>
                 </thead>                
                 <tbody>
-                    @foreach ($senior as $value)
+                    @foreach ($senior as $entertainer)
                     <tr>
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                            <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                        @if($entertainer->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                            <td>@include('commons.entertainer_name')</td>
                         @else
-                            <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
+                            <td class="text-secondary">@include('commons.entertainer_name')（解散済）</td>
                         @endif
-                        
                             @include('commons.gender')
-                            
                     </tr>
                     @endforeach
                 </tbody>   
             </table>
-    </div>
+        </div>
+
     
-    
-    
-    <div id="sync"  class="tab-pane active">
-        <h2 class="mt-4 pb-1">同期芸人</h2>
+        {{--同期芸人--}}
+
+        <div id="sync"  class="tab-pane active">
+            <h2 class="mt-4 pb-1">同期芸人</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>芸人</th><th>人数</th>
+                        <th>芸人</th>
+                        <th>人数</th>
                     </tr>                        
                 </thead>
                 <tbody>                
-                    @foreach ($sync as $value)
+                    @foreach ($sync as $entertainer)
                     <tr>
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                            <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                        @if($entertainer->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                            <td>@include('commons.entertainer_name')</td>
                         @else
-                            <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
+                            <td class="text-secondary">@include('commons.entertainer_name')（解散済）</td>
                         @endif
                             @include('commons.gender')
                     </tr>
                     @endforeach
                 </tbody>   
             </table>
-    </div>
+        </div>
     
-    
-    <div id="junior" class="tab-pane">
-        <h2 class="mt-4 pb-1">1年後輩</h2>
+
+        {{--後輩芸人--}}
+
+        <div id="junior" class="tab-pane">
+            <h2 class="mt-4 pb-1">1年後輩</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>芸人</th><th>人数</th>
+                        <th>芸人</th>
+                        <th>人数</th>
                     </tr>
                 </thead>
                 <tbody>                                
-                    @foreach ($junior as $value)
+                    @foreach ($junior as $entertainer)
                     <tr>
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                            <td>{!! link_to_route('entertainers.show', $value->name, $value->id) !!}</td>
+                        @if($entertainer->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                            <td>@include('commons.entertainer_name')</td>
                         @else
-                            <td class="text-secondary">{!! link_to_route('entertainers.show', $value->name, $value->id) !!}（解散済）</td>
+                            <td class="text-secondary">@include('commons.entertainer_name')（解散済）</td>
                         @endif
-    
                             @include('commons.gender')
-                            
                     </tr>
                     @endforeach
                 </tbody>   
             </table>
-    </div>
+        </div>
     </div>    
-
-
 
 
 @endsection

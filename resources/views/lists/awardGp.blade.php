@@ -22,14 +22,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($awards as $value)
+                        @foreach ($awards as $award)
                         <tr>
-                            <td>{{$value->year}}</td>                            
-                            <td>{{$value->award}}</td>
-                            <td>{!! link_to_route('entertainers.show', $value->entertainer->name, [$value->entertainer->id]) !!}</td>
-                            <td>{{$value->entertainer->office->office}}</td>
-                            <td>{{$now->diffInYears($value->entertainer->active)-$now->diffInYears($value->year.'-1-1')}}年目</td>   
-                            <td>{{$now->diffInYears($value->entertainer->active)}}年目</td>  
+                            <td>{{$award->year}}</td>                            
+                            <td>{{$award->award}}</td>
+                            <td>{!! link_to_route('entertainers.show', $award->entertainer->name, [$award->entertainer->id]) !!}</td>
+                            <td>{{$award->entertainer->office->office}}</td>
+                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($award->entertainer->active)-$now->diffInYears($award->year.'-1-1'), ['year' => $now->diffInYears($award->entertainer->active)-$now->diffInYears($award->year.'-1-1')]) !!}年</td>
+                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($award->entertainer->active), ['year' => $now->diffInYears($award->entertainer->active)]) !!}年</td>                            
 
                         </tr>
                         @endforeach

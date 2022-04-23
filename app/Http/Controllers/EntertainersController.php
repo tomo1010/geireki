@@ -254,9 +254,6 @@ class EntertainersController extends Controller
     {
         // idの値でメッセージを検索して取得
         $entertainer = Entertainer::findOrFail($id);
-        //$entertainer = Entertainer::with('perfomers')->findOrFail($id);        
-        // $entertainer = Entertainer::with(['perfomers.office', 'office'])->findOrFail($id);
-        //dd($entertainer);
 
         // 活動開始年から芸歴を取得
         $active = $entertainer->active;
@@ -302,38 +299,26 @@ class EntertainersController extends Controller
         }
         
         
-        
         //所属事務所
         $office = Entertainer::find($id)->office;
 
         //受賞歴
         $award = Entertainer::find($id)->award;    
-        
-        //dd($award);
 
-        //メンバー（個人）を取得
-        //$perfomer = Entertainer::find($id)->perfomers();
-
-        
         //Youtubeを取得
         $youtubes = Entertainer::find($id)->youtubes;
         $count = $youtubes->count();
-        
-        //dd($count);
 
         //Youtubeのサムネイルを取得
         if (empty($count)) {
             //nullの場合何もしない
             $iflame = array();     //初期化
-                $iframe[] = "-";
-            
+            $iframe[] = "-";
         }else{
             $iflame = array();     //初期化     
-            
+
             foreach($youtubes as $value){
-                
                 if (strpos($value->youtube, "watch") != false) //ページURL?
-            	
             	{
             		/** コード変換 */
                 	$code = htmlspecialchars($value->youtube, ENT_QUOTES);        		
@@ -345,27 +330,15 @@ class EntertainersController extends Controller
                 	$code = htmlspecialchars($value->youtube, ENT_QUOTES);
             		$code = substr($value->youtube, (strpos($code, "youtu.be/")+9));
             	}
-            
                 //$iframe[] = "<iframe width=\"100%\" height=\"400\" src=\"https://www.youtube.com/embed/{$code}\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
                 $iframe[] = "http://img.youtube.com/vi/{$code}/2.jpg";
             }            
         }
-
-            
-
-//dd($iframe);
-
-        // $youtubecounts = $youtubes->loadRelationshipCounts();
-
-        // dd($youtubecounts);
-        
         
         if (\Auth::check()) {
             $user = \Auth::user();  // 認証済みユーザを取得
         } 
         
-
-
 
         // メッセージ詳細ビューでそれを表示
         return view('entertainers.show', [
@@ -376,17 +349,10 @@ class EntertainersController extends Controller
             'now' => new \Carbon\Carbon(),
             'office' => $office,
             'award' => $award,            
-            //'perfomer' => $perfomer,
             'youtubes' => $youtubes,
             'iframe' => $iframe,
-            // 'user' => $user,
         ]);
     }
-
-
-
-
-
 
 
 

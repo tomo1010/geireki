@@ -7,7 +7,6 @@
 
     <div class="container">
         <div class="row">
-
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -18,72 +17,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($perfomer as $value)
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                        <tr>
-                            <td nowrap>{!! link_to_route('perfomers.show', $value->name, [$value->id]) !!}</td>
-
-                            {{--コンビ名もリンク--}}
-                            <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                        @foreach ($perfomers as $perfomer)
+                            @if($perfomer->activeend == NULL){{--解散済みの場合はグレー文字--}}
+                            <tr>
+                                {{--名前リンク--}}
+                                <td nowrap>@include('commons.perfomer_name')</td>
+                                @include('lists.age_common')
+                            </tr>
                             @else
-                            @endif    
-                            </td>
-                            
-                            {{--年齢もリンク--}}
-                            @empty($value->birthday)
-                            <td>-</td>
-                            @else
-                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
-                            @endempty
-
-                            {{--芸歴もリンク--}}                            
-                            @empty($value->active)
-                            <td>-</td>
-                            @else
-                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
-                            @endempty
-                        </tr>
-                        @else
-                        <tr class="text-secondary">
-                            <td nowrap>{!! link_to_route('perfomers.show', $value->name, [$value->id]) !!}（解散済）</td>
-                            
-                            {{--コンビ名もリンク--}}
-                            <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
-                            @else
-                            @endif    
-                            </td>
-                            
-                            {{--年齢もリンク--}}
-                            @empty($value->birthday)
-                            <td>-</td>
-                            @else
-                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
-                            @endempty
-
-                            {{--芸歴もリンク--}}                            
-                            @empty($value->active)
-                            <td>-</td>
-                            @else
-                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
-                            @endempty
-                        </tr>
-                        @endif
+                            <tr class="text-secondary">
+                                {{--名前リンク（解散済み）--}}
+                                <td nowrap>@include('commons.perfomer_name')（解散済）</td>                            
+                                @include('lists.age_common')
+                            </tr>
+                            @endif
                         @endforeach
                     </tbody>   
                 </table>
-
-
         </div>
     </div>
 
-
-
     {{-- ページネーションのリンク --}}
-
-        {{ $perfomer->appends(request()->query())->links() }}        
+    {{ $perfomers->appends(request()->query())->links() }}        
 
 @endsection

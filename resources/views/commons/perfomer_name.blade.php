@@ -1,0 +1,1 @@
+{!! link_to_route('perfomers.show', $perfomer->name, [$perfomer->id]) !!}

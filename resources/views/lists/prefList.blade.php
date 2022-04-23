@@ -7,67 +7,36 @@
 
     <div class="container">
         <div class="row">
-
-                <table class="table table-striped">
-                    <thead>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>名前</th>
+                        <th>コンビ名など</th>       
+                        <th>出身地</th>
+                        <th>芸歴</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($perfomers as $perfomer)
+                        @if($perfomer->activeend == NULL)
                         <tr>
-                            <th>名前</th>
-                            <th>コンビ名など</th>       
-                            <th>出身地</th>
-                            <th>芸歴</th>
-
+                            <td nowrap>@include('commons.perfomer_name')</td>
+                            @include('lists.pref_common')
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($perfomer as $value)
-                        @if($value->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                        <tr>
-                            <td nowrap>{!! link_to_route('perfomers.show', $value->name, [$value->id]) !!}</td>
-
-                            {{--コンビ名もリンク--}}
-                            <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
-                            @else
-                            @endif    
-                            </td>
-
-                            <td>{{$value->birthplace}}</td>
-                        
-                            {{--芸歴リンク--}}
-                            @empty($value->active)
-                            <td>-</td>
-                            @else
-                            <td>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
-                            @endempty
-
-                        </tr>
+                        {{--解散済みの場合はグレー文字--}}                    
                         @else
                         <tr class="text-secondary">
-                            <td nowrap>{!! link_to_route('perfomers.show', $value->name, [$value->id]) !!}（解散済）</td>
-
-                            {{--コンビ名もリンク--}}
-                            <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
-                            @else
-                            @endif    
-                            </td>
-
-                            <td>{{$value->birthplace}}</td>
-                            <td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年目</td>
+                            <td nowrap>@include('commons.perfomer_name')（解散済）</td>
+                            @include('lists.pref_common')
                         </tr>
                         @endif
-                        @endforeach
-                    </tbody>   
-                </table>
-
-
+                    @endforeach
+                </tbody>   
+            </table>
         </div>
     </div>
 
-
     {{-- ページネーションのリンク --}}
-    {{ $perfomer->appends(request()->query())->links() }}        
+    {{ $perfomers->appends(request()->query())->links() }}        
 
 @endsection

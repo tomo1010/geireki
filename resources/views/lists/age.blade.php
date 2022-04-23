@@ -3,11 +3,11 @@
 @section('content')
 
         {{--年代別一覧--}}
-        <div class="col-lg-6"><h2 class="mt-5 pb-2 display-5 border-bottom">年代別一覧</h2>
+        <div class="col-lg-12"><h2 class="mt-5 pb-2 display-5 border-bottom">年代別一覧</h2>
             <table class="table table-striped">
                 <tbody>
                 <?php $year=1; ?>                    
-                   @foreach ($age as $value)
+                   @foreach ($ages as $value)
                         <tr>
                             <td>
                                 <?php echo $year; ?>0代　

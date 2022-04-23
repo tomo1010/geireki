@@ -1,0 +1,1 @@
+                            <a href="{{ $entertainer->official }}" target="new"><img src="../icon/web.png" width="64" alt="芸人さんの公式サイト"></a>

@@ -10,6 +10,7 @@
                     <th>名前</th>
                     <th>年齢</th>                    
                     <th>芸歴</th>
+                    <th>SNS</th></th>                    
                 </tr>
             </thead>
             
@@ -52,6 +53,17 @@
                             <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($gacha->active), ['year' => $now->diffInYears($gacha->active)]) !!}年</td>
                         @endempty
                     @endempty
+                    
+                    {{--SNSリンク--}}
+                    @empty($gacha)
+                        <td>-</td>
+                    @else
+                        <td>
+                        <a href="https://twitter.com/intent/tweet?hashtags={{$gacha->name}},芸人ガチャ,芸歴ネット" class="twitter-hashtags-btn" target="_blank">
+                          <img src="../icon/twitter.png" width="30" alt="Twitterでお祝いメッセージを">
+                        </a>
+                        </td>
+                    @endempty    
                 </tr>
     
             </tbody>

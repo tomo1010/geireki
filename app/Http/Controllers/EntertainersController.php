@@ -31,21 +31,6 @@ class EntertainersController extends Controller
     public function index(Request $request)
     {
 
-
-        /*活動終了入力の場合、活動開始から計算して芸歴を固定する
-        $cal = Entertainer::where('activeend', '!=', NULL)->get();      
-        $diff = array();
-
-        foreach($cal as $value){
-            $active = $value->active;
-            $activeend = $value->activeend;
-            $diff[] = $active->diffInYears($activeend);
-        }
-
-        //dd($diff);
-        */
-
-
         /*
         本日・明日の誕生日を表示
         */
@@ -81,7 +66,10 @@ class EntertainersController extends Controller
 
 
 
-        //おすすめネタ動画　Youtube動画一覧
+        /*
+        おすすめネタ動画　Youtube動画一覧
+        */
+        
         $youtubes = Youtube::latest()->take(3)->get();
         $count = $youtubes->count();        
 
@@ -134,15 +122,13 @@ class EntertainersController extends Controller
         $gacha = request('gacha');
 
         if($gacha == '1'){
-            $gacha = Perfomer::inRandomOrder()->first();
+            $gacha = Perfomer::inRandomOrder()->where('activeend', '=', NULL)->first();
         }else{
             $gacha = null;
         }
 
 
-
         //本日のギャグガチャ
-       //dd($request);
         
         if(empty($request->files)){
             $gag = null;

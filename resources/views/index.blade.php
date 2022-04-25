@@ -258,6 +258,43 @@
             </tbody>
         </table>
 
+<h2 class="mt-5 pb-2">実はNSC出身な芸人</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>名前</th>
+                    <th>コンビ名など</th>
+                    <th>事務所</th>                    
+                    <th>芸歴</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($nsc as $perfomer)
+                    <tr>
+                        <td nowrap>@include('commons.perfomer_name')</td>
+                    {{--コンビ名など--}}                    
+                    <td>
+                        @if(!empty($perfomer->entertainer[0]->name))
+                            {!! link_to_route('entertainers.show', $perfomer->entertainer[0]->name, $perfomer->entertainer[0]->id) !!}
+                        @else
+                        @endif
+                    </td>
+                    {{--事務所など--}}                    
+                    <td>
+                            {!! link_to_route('lists.officeList', $perfomer->office->office, $perfomer->office->id) !!}
+                    </td>
+                    {{--芸歴--}}
+                    <td>
+                        @empty($perfomer->active)
+                        @else
+                        @include('commons.perfomer_history')年
+                        @endempty
+                    </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
 
 <h2 class="mt-5 pb-2">M1グランプリ2021 結果</h2>

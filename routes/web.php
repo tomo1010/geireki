@@ -27,6 +27,7 @@ Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertaine
 //個人データ
 Route::get('perfomers/all', 'PerfomersController@all')->name('perfomers.all');
 Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');
+Route::get('perfomers/nsc', 'PerfomersController@nsc')->name('perfomers.nsc');
 
 
 //ガチャ

@@ -105,8 +105,6 @@ class EntertainersController extends Controller
 
 
 
-
-
         //今年解散した芸人の一覧
         $lastyear = Carbon::now()->subYear(0); // 今年を取得
         $dissolutions = Entertainer::whereYear('activeend','=', $lastyear)->orderBy('active', 'asc')->get();
@@ -120,7 +118,6 @@ class EntertainersController extends Controller
 
         //本日のガチャ
         $gacha = request('gacha');
-
         if($gacha == '1'){
             $gacha = Perfomer::inRandomOrder()->where('activeend', '=', NULL)->first();
         }else{
@@ -129,7 +126,6 @@ class EntertainersController extends Controller
 
 
         //本日のギャグガチャ
-        
         if(empty($request->files)){
             $gag = null;
         }else{
@@ -137,6 +133,18 @@ class EntertainersController extends Controller
         }
 
 
+
+        //NSC出身だけど非吉本の芸人の一覧
+        $nsc = Perfomer::inRandomOrder()->whereHas('office',function($query){
+            $query->where('id','!=','108');
+            $query->where('id','!=','146');            
+        })->where('school','like', '%NSC%')->where('activeend','=', NULL)->take(5)->get();
+        
+
+        
+        //最新のM1グランプリ結果
+        $m1 = Award::where('year','=','2020')->where('award','like','%M-1グランプリ%')->get();
+//dd($m1);
 
 
         // 一覧ビューで表示
@@ -149,8 +157,9 @@ class EntertainersController extends Controller
             'youtubes' => $youtubes,
             'iframe' => $iframe,   
             'gacha' => $gacha,
-            'gag' => $gag,            
-            
+            'gag' => $gag,  
+            'nsc' => $nsc,              
+                        
         ]);
         
 

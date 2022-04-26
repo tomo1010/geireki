@@ -39,6 +39,7 @@ class UsersController extends Controller
         return view('users.show', [
             'user' => $user,
             'youtubes' => $youtubes,
+            'now' => new \Carbon\Carbon(),            
         ]);
     }
     

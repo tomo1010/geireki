@@ -142,10 +142,11 @@ class EntertainersController extends Controller
         
 
         
-        //最新のM1グランプリ結果
-        $m1 = Award::where('year','=','2020')->where('award','like','%M-1グランプリ%')->get();
-//dd($m1);
-
+        //最新のM1結果
+        $m1 = Award::with('entertainer')->where('year', '2021')->where('award', 'like','%M-1グランプリ%')->orderBy('rank', 'asc')->get();
+        
+        //最新のKOC結果
+        $koc = Award::with('entertainer')->where('year', '2021')->where('award', 'like','%キングオブコント%')->orderBy('rank', 'asc')->get();
 
         // 一覧ビューで表示
         return view('index', [
@@ -158,7 +159,9 @@ class EntertainersController extends Controller
             'iframe' => $iframe,   
             'gacha' => $gacha,
             'gag' => $gag,  
-            'nsc' => $nsc,              
+            'nsc' => $nsc,
+            'm1' => $m1,            
+            'koc' => $koc,            
                         
         ]);
         

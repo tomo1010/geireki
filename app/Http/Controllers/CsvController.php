@@ -73,7 +73,7 @@ class CsvController extends Controller
         
         foreach($dataList as $row){
             // dd(count($dataList),$row);
-            Entertainer::create([
+            Entertainer::insert([
                 //'id' => $row[0], 
                 //'office_id' => $row[1] == '' ? NULL : $row[1],
                 'office_id' => $row[1],                
@@ -376,7 +376,8 @@ class CsvController extends Controller
                 'id' => $row[0], 
                 'entertainer_id' => $row[1],
                 'year' => $row[2],
-                'award' => $row[3],
+                'rank' => $row[3] == '' ? NULL : $row[3],
+                'award' => $row[4],
                 ]);
             $count++;
         }
@@ -777,6 +778,7 @@ class CsvController extends Controller
                     $row->id,
                     $row->entertainer_id,
                     $row->year,
+                    $row->rank,                    
                     $row->award,
                 ];
             }

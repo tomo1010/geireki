@@ -17,6 +17,7 @@ class CreateAwardsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('entertainer_id');            
             $table->string('year');    
+            $table->integer('rank')->nullable();                
             $table->string('award');    
             $table->timestamps();
         });

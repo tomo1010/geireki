@@ -688,4 +688,27 @@ class PerfomersController extends Controller
     
     
     
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function nsc()
+    {
+        
+        //NSC出身だけど非吉本の芸人の一覧
+        $nsc = Perfomer::whereHas('office',function($query){
+            $query->where('id','!=','108');
+            $query->where('id','!=','146');            
+        })->where('school','like', '%NSC%')->take(10)->get();
+        
+        
+        // 一覧ビューで表示
+        return view('perfomers.nsc', [
+            'nsc' => $nsc,
+            'now' => new \Carbon\Carbon(),
+        ]);
+    }
+    
+    
 }

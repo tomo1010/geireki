@@ -31,21 +31,6 @@ class EntertainersController extends Controller
     public function index(Request $request)
     {
 
-
-        /*活動終了入力の場合、活動開始から計算して芸歴を固定する
-        $cal = Entertainer::where('activeend', '!=', NULL)->get();      
-        $diff = array();
-
-        foreach($cal as $value){
-            $active = $value->active;
-            $activeend = $value->activeend;
-            $diff[] = $active->diffInYears($activeend);
-        }
-
-        //dd($diff);
-        */
-
-
         /*
         本日・明日の誕生日を表示
         */
@@ -81,7 +66,10 @@ class EntertainersController extends Controller
 
 
 
-        //おすすめネタ動画　Youtube動画一覧
+        /*
+        おすすめネタ動画　Youtube動画一覧
+        */
+        
         $youtubes = Youtube::latest()->take(3)->get();
         $count = $youtubes->count();        
 
@@ -117,8 +105,6 @@ class EntertainersController extends Controller
 
 
 
-
-
         //今年解散した芸人の一覧
         $lastyear = Carbon::now()->subYear(0); // 今年を取得
         $dissolutions = Entertainer::whereYear('activeend','=', $lastyear)->orderBy('active', 'asc')->get();
@@ -132,18 +118,14 @@ class EntertainersController extends Controller
 
         //本日のガチャ
         $gacha = request('gacha');
-
         if($gacha == '1'){
-            $gacha = Perfomer::inRandomOrder()->first();
+            $gacha = Perfomer::inRandomOrder()->where('activeend', '=', NULL)->first();
         }else{
             $gacha = null;
         }
 
 
-
         //本日のギャグガチャ
-       //dd($request);
-        
         if(empty($request->files)){
             $gag = null;
         }else{
@@ -152,6 +134,19 @@ class EntertainersController extends Controller
 
 
 
+        //NSC出身だけど非吉本の芸人の一覧
+        $nsc = Perfomer::inRandomOrder()->whereHas('office',function($query){
+            $query->where('id','!=','108');
+            $query->where('id','!=','146');            
+        })->where('school','like', '%NSC%')->where('activeend','=', NULL)->take(5)->get();
+        
+
+        
+        //最新のM1結果
+        $m1 = Award::with('entertainer')->where('year', '2021')->where('award', 'like','%M-1グランプリ%')->orderBy('rank', 'asc')->get();
+        
+        //最新のKOC結果
+        $koc = Award::with('entertainer')->where('year', '2021')->where('award', 'like','%キングオブコント%')->orderBy('rank', 'asc')->get();
 
         // 一覧ビューで表示
         return view('index', [
@@ -163,8 +158,11 @@ class EntertainersController extends Controller
             'youtubes' => $youtubes,
             'iframe' => $iframe,   
             'gacha' => $gacha,
-            'gag' => $gag,            
-            
+            'gag' => $gag,  
+            'nsc' => $nsc,
+            'm1' => $m1,            
+            'koc' => $koc,            
+                        
         ]);
         
 

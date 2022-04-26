@@ -1,0 +1,1 @@
+{!! link_to_route('lists.historyList', $now->diffInYears($award->entertainer->active), ['year' => $now->diffInYears($award->entertainer->active)]) !!}

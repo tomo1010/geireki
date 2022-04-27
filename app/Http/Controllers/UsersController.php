@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\User; // 追加
 use App\Youtube; // 追加
+use App\Perfomer; // 追加
+use Carbon\Carbon; //芸歴計算
 
 class UsersController extends Controller
 {
@@ -32,14 +34,30 @@ class UsersController extends Controller
 
         // ユーザの投稿一覧を作成日時の降順で取得
         $youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
+        
+        // 同郷芸人
+        $pref = Perfomer::where('birthplace', 'like',  '%'.$user->birthplace.'%')->inRandomOrder()->first();
+        //dd($pref);
 
-//dd($youtubes);
+
+        // 同い年芸人
+        $now = new \Carbon\Carbon();
+        $yearsOld = $now->diffInYears($user->birthday);//年齢
+
+        $from = Carbon::now()->subYear($yearsOld)->format('Y-m-d');
+        $to = Carbon::now()->subYear($yearsOld+1)->format('Y-m-d');    
+
+        $age = Perfomer::inRandomOrder()->with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->first();
+        //dd($age);
+        
 
         // ユーザ詳細ビューでそれらを表示
         return view('users.show', [
             'user' => $user,
             'youtubes' => $youtubes,
             'now' => new \Carbon\Carbon(),            
+            'pref' => $pref,            
+            'age' => $age,                     
         ]);
     }
     

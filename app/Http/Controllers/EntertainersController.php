@@ -148,6 +148,7 @@ class EntertainersController extends Controller
         //最新のKOC結果
         $koc = Award::with('entertainer')->where('year', '2021')->where('award', 'like','%キングオブコント%')->orderBy('rank', 'asc')->get();
 
+
         // 一覧ビューで表示
         return view('index', [
             'now' => new \Carbon\Carbon(),

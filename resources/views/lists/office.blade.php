@@ -12,7 +12,7 @@
                             {{$office->office}}
                             </td>
                             <td align="right">
-                            <a href="{{ route('lists.officeList', ['id'=>$office->id]) }}">{{$office = $office->entertainers_count}}</a>人
+                            <a href="{{ route('lists.officeList', ['id'=>$office->id]) }}">{{$office->entertainers_count}}</a>人
                             </td>
                         </tr>
                     @endforeach

@@ -518,7 +518,6 @@ class ListsController extends Controller
         //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
         $disband = request('disband');
         
-        
         if($disband == '1'){
             
             $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->orderBy('year', 'DESC')->get();
@@ -531,7 +530,6 @@ class ListsController extends Controller
         }
 
 
-
         // ビューで表示
         return view('lists.awardList', [
             'awards' => $awards,    
@@ -540,11 +538,77 @@ class ListsController extends Controller
 
         ]);
         
-        
-
     }
     
-    
+
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+
+    public function birthday()
+    {
+
+    for ($month = 1; $month < 13; $month++){
+        for ($day = 1; $day < 32; $day++){
+            $birthdays[] = $month.'月'.$day;
+            $birthdaysCount[] = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->count();
+        }
+    }
+
+        // ビューで表示
+        return view('lists.birthday', [
+            'birthdays' => $birthdays,                
+            'birthdaysCount' => $birthdaysCount,
+            'now' => new \Carbon\Carbon(),
+        ]);
+        
+    }    
+
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+
+    public function birthdayList($birthday)
+    {
+
+        $value = explode("月",$birthday); //誕生日を月と日で分割
+        $month = $value[0];
+        $day = $value[1];            
+
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+
+        if($disband == '1'){
+
+            $perfomers = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->orderBy('birthday', 'DESC')->get();
+
+        }else{
+            
+            $perfomers = Perfomer::where('activeend', NULL)->whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->orderBy('birthday', 'DESC')->get();
+        }
+ 
+//dd($perfomers);
+        
+        // 一覧ビューで表示
+        return view('lists.birthdayList', [
+            'perfomers' => $perfomers,
+            'birthday' => $birthday,
+            'now' => new \Carbon\Carbon(),
+        ]);
+        
+    }    
     
 
 

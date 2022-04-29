@@ -48,6 +48,8 @@ Route::get('lists/pref/{pref}', 'ListsController@prefList')->name('lists.prefLis
 Route::get('lists/award', 'ListsController@award')->name('lists.award');
 Route::get('lists/award/{year}', 'ListsController@awardList')->name('lists.awardList');
 Route::get('lists/awardGp/{gp}', 'ListsController@awardGp')->name('lists.awardGp');
+Route::get('lists/birthday', 'ListsController@birthday')->name('lists.birthday');
+Route::get('lists/birthdayList/{birthday}', 'ListsController@birthdayList')->name('lists.birthdayList');
 
 
 //ランキング

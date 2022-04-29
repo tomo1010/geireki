@@ -180,7 +180,42 @@
     </div>        
 
 
-    <h2 class="mt-5 pb-2">おすすめネタ動画</h2>
+
+    <h2 class="mt-5 pb-2" >新着の芸人</h2>    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>名前</th>
+                    <th>事務所</th>                    
+                    <th>芸歴</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($creates as $entertainer)
+                <tr>
+                    <td nowrap>
+                        @include('commons.entertainer_name')
+                    </td>
+                    
+                    <td>
+                        @include('commons.entertainer_office')
+                    </td>
+    
+                    {{--芸歴リンク--}}
+                    @empty($entertainer->active)
+                        <td>-</td>
+                    @else
+                        <td>@include('commons.entertainer_history')</td>
+                    @endempty
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+
+
+    <h2 class="mt-5 pb-2">新着ネタ動画</h2>
         <table class="table table-striped">
             <thead>
                 <tr>

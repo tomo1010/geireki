@@ -556,9 +556,9 @@ class ListsController extends Controller
 
     for ($month = 1; $month < 13; $month++){
         for ($day = 1; $day < 32; $day++){
-            $birthdays[] = $month.'-'.$day;
+            $birthdays[] = $month.'月'.$day;
             $birthdaysCount[] = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->count();
-        }        
+        }
     }
 
         // ビューで表示
@@ -583,7 +583,7 @@ class ListsController extends Controller
     public function birthdayList($birthday)
     {
 
-        $value = explode("-",$birthday); //誕生日を月と日で分割
+        $value = explode("月",$birthday); //誕生日を月と日で分割
         $month = $value[0];
         $day = $value[1];            
 

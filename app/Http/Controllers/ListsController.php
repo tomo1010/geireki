@@ -518,6 +518,79 @@ class ListsController extends Controller
         //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
         $disband = request('disband');
         
+        if($disband == '1'){
+            
+            $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->orderBy('year', 'DESC')->get();
+        
+        }
+        else{
+
+            $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->orderBy('year', 'DESC')->get();
+            
+        }
+
+
+        // ビューで表示
+        return view('lists.awardList', [
+            'awards' => $awards,    
+            'year' => $year,                
+            'now' => new \Carbon\Carbon(),
+
+        ]);
+        
+    }
+    
+
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+
+    public function birthday()
+    {
+
+    $birthdays = array();
+    $birthdaysCount = array();    
+
+    for ($month = 1; $month < 13; $month++){
+        for ($day = 1; $day < 32; $day++){
+            $birthdays[] = $month.'/'.$day;
+            //$birthdays[] = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->get();
+            $birthdaysCount[] = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->count();
+        }        
+    }
+
+//dd($birthdays[1]);
+
+        // ビューで表示
+        return view('lists.birthday', [
+            'birthdays' => $birthdays,                
+            'birthdaysCount' => $birthdaysCount,
+            'now' => new \Carbon\Carbon(),
+        ]);
+        
+    }    
+
+
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */    
+
+    public function birthdayList()
+    {
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
         
         if($disband == '1'){
             
@@ -531,7 +604,6 @@ class ListsController extends Controller
         }
 
 
-
         // ビューで表示
         return view('lists.awardList', [
             'awards' => $awards,    
@@ -541,10 +613,7 @@ class ListsController extends Controller
         ]);
         
         
-
-    }
-    
-    
+    }    
     
 
 

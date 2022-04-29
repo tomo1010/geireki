@@ -9,13 +9,13 @@
                 <tbody>
                     {{--@for ($month = 1; $month < 13; $month++)--}}
 
-                       @foreach ($birthdays as $day)
+                       @foreach ($birthdays as $birthday)
                             <tr>
                                 <td>
-                                {{$day}} 生まれ
+                                {{$birthday}} 生まれ
                                 </td>
                                 <td align="right">
-                                <a href="{{ route('lists.officeList', ['id'=>$day]) }}">{{$birthdaysCount[$loop->index]}}</a>人
+                                <a href="{{ route('lists.birthdayList', ['birthday'=>$birthday]) }}">{{$birthdaysCount[$loop->index]}}</a>人
                                 </td>
                             </tr>
                         @endforeach

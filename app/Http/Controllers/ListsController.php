@@ -554,18 +554,12 @@ class ListsController extends Controller
     public function birthday()
     {
 
-    $birthdays = array();
-    $birthdaysCount = array();    
-
     for ($month = 1; $month < 13; $month++){
         for ($day = 1; $day < 32; $day++){
-            $birthdays[] = $month.'/'.$day;
-            //$birthdays[] = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->get();
+            $birthdays[] = $month.'-'.$day;
             $birthdaysCount[] = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->count();
         }        
     }
-
-//dd($birthdays[1]);
 
         // ビューで表示
         return view('lists.birthday', [
@@ -579,7 +573,6 @@ class ListsController extends Controller
 
 
 
-
     /**
      * Remove the specified resource from storage.
      *
@@ -587,31 +580,33 @@ class ListsController extends Controller
      * @return \Illuminate\Http\Response
      */    
 
-    public function birthdayList()
+    public function birthdayList($birthday)
     {
+
+        $value = explode("-",$birthday); //誕生日を月と日で分割
+        $month = $value[0];
+        $day = $value[1];            
+
         //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
         $disband = request('disband');
-        
+
         if($disband == '1'){
+
+            $perfomers = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->orderBy('birthday', 'DESC')->get();
+
+        }else{
             
-            $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->orderBy('year', 'DESC')->get();
+            $perfomers = Perfomer::where('activeend', NULL)->whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->orderBy('birthday', 'DESC')->get();
+        }
+ 
+//dd($perfomers);
         
-        }
-        else{
-
-            $awards = Award::with(['entertainer.office'])->where('year', '=', $year)->orderBy('year', 'DESC')->get();
-            
-        }
-
-
-        // ビューで表示
-        return view('lists.awardList', [
-            'awards' => $awards,    
-            'year' => $year,                
+        // 一覧ビューで表示
+        return view('lists.birthdayList', [
+            'perfomers' => $perfomers,
+            'birthday' => $birthday,
             'now' => new \Carbon\Carbon(),
-
         ]);
-        
         
     }    
     

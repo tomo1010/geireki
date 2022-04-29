@@ -263,7 +263,6 @@
             <thead>
                 <tr>
                     <th>名前</th>
-                    <th>コンビ名など</th>
                     <th>事務所</th>                    
                     <th>芸歴</th>
                 </tr>
@@ -272,11 +271,10 @@
             <tbody>
                 @foreach ($nsc as $perfomer)
                     <tr>
-                        <td nowrap>@include('commons.perfomer_name')</td>
-                    {{--コンビ名など--}}                    
-                    <td>
+                        <td nowrap>@include('commons.perfomer_name')
+                    {{--コンビ名リンク　芸人と個人が同じ場合は表示しない--}}                    
                         @if(!empty($perfomer->entertainer[0]->name))
-                            {!! link_to_route('entertainers.show', $perfomer->entertainer[0]->name, $perfomer->entertainer[0]->id) !!}
+                            <br></a>{!! link_to_route('entertainers.show', $perfomer->entertainer[0]->name, $perfomer->entertainer[0]->id) !!}
                         @else
                         @endif
                     </td>

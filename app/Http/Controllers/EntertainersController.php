@@ -70,7 +70,7 @@ class EntertainersController extends Controller
         */
         
         $creates = Entertainer::orderBy('created_at', 'desc')->take(3)->get();
-        $updates = Entertainer::orderBy('update_at', 'decs')->take(3)->get();        
+        //$updates = Entertainer::orderBy('update_at', 'decs')->take(3)->get();        
 
 //dd($creates);
 
@@ -172,7 +172,7 @@ class EntertainersController extends Controller
             'm1' => $m1,            
             'koc' => $koc,  
             'creates' => $creates,
-            'updates' => $updates,                    
+            //'updates' => $updates,                    
                         
         ]);
         

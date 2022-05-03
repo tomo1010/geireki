@@ -14,7 +14,7 @@
             {{-- タブ --}}
             @include('users.navtabs')
 
-            {{-- 投稿一覧 --}}
+            {{-- お気に入り一覧 --}}
             @include('youtubes.youtubes')
         
         </div>

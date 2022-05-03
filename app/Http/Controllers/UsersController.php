@@ -35,6 +35,7 @@ class UsersController extends Controller
         // ユーザの投稿一覧を作成日時の降順で取得
         $youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
 
+
         // 誕生日同じ芸人
         $value = explode("-",$user->birthday); //誕生日を月と日で分割
         $month = $value[1];
@@ -53,7 +54,6 @@ class UsersController extends Controller
         $to = Carbon::now()->subYear($yearsOld+1)->format('Y-m-d');    
 
         $age = Perfomer::inRandomOrder()->with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->first();
-        //dd($age);
         
 
         // ユーザ詳細ビューでそれらを表示
@@ -81,12 +81,35 @@ class UsersController extends Controller
         // ユーザの投稿一覧を作成日時の降順で取得
         $favorites = $user->favoritesyoutubes()->orderBy('created_at', 'desc')->paginate(10);
 
-//dd($youtubes);
+
+        // 誕生日同じ芸人
+        $value = explode("-",$user->birthday); //誕生日を月と日で分割
+        $month = $value[1];
+        $day = $value[2];
+        $birthday = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->inRandomOrder()->first();        
+        
+        // 同郷芸人
+        $pref = Perfomer::where('birthplace', 'like',  '%'.$user->birthplace.'%')->inRandomOrder()->first();
+        //dd($pref);
+
+        // 同い年芸人
+        $now = new \Carbon\Carbon();
+        $yearsOld = $now->diffInYears($user->birthday);//年齢
+
+        $from = Carbon::now()->subYear($yearsOld)->format('Y-m-d');
+        $to = Carbon::now()->subYear($yearsOld+1)->format('Y-m-d');    
+
+        $age = Perfomer::inRandomOrder()->with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->first();
+
 
         // ユーザ詳細ビューでそれらを表示
         return view('users.favorites', [
             'user' => $user,
             'youtubes' => $favorites,
+            'now' => new \Carbon\Carbon(),            
+            'birthday' => $birthday,            
+            'pref' => $pref,            
+            'age' => $age,            
         ]);
     }
     

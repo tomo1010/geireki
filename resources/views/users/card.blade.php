@@ -8,7 +8,7 @@
 
                     {{--誕生日--}}
                     <hr>
-                    誕生日：{!! link_to_route('lists.birthdayList', $user->birthday, ['birthday' => $user->birthday]) !!}<br>
+                    誕生日：{{$user->birthday}}<br>
 
                     {{--同じ誕生日--}}
                     同じ誕生日：

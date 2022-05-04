@@ -92,7 +92,11 @@ class UsersController extends Controller
         $birthday = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->inRandomOrder()->first();        
         
         // 同郷芸人
+        if(!empty($user->birthplace))
         $pref = Perfomer::where('birthplace', 'like',  '%'.$user->birthplace.'%')->inRandomOrder()->first();
+        else
+        $pref = null;
+        
         //dd($pref);
 
         // 同い年芸人

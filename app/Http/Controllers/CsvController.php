@@ -16,7 +16,7 @@ use Goodby\CSV\Import\Standard\LexerConfig; //csvインポート
 use Goodby\CSV\Import\Standard\Lexer;
 use Goodby\CSV\Import\Standard\Interpreter;
 
-use Symfony\Component\HttpFoundation\StreamedResponse; //csvダウンロード
+use Symfony\Component\HttpFoundation\StreamedResponse; //csv▼ダウンロード
 
 
 
@@ -25,19 +25,20 @@ class CsvController extends Controller
 {
 
 
-    /*entertainerアップロード画面
+    /*
+    user▲アップロード画面
     */
     
-    public function uploadEntertainer()
+    public function uploaduser()
     {
-        return view("csv.entertainer");
+        return view("csv.user");
     }
 
 
 
-    // entertainerインポート処理
+    // Userインポート処理
 
-    public function importEntertainer(Request $request)
+    public function importUser(Request $request)
     {
         // CSV ファイル保存
         $tmpName = mt_rand().".".$request->file('csv')->guessExtension(); //TMPファイル名
@@ -72,50 +73,29 @@ class CsvController extends Controller
         $count = 0;
         
         foreach($dataList as $row){
-            // dd(count($dataList),$row);
-            Entertainer::insert([
+
+            User::insert([
                 //'id' => $row[0], 
-                //'office_id' => $row[1] == '' ? NULL : $row[1],
-                'office_id' => $row[1],                
-                'name' => $row[2], 
-                'numberofpeople' => $row[3],
-                'gender' => $row[4],
-                'alias' => $row[5],
-                'active' => $row[6] == '' ? NULL : $row[6],
-                // 'active' => $row[6],                
-                'activeend' => $row[7] == '' ? NULL : $row[7],
-                // 'activeend' => $row[7],                
-                'master' => $row[8],
-                'oldname' => $row[9],
-                'brain' => $row[10],
-                'encounter' => $row[11],                
-                'named' => $row[12] == '' ? NULL : $row[12],                                
-                // 'named' => $row[12],                                                
-                'memo' => $row[13] == '' ? NULL : $row[13],                                                
-                // 'memo' => $row[13],                                                                
-                'official' => $row[14] == '' ? NULL : $row[14],
-                // 'official' => $row[14],                
-                'twitter' => $row[15] == '' ? NULL : $row[15],
-                // 'twitter' => $row[15],                
-                'youtube' => $row[16] == '' ? NULL : $row[16],
-                // 'youtube' => $row[16],                
-                'tiktok' => $row[17] == '' ? NULL : $row[17],
-                // 'tiktok' => $row[17],
-                // 'tiktok' => '',
+                'name' => $row[1],                
+                'email' => $row[2], 
+                'email_verified_at' => $row[3],
+                'password' => $row[4],
+                'birthday' => $row[5] == '' ? NULL : $row[5],
+                'birthplace' => $row[6] == '' ? NULL : $row[6],
+                'admin_flag' => $row[7] == '' ? NULL : $row[7],
             ]);
             $count++;
         }
  
-        return redirect()->action('EntertainersController@index')->with('flash_message', $count . '組登録しました！');
+        return redirect()->action('UsersController@index')->with('flash_message', $count . '組登録しました！');
     }
     
 
 
 
 
-
-
-    /*officeアップロード画面
+    /*
+    （１）office▲アップロード画面
     */
     
     public function uploadOffice()
@@ -169,12 +149,91 @@ class CsvController extends Controller
  
         return redirect()->action('EntertainersController@index')->with('flash_message', $count . '件登録しました！');
     }
+
+
+
+
+    /*
+    （２）entertainer▲アップロード画面
+    */
+    
+    public function uploadEntertainer()
+    {
+        return view("csv.entertainer");
+    }
+
+
+
+    // entertainerインポート処理
+
+    public function importEntertainer(Request $request)
+    {
+        // CSV ファイル保存
+        $tmpName = mt_rand().".".$request->file('csv')->guessExtension(); //TMPファイル名
+        $request->file('csv')->move(public_path()."/csv/tmp",$tmpName);
+        $tmpPath = public_path()."/csv/tmp/".$tmpName;
+ 
+        //Goodby CSVのconfig設定
+        $config = new LexerConfig();
+        $interpreter = new Interpreter();
+        $lexer = new Lexer($config);
+ 
+        //CharsetをUTF-8に変換、CSVのヘッダー行を無視
+        $config->setToCharset("UTF-8");
+        $config->setFromCharset("sjis-win");
+        $config->setIgnoreHeaderLine(true);
+ 
+        $dataList = [];
+     
+        // 新規Observerとして、$dataList配列に値を代入
+        $interpreter->addObserver(function (array $row) use (&$dataList){
+            // 各列のデータを取得
+            $dataList[] = $row;
+        });
+ 
+        // CSVデータをパース
+        $lexer->parse($tmpPath, $interpreter);
+ 
+        // TMPファイル削除
+        unlink($tmpPath);
+ 
+        // 登録処理
+        $count = 0;
+        
+        foreach($dataList as $row){
+
+            Entertainer::insert([
+                //'id' => $row[0], //herokuのpostgreSQLでエラーがでるので、idは自動採番
+                'office_id' => $row[1],                
+                'name' => $row[2], 
+                'numberofpeople' => $row[3],
+                'gender' => $row[4],
+                'alias' => $row[5],
+                'active' => $row[6] == '' ? NULL : $row[6],
+                'activeend' => $row[7] == '' ? NULL : $row[7],
+                'master' => $row[8],
+                'oldname' => $row[9],
+                'brain' => $row[10],
+                'encounter' => $row[11],                
+                'named' => $row[12] == '' ? NULL : $row[12],                                
+                'memo' => $row[13] == '' ? NULL : $row[13],                                                
+                'official' => $row[14] == '' ? NULL : $row[14],
+                'twitter' => $row[15] == '' ? NULL : $row[15],
+                'youtube' => $row[16] == '' ? NULL : $row[16],
+                'tiktok' => $row[17] == '' ? NULL : $row[17],
+            ]);
+            $count++;
+        }
+ 
+        return redirect()->action('EntertainersController@index')->with('flash_message', $count . '組登録しました！');
+    }
     
 
 
 
 
-    /*Perpomerアップロード画面
+    /*
+    （３）Perpomer▲アップロード画面
     */
     
     public function uploadPerfomer()
@@ -265,7 +324,8 @@ class CsvController extends Controller
 
 
 
-    /*memberアップロード画面
+    /*
+    （４）member▲アップロード画面
     */
     
     public function uploadMember()
@@ -327,7 +387,8 @@ class CsvController extends Controller
 
 
 
-    /*★awardアップロード画面
+    /*
+    （５）受賞歴▲アップロード画面
     */
     
     public function uploadAward()
@@ -336,7 +397,7 @@ class CsvController extends Controller
     }
 
 
-    // ★awardインポート処理
+    // awardインポート処理
 
     public function importAward(Request $request)
     {
@@ -389,7 +450,9 @@ class CsvController extends Controller
 
 
 
-    // おすすめYoutubeアップロード画面
+    /* 
+    （６）おすすめYoutube▲アップロード画面
+	*/
 
     public function uploadYoutube()
     {
@@ -451,7 +514,9 @@ class CsvController extends Controller
 
 
 
-    // お気に入りYoutube（favorite）アップロード画面
+    /*
+    （７）お気に入りYoutube（中間テーブル）▲アップロード画面
+    */
 
     public function uploadFavorite()
     {
@@ -497,8 +562,8 @@ class CsvController extends Controller
         foreach($dataList as $row){
             Favorite::insert([
                 //'id' => $row[0], 
-                'user_id' => $row[1],                
-                'youtube_id' => $row[2],
+                'user_id' => $row[0],                
+                'youtube_id' => $row[1],
                 ]);
             $count++;
         }
@@ -517,11 +582,11 @@ class CsvController extends Controller
 
 
     /*
-    // ダウンロード処理
+    ▼ダウンロード処理
     */
 
 
-    //ダウンロード
+    //▼ダウンロード
     //事務所
     
     public function exportOffice(Request $request)
@@ -564,7 +629,7 @@ class CsvController extends Controller
 
 
 
-    //ダウンロード
+    //▼ダウンロード
     //芸人
 
     public function exportEntertainer(Request $request)
@@ -624,7 +689,7 @@ class CsvController extends Controller
 
 
 
-    //ダウンロード
+    //▼ダウンロード
     //個人
 
     public function exportPerfomer(Request $request)
@@ -694,8 +759,8 @@ class CsvController extends Controller
 
 
 
-    //ダウンロード　
-    //中間テーブル
+    //▼ダウンロード　
+    //メンバー（中間テーブル）
 
     public function exportMember(Request $request)
     {
@@ -740,7 +805,7 @@ class CsvController extends Controller
 
 
 
-    //ダウンロード　
+    //▼ダウンロード　
     //受賞歴
 
     public function exportAward(Request $request)
@@ -787,7 +852,7 @@ class CsvController extends Controller
 
 
 
-    //ダウンロード　
+    //▼ダウンロード　
     //おすすめyoutubeテーブル
 
     public function exportYoutube(Request $request)
@@ -834,8 +899,8 @@ class CsvController extends Controller
 
 
 
-    //ダウンロード　
-    //お気に入りYoutube
+    //▼ダウンロード　
+    //お気に入りYoutube（中間テーブル）
 
     public function exportFavorite(Request $request)
     {
@@ -869,13 +934,12 @@ class CsvController extends Controller
         */
         private function _csvFavorite($row){
                 return [
+                    $row->id,                    
                     $row->user_id,
                     $row->youtube_id,
 
                 ];
             }
-
-
 
 
     

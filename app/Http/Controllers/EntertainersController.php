@@ -65,9 +65,17 @@ class EntertainersController extends Controller
         }
 
 
+        /*
+        新着芸人　更新芸人
+        */
+        
+        $creates = Entertainer::orderBy('created_at', 'desc')->take(3)->get();
+        //$updates = Entertainer::orderBy('update_at', 'decs')->take(3)->get();        
+
+//dd($creates);
 
         /*
-        おすすめネタ動画　Youtube動画一覧
+        新着ネタ動画　Youtube動画一覧
         */
         
         $youtubes = Youtube::latest()->take(3)->get();
@@ -162,7 +170,9 @@ class EntertainersController extends Controller
             'gag' => $gag,  
             'nsc' => $nsc,
             'm1' => $m1,            
-            'koc' => $koc,            
+            'koc' => $koc,  
+            'creates' => $creates,
+            //'updates' => $updates,                    
                         
         ]);
         

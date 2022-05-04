@@ -180,7 +180,42 @@
     </div>        
 
 
-    <h2 class="mt-5 pb-2">おすすめネタ動画</h2>
+{{--
+    <h2 class="mt-5 pb-2" >新着の芸人</h2>    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>名前</th>
+                    <th>事務所</th>                    
+                    <th>芸歴</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($creates as $entertainer)
+                <tr>
+                    <td nowrap>
+                        @include('commons.entertainer_name')
+                    </td>
+                    
+                    <td>
+                        @include('commons.entertainer_office')
+                    </td>
+--}}    
+                    {{--芸歴リンク
+                    @empty($entertainer->active)
+                        <td>-</td>
+                    @else
+                        <td>@include('commons.entertainer_history')</td>
+                    @endempty
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+--}}
+
+
+    <h2 class="mt-5 pb-2">新着ネタ動画</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -192,13 +227,13 @@
             </thead>
             
             <tbody>
-                @foreach ($youtubes as $value)
+                @foreach ($youtubes as $youtube)
                 <tr>
-                    <td><a href="{{$value->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}" alt="芸人さんの公式youtubeチャンネル"></a>@include('youtubes.favorite')</td>
-                    <td>{!! link_to_route('entertainers.show', $value->entertainer->name, ['id' => $value->entertainer->id]) !!}
-                    <!--{{ $value->entertainer->name }}</td>-->
-                    <td>{{ $value->user->name }}</td>
-                    <td>{{ $value->created_at }}</td>                    
+                    <td><a href="{{$youtube->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}" alt="芸人さんの公式youtubeチャンネル"></a>@include('youtubes.favorite')</td>
+                    <td>{!! link_to_route('entertainers.show', $youtube->entertainer->name, ['id' => $youtube->entertainer->id]) !!}
+                    <!--{{ $youtube->entertainer->name }}</td>-->
+                    <td>{{ $youtube->user->name }}</td>
+                    <td>{{ $youtube->created_at }}</td>                    
                 </tr>
                 @endforeach
             </tbody>
@@ -263,7 +298,6 @@
             <thead>
                 <tr>
                     <th>名前</th>
-                    <th>コンビ名など</th>
                     <th>事務所</th>                    
                     <th>芸歴</th>
                 </tr>
@@ -272,11 +306,10 @@
             <tbody>
                 @foreach ($nsc as $perfomer)
                     <tr>
-                        <td nowrap>@include('commons.perfomer_name')</td>
-                    {{--コンビ名など--}}                    
-                    <td>
+                        <td nowrap>@include('commons.perfomer_name')
+                    {{--コンビ名リンク　芸人と個人が同じ場合は表示しない--}}                    
                         @if(!empty($perfomer->entertainer[0]->name))
-                            {!! link_to_route('entertainers.show', $perfomer->entertainer[0]->name, $perfomer->entertainer[0]->id) !!}
+                            <br></a>{!! link_to_route('entertainers.show', $perfomer->entertainer[0]->name, $perfomer->entertainer[0]->id) !!}
                         @else
                         @endif
                     </td>

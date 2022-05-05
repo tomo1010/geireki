@@ -432,6 +432,9 @@ class EntertainersController extends Controller
         if(!empty($request->newPerfomer_id)){
             $entertainer->perfomers()->attach($request->newPerfomer_id); //中間テーブルを更新した時
         }
+        //elseif($request->perfomer_id = null){
+        //    $member = $request->perfomer_id;
+        //}
         
         $entertainer->save();
 

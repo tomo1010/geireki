@@ -68,7 +68,6 @@
                     @empty($perfomer->entertainer)
                     @else
                         @foreach ($perfomer->entertainer as $value)
-                            <!--{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}-->
                             {!! Form::label('entertainer_id[]', '芸人id:') !!}
                             {!! Form::text('entertainer_id[]', $value->id, ['class' => 'form-control']) !!}
                         @endforeach

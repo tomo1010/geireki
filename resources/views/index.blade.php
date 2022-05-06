@@ -3,12 +3,13 @@
 @section('content')
 
 
-    <h2 class="mt-5 pb-2" >本日の芸人ガチャ</h2>    
+
+    <h2 class="mt-5 pb-2" >本日のギャグガチャ</h2>    
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>名前</th>
-                    <th>年齢</th>                    
+                    <th>ギャグ</th>                    
                     <th>芸歴</th>
                     <th>SNS</th></th>                    
                 </tr>
@@ -36,10 +37,10 @@
                     @empty($gacha)
                         <td>-</td>
                     @else
-                        @empty($gacha->birthday)
+                        @empty($gacha->gag)
                         <td>-</td>
                         @else
-                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($gacha->birthday), ['yearsOld' => $now->diffInYears($gacha->birthday)]) !!}歳</td>
+                            <td>{{$gacha->gag}}</td>
                         @endempty
                     @endempty
                     
@@ -73,9 +74,6 @@
 
 
 
-{{--<a href="{{ route('hinaGacha') }}">その他のガチャ</a>--}}
-
-{{--{{$gag->gag}}--}}
 
 
    <div class="container">

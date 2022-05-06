@@ -33,15 +33,11 @@
                         </td>
                     @endempty
                     
-                    {{--年齢リンク--}}
+                    {{--ギャグ--}}
                     @empty($gacha)
                         <td>-</td>
                     @else
-                        @empty($gacha->gag)
-                        <td>-</td>
-                        @else
-                            <td>{{$gacha->gag}}</td>
-                        @endempty
+                            <td>{{$gag}}</td>
                     @endempty
                     
                     {{--芸歴リンク--}}
@@ -60,8 +56,8 @@
                         <td>-</td>
                     @else
                         <td>
-                        <a href="https://twitter.com/intent/tweet?hashtags={{$gacha->name}},芸人ガチャ,芸歴ネット" class="twitter-hashtags-btn" target="_blank">
-                          <img src="../icon/twitter.png" width="30" alt="Twitterでお祝いメッセージを">
+                        <a href="https://twitter.com/intent/tweet?hashtags={{$gacha->name}},{{$gag}},ギャグガチャ,芸歴ネット" class="twitter-hashtags-btn" target="_blank">
+                          <img src="../icon/twitter.png" width="30" alt="Twitterでギャグを広めよう！">
                         </a>
                         </td>
                     @endempty    

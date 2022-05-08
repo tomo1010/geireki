@@ -3,12 +3,13 @@
 @section('content')
 
 
-    <h2 class="mt-5 pb-2" >本日の芸人ガチャ</h2>    
+
+    <h2 class="mt-5 pb-2" >本日のギャグガチャ</h2>    
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>名前</th>
-                    <th>年齢</th>                    
+                    <th>ギャグ</th>                    
                     <th>芸歴</th>
                     <th>SNS</th></th>                    
                 </tr>
@@ -32,15 +33,11 @@
                         </td>
                     @endempty
                     
-                    {{--年齢リンク--}}
+                    {{--ギャグ--}}
                     @empty($gacha)
                         <td>-</td>
                     @else
-                        @empty($gacha->birthday)
-                        <td>-</td>
-                        @else
-                            <td>{!! link_to_route('lists.age2List', $now->diffInYears($gacha->birthday), ['yearsOld' => $now->diffInYears($gacha->birthday)]) !!}歳</td>
-                        @endempty
+                            <td>{{$gag}}</td>
                     @endempty
                     
                     {{--芸歴リンク--}}
@@ -59,8 +56,8 @@
                         <td>-</td>
                     @else
                         <td>
-                        <a href="https://twitter.com/intent/tweet?hashtags={{$gacha->name}},芸人ガチャ,芸歴ネット" class="twitter-hashtags-btn" target="_blank">
-                          <img src="../icon/twitter.png" width="30" alt="Twitterでお祝いメッセージを">
+                        <a href="https://twitter.com/intent/tweet?hashtags={{$gacha->name}},{{$gag}},ギャグガチャ,芸歴ネット" class="twitter-hashtags-btn" target="_blank">
+                          <img src="../icon/twitter.png" width="30" alt="Twitterでギャグを広めよう！">
                         </a>
                         </td>
                     @endempty    
@@ -73,9 +70,6 @@
 
 
 
-{{--<a href="{{ route('hinaGacha') }}">その他のガチャ</a>--}}
-
-{{--{{$gag->gag}}--}}
 
 
    <div class="container">

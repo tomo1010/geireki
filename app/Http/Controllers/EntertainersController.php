@@ -124,20 +124,25 @@ class EntertainersController extends Controller
 
 
 
-        //本日のガチャ
-        $gacha = request('gacha');
-        if($gacha == '1'){
-            $gacha = Perfomer::inRandomOrder()->where('activeend', '=', NULL)->first();
-        }else{
-            $gacha = null;
-        }
+        // //本日の芸人ガチャ
+        // $gacha = request('gacha');
+        // if($gacha == '1'){
+        //     $gacha = Perfomer::inRandomOrder()->where('activeend', '=', NULL)->first();
+        // }else{
+        //     $gacha = null;
+        // }
 
 
         //本日のギャグガチャ
-        if(empty($request->files)){
-            $gag = null;
+        $gacha = request('gacha');
+        if($gacha == '1'){
+            $gacha = Perfomer::inRandomOrder()->whereNotNull('gag')->first();
+            $gag = explode('/',$gacha->gag);
+            $gag = $gag[ array_rand( $gag ) ] ;
+            //dd($gag);
         }else{
-            $gag = Perfomer::inRandomOrder()->whereNotNull('gag')->first();    
+            $gacha = null;
+            $gag = null;
         }
 
 
@@ -402,7 +407,6 @@ class EntertainersController extends Controller
     {
         // idの値でメッセージを検索して取得
         $entertainer = Entertainer::findOrFail($id);
-        //$member = array();
         
         // メッセージを更新
         $entertainer->name = $request->name;
@@ -422,15 +426,20 @@ class EntertainersController extends Controller
         $entertainer->youtube = $request->youtube;
         $entertainer->tiktok = $request->tiktok;      
         $entertainer->office_id = $request->office_id;
-        //$member = $request->perfomer_id;
 
 //dd($request->perfomer_id);
 
 
-        $entertainer->perfomers()->sync($request->perfomer_id); //中間テーブルを更新した時
+        /*
+        メンバー（中間テーブル）更新処理
+        */
+
+        $entertainer->perfomers()->sync($request->perfomer_id); //すでにあるperfomer_idを更新した場合
         
         if(!empty($request->newPerfomer_id)){
-            $entertainer->perfomers()->attach($request->newPerfomer_id); //中間テーブルを更新した時
+            $entertainer->perfomers()->attach($request->newPerfomer_id); //新しくperfomer_idを追加した場合
+        }
+        else{
         }
         
         $entertainer->save();

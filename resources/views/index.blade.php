@@ -11,12 +11,13 @@
                     <th>名前</th>
                     <th>ギャグ</th>                    
                     <th>芸歴</th>
-                    <th>SNS</th></th>                    
+                    <th>SNS</th>                
                 </tr>
             </thead>
             
             <tbody>
                 <tr>
+                    {{--名前リンク--}}
                     @empty($gacha)
                         <td>-</td>
                     @else
@@ -37,7 +38,7 @@
                     @empty($gacha)
                         <td>-</td>
                     @else
-                            <td>{{$gag}}</td>
+                        <td>{{$gag}}</td>
                     @endempty
                     
                     {{--芸歴リンク--}}
@@ -87,36 +88,34 @@
                         </thead>
                         
                         <tbody>
-                            @foreach ($birthday as $value)
+                            @foreach ($birthday as $perfomer)
                             
                             <tr>
+                                {{--名前リンク--}}
                                 <td nowrap>
-                                    {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
+                                    @include('commons.perfomer_name')
 
                                     {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
-                                    @if(!empty($value->entertainer[0]->name))
-                                        @if (strcmp($value->entertainer[0]->name, $value->name) == 0 )
-                                        @else
-                                            </br><font size="small">{!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}</font>
-                                        @endif
-                                    @endif
+                                    @include('commons.perfomer_combiNameSync')                                    
                                 </td>
                                 
                                 {{--年齢リンク--}}
                                 <td>
-                                {!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳
+                                    @include('commons.perfomer_age')歳
                                 </td>
 
                                 {{--芸歴リンク--}}
-                                @empty($value->active)
+                                @empty($perfomer->active)
                                     <td>-</td>
                                 @else
-                                    <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                                    <td nowrap>
+                                        @include('commons.perfomer_history')年
+                                    </td>
                                 @endempty
 
                                 {{--SNSリンク--}}
                                 <td>
-                                <a href="https://twitter.com/intent/tweet?hashtags={{$value->name}},誕生日,誕生日おめでとう" class="twitter-hashtags-btn" target="_blank">
+                                <a href="https://twitter.com/intent/tweet?hashtags={{$perfomer->name}},誕生日,誕生日おめでとう" class="twitter-hashtags-btn" target="_blank">
                                   <img src="../icon/twitter.png" width="30" alt="Twitterでお祝いメッセージを">
                                 </a>
                                 </td>
@@ -127,7 +126,11 @@
             </div>
             
             
-    @can('admin-only') {{-- システム管理者権限のみに表示される --}}
+            
+    {{-- 
+            システム管理者権限のみに表示される 
+                                                    --}}        
+    @can('admin-only')
 
         本日誕生日の芸人さん、おめでとうございます^^
             @foreach ($birthday as $value)
@@ -156,14 +159,23 @@
                         </thead>
                         
                         <tbody>
-                            @foreach ($birthdayTomorrow as $value)
+                            @foreach ($birthdayTomorrow as $perfomer)
                             <tr>
-                                <td nowrap>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
-                                <td>{!! link_to_route('lists.age2List', $now->diffInYears($value->birthday), ['yearsOld' => $now->diffInYears($value->birthday)]) !!}歳</td>
-                                @empty($value->active)
+                                {{--名前リンク--}}
+                                <td nowrap>
+                                    @include('commons.perfomer_name')
+                                </td>
+                                {{--年齢リンク--}}
+                                <td>
+                                    @include('commons.perfomer_age')歳
+                                </td>
+                                {{--芸歴リンク--}}
+                                @empty($perfomer->active)
                                     <td>-</td>
                                 @else
-                                    <td nowrap>{!! link_to_route('lists.historyList', $now->diffInYears($value->active), ['year' => $now->diffInYears($value->active)]) !!}年</td>
+                                    <td nowrap>
+                                    @include('commons.perfomer_history')年
+                                    </td>
                                 @endempty
                             </tr>
                             @endforeach
@@ -287,6 +299,9 @@
             </tbody>
         </table>
 
+
+
+
 <h2 class="mt-5 pb-2">実はNSC出身な芸人</h2>
         <table class="table table-striped">
             <thead>
@@ -303,12 +318,7 @@
                         <td nowrap>@include('commons.perfomer_name')
 
                         {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
-                        @if(!empty($perfomer->entertainer[0]->name))
-                            @if (strcmp($perfomer->entertainer[0]->name, $perfomer->name) == 0 )
-                            @else
-                                </br><font size="small">{!! link_to_route('entertainers.show', $perfomer->entertainer[0]->name, $perfomer->entertainer[0]->id) !!}</font>
-                            @endif
-                        @endif
+                        @include('commons.perfomer_combiNameSync')                                    
 
                     </td>
                     {{--事務所など--}}                    

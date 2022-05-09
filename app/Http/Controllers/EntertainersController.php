@@ -137,9 +137,14 @@ class EntertainersController extends Controller
         $gacha = request('gacha');
         if($gacha == '1'){
             $gacha = Perfomer::inRandomOrder()->whereNotNull('gag')->first();
-            $gag = explode('/',$gacha->gag);
-            $gag = $gag[ array_rand( $gag ) ] ;
-            //dd($gag);
+
+            $gag = $gacha->gag;            
+            if(strpos($gag,'/') !== false){
+                $gag = explode('/',$gacha->gag );
+                $gag = $gag[ array_rand( $gag ) ] ;
+            }
+
+            //dd($gacha->gag);
         }else{
             $gacha = null;
             $gag = null;

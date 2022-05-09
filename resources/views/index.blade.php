@@ -301,11 +301,15 @@
                 @foreach ($nsc as $perfomer)
                     <tr>
                         <td nowrap>@include('commons.perfomer_name')
-                    {{--コンビ名リンク　芸人と個人が同じ場合は表示しない--}}                    
+
+                        {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
                         @if(!empty($perfomer->entertainer[0]->name))
-                            <br></a>{!! link_to_route('entertainers.show', $perfomer->entertainer[0]->name, $perfomer->entertainer[0]->id) !!}
-                        @else
+                            @if (strcmp($perfomer->entertainer[0]->name, $perfomer->name) == 0 )
+                            @else
+                                </br><font size="small">{!! link_to_route('entertainers.show', $perfomer->entertainer[0]->name, $perfomer->entertainer[0]->id) !!}</font>
+                            @endif
                         @endif
+
                     </td>
                     {{--事務所など--}}                    
                     <td>

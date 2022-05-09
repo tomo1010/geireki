@@ -18,6 +18,7 @@
         <!--@endif-->
         
     @endcan
+    
 
 @if (session('message'))
     <div class="alert alert-danger">

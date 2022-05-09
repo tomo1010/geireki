@@ -2,6 +2,24 @@
 
 @section('content')
 
+
+    @can('admin-only') {{-- システム管理者権限のみに表示される --}}
+
+        {{-- 作成ページへのリンク --}}
+        @if (Auth::check())
+        {{-- 編集ページへのリンク --}}
+        {!! link_to_route('perfomers.edit', 'この個人を編集', ['id' => $perfomer->id], ['class' => 'btn btn-light']) !!}
+    
+        {{-- 削除フォーム --}}
+        {!! Form::model($perfomer, ['route' => ['perfomers.destroy', $perfomer->id], 'method' => 'delete']) !!}
+            {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
+        @else
+        @endif
+
+    @endcan
+
+
     <div class="container">
         <div class="row">
             <div class="col-lg-4"><h1 class="mt-3 pb-0">芸歴{{$now->diffInYears($perfomer->active)}}年目：</h1></div> 
@@ -312,20 +330,5 @@
         </div>
     </div>    
 
-
-    
-    
-    
-    {{-- 作成ページへのリンク --}}
-    @if (Auth::check())
-    {{-- 編集ページへのリンク --}}
-    {!! link_to_route('perfomers.edit', 'この個人を編集', ['id' => $perfomer->id], ['class' => 'btn btn-light']) !!}
-
-    {{-- 削除フォーム --}}
-    {!! Form::model($perfomer, ['route' => ['perfomers.destroy', $perfomer->id], 'method' => 'delete']) !!}
-        {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
-    {!! Form::close() !!}
-    @else
-    @endif
 
 @endsection

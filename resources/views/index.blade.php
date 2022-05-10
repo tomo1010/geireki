@@ -237,7 +237,6 @@
                 <tr>
                     <td><a href="{{$youtube->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}" alt="芸人さんの公式youtubeチャンネル"></a>@include('youtubes.favorite')</td>
                     <td>{!! link_to_route('entertainers.show', $youtube->entertainer->name, ['id' => $youtube->entertainer->id]) !!}
-                    <!--{{ $youtube->entertainer->name }}</td>-->
                     <td>{{ $youtube->user->name }}</td>
                     <td>{{ $youtube->created_at }}</td>                    
                 </tr>
@@ -259,15 +258,19 @@
             </thead>
             
             <tbody>
-                @foreach ($m1year as $value)
+                @foreach ($m1year as $entertainer)
                 <tr>
-                    <td>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}</td>
+                    <td>
+                    @include('commons.entertainer_name')
+                    </td>
 
                     {{--事務所リンク--}}                                
-                    @empty($value->office->office)
+                    @empty($entertainer->office->office)
                     <td>-</td>
                     @else
-                    <td>{!! link_to_route('lists.officeList', $value->office->office, [$value->office->id]) !!}</td>
+                    <td>
+                    @include('commons.entertainer_office')
+                    </td>
                     @endempty
                 </tr>
                 @endforeach
@@ -283,17 +286,19 @@
             <thead>
                 <tr>
                     <th>芸人</th>
-                    <!--<th>活動終了時期</th>-->
-                    <th><strong>芸歴</strong></th>
+                    <th>芸歴</th>
                 </tr>
             </thead>
             
             <tbody>
-                @foreach ($dissolutions as $dissolution)
+                @foreach ($dissolutions as $entertainer)
                 <tr>
-                    <td nowrap>{!! link_to_route('entertainers.show', $dissolution->name, ['id' => $dissolution->id]) !!}</td>
-                    <!--<td>{{ $dissolution->activeend->format('Y年m月d日') }}</td>-->
-                    <td>{{$now->diffInYears($dissolution->active)}}年</td>
+                    <td nowrap>
+                    @include('commons.entertainer_name')
+                    </td>
+                    <td>
+                    @include('commons.entertainer_history')年
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -323,7 +328,7 @@
                     </td>
                     {{--事務所など--}}                    
                     <td>
-                            {!! link_to_route('lists.officeList', $perfomer->office->office, $perfomer->office->id) !!}
+                        {!! link_to_route('lists.officeList', $perfomer->office->office, $perfomer->office->id) !!}
                     </td>
                     {{--芸歴--}}
                     <td>

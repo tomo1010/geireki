@@ -226,7 +226,7 @@
             <thead>
                 <tr>
                     <th>Youtube</th>
-                    <th>芸人</th>                    
+                    <th>芸人</th>                                        
                     <th>投稿者</th>
                     <th>投稿日</th>                    
                 </tr>
@@ -235,15 +235,28 @@
             <tbody>
                 @foreach ($youtubes as $youtube)
                 <tr>
-                    <td><a href="{{$youtube->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}" alt="芸人さんの公式youtubeチャンネル"></a>@include('youtubes.favorite')</td>
-                    <td>{!! link_to_route('entertainers.show', $youtube->entertainer->name, ['id' => $youtube->entertainer->id]) !!}
+                    <td>
+                        <a href="{{$youtube->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}" alt="おすすめYoutubeネタ動画" hspace="5" vspace="5"></a>
+                        </br>
+                        <span>
+                        <img src="{{asset('../icon/nicebutton.png')}}" width="30px">
+                    		<!-- 「いいね」の数を表示 -->
+                    		<span class="badge">
+                    			{{ $youtube->favoritesUser()->count() }}
+                    		</span>
+                        </span>
+                        @include('youtubes.favorite')
+                    </td>
+                    <td nowrap>
+                        {!! link_to_route('entertainers.show', $youtube->entertainer->name, ['id' => $youtube->entertainer->id]) !!}
+                    </td>
                     <td>{{ $youtube->user->name }}</td>
                     <td>{{ $youtube->created_at }}</td>                    
                 </tr>
                 @endforeach
             </tbody>
         </table>
-    Youtube動画を紹介するには<a href="{{route('login')}}">ログイン</a>が必要です。
+    「いいね」や「Youtube動画を紹介」するには<a href="{{route('login')}}">ログイン</a>が必要です。
 
 
 
@@ -341,7 +354,10 @@
                 @endforeach
             </tbody>
         </table>
-
+        
+{{--　404エラー        
+{!! link_to_route('perfomers.nsc', '一覧', ) !!}
+--}}
 
 <h2 class="mt-5 pb-2">M1グランプリ2021 結果</h2>
         <table class="table table-striped">

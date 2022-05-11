@@ -88,6 +88,7 @@ Route::get('basics.xml', 'SitemapController@basics')->name('sitemap-basics');
 });
 
 
+
 //ユーザのみ
 Route::group(['middleware' => ['auth']], function () {
     

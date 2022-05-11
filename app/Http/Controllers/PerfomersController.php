@@ -12,6 +12,7 @@ use Carbon\Carbon; //芸歴計算
 
 class PerfomersController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -40,6 +41,31 @@ class PerfomersController extends Controller
             'perfomers' => $perfomers,
             'now' => new \Carbon\Carbon(),
         ]);
+    }
+
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function nsc()
+    {
+        //NSC出身だけど非吉本の芸人の一覧
+        $nsc = Perfomer::whereHas('office',function($query){
+            $query->where('id','!=','108');
+            $query->where('id','!=','146');            
+        })->where('school','like', '%NSC%')->take(10)->get();
+        
+        
+        // 一覧ビューで表示
+        return view('perfomers.nsc', [
+            'nsc' => $nsc,
+            'now' => new \Carbon\Carbon(),
+        ]);
+        
     }
 
 
@@ -300,7 +326,6 @@ class PerfomersController extends Controller
     {
         // yearの値で検索して取得
         $perfomer = Perfomer::whereBetween('office_id', [$year])->get();
-//dd($perfomer);
 
         // 編集ビューでそれを表示
         return view('perfomers.edit', [
@@ -310,6 +335,9 @@ class PerfomersController extends Controller
 
     
     
+
+   
+   
     
     
     /**
@@ -645,12 +673,6 @@ class PerfomersController extends Controller
             });
 
 
-
-
-
-
-
-
         $perfomers = $query->get();
         //dd($perfomers);
         
@@ -671,11 +693,6 @@ class PerfomersController extends Controller
         }
 
         
-
-
-
-
-
         /*一覧ビューで表示
         */
         return view('perfomers.hinaGacha', [
@@ -688,27 +705,7 @@ class PerfomersController extends Controller
     
     
     
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function nsc()
-    {
-        
-        //NSC出身だけど非吉本の芸人の一覧
-        $nsc = Perfomer::whereHas('office',function($query){
-            $query->where('id','!=','108');
-            $query->where('id','!=','146');            
-        })->where('school','like', '%NSC%')->take(10)->get();
-        
-        
-        // 一覧ビューで表示
-        return view('perfomers.nsc', [
-            'nsc' => $nsc,
-            'now' => new \Carbon\Carbon(),
-        ]);
-    }
+
     
     
 }

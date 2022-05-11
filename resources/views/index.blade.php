@@ -250,7 +250,7 @@
                     <td nowrap>
                         {!! link_to_route('entertainers.show', $youtube->entertainer->name, ['id' => $youtube->entertainer->id]) !!}
                     </td>
-                    <td>{{ $youtube->user->name }}</td>
+                    <td>{{$youtube->user->name}}</td>
                     <td>{{ $youtube->created_at }}</td>                    
                 </tr>
                 @endforeach

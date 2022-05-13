@@ -72,6 +72,28 @@ class UsersController extends Controller
     
     
     
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        // idの値で検索して取得
+        $user = User::findOrFail($id);
+
+        // 編集ビューでそれを表示
+        return view('users.edit', [
+            'user' => $user,
+        ]);
+    }
+    
+    
+    
+    
+    
+    
     
     public function favorites($id)
     {

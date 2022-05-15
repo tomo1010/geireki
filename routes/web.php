@@ -26,8 +26,9 @@ Route::get('entertainers/{id}', 'EntertainersController@show')->name('entertaine
 
 //個人データ
 Route::get('perfomers/all', 'PerfomersController@all')->name('perfomers.all');
-Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');
 Route::get('perfomers/nsc', 'PerfomersController@nsc')->name('perfomers.nsc');
+Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show');
+
 
 
 //ガチャ
@@ -95,10 +96,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'users/{id}'], function () {
         Route::get('favorite', 'FavoriteController@store')->name('user.favorite');
         Route::get('unfavorite', 'FavoriteController@destroy')->name('user.unfavorite');
-        Route::get('favorites', 'UsersController@favorites')->name('users.favorites');        
+        Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
+
+        Route::get('edit', 'UsersController@edit')->name('users.edit'); 
+        Route::put('/', 'UsersController@update')->name('users.update');        
     });    
     
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show',]]);
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show', ]]);
     Route::resource('youtubes', 'YoutubesController');
 
     });

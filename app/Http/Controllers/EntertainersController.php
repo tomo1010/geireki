@@ -435,13 +435,14 @@ class EntertainersController extends Controller
         メンバー（中間テーブル）更新処理
         */
 
-        $entertainer->perfomers()->sync($request->perfomer_id); //すでにあるperfomer_idを更新した場合
+
         
-        if(!empty($request->newPerfomer_id)){
-            $entertainer->perfomers()->attach($request->newPerfomer_id); //新しくperfomer_idを追加した場合
-        }
-        else{
-        }
+        // if(!empty($request->newPerfomer_id)){
+        //     $entertainer->perfomers()->attach($request->newPerfomer_id); //新しくperfomer_idを追加した場合
+        // }
+//        else{
+            $entertainer->perfomers()->sync(array_filter($request->perfomer_id)); //すでにあるperfomer_idを更新した場合            
+//        }
         
         $entertainer->save();
 

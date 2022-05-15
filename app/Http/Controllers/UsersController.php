@@ -72,6 +72,54 @@ class UsersController extends Controller
     
     
     
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        // idの値で検索して取得
+        $user = User::findOrFail($id);
+
+        // 編集ビューでそれを表示
+        return view('users.edit', [
+            'user' => $user,
+        ]);
+    }
+    
+    
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        // idの値でメッセージを検索して取得
+        $user = User::findOrFail($id);
+
+        // メッセージを更新
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = \Hash::make($request->password);
+        $user->birthday = $request->birthday;
+        $user->birthplace = $request->birthplace;        
+
+        $user->save();
+
+        //dd($request->back_url);
+
+        return back();        
+    }
+    
+    
+
+    
     
     public function favorites($id)
     {

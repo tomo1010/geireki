@@ -69,7 +69,7 @@ class EntertainersController extends Controller
         新着芸人　更新芸人
         */
         
-        $creates = Entertainer::orderBy('created_at', 'desc')->take(3)->get();
+        $creates = Entertainer::orderBy('created_at', 'asc')->take(3)->get();
         //$updates = Entertainer::orderBy('update_at', 'decs')->take(3)->get();        
 
 //dd($creates);

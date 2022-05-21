@@ -54,7 +54,7 @@ class Entertainer extends Model
     //この芸人に紐付けされた受賞歴
     Public function award()
     {
-        // Profileモデルのデータを引っ張てくる
+        // モデルのデータを引っ張てくる
         return $this->hasMany(Award::class);
     }
     

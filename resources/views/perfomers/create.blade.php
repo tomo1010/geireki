@@ -10,7 +10,10 @@
             {!! Form::model($perfomer, ['route' => 'perfomers.store']) !!}
 
                 <div class="form-group">
-                    {!! Form::label('name', '名前:') !!}
+                    {!! Form::label('office_id', '※事務所id:') !!}
+                    {!! Form::text('office_id', null, ['class' => 'form-control']) !!}                    
+
+                    {!! Form::label('name', '※名前:') !!}
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}
                     {!! Form::label('realname', '本名:') !!}
                     {!! Form::text('realname', null, ['class' => 'form-control']) !!}
@@ -67,8 +70,7 @@
 
                     <!--{!! Form::label('entertainer_id', '芸人id:') !!}-->
                     <!--{!! Form::text('entertainer_id', null, ['class' => 'form-control']) !!}-->
-                    {!! Form::label('office_id', '事務所id:') !!}
-                    {!! Form::text('office_id', null, ['class' => 'form-control']) !!}                    
+
                 </div>
 
                 {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}

@@ -74,6 +74,7 @@ class EntertainersController extends Controller
 
 //dd($creates);
 
+
         /*
         新着ネタ動画　Youtube動画一覧
         */

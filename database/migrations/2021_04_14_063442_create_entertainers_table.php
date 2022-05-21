@@ -15,7 +15,7 @@ class CreateEntertainersTable extends Migration
     {
         Schema::create('entertainers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('office_id');
+            $table->unsignedBigInteger('office_id')->nullable();
             $table->string('name');
             $table->integer('numberofpeople');
             $table->integer('gender');
@@ -26,12 +26,12 @@ class CreateEntertainersTable extends Migration
             $table->string('oldname')->nullable();
             $table->string('brain')->nullable();
             $table->string('encounter')->nullable(); 
-            $table->string('named')->nullable();             
-            $table->text('memo')->nullable();                         
+            $table->string('named')->nullable();
+            $table->text('memo')->nullable();                    
             $table->string('official')->nullable();
             $table->string('twitter')->nullable();
             $table->string('youtube')->nullable();
-            $table->string('tiktok')->nullable();            
+            $table->string('tiktok')->nullable();
             
             $table->timestamps();
             

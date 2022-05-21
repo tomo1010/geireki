@@ -10,11 +10,14 @@
             {!! Form::model($entertainer, ['route' => 'entertainers.store']) !!}
 
                 <div class="form-group">
-                    {!! Form::label('name', '名前:') !!}
+                    {!! Form::label('office_id', '※事務所id:') !!} 
+                    {!! Form::text('office_id', null, ['class' => 'form-control']) !!}                    
+
+                    {!! Form::label('name', '※名前:') !!}
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                    {!! Form::label('numberofpeople', '人数:') !!}
+                    {!! Form::label('numberofpeople', '※人数:') !!}
                     {!! Form::text('numberofpeople', null, ['class' => 'form-control']) !!}
-                    {!! Form::label('gender', '性別:') !!}
+                    {!! Form::label('gender', '※性別:') !!}
                     {!! Form::text('gender', null, ['class' => 'form-control']) !!}
                     {!! Form::label('alias', '別名・略名:') !!}
                     {!! Form::text('alias', null, ['class' => 'form-control']) !!}
@@ -42,8 +45,6 @@
                     {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
                     {!! Form::label('tiktok', 'TikTokチャンネル:') !!}
                     {!! Form::text('tiktok', null, ['class' => 'form-control']) !!}                    
-                    {!! Form::label('office_id', '事務所id:') !!}
-                    {!! Form::text('office_id', null, ['class' => 'form-control']) !!}
                 </div>
 
                 {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}

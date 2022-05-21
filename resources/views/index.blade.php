@@ -186,8 +186,8 @@
     </div>        
 
 
-{{--
-    <h2 class="mt-5 pb-2" >新着の芸人</h2>    
+
+    <h2 class="mt-5 pb-2" >新しく登録された芸人</h2>    
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -207,8 +207,8 @@
                     <td>
                         @include('commons.entertainer_office')
                     </td>
---}}    
-                    {{--芸歴リンク
+
+                    {{--芸歴リンク--}}
                     @empty($entertainer->active)
                         <td>-</td>
                     @else
@@ -218,7 +218,7 @@
                 @endforeach
             </tbody>
         </table>
---}}
+
 
 
     <h2 class="mt-5 pb-2">新着ネタ動画</h2>

@@ -221,6 +221,30 @@
 
 
 
+    <h2 class="mt-5 pb-2" >今年の大会結果</h2>    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>大会名/コンビ名</th>
+                    <th>事務所</th>                    
+                    <th>芸歴</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($awards as $award)
+                <tr>
+                    <td nowrap>{{$award->award}}<br>@include('commons.award_entertainerName')</td>
+                    <td>@include('commons.award_entertainerOffice')</td>
+                    <td>@include('commons.award_entertainerHistory')年</td>
+
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+
+
     <h2 class="mt-5 pb-2">新着ネタ動画</h2>
         <table class="table table-striped">
             <thead>

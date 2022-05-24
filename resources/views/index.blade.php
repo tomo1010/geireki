@@ -212,7 +212,7 @@
                     @empty($entertainer->active)
                         <td>-</td>
                     @else
-                        <td>@include('commons.entertainer_history')</td>
+                        <td>@include('commons.entertainer_history')年</td>
                     @endempty
                 </tr>
                 @endforeach

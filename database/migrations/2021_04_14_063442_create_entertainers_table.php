@@ -15,7 +15,7 @@ class CreateEntertainersTable extends Migration
     {
         Schema::create('entertainers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('office_id')->nullable();
+            $table->unsignedBigInteger('office_id');
             $table->string('name');
             $table->integer('numberofpeople');
             $table->integer('gender');

@@ -431,5 +431,6 @@
             </tbody>
         </table>
 
+<p style="text-align: right">最終更新：2022.5.26</p>
 
 @endsection

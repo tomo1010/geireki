@@ -243,6 +243,7 @@
             </tbody>
         </table>
 
+賞レースの年間スケジュールは<a href="{{route('lists.awardCal')}}">こちら</a>
 
 
     <h2 class="mt-5 pb-2">新着ネタ動画</h2>

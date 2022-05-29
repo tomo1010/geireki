@@ -52,7 +52,10 @@ class EntertainersController extends Controller
                     $birthday[] = $value;
                 }
             }
-        }    
+        }
+    
+
+        
 
         //明日誕生日を取得        
         foreach($perfomers as $value){

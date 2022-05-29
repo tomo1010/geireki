@@ -234,7 +234,7 @@
             <tbody>
                 @foreach ($awards as $award)
                 <tr>
-                    <td nowrap>{{$award->award}}<br>@include('commons.award_entertainerName')</td>
+                    <td>{{$award->award}}<br>@include('commons.award_entertainerName')</td>
                     <td>@include('commons.award_entertainerOffice')</td>
                     <td>@include('commons.award_entertainerHistory')年</td>
 

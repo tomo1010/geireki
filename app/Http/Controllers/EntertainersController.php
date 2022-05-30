@@ -229,19 +229,15 @@ class EntertainersController extends Controller
     public function store(Request $request)
     {
         
-        /** バリデーション
+        
+        // バリデーション
         $request->validate([
-            'name' => 'required|max:255',
-            'numberofpeople' => 'required|max:255',
-            'alias' => 'required|max:255',
-            'active' => 'required|max:255',
-            'activeend' => 'required|max:255',
-            'master' => 'required|max:255',
-            'oldname' => 'required|max:255',
-            'official' => 'required|max:255',
-            'youtube' => 'required|max:255',
+            'name' => 'required|max:255|unique:entertainers,name',
+            'numberofpeople' => 'required|max:10',
+            'gender' => 'required|max:10',
+            'office_id' => 'required|max:10',                
         ]);
-        */
+        
 
         // 作成
         $entertainer = new Entertainer;

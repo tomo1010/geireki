@@ -2,24 +2,34 @@
 
 @section('content')
 
-        {{--年の差
-        <div class="col-lg-6"><h2 class="mt-5 pb-2 display-5 border-bottom">年代別一覧</h2>
-            <table class="table table-striped">
-                <tbody>
-                <?php $year=1; ?>                    
-                   @foreach ($age as $value)
+
+    <center><h1 class="mt-5 pb-2">年の差　芸人一覧</h1></center>
+
+    <div class="container">
+        <div class="row">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <td>
-                                <?php echo $year; ?>0代　
-                            </td>
-                            <td align="right">
-                                <a href="{{ route('lists.ageList', ['year'=>$year]) }}">{{$value}}</a>人
-                                <?php $year++; ?>
-                            </td>
+                            <th>名前</th>
+                            <th>年の差</th>
+                            <th>芸歴</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($results as $result)
+                            <tr>
+                                <td nowrap></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>@include('commons.entertainer_history')</td>
+                            </tr>                            
+                        @endforeach
+                    </tbody>   
+                </table>
         </div>
-        --}}
+    </div>
+
 @endsection

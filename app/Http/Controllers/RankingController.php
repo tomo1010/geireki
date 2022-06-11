@@ -42,86 +42,42 @@ class RankingController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
+    /*
+    年の差コンビ
+    */
+
     public function yearDiff()
     {
 
-
-        // $entertainers = Entertainer::with(['perfomers.office'])
-        // ->where('numberofpeople', '=','2')
-        // ->isEmpty('perfomers->birthday')
-        // ->find(30);  
-        
-        
-        // $entertainers = Entertainer::with(['perfomers.office'])
-        // ->where('numberofpeople', '=','2')
-        // ->get();          
-
-
-        $entertainers = Entertainer::with(['perfomers.office'])
+        $entertainers = Entertainer::withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
         ->whereHas('perfomers', function ($query) {
-            $query->where('birthday','!=','null');
-        })->where('numberofpeople', '=','2')->take(10)->get();  
-
+            $query->where('birthday','!=', NULL);
+        })->get();  
 
 //dd($entertainers);
-//dd($entertainers[100]->perfomers[0]->birthday);
-//dd($entertainers[100]->perfomers[1]->birthday);
+//dd($entertainers[0]->perfomers[0]);
+//dd($entertainers[1]->perfomers[1]);
 
-
-$result = array();
-
-foreach($entertainers as $entertainer){
-
-
-    //$first = new Carbon($entertainer->perfomers[0]->birthday);
-    //dd($first);
-    //$second = new Carbon($entertainer->perfomers[1]->birthday);
-    //dd($second);
-
-    $first = $entertainer->perfomers[0]->birthday;
-    $second = $entertainer->perfomers[1]->birthday;    
-
-    $result[] = $first->diffInYears($second);
-    //dd($result);
-}
-
-//  foreach($result as $value){
-//      dd($value);
-//  }
-
-
-
-dd($result[]);
-
-
-
-
-        $from = Carbon::now()->subYear($year)->format('Y-m-d');
-        $to = Carbon::now()->subYear($year+10)->format('Y-m-d');
-
-
-
-
-
-        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
-        $disband = request('disband');
-
-        if($disband == '1'){
-
-            $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
-
-        }else{
-            
-            $perfomer = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
-        }
- 
-
+        $results = array(); //比較結果を配列へ格納
         
+        foreach($entertainers as $entertainer){
+        
+            $first = $entertainer->perfomers[0]->birthday;
+            $second = $entertainer->perfomers[1]->birthday;    
+            $results[] = $first->diffInYears($second);
+        }
+        
+
+        arsort($results);
+
+//dd($results);
+
+
         // 一覧ビューで表示
-        return view('lists.ageList', [
-            'perfomer' => $perfomer,
-            'year' => $year,
-            'now' => new \Carbon\Carbon(),
+        return view('ranking.yearDiff', [
+            'results' => $results,
+            'entertainers' => $entertainers,
         ]);
     } 
     
@@ -205,7 +161,7 @@ dd($result[]);
         //$count = $youtubes->loadRelationshipCounts();                
 
 //dd($count);
-dd($youtubes);
+//dd($youtubes);
 
         //Youtube動画をカウント
         if (empty($count)) {
@@ -262,7 +218,7 @@ dd($youtubes);
     {
 
         //おすすめネタ動画　Youtube動画一覧
-        $talls = Perfomer::with(['entertainer'])->orderBy('height', 'desc')->paginate(15);
+        $talls = Perfomer::with(['entertainer'])->where('height', '!=', '')->orderBy('height', 'desc')->paginate(15);
 
 //dd($talls);
         
@@ -284,8 +240,8 @@ dd($youtubes);
     public function short()
     {
 
-        //おすすめネタ動画　Youtube動画一覧
-        $shorts = Perfomer::with(['entertainer'])->orderBy('height', 'asc')->paginate(15);
+        //
+        $shorts = Perfomer::with(['entertainer'])->where('height', '!=', '')->orderBy('height', 'asc')->paginate(10);
 
         
         // 一覧ビューで表示
@@ -293,6 +249,8 @@ dd($youtubes);
             'shorts' => $shorts,
         ]);
     }
+
+
 
 
 
@@ -306,7 +264,7 @@ dd($youtubes);
     public function award()
     {
 
-        //おすすめネタ動画　Youtube動画一覧
+        //受賞数でランキング
         $awards = Entertainer::with(['award'])->take(10)->paginate(15);
 //dd($awards[0]);
         $count = array();
@@ -326,6 +284,87 @@ dd($youtubes);
             'count' => $count,            
         ]);
     }
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+    /*
+    身長の差コンビ
+    */
+
+    public function heightDiff()
+    {
+
+        $entertainers = Entertainer::with(['perfomers.office'])->where('numberofpeople', '=','2')->where('activeend', NULL)
+        ->whereHas('perfomers', function ($query) {
+            $query->where('height','!=', NULL);
+        })->take(10)->get();  
+
+
+//dd($entertainers[0]->perfomers[0]);
+//dd($entertainers[0]->perfomers[1]);
+
+
+        $result = array();
+        
+        foreach($entertainers as $entertainer){
+        
+            $first = $entertainer->perfomers[0]->height;
+            $second = $entertainer->perfomers[1]->height;    
+        
+            $result = abs($first - $second);
+            dd($result);
+        }
+        
+        //  foreach($result as $value){
+        //      dd($value);
+        //  }
+        
+        
+        
+        dd($result[]);
+
+
+
+
+        $from = Carbon::now()->subYear($year)->format('Y-m-d');
+        $to = Carbon::now()->subYear($year+10)->format('Y-m-d');
+
+
+
+
+
+        //getパラメータから「解散済みを含めるか？」のチェックを受け取る        
+        $disband = request('disband');
+
+        if($disband == '1'){
+
+            $perfomer = Perfomer::with(['entertainer.office'])->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+
+        }else{
+            
+            $perfomer = Perfomer::with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('birthday','desc')->paginate(15);
+        }
+ 
+
+        
+        // 一覧ビューで表示
+        return view('lists.ageList', [
+            'perfomer' => $perfomer,
+            'year' => $year,
+            'now' => new \Carbon\Carbon(),
+        ]);
+    } 
+
+
+
+
 
     
     

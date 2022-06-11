@@ -62,7 +62,7 @@ Route::get('ranking/youtubeCount', 'RankingController@youtubeCount')->name('rank
 Route::get('ranking/tall', 'RankingController@tall')->name('ranking.tall');
 Route::get('ranking/short', 'RankingController@short')->name('ranking.short');
 Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
-
+Route::get('ranking/heightDiff', 'RankingController@heightDiff')->name('ranking.heightDiff');
 
 
 

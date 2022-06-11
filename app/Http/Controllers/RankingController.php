@@ -68,7 +68,6 @@ class RankingController extends Controller
             $results[] = $first->diffInYears($second);
         }
         
-
         arsort($results);
 
 //dd($results);

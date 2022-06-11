@@ -16,15 +16,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($results as $result)
+                        @foreach ($results as $key => $value)
                             <tr>
-                                <td nowrap></td>
+                                <td nowrap>{{$entertainers[$key]->name}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$value}}</td>
                             </tr>
                             <tr>
                                 <td></td>
-                            </tr>
-                            <tr>
-                                <td>@include('commons.entertainer_history')</td>
                             </tr>                            
                         @endforeach
                     </tbody>   

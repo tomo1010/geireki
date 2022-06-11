@@ -41,7 +41,11 @@ class EntertainersController extends Controller
         $birthdayTomorrow = array();
         //$limit = $today->subYear(90); 表示する年齢制限
         
-        $perfomers = Perfomer::with(['entertainer'])->whereNull('deth')->whereNull('activeend')->orderBy('birthday', 'asc')->get();
+        // $perfomers = Perfomer::with(['entertainer'])->whereNull('deth')->whereNull('activeend')->orderBy('birthday', 'asc')->get();
+
+        $perfomers = Perfomer::with(['entertainer'=> function ($query) {
+                         $query->whereNull('activeend');
+                     }])->whereNull('deth')->whereNull('activeend')->orderBy('birthday', 'asc')->get();
 
 
         //本日誕生日を取得

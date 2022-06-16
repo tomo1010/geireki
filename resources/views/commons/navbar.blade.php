@@ -109,7 +109,6 @@
 {!! link_to_route('lists.birthday', '誕生日', [], ['class' => 'btn btn-primary']) !!}
 {!! link_to_route('lists.pref', '出身', [], ['class' => 'btn btn-primary']) !!}
 {!! link_to_route('lists.award', '受賞歴', [], ['class' => 'btn btn-primary']) !!}
-{!! link_to_route('ranking.index', 'ランキング', [], ['class' => 'btn btn-primary']) !!}
 </p>
 
 

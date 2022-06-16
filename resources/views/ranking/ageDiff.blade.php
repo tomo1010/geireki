@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <center><h1 class="mt-5 pb-2">芸人・コンビの年の差ランキング</h1></center>
 
     <div class="container">
@@ -28,5 +29,5 @@
                 </table>
         </div>
     </div>
-    
+
 @endsection

@@ -237,6 +237,7 @@
     @include('commons.tab_sync')
     
     <div class="tab-content">
+        
         <div id="senior" class="tab-pane">
             <h2 class="mt-4 pb-1">１年先輩（個人）</h2>
             <table class="table table-striped">

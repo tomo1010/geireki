@@ -35,6 +35,7 @@ Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show')
 Route::get('perfomers/hinaGacha', 'PerfomersController@hinaGacha')->name('hinaGacha');
 
 
+
 //一覧表示
 Route::get('lists/history', 'ListsController@history')->name('lists.history');
 Route::get('lists/history/{year}', 'ListsController@historyList')->name('lists.historyList');
@@ -136,6 +137,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     //Route::resource('members', 'MembersController');
     // Route::get('members/create', 'MembersController@create')->name('members.create');    
 
+
+    //タグ
+    Route::resource('tags', 'TagsController');
+
     
     /*
     csv処理
@@ -181,6 +186,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     Route::get('csv/favorite', 'CsvController@uploadFavorite');
     Route::post('csv/favorite', 'CsvController@importFavorite')->name('csv.importFavorite');    
     Route::get('csv/favorite_dl', 'CsvController@exportFavorite')->name('csv.exportFavorite'); 
+    
+    
+    // tagデータ
+    Route::get('csv/tag', 'CsvController@uploadTag');
+    Route::post('csv/tag', 'CsvController@importTag')->name('csv.importTag');    
+    Route::get('csv/tag_dl', 'CsvController@exportTag')->name('csv.exportTag');     
     
 
 });

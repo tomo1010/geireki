@@ -102,11 +102,25 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
 
         Route::get('edit', 'UsersController@edit')->name('users.edit'); 
-        Route::put('/', 'UsersController@update')->name('users.update');        
+        Route::put('/', 'UsersController@update')->name('users.update');
+
+    });    
+
+
+    Route::group(['prefix' => 'entertainers/{id}'], function () {
+        Route::get('tagging', 'TagEntertainerController@store')->name('entertainer.tagging');        
+        //Route::post('tagging', 'TagEntertainerController@store')->name('entertainer.tagging');
+        Route::delete('untagging', 'TagentErtainerController@destroy')->name('entertainer.untagging');
+        
+        Route::get('followings', 'UsersController@followings')->name('users.followings');
+        Route::get('followers', 'UsersController@followers')->name('users.followers');
+        
+        
     });    
     
     Route::resource('users', 'UsersController', ['only' => ['index', 'show', ]]);
     Route::resource('youtubes', 'YoutubesController');
+    Route::resource('tagentertainer', 'TagEntertainerController');    
 
     });
 

@@ -235,6 +235,18 @@
         {{-- ログインページへのリンク 
         ※YoutubeのURLを投稿するには{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}が必要です。--}} 
     @endif
+    
+    
+    {{--Tagづけボタン    --}}
+
+@foreach($tags as $tag)
+        {!! Form::open(['route' => 'tagentertainer.store']) !!}
+        <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
+        <input type="hidden" value="{{$tag->id}}" name="tag_id">	    
+        {!! Form::button('$tag->name', ['class' => 'btn btn-success btn-sm','type' => 'submit']) !!}
+	    {!! Form::close() !!} 
+@endforeach
+    
 
 </br></br>    
     

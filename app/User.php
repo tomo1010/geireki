@@ -96,6 +96,7 @@ class User extends Authenticatable
     }
      
      
+     
     /**
     * $youtube_idで指定されたYouutbe動画をのお気に入り登録を外す。
     *
@@ -137,6 +138,20 @@ class User extends Authenticatable
     }
     
     
+    
+    
+    //このユーザに紐付けされたTag
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'entertainer_tag', 'user_id', 'tag_id')->withTimestamps();
+    }
+
+
+    //このユーザにtagづけけされた芸人
+    public function entertainers()
+    {
+        return $this->belongsToMany(Entertainer::class, 'entertainer_tag', 'user_id', 'entertainer_id')->withTimestamps();
+    }    
     
     
 }

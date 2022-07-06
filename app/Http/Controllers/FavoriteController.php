@@ -21,9 +21,9 @@ class FavoriteController extends Controller
     }
 
     /**
-     * ユーザをアンフォローするアクション。
+     *　Youtubeをお気に入りから外すアクション。
      *
-     * @param  $id  相手ユーザのid
+     * @param  $id  youtubeのid
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

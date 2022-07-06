@@ -11,6 +11,7 @@ use App\Member;
 use App\Award; 
 use App\Youtube;
 use App\Favorite;
+use App\Tag;
 
 use Goodby\CSV\Import\Standard\LexerConfig; //csvインポート
 use Goodby\CSV\Import\Standard\Lexer;
@@ -619,10 +620,10 @@ class CsvController extends Controller
         // ★★登録処理
         $count = 0;
         foreach($dataList as $row){
-            Favorite::insert([
-                //'id' => $row[0], 
-                'category' => $row[0], //変更点
-                'tag' => $row[1], //変更点
+            Tag::insert([ //変更点
+                'id' => $row[0], 
+                'category' => $row[1], //変更点
+                'name' => $row[2], //変更点
                 ]);
             $count++;
         }

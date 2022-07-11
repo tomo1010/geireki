@@ -236,17 +236,54 @@
         ※YoutubeのURLを投稿するには{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}が必要です。--}} 
     @endif
     
-    
-    {{--Tagづけボタン    --}}
 
-@foreach($tags as $tag)
-        {!! Form::open(['route' => 'tagentertainer.store']) !!}
-        <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
-        <input type="hidden" value="{{$tag->id}}" name="tag_id">	    
-        {!! Form::button('$tag->name', ['class' => 'btn btn-success btn-sm','type' => 'submit']) !!}
-	    {!! Form::close() !!} 
-@endforeach
     
+
+    
+    {{-- Tagボタン --}}
+    
+                            {{--@foreach ($entertainer->perfomers as $perfomer)--}}
+            {{--@foreach($tags->category as $category)--}}    
+
+    @foreach($tags as $tag)
+        @if (Auth::check())
+
+<table class="table">
+<tr>
+<td></a>{{$tag->category}}</td>
+
+                @if (Auth::user()->is_tagging($tag->id,$entertainer->id))
+<td>    
+                    {{-- お気に入りを外す --}}
+                    {!! Form::open(['method'=>'delete', 'route' => 'tagentertainer.destroy']) !!}
+                        <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
+                        <input type="hidden" value="{{$tag->id}}" name="tag_id">	    
+                        <button type="submit" class="btn btn-success btn-sm">
+                        {{$tag->name}}
+                        </button>
+            	    {!! Form::close() !!} 
+</td>            	
+                @else
+<td>                
+                    {{-- お気に入りにする --}}
+                    {!! Form::open(['route' => 'tagentertainer.store']) !!}
+                        <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
+                        <input type="hidden" value="{{$tag->id}}" name="tag_id">
+                        <button type="submit" class="btn btn-secondary btn-sm">
+                        {{$tag->name}}
+                        </button>                
+            	    {!! Form::close() !!} 
+</td>                   
+                @endif
+
+        @else
+        @endif
+</tr>
+</table>
+
+    @endforeach
+    
+
 
 </br></br>    
     

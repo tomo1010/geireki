@@ -108,15 +108,13 @@ class User extends Authenticatable
         // すでにお気に入りしているかの確認
         $exist = $this->is_favorite($youtubeId);
         
-        // // 相手が自分自身かどうかの確認
-        // $its_me = $this->id == $youtubeId;
         if ($exist) {
             
-        // すでにフォローしていればフォローを外す
-        $this->favoritesyoutubes()->detach($youtubeId);
-        return true;
+            // すでにフォローしていればフォローを外す
+            $this->favoritesyoutubes()->detach($youtubeId);
+            return true;
         
-    } else {
+        } else {
         
         // 未フォローであれば何もしない
         return false;
@@ -140,6 +138,8 @@ class User extends Authenticatable
     
     
     
+    
+    
     //このユーザに紐付けされたTag
     public function tags()
     {
@@ -153,5 +153,84 @@ class User extends Authenticatable
         return $this->belongsToMany(Entertainer::class, 'entertainer_tag', 'user_id', 'entertainer_id')->withTimestamps();
     }    
     
+
+
+
+
+    /**
+    * $tag_idで指定されたtagを登録する。
+    *
+    * @param int $tagId
+    * @return bool
+    */
+    public function tagging($request)
+    {
+        // すでにタグ登録しているかの確認
+        $exist = $this->is_tagging($request->tag_id,$request->entertainer_id);
+        
+//dd($exist);
+        
+        if ($exist) {
+            
+            // すでにタグ済みなら何もしない
+            return false;
+        
+        } else {
+        
+            // 認証済みユーザが芸人のタグ登録する
+            $this->entertainers()->attach($request->entertainer_id, ['tag_id' => $request->tag_id]);            
+            return true;
+        }
+     
+    }
+     
+     
+
+    /**
+    * $tag_idで指定されたtagり登録を外す。
+    *
+    * @param int $tagId
+    * @return bool
+    */
+    public function untagging($request)
+    {
+        // すでにタグしているかの確認
+        $exist = $this->is_tagging($request->tag_id,$request->entertainer_id);
+
+//dd($request);        
+//dd($exist);
+        
+        if ($exist) {
+            
+            // すでにタグ済みならタグを外す
+            $this->entertainers()->detach($request->entertainer_id, ['tag_id' => $request->tag_id]);
+            return true;
+        
+        } else {
+            
+            // 未フォローであれば何もしない
+            return false;
+        }
+    }
+     
+     
+     
+    /**
+    * 指定された $tagIdのtagをこの芸人がタグ登録済みであるか調べる。登録済みならtrueを返す。
+    *
+    * @param int $tagId
+    * @return bool
+    */
+    public function is_tagging($tagId,$entertainerId)
+    {
+        // すでにタグ登録されてるかどうか
+        return $this->entertainers()->where('entertainer_id', $entertainerId)->whereHas('tags',function($query) use($tagId) {
+                        $query->where('tag_id', $tagId);
+                    })->exists();
+dd($exists);
+    }
+
+
+
     
 }

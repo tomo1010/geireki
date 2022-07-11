@@ -108,10 +108,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::group(['prefix' => 'entertainers/{id}'], function () {
-        Route::get('tagging', 'TagEntertainerController@store')->name('entertainer.tagging');        
-        //Route::post('tagging', 'TagEntertainerController@store')->name('entertainer.tagging');
-        Route::delete('untagging', 'TagentErtainerController@destroy')->name('entertainer.untagging');
-        
         Route::get('followings', 'UsersController@followings')->name('users.followings');
         Route::get('followers', 'UsersController@followers')->name('users.followers');
         
@@ -120,7 +116,10 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::resource('users', 'UsersController', ['only' => ['index', 'show', ]]);
     Route::resource('youtubes', 'YoutubesController');
-    Route::resource('tagentertainer', 'TagEntertainerController');    
+
+
+    Route::post('tagging', 'TagEntertainerController@store')->name('tagentertainer.store');
+    Route::delete('untagging', 'TagEntertainerController@destroy')->name('tagentertainer.destroy');
 
     });
 

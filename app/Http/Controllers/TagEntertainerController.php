@@ -17,13 +17,8 @@ class TagEntertainerController extends Controller
      
     public function store(Request $request)
     {
-
-        $entertainer_id = $request->entertainer_id;  //芸人idを取得
-        $tag_id = $request->tag_id;  //タグidを取得        
-
-        // 認証済みユーザが芸人のタグを作成
-        \Auth::user()->entertainers()->attach($request->entertainer_id, ['tag_id' => $request->tag_id]);
-
+        // 認証済みユーザ（閲覧者）が、表示している芸人をタグする
+        \Auth::user()->tagging($request);
         // 前のURLへリダイレクトさせる
         return back();
     }
@@ -38,12 +33,23 @@ class TagEntertainerController extends Controller
      * @return \Illuminate\Http\Response
      */
      
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+//dd($request);
         // 認証済みユーザ（閲覧者）が、 芸人のtagを解除する
-        \Auth::entertainer()->untagging($id);
+        \Auth::user()->untagging($request);
         // 前のURLへリダイレクトさせる
         return back();
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
         
 }

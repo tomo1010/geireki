@@ -13,6 +13,7 @@ class Youtube extends Model
         return $this->belongsTo(User::class);
     }
 
+
     
     //Entertainerモデルとの関係を定義
     public function entertainer()
@@ -35,6 +36,7 @@ class Youtube extends Model
     }
     
     
+
     
     /**
      * このyoutub動画のお気に入り件数をロードする。

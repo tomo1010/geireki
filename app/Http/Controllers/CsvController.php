@@ -11,6 +11,7 @@ use App\Member;
 use App\Award; 
 use App\Youtube;
 use App\Favorite;
+use App\Tag;
 
 use Goodby\CSV\Import\Standard\LexerConfig; //csvインポート
 use Goodby\CSV\Import\Standard\Lexer;
@@ -571,6 +572,64 @@ class CsvController extends Controller
         return redirect()->action('EntertainersController@index')->with('flash_message', $count . '件登録しました！');
     }
     
+
+
+    /*
+    （８）タグ▲アップロード画面
+    */
+
+    public function uploadtag() //変更点
+    {
+        return view("csv.tag"); //変更点
+    }
+
+
+    // タグインポート処理
+
+    public function importTag(Request $request) //変更点
+    {
+        // CSV ファイル保存
+        $tmpName = mt_rand().".".$request->file('csv')->guessExtension(); //TMPファイル名
+        $request->file('csv')->move(public_path()."/csv/tmp",$tmpName);
+        $tmpPath = public_path()."/csv/tmp/".$tmpName;
+ 
+        //Goodby CSVのconfig設定
+        $config = new LexerConfig();
+        $interpreter = new Interpreter();
+        $lexer = new Lexer($config);
+ 
+        //CharsetをUTF-8に変換、CSVのヘッダー行を無視
+        $config->setToCharset("UTF-8");
+        $config->setFromCharset("sjis-win");
+        $config->setIgnoreHeaderLine(true);
+ 
+        $dataList = [];
+     
+        // 新規Observerとして、$dataList配列に値を代入
+        $interpreter->addObserver(function (array $row) use (&$dataList){
+            // 各列のデータを取得
+            $dataList[] = $row;
+        });
+ 
+        // CSVデータをパース
+        $lexer->parse($tmpPath, $interpreter);
+ 
+        // TMPファイル削除
+        unlink($tmpPath);
+ 
+        // ★★登録処理
+        $count = 0;
+        foreach($dataList as $row){
+            Tag::insert([ //変更点
+                'id' => $row[0], 
+                'category' => $row[1], //変更点
+                'name' => $row[2], //変更点
+                ]);
+            $count++;
+        }
+ 
+        return redirect()->action('EntertainersController@index')->with('flash_message', $count . '件登録しました！');
+    }
     
     
     

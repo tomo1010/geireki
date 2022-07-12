@@ -212,13 +212,38 @@
                     @empty($entertainer->active)
                         <td>-</td>
                     @else
-                        <td>@include('commons.entertainer_history')</td>
+                        <td>@include('commons.entertainer_history')年</td>
                     @endempty
                 </tr>
                 @endforeach
             </tbody>
         </table>
 
+
+
+    <h2 class="mt-5 pb-2" >今年の大会結果</h2>    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>大会名/コンビ名</th>
+                    <th>事務所</th>                    
+                    <th>芸歴</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach ($awards as $award)
+                <tr>
+                    <td>{{$award->award}}<br>@include('commons.award_entertainerName')</td>
+                    <td>@include('commons.award_entertainerOffice')</td>
+                    <td>@include('commons.award_entertainerHistory')年</td>
+
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+賞レースの年間スケジュールは<a href="{{route('lists.awardCal')}}">こちら</a>
 
 
     <h2 class="mt-5 pb-2">新着ネタ動画</h2>
@@ -407,5 +432,6 @@
             </tbody>
         </table>
 
+<p style="text-align: right">最終更新：2022.5.26</p>
 
 @endsection

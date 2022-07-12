@@ -97,6 +97,14 @@ class PerfomersController extends Controller
      */
     public function store(Request $request)
     {
+        
+        // バリデーション
+        $request->validate([
+            'name' => 'required|max:255|unique:entertainers,name',
+            'office_id' => 'required|max:10',                
+        ]);
+        
+        
         // 作成
         $perfomer = new Perfomer;
         $perfomer->name = $request->name;
@@ -125,8 +133,6 @@ class PerfomersController extends Controller
         $perfomer->youtube = $request->youtube;
         $perfomer->tiktok = $request->tiktok;        
         $perfomer->blog = $request->blog;        
-
-        // $perfomer->entertainer_id = $request->entertainer_id;
         $perfomer->office_id = $request->office_id;
         
         $perfomer->save();

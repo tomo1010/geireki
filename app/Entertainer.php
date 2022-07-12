@@ -31,14 +31,13 @@ class Entertainer extends Model
     {
         return $this->belongsTo(Office::class);
     }
+
     
  
     //このコンビに所属するメンバー（個人）
     public function perfomers()
     {
         return $this->belongsToMany(Perfomer::class, 'members', 'entertainer_id', 'perfomer_id');
-        //return $this->belongsToMany(Perfomer::class);
-        //return $this->hasMany(Perfomer::class);
     }
     
     
@@ -57,7 +56,25 @@ class Entertainer extends Model
         // モデルのデータを引っ張てくる
         return $this->hasMany(Award::class);
     }
+
+
+
+    //この芸人に紐付けされたTag
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'entertainer_tag', 'entertainer_id', 'tag_id')->withTimestamps();
+    }
     
+
+    //この芸人に紐付けされたユーザ
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'entertainer_tag', 'entertainer_id', 'user_id')->withTimestamps();
+    }
+
+
+
+
     
     
 }

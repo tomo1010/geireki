@@ -10,6 +10,7 @@ use App\Youtube;
 use App\Member;
 use App\Award;
 use App\User;
+use App\Tag;
 
 use Carbon\Carbon; //芸歴計算
 
@@ -41,7 +42,11 @@ class EntertainersController extends Controller
         $birthdayTomorrow = array();
         //$limit = $today->subYear(90); 表示する年齢制限
         
-        $perfomers = Perfomer::with(['entertainer'])->where('deth', '=', NULL)->orderBy('birthday', 'asc')->get();
+        // $perfomers = Perfomer::with(['entertainer'])->whereNull('deth')->whereNull('activeend')->orderBy('birthday', 'asc')->get();
+
+        $perfomers = Perfomer::with(['entertainer'=> function ($query) {
+                         $query->whereNull('activeend');
+                     }])->whereNull('deth')->whereNull('activeend')->orderBy('birthday', 'asc')->get();
 
 
         //本日誕生日を取得
@@ -52,7 +57,10 @@ class EntertainersController extends Controller
                     $birthday[] = $value;
                 }
             }
-        }    
+        }
+    
+
+        
 
         //明日誕生日を取得        
         foreach($perfomers as $value){
@@ -69,10 +77,19 @@ class EntertainersController extends Controller
         新着芸人　更新芸人
         */
         
-        $creates = Entertainer::orderBy('created_at', 'desc')->take(3)->get();
+        $creates = Entertainer::whereNotNull('created_at')->orderBy('created_at', 'desc')->take(3)->get();
         //$updates = Entertainer::orderBy('update_at', 'decs')->take(3)->get();        
 
-//dd($creates);
+
+
+        /*
+        今年の賞レース結果
+        */
+
+        $year = $today->year; //誕生日で作ったcarbon$todayを再利用
+        $awards = Award::where('year', '=' , $year)->get();
+        //dd($awards);
+
 
 
         /*
@@ -179,6 +196,7 @@ class EntertainersController extends Controller
             'm1' => $m1,            
             'koc' => $koc,  
             'creates' => $creates,
+            'awards' => $awards,
             //'updates' => $updates,                    
                         
         ]);
@@ -216,19 +234,15 @@ class EntertainersController extends Controller
     public function store(Request $request)
     {
         
-        /** バリデーション
+        
+        // バリデーション
         $request->validate([
-            'name' => 'required|max:255',
-            'numberofpeople' => 'required|max:255',
-            'alias' => 'required|max:255',
-            'active' => 'required|max:255',
-            'activeend' => 'required|max:255',
-            'master' => 'required|max:255',
-            'oldname' => 'required|max:255',
-            'official' => 'required|max:255',
-            'youtube' => 'required|max:255',
+            'name' => 'required|max:255|unique:entertainers,name',
+            'numberofpeople' => 'required|max:10',
+            'gender' => 'required|max:10',
+            'office_id' => 'required|max:10',                
         ]);
-        */
+        
 
         // 作成
         $entertainer = new Entertainer;
@@ -354,6 +368,12 @@ class EntertainersController extends Controller
         if (\Auth::check()) {
             $user = \Auth::user();  // 認証済みユーザを取得
         } 
+
+
+        //タグを取得
+        $tags = Tag::all();
+        
+        //dd($tags);
         
 
         // メッセージ詳細ビューでそれを表示
@@ -367,6 +387,7 @@ class EntertainersController extends Controller
             'award' => $award,            
             'youtubes' => $youtubes,
             'iframe' => $iframe,
+            'tags' => $tags
         ]);
     }
 

@@ -35,6 +35,7 @@ Route::get('perfomers/{id}', 'PerfomersController@show')->name('perfomers.show')
 Route::get('perfomers/hinaGacha', 'PerfomersController@hinaGacha')->name('hinaGacha');
 
 
+
 //一覧表示
 Route::get('lists/history', 'ListsController@history')->name('lists.history');
 Route::get('lists/history/{year}', 'ListsController@historyList')->name('lists.historyList');
@@ -49,19 +50,21 @@ Route::get('lists/pref/{pref}', 'ListsController@prefList')->name('lists.prefLis
 Route::get('lists/award', 'ListsController@award')->name('lists.award');
 Route::get('lists/award/{year}', 'ListsController@awardList')->name('lists.awardList');
 Route::get('lists/awardGp/{gp}', 'ListsController@awardGp')->name('lists.awardGp');
+Route::get('lists/awardCal', 'ListsController@awardCal')->name('lists.awardCal');
 Route::get('lists/birthday', 'ListsController@birthday')->name('lists.birthday');
 Route::get('lists/birthdayList/{birthday}', 'ListsController@birthdayList')->name('lists.birthdayList');
 
 
 //ランキング
 Route::get('ranking/index', 'RankingController@index')->name('ranking.index');
-Route::get('ranking/yearDiff', 'RankingController@yearDiff')->name('ranking.yearDiff');
-Route::get('ranking/favorite', 'RankingController@favorite')->name('ranking.favorite');
-Route::get('ranking/youtubeCount', 'RankingController@youtubeCount')->name('ranking.youtubeCount');
-Route::get('ranking/tall', 'RankingController@tall')->name('ranking.tall');
-Route::get('ranking/short', 'RankingController@short')->name('ranking.short');
-Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
-
+// Route::get('ranking/ageDiff', 'RankingController@ageDiff')->name('ranking.ageDiff');
+// Route::get('ranking/favorite', 'RankingController@favorite')->name('ranking.favorite');
+// Route::get('ranking/youtubeCount', 'RankingController@youtubeCount')->name('ranking.youtubeCount');
+// Route::get('ranking/tall', 'RankingController@tall')->name('ranking.tall');
+// Route::get('ranking/short', 'RankingController@short')->name('ranking.short');
+// Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
+// Route::get('ranking/heightDiff', 'RankingController@heightDiff')->name('ranking.heightDiff');
+// Route::get('ranking/yearDiff', 'RankingController@yearDiff')->name('ranking.yearDiff');
 
 
 
@@ -99,11 +102,24 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
 
         Route::get('edit', 'UsersController@edit')->name('users.edit'); 
-        Route::put('/', 'UsersController@update')->name('users.update');        
+        Route::put('/', 'UsersController@update')->name('users.update');
+
+    });    
+
+
+    Route::group(['prefix' => 'entertainers/{id}'], function () {
+        Route::get('followings', 'UsersController@followings')->name('users.followings');
+        Route::get('followers', 'UsersController@followers')->name('users.followers');
+        
+        
     });    
     
     Route::resource('users', 'UsersController', ['only' => ['index', 'show', ]]);
     Route::resource('youtubes', 'YoutubesController');
+
+
+    Route::post('tagging', 'TagEntertainerController@store')->name('tagentertainer.store');
+    Route::delete('untagging', 'TagEntertainerController@destroy')->name('tagentertainer.destroy');
 
     });
 
@@ -133,6 +149,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     //メンバー（中間テーブル）データ編集その他    
     //Route::resource('members', 'MembersController');
     // Route::get('members/create', 'MembersController@create')->name('members.create');    
+
+
+    //タグ
+    Route::resource('tags', 'TagsController');
 
     
     /*
@@ -179,6 +199,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     Route::get('csv/favorite', 'CsvController@uploadFavorite');
     Route::post('csv/favorite', 'CsvController@importFavorite')->name('csv.importFavorite');    
     Route::get('csv/favorite_dl', 'CsvController@exportFavorite')->name('csv.exportFavorite'); 
+    
+    
+    // tagデータ
+    Route::get('csv/tag', 'CsvController@uploadTag');
+    Route::post('csv/tag', 'CsvController@importTag')->name('csv.importTag');    
+    Route::get('csv/tag_dl', 'CsvController@exportTag')->name('csv.exportTag');     
     
 
 });

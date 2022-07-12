@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h2 class="mt-5 pb-2">背の高いランキング</h2>
+    <h2 class="mt-5 pb-2">背が高い芸人ランキング</h2>
         <table class="table table-striped">
             <thead>
                 <tr>

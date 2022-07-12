@@ -37,7 +37,7 @@ class RankingController extends Controller
             $query->where('birthday','!=', NULL);
         })->get();  
 
-        $results = array(); //比較結果を配列へ格納
+        $results = array(); //比較結果を配列へ
         
         foreach($entertainers as $entertainer){
         
@@ -51,7 +51,7 @@ class RankingController extends Controller
 
         //芸歴差ランキング
 
-        $perfomers = Perfomer::with(['entertainer'])->where('active', '!=' , '')->where('activeend', NULL)->where('birthday','!=', '')->get();  
+        $perfomers = Perfomer::with(['entertainer'])->where('active', '!=' , NULL)->where('activeend', NULL)->where('birthday','!=', NULL)->get();  
 
         $young = array(); //比較結果を配列へ格納
 

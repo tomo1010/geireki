@@ -241,45 +241,42 @@
 
     
     {{-- Tagボタン --}}
-    
-                            {{--@foreach ($entertainer->perfomers as $perfomer)--}}
-            {{--@foreach($tags->category as $category)--}}    
 
     @foreach($tags as $tag)
+
         @if (Auth::check())
 
-<table class="table">
-<tr>
-<td></a>{{$tag->category}}</td>
-
+        <table class="table">
+            <tr>
+            
                 @if (Auth::user()->is_tagging($tag->id,$entertainer->id))
-<td>    
+        
                     {{-- お気に入りを外す --}}
-                    {!! Form::open(['method'=>'delete', 'route' => 'tagentertainer.destroy']) !!}
+                    <form action="{{ route('tagentertainer.destroy') }}" method="POST">
                         <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
                         <input type="hidden" value="{{$tag->id}}" name="tag_id">	    
                         <button type="submit" class="btn btn-success btn-sm">
                         {{$tag->name}}
                         </button>
-            	    {!! Form::close() !!} 
-</td>            	
+            	    </form>
+
                 @else
-<td>                
+
                     {{-- お気に入りにする --}}
-                    {!! Form::open(['route' => 'tagentertainer.store']) !!}
+                    <form action="{{ route('tagentertainer.store') }}" method="POST">
                         <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
                         <input type="hidden" value="{{$tag->id}}" name="tag_id">
-                        <button type="submit" class="btn btn-secondary btn-sm">
+                        <button type="submit" class="btn btn-success btn-sm">
                         {{$tag->name}}
-                        </button>                
-            	    {!! Form::close() !!} 
-</td>                   
-                @endif
+                        </button>
+                    </form>
 
-        @else
+                @endif
+                
+            </tr>
+        </table>
+
         @endif
-</tr>
-</table>
 
     @endforeach
     

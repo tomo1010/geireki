@@ -147,6 +147,7 @@ class User extends Authenticatable
     }
 
 
+
     //このユーザにtagづけけされた芸人
     public function entertainers()
     {
@@ -167,8 +168,6 @@ class User extends Authenticatable
     {
         // すでにタグ登録しているかの確認
         $exist = $this->is_tagging($request->tag_id,$request->entertainer_id);
-        
-//dd($exist);
         
         if ($exist) {
             
@@ -203,7 +202,8 @@ class User extends Authenticatable
         if ($exist) {
             
             // すでにタグ済みならタグを外す
-            $this->entertainers()->detach($request->entertainer_id, ['tag_id' => $request->tag_id]);
+//            $this->entertainers()->detach($request->entertainer_id, ['tag_id' => $request->tag_id]);
+            $this->entertainers()->wherePivot('tag_id', '=', $request->tag_id)->detach($request->entertainer_id);
             return true;
         
         } else {

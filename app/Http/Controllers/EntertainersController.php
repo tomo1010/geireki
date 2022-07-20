@@ -371,10 +371,32 @@ class EntertainersController extends Controller
 
 
         //タグを取得
-        $tags = Tag::all();
+        $tags = Tag::all()->take(10);
         
-        //dd($tags);
+        $taglists = $tags->mapToGroups(function ($item, $key) {
+            return [$item['category'] => $item['name']];
+        });
+
+
+//dd($tags[2]->id);
+
+        // foreach($taglists as $category => $name){
+        //     //dd($category,$name);
+        //     foreach($name as $value){
+        //     dd($value,$tags[$loop->index]->id);
+        //     }
+        // }
         
+        
+        // foreach($taglists as $key => $item){
+        //     //dd($item);   
+        //     foreach($item as $key => $value){
+        //     dd($value);   
+        //     }
+        // }
+
+        
+        //dd($taglists);
 
         // メッセージ詳細ビューでそれを表示
         return view('entertainers.show', [
@@ -387,7 +409,8 @@ class EntertainersController extends Controller
             'award' => $award,            
             'youtubes' => $youtubes,
             'iframe' => $iframe,
-            'tags' => $tags
+            'tags' => $tags,            
+            'taglists' => $taglists,
         ]);
     }
 

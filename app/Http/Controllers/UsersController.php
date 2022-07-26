@@ -179,9 +179,10 @@ class UsersController extends Controller
 
         // ユーザの投稿一覧を作成日時の降順で取得
         $tags = $user->tags()->withPivot('tag_id')->orderBy('tag_id','asc')->get();
+        //$tags = $user->tags()->entertainers()->get();        
 
 //dd($tags);
-//dd($tags[0]->pivot->entertainer_id);
+//dd($tags[0]->entertainers());
 
 
         $entertainers = array();
@@ -190,11 +191,6 @@ class UsersController extends Controller
 
             $entertainers[] = Entertainer::find($tag->pivot->entertainer_id);
         }
-
-
-
-
-
 
 //dd($entertainers);
 

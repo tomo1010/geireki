@@ -10,7 +10,8 @@
                     <div>
                         {{-- 投稿の所有者のユーザ詳細ページへのリンク --}}
                         {{--{!! link_to_route('users.show', $tag->user->name, ['user' => $tag->user->id]) !!}--}}
-                        <span class="text-muted">{{ $tag->name }}</span>
+                        <h3><span class="badge badge-success">#{{ $tag->name }}</span></h3>
+
                     </div>
                     <div>
                         {{-- 投稿内容 --}}

@@ -218,7 +218,7 @@
                             {{-- お気に入りを外す --}}
                             {!! Form::open(['method'=>'delete', 'route' => 'tagentertainer.destroy']) !!}
                                 <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
-                                <input type="hidden" value="{{$tag->id}}" name="tag_id">	    
+                                <input type="hidden" value="{{$tag->id}}" name="tag_id">   
                                 <button type="submit" class="btn btn-success btn-lg mr-1">
                                 #{{$tag->name}}
                                 </button>

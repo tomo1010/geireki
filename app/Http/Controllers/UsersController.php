@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User; // 追加
 use App\Youtube; // 追加
 use App\Perfomer; // 追加
+use App\Entertainer; // 追加
 use Carbon\Carbon; //芸歴計算
 
 class UsersController extends Controller
@@ -164,7 +165,47 @@ class UsersController extends Controller
         ]);
     }
     
-    
+
+
+
+
+    public function tags($id)
+    {
+        // idの値でユーザを検索して取得
+        $user = User::findOrFail($id);
+
+        // 関係するモデルの件数をロード
+        //$user->loadRelationshipCounts();
+
+        // ユーザの投稿一覧を作成日時の降順で取得
+        $tags = $user->tags()->withPivot('tag_id')->orderBy('tag_id','asc')->get();
+
+//dd($tags);
+//dd($tags[0]->pivot->entertainer_id);
+
+
+        $entertainers = array();
+        
+        foreach($tags as $tag){
+
+            $entertainers[] = Entertainer::find($tag->pivot->entertainer_id);
+        }
+
+
+
+
+
+
+//dd($entertainers);
+
+        // ユーザ詳細ビューでそれらを表示
+        return view('users.tags', [
+            'user' => $user,
+            'tags' => $tags,
+            'entertainers' => $entertainers,            
+            'now' => new \Carbon\Carbon(), 
+        ]);
+    }    
     
     
     

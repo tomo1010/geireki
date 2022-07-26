@@ -143,7 +143,9 @@ class User extends Authenticatable
     //このユーザに紐付けされたTag
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'entertainer_tag', 'user_id', 'tag_id')->withTimestamps();
+        return $this->belongsToMany(Tag::class, 'entertainer_tag', 'user_id', 'tag_id')
+                        ->withPivot('entertainer_id')
+                        ->withTimestamps();
     }
 
 
@@ -154,6 +156,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Entertainer::class, 'entertainer_tag', 'user_id', 'entertainer_id')->withTimestamps();
     }    
     
+    
+    
+
+    //Tagした件数をロード
+    public function loadTagCounts()
+    {
+        $this->loadCount('tags');
+    }
 
 
 
@@ -166,6 +176,7 @@ class User extends Authenticatable
     */
     public function tagging($request)
     {
+
         // すでにタグ登録しているかの確認
         $exist = $this->is_tagging($request->tag_id,$request->entertainer_id);
         
@@ -196,13 +207,10 @@ class User extends Authenticatable
         // すでにタグしているかの確認
         $exist = $this->is_tagging($request->tag_id,$request->entertainer_id);
 
-//dd($request);        
-//dd($exist);
         
         if ($exist) {
             
             // すでにタグ済みならタグを外す
-//            $this->entertainers()->detach($request->entertainer_id, ['tag_id' => $request->tag_id]);
             $this->entertainers()->wherePivot('tag_id', '=', $request->tag_id)->detach($request->entertainer_id);
             return true;
         
@@ -227,7 +235,6 @@ class User extends Authenticatable
         return $this->entertainers()->where('entertainer_id', $entertainerId)->whereHas('tags',function($query) use($tagId) {
                         $query->where('tag_id', $tagId);
                     })->exists();
-dd($exists);
     }
 
 

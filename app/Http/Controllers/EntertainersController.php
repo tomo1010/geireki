@@ -371,7 +371,7 @@ class EntertainersController extends Controller
 
 
         //タグを取得
-        $tags = Tag::all()->take(10);
+        $tags = Tag::all();
         
         $taglists = $tags->mapToGroups(function ($item, $key) {
             return [$item['category'] => $item['name']];
@@ -384,14 +384,6 @@ class EntertainersController extends Controller
         //     //dd($category,$name);
         //     foreach($name as $value){
         //     dd($value,$tags[$loop->index]->id);
-        //     }
-        // }
-        
-        
-        // foreach($taglists as $key => $item){
-        //     //dd($item);   
-        //     foreach($item as $key => $value){
-        //     dd($value);   
         //     }
         // }
 

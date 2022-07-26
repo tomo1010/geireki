@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('favorite', 'FavoriteController@store')->name('user.favorite');
         Route::get('unfavorite', 'FavoriteController@destroy')->name('user.unfavorite');
         Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
+        Route::get('tags', 'UsersController@tags')->name('users.tags');        
 
         Route::get('edit', 'UsersController@edit')->name('users.edit'); 
         Route::put('/', 'UsersController@update')->name('users.update');

@@ -18,7 +18,7 @@ class TagEntertainerController extends Controller
     public function store(Request $request)
     {
 
-dd($request);
+//dd($request);
         //タグ件数の制限   
         $id = $request->tag_id;
 

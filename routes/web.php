@@ -65,7 +65,7 @@ Route::get('ranking/index', 'RankingController@index')->name('ranking.index');
 // Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
 Route::get('ranking/heightDiff', 'RankingController@heightDiff')->name('ranking.heightDiff');
 // Route::get('ranking/yearDiff', 'RankingController@yearDiff')->name('ranking.yearDiff');
-
+Route::get('ranking/tag', 'TagsController@tagRanking')->name('ranking.tag');
 
 
 //検索

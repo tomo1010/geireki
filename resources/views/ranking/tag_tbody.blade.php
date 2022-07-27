@@ -1,0 +1,11 @@
+                <tr>
+                    <td>
+                        @include('commons.entertainer_name')
+                    </td>
+                    <td>
+                        @include('commons.entertainer_history')
+                    </td>
+                    <td>
+                        {{$entertainer->tags_count}}
+                    </td>
+                </tr>

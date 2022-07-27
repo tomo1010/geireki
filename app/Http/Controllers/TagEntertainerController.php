@@ -37,7 +37,6 @@ class TagEntertainerController extends Controller
 
 
 
-
     /**
      * 芸人のtagを解除するアクション。
      *

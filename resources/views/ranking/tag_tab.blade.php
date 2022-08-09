@@ -7,3 +7,8 @@
     <li class="nav-item"><a href="#category6" class="nav-link" data-toggle="tab">売れる売れない</a></li>
     <li class="nav-item"><a href="#category7" class="nav-link" data-toggle="tab">ネガティブ</a></li>
     </ul>
+
+    @if (Auth::check())        
+    @else
+        <br><center>推し芸人に<a href="{{route('login')}}">Tag</a>して応援しよう！※要ログイン</center>
+    @endif

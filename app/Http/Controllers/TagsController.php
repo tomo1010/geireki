@@ -96,9 +96,9 @@ class TagsController extends Controller
     public function tagRanking()
     {
 
-        $tags = Tag::all();
+        $tags = Tag::all(); //タグ情報を取得
 
-        for($i = 1; $i < 30; $i++){
+        for($i = 1; $i < 30; $i++){ //$iはtagのidと連動し、viewへ渡す変数も[tagCounr_$id]と設定。tagづけされた芸人の上位10件をtagIdづつ取得
             $value = 'tagCount_'.$i;
             $$value = Entertainer::withCount(['tags' => function ($query) use ($i) { //芸人のタグごと上位10件取得
                     $query->where('tag_id', $i);

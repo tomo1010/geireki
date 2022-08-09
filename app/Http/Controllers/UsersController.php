@@ -42,6 +42,7 @@ class UsersController extends Controller
             $month = $value[1];
             $day = $value[2];
             $birthday = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->inRandomOrder()->first();        
+       
         
             // 同郷芸人
             if(!empty($user->birthplace))
@@ -49,6 +50,7 @@ class UsersController extends Controller
             else
             $pref = null;
             //dd($pref);
+
 
             // 同い年芸人
             $now = new \Carbon\Carbon();
@@ -59,6 +61,7 @@ class UsersController extends Controller
     
             $age = Perfomer::inRandomOrder()->with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->first();
             //dd($age);
+
 
         // ユーザ詳細ビューでそれらを表示
         return view('users.show', [

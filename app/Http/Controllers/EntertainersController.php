@@ -73,6 +73,17 @@ class EntertainersController extends Controller
         }
 
 
+
+        /*
+        新着Tag芸人
+        */
+        
+        //$tags = Entertainer::all()->tags()->orderBy('created_at', 'desc')->take(3)->get();
+        //$updates = Entertainer::orderBy('update_at', 'decs')->take(3)->get();        
+
+//dd($tags);
+
+
         /*
         新着芸人　更新芸人
         */
@@ -370,12 +381,12 @@ class EntertainersController extends Controller
         } 
 
 
-        //タグを取得
-        $tags = Tag::all();
+        // //タグを取得
+        // $tags = Tag::all();
         
-        $taglists = $tags->mapToGroups(function ($item, $key) {
-            return [$item['category'] => $item['name']];
-        });
+        // $taglists = $tags->mapToGroups(function ($item, $key) {
+        //     return [$item['category'] => $item['name']];
+        // });
 
 
 //dd($tags[2]->id);

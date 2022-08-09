@@ -319,7 +319,7 @@
 
 
     
-<h2 class="mt-5 pb-2">今年解散した芸人</h2>    
+<h2 class="mt-5 pb-2">今年解散・引退した芸人</h2>    
             <table class="table table-striped">
             <thead>
                 <tr>

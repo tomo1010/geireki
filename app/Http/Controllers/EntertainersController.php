@@ -382,7 +382,7 @@ class EntertainersController extends Controller
 
 
         // //タグを取得
-        // $tags = Tag::all();
+        $tags = Tag::all();
         
         // $taglists = $tags->mapToGroups(function ($item, $key) {
         //     return [$item['category'] => $item['name']];

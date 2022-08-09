@@ -413,7 +413,7 @@ class EntertainersController extends Controller
             'youtubes' => $youtubes,
             'iframe' => $iframe,
             'tags' => $tags,            
-            'taglists' => $taglists,
+            //'taglists' => $taglists,
         ]);
     }
 

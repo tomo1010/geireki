@@ -189,6 +189,79 @@
     <p><center>
     <a href="https://forms.gle/PayWcxWhphTi36zRA" class="btn btn-success">修正依頼はこちら</a>
     </p></center>
+
+
+
+    {{--tagボタン--}}
+
+    <div class="border-bottom" style="padding:10px;">
+        <h2 class="mt-5 pb-2">タグ </h2>    
+        @if (Auth::check())
+        @else
+        タグするには<a href="{{route('login')}}">ログイン</a>が必要です。
+        @endif
+    </div>
+
+
+        <table class="table">
+
+            @foreach($tags as $tag)
+
+            <tr>
+
+                @if (Auth::check())
+                
+                    @include('tags.category')
+                    
+                    @if (Auth::user()->is_tagging($tag->id,$entertainer->id))
+
+                            {{-- お気に入りを外す --}}
+                            {!! Form::open(['method'=>'delete', 'route' => 'tagentertainer.destroy']) !!}
+                                <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
+                                <input type="hidden" value="{{$tag->id}}" name="tag_id">   
+                                <button type="submit" class="btn btn-success btn-lg mr-1">
+                                #{{$tag->name}}
+                                </button>
+                    	    {!! Form::close() !!} 
+                    	  
+                    @else
+        
+                            {{-- お気に入りにする --}}
+                            {!! Form::open(['route' => 'tagentertainer.store']) !!}
+                                <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
+                                <input type="hidden" value="{{$tag->id}}" name="tag_id">
+                                <button type="submit" class="btn btn-secondary btn-lg m-1">
+                                #{{$tag->name}}
+                                </button>
+                    	    {!! Form::close() !!} 
+                        
+                    @endif
+                    
+                @else
+                
+                    @include('tags.category')
+        
+                            {{-- 未ログインはタグ表示のみ --}}
+                            <button class="btn btn-secondary btn-lg m-1">
+                            #{{$tag->name}}
+                            </button>
+                                
+                @endif
+        
+            </tr>
+
+            @endforeach
+    
+        </table>    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     {{--Youtube表示＆投稿フォーム--}}
     <h2 class="mt-5 pb-2">おすすめネタ動画</h2>
@@ -239,50 +312,11 @@
 
     
 
-    
-    {{-- Tagボタン --}}
-    
-                            {{--@foreach ($entertainer->perfomers as $perfomer)--}}
-            {{--@foreach($tags->category as $category)--}}    
 
-    @foreach($tags as $tag)
-        @if (Auth::check())
 
-<table class="table">
-<tr>
-<td></a>{{$tag->category}}</td>
 
-                @if (Auth::user()->is_tagging($tag->id,$entertainer->id))
-<td>    
-                    {{-- お気に入りを外す --}}
-                    {!! Form::open(['method'=>'delete', 'route' => 'tagentertainer.destroy']) !!}
-                        <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
-                        <input type="hidden" value="{{$tag->id}}" name="tag_id">	    
-                        <button type="submit" class="btn btn-success btn-sm">
-                        {{$tag->name}}
-                        </button>
-            	    {!! Form::close() !!} 
-</td>            	
-                @else
-<td>                
-                    {{-- お気に入りにする --}}
-                    {!! Form::open(['route' => 'tagentertainer.store']) !!}
-                        <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
-                        <input type="hidden" value="{{$tag->id}}" name="tag_id">
-                        <button type="submit" class="btn btn-secondary btn-sm">
-                        {{$tag->name}}
-                        </button>                
-            	    {!! Form::close() !!} 
-</td>                   
-                @endif
 
-        @else
-        @endif
-</tr>
-</table>
 
-    @endforeach
-    
 
 
 </br></br>    

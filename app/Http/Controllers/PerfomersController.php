@@ -100,7 +100,7 @@ class PerfomersController extends Controller
         
         // バリデーション
         $request->validate([
-            'name' => 'required|max:255|unique:entertainers,name',
+            'name' => 'required|max:255|unique:perfomers,name',
             'office_id' => 'required|max:10',                
         ]);
         
@@ -137,8 +137,10 @@ class PerfomersController extends Controller
         
         $perfomer->save();
 
-        // トップページへリダイレクトさせる
-        return redirect('/');
+
+        // 投稿したページへリダイレクトさせる
+        return redirect()->action('PerfomersController@show', ['id' => $perfomer->id]);        
+        //return redirect('/');
     }
 
 

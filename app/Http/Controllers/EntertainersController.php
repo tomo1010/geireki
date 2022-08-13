@@ -73,6 +73,17 @@ class EntertainersController extends Controller
         }
 
 
+
+        /*
+        新着Tag芸人
+        */
+        
+        //$tags = Entertainer::all()->tags()->orderBy('created_at', 'desc')->take(3)->get();
+        //$updates = Entertainer::orderBy('update_at', 'decs')->take(3)->get();        
+
+//dd($tags);
+
+
         /*
         新着芸人　更新芸人
         */
@@ -201,9 +212,11 @@ class EntertainersController extends Controller
                         
         ]);
         
-
-
     }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -264,8 +277,9 @@ class EntertainersController extends Controller
         $entertainer->office_id = $request->office_id;        
         $entertainer->save();
 
-        // トップページへリダイレクトさせる
-        return redirect('/');
+        // 投稿したページへリダイレクトさせる
+        return redirect()->action('EntertainersController@show', ['id' => $entertainer->id]);
+
 
     }
 
@@ -370,11 +384,30 @@ class EntertainersController extends Controller
         } 
 
 
+
         //タグを取得
         $tags = Tag::all();
+
+
+        /*
+        タグをカテゴリーと名前で分ける
+        */
+        // $taglists = $tags->mapToGroups(function ($item, $key) {
+        //     return [$item['category'] => $item['name']];
+        // });
+
+
+//dd($tags[2]->id);
+
+        // foreach($taglists as $category => $name){
+        //     //dd($category,$name);
+        //     foreach($name as $value){
+        //     dd($value,$tags[$loop->index]->id);
+        //     }
+        // }
+
         
-        //dd($tags);
-        
+        //dd($taglists);
 
         // メッセージ詳細ビューでそれを表示
         return view('entertainers.show', [
@@ -387,7 +420,8 @@ class EntertainersController extends Controller
             'award' => $award,            
             'youtubes' => $youtubes,
             'iframe' => $iframe,
-            'tags' => $tags
+            'tags' => $tags,            
+            //'taglists' => $taglists,
         ]);
     }
 

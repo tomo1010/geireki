@@ -55,6 +55,7 @@
                                     <th>名前</th>
                                     <th>年齢</th>
                                     <th>芸歴</th>
+                                    <th>差分</th>                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,6 +65,7 @@
                                         <td nowrap>{!! link_to_route('perfomers.show', $perfomers[$key]->name, [$perfomers[$key]->id]) !!}<br>
                                         <td>{!! link_to_route('lists.age2List', $now->diffInYears($perfomers[$key]->birthday), ['yearsOld' => $now->diffInYears($perfomers[$key]->birthday)]) !!}</td>
                                         <td>{!! link_to_route('lists.historyList', $now->diffInYears($perfomers[$key]->active), ['year' => $now->diffInYears($perfomers[$key]->active)]) !!}</td>
+                                        <td>{{ '$now->diffInYears($perfomers[$key]->birthday' }}</td>
                                     </tr>                            
                                     @endif
                                 @endforeach

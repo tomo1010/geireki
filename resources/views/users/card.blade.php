@@ -6,12 +6,13 @@
                     {{-- ユーザのメールアドレスをもとにGravatarを取得して表示 --}}
                     <img class="rounded img-fluid" src="{{ Gravatar::get($user->email, ['size' => 500]) }}" alt="お笑い大好き">
 
+
                     {{--誕生日--}}
                     <hr>
                     誕生日：{!! link_to_route('lists.birthdayList', $user->birthday, ['birthday' => $user->birthday]) !!}<br>
 
                     {{--同じ誕生日--}}
-                    同じ誕生日：
+                    誕生日が同じ：
                     @empty($birthday)
                     @else
                         {!! link_to_route('perfomers.show', $birthday->name, [$birthday->id]) !!}
@@ -24,12 +25,13 @@
                     @endempty
                     <br>
 
+
                     {{--出身ユーザ--}}
                     <hr>
                     出身：
-                    @empty($user->pref)
+                    @empty($user->birthplace)
                     @else                                            
-                    {!! link_to_route('lists.prefList', $user->pref, ['pref' => $user->pref]) !!}<br>
+                    {!! link_to_route('lists.prefList', $user->birthplace, ['pref' => $user->birthplace]) !!}<br>
                     @endempty        
                     
                     {{--出身同じ--}}
@@ -45,6 +47,7 @@
                         @endif
                     @endempty        
                     <br>
+
 
                     {{--年齢ユーザ--}}
                     <hr>

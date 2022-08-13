@@ -53,7 +53,7 @@ class RankingController extends Controller
 
         $perfomers = Perfomer::with(['entertainer'])->where('active', '!=' , NULL)->where('activeend', NULL)->where('birthday','!=', NULL)->get();  
 
-        $young = array(); //比較結果を配列へ格納
+        $young = array(); //比較結果を配列へ格納　※若い時から芸人
 
         foreach($perfomers as $perfomer){
             $birthday = $perfomer->birthday;
@@ -64,7 +64,7 @@ class RankingController extends Controller
         arsort($young);
 
 
-        $elderly = array(); //比較結果を配列へ格納        
+        $elderly = array(); //比較結果を配列へ格納　※年をとってから芸人
 
         foreach($perfomers as $perfomer){
             $birthday = $perfomer->birthday;
@@ -83,6 +83,9 @@ class RankingController extends Controller
         //身長が高いランキング        
 
         $talls = Perfomer::with(['entertainer'])->where('height', '!=', '')->orderBy('height', 'desc')->paginate(10);
+
+
+
 
 
         // 一覧ビューで表示
@@ -206,8 +209,17 @@ class RankingController extends Controller
 
         $entertainers = Entertainer::withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
         ->whereHas('perfomers', function ($query) {
-            $query->where('height','!=', '');
-        })->take(12)->get();  
+            $query->whereNotNull('height');
+            $query->where('height','!=','');            
+        })->take(8)->get();  
+        
+        
+        // $entertainers = Perfomer::whereNotNull('height')->where('height','!=','')
+        // ->whereHas('entertainer', function ($query) {
+        //     $query->whereNumberofpeople('2');
+        //     $query->whereNull('activeend');        
+            
+        // })->take(10)->get();
 
         $results = array(); //比較結果を配列へ格納
 
@@ -215,13 +227,13 @@ dd($entertainers);
         
         foreach($entertainers as $entertainer){
         
-            $first = $entertainer->perfomers[0]->height;
-            $first = str_replace('cm', '', $first);
-            $first = trim($first);
+            $first = $entertainer->perfomers()->perfomers[0]->height;
+            //$first = str_replace('cm', '', $first);
+            //$first = trim($first);
 
             $second = $entertainer->perfomers[1]->height;    
-            $second = str_replace('cm', '', $second);
-            $second = trim($second);
+            //$second = str_replace('cm', '', $second);
+            //$second = trim($second);
 
 //dd($first,$second);
 

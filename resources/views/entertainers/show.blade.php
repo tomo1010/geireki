@@ -200,7 +200,7 @@
         @else
         タグするには<a href="{{route('login')}}">ログイン</a>が必要です。
         @endif
-    </div> <!--下ボーダー -->
+    </div>
 
 
         <table class="table">
@@ -241,7 +241,7 @@
                 
                     @include('tags.category')
         
-                            {{-- タグ表示のみ --}}
+                            {{-- 未ログインはタグ表示のみ --}}
                             <button class="btn btn-secondary btn-lg m-1">
                             #{{$tag->name}}
                             </button>

@@ -29,4 +29,9 @@
     {!! link_to_route('csv.exportTag', '８タグcsv', [], ['class' => 'nav-link']) !!}        　　
 　　<p>    
 
+
+<h2>タグ</h2>
+    {!! link_to_route('tags.index', 'タグ一覧', [], ['class' => 'nav-link']) !!}
+    {!! link_to_route('tags.create', 'タグ新規作成', [], ['class' => 'nav-link']) !!}    
+
 @endsection

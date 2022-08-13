@@ -137,8 +137,10 @@ class PerfomersController extends Controller
         
         $perfomer->save();
 
-        // トップページへリダイレクトさせる
-        return redirect('/');
+
+        // 投稿したページへリダイレクトさせる
+        return redirect()->action('PerfomersController@show', ['id' => $perfomer->id]);        
+        //return redirect('/');
     }
 
 

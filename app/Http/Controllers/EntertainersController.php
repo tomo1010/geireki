@@ -212,9 +212,11 @@ class EntertainersController extends Controller
                         
         ]);
         
-
-
     }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -275,8 +277,9 @@ class EntertainersController extends Controller
         $entertainer->office_id = $request->office_id;        
         $entertainer->save();
 
-        // トップページへリダイレクトさせる
-        return redirect('/');
+        // 投稿したページへリダイレクトさせる
+        return redirect()->action('EntertainersController@show', ['id' => $entertainer->id]);
+
 
     }
 
@@ -381,9 +384,14 @@ class EntertainersController extends Controller
         } 
 
 
-        // //タグを取得
+
+        //タグを取得
         $tags = Tag::all();
-        
+
+
+        /*
+        タグをカテゴリーと名前で分ける
+        */
         // $taglists = $tags->mapToGroups(function ($item, $key) {
         //     return [$item['category'] => $item['name']];
         // });

@@ -210,24 +210,24 @@ class RankingController extends Controller
         $entertainers = Entertainer::withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
         ->whereHas('perfomers', function ($query) {
             $query->whereNotNull('height');
-            $query->where('height','!=','');            
+            $query->where('height','!=','');
+            $query->whereNotIn('height','');
         })->take(8)->get();  
         
         
         // $entertainers = Perfomer::whereNotNull('height')->where('height','!=','')
         // ->whereHas('entertainer', function ($query) {
         //     $query->whereNumberofpeople('2');
-        //     $query->whereNull('activeend');        
-            
+        //     $query->whereNull('activeend');
         // })->take(10)->get();
 
         $results = array(); //比較結果を配列へ格納
 
-dd($entertainers);
+//dd($entertainers);
         
         foreach($entertainers as $entertainer){
         
-            $first = $entertainer->perfomers()->perfomers[0]->height;
+            $first = $entertainer->perfomers[0]->height;
             //$first = str_replace('cm', '', $first);
             //$first = trim($first);
 
@@ -239,13 +239,15 @@ dd($entertainers);
 
             $results[] = abs($first-$second);
 
+
+
         }
 
-//dd($results);        
+dd($results);
         
         arsort($results);
         
-dd($results);        
+//dd($results);        
         
         // 一覧ビューで表示
         return view('ranking.heightDiff', [

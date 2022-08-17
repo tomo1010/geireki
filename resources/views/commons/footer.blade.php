@@ -1,7 +1,7 @@
 <footer class="footer">
 
 <center><p>
-    {{--一覧へのリンク--}}
+    {{--一覧へのリンク
     <p><br>
         {!! link_to_route('lists.history', '芸歴', [], ['class' => 'btn btn-primary']) !!}
         {!! link_to_route('lists.office', '事務所', [], ['class' => 'btn btn-primary']) !!}
@@ -9,7 +9,7 @@
         {!! link_to_route('lists.birthday', '誕生日', [], ['class' => 'btn btn-primary']) !!}        
         {!! link_to_route('lists.pref', '出身', [], ['class' => 'btn btn-primary']) !!}
         {!! link_to_route('lists.award', '受賞歴', [], ['class' => 'btn btn-primary']) !!}
-    </p>
+    </p>--}}
         {!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-light']) !!}
 
 </p></center>
@@ -35,10 +35,10 @@
   
         <td>
             {!! link_to_route('ranking.ageDiff', '年の差', ) !!}</br>
-            {!! link_to_route('ranking.favorite', 'お気に入りネタ動画', ) !!}</br>
+            {!! link_to_route('ranking.favorite', 'ネタ動画お気に入り数', ) !!}</br>
             {!! link_to_route('ranking.tall', '高身長', ) !!}</br>
             {!! link_to_route('ranking.short', '低身長', ) !!}</br>
-            {!! link_to_route('ranking.yearDiff', '芸人になったタイミング', ) !!}</br>
+            {!! link_to_route('ranking.yearDiff', '年齢と芸歴の差', ) !!}</br>
             {!! link_to_route('ranking.tag', 'Tag', ) !!}            
         </td>
         

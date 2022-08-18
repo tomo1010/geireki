@@ -15,7 +15,7 @@
                         <?php echo $year; ?>年
                         </td>
                         <td align="right">
-                        {!! link_to_route('lists.historyList', $count, ['year' => $year]) !!}人
+                        {!! link_to_route('lists.historyList', $count, ['year' => $year]) !!}人</br>
                         （ピン{{ $pin[$loop->index] }}人　コンビ{{ $combi[$loop->index] }}人　トリオ{{ $trio[$loop->index] }}人）
                         <?php $year++; ?>
                         </td>

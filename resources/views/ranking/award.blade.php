@@ -11,31 +11,18 @@
                 </tr>
             </thead>
 
-
-{{--
             <tbody>
-                @foreach ($count as $value)
+                @foreach ($count as $key => $value)
                 <tr>
-                    <td>{!! link_to_route('entertainers.show', $awards[$loop->index]->name, ['id' => $count[$loop->index]]) !!}
+                    <td>{!! link_to_route('entertainers.show', $awards[$key]->name, ['id' => $awards[$key]->id]) !!}
                     <td>{{ $value }}</td>
-                </tr>
-                @endforeach
-            </tbody>
---}}            
-            
-            
-            <tbody>
-                @foreach ($awards as $value)
-                <tr>
-                    <td>{!! link_to_route('entertainers.show', $value->name, ['id' => $value->id]) !!}
-                    <td>{{ $count[$loop->index] }}</td>
                 </tr>
                 @endforeach
             </tbody>
             
         </table>
     
-    {{-- ページネーションのリンク --}}
+    {{-- ページネーションのリンク
     {{ $awards->appends(request()->query())->links() }}    
-
+--}} 
 @endsection

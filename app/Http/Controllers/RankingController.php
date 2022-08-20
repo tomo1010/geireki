@@ -160,7 +160,6 @@ class RankingController extends Controller
 
         $talls = Perfomer::with(['entertainer'])->where('height', '!=', '')->orderBy('height', 'desc')->paginate(10);
 
-//dd($talls);
         
         // 一覧ビューで表示
         return view('ranking.tall', [
@@ -201,7 +200,7 @@ class RankingController extends Controller
 
 
     /*
-    身長の差コンビ
+    身長の差・コンビ
     */
 
     public function heightDiff()
@@ -211,7 +210,7 @@ class RankingController extends Controller
         ->whereHas('perfomers', function ($query) {
             $query->whereNotNull('height');
             $query->where('height','!=','');
-            $query->whereNotIn('height','');
+            //$query->whereNotIn('height','');
         })->take(8)->get();  
         
         
@@ -223,23 +222,73 @@ class RankingController extends Controller
 
         $results = array(); //比較結果を配列へ格納
 
+dd($entertainers);
+        
+        foreach($entertainers as $entertainer){
+        
+            $first = $entertainer->perfomers[0]->height;
+            $second = $entertainer->perfomers[1]->height;    
+
+//dd($first,$second);
+
+            $results[] = abs($first-$second); //差分の絶対値を配列へ格納
+
+        }
+
+//dd($results);
+        
+        arsort($results);
+        
+dd($results);        
+        
+        // 一覧ビューで表示
+        return view('ranking.heightDiff', [
+            'results' => $results,
+            'entertainers' => $entertainers,
+            'now' => new \Carbon\Carbon(),
+        ]);
+    } 
+    
+    
+    
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+    /*
+    身長の合計・コンビ
+    */
+
+    public function heightSum()
+    {
+
+        $entertainers = Entertainer::withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
+        ->whereHas('perfomers', function ($query) {
+            $query->whereNotNull('height');
+            $query->where('height','!=','');
+            $query->whereNotIn('height','');
+        })->take(8)->get();  
+        
+
+
+        $results = array(); //比較結果を配列へ格納
+
 //dd($entertainers);
         
         foreach($entertainers as $entertainer){
         
             $first = $entertainer->perfomers[0]->height;
-            //$first = str_replace('cm', '', $first);
-            //$first = trim($first);
-
             $second = $entertainer->perfomers[1]->height;    
-            //$second = str_replace('cm', '', $second);
-            //$second = trim($second);
 
 //dd($first,$second);
 
-            $results[] = abs($first-$second);
-
-
+            $results[] = abs($first+$second);
 
         }
 
@@ -256,6 +305,7 @@ dd($results);
             'now' => new \Carbon\Carbon(),
         ]);
     } 
+    
 
 
 
@@ -327,8 +377,8 @@ dd($results);
     {
 
         //受賞数でランキング
-        $awards = Entertainer::with(['award'])->take(10)->paginate(15);
-//dd($awards[0]);
+        $awards = Entertainer::with(['award'])->get();
+
         $count = array();
 
         foreach($awards as $value){
@@ -343,7 +393,7 @@ dd($results);
         // 一覧ビューで表示
         return view('ranking.award', [
             'awards' => $awards,
-            'count' => $count,            
+            'count' => $count,
         ]);
     }
 

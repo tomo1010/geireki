@@ -13,6 +13,7 @@
 
             <tbody>
                 @foreach ($count as $key => $value)
+                @continue($value < 5)
                 <tr>
                     <td>{!! link_to_route('entertainers.show', $awards[$key]->name, ['id' => $awards[$key]->id]) !!}
                     <td>{{ $value }}</td>

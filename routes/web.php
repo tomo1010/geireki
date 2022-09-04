@@ -59,11 +59,11 @@ Route::get('lists/birthdayList/{birthday}', 'ListsController@birthdayList')->nam
 //Route::get('ranking/index', 'RankingController@index')->name('ranking.index');
 Route::get('ranking/ageDiff', 'RankingController@ageDiff')->name('ranking.ageDiff');
 Route::get('ranking/favorite', 'RankingController@favorite')->name('ranking.favorite');
-//Route::get('ranking/youtubeCount', 'RankingController@youtubeCount')->name('ranking.youtubeCount');
+Route::get('ranking/youtubeCount', 'RankingController@youtubeCount')->name('ranking.youtubeCount');
 Route::get('ranking/tall', 'RankingController@tall')->name('ranking.tall');
 Route::get('ranking/short', 'RankingController@short')->name('ranking.short');
 Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
-//Route::get('ranking/heightDiff', 'RankingController@heightDiff')->name('ranking.heightDiff');
+Route::get('ranking/heightDiff', 'RankingController@heightDiff')->name('ranking.heightDiff');
 //Route::get('ranking/heightSum', 'RankingController@heightSum')->name('ranking.heightSum');
 Route::get('ranking/yearDiff', 'RankingController@yearDiff')->name('ranking.yearDiff');
 Route::get('ranking/tag', 'TagsController@tagRanking')->name('ranking.tag');

@@ -177,9 +177,6 @@ class UsersController extends Controller
         // idの値でユーザを検索して取得
         $user = User::findOrFail($id);
 
-        // 関係するモデルの件数をロード
-        //$user->loadRelationshipCounts();
-
         // ユーザの投稿一覧を作成日時の降順で取得
         $tags = $user->tags()->withPivot('tag_id')->orderBy('tag_id','asc')->get();
         //$tags = $user->tags()->entertainers()->get();        

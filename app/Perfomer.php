@@ -12,13 +12,22 @@ class Perfomer extends Model
     public $sortable = ['name', 'active']; // 追加
     
     
-    //この個人が所属するコンビ名。
+    //この個人が所属するコンビ。
     public function entertainer()
     {
         return $this->belongsToMany(Entertainer::class, 'members', 'perfomer_id', 'entertainer_id');
+
+    }
+
+
+    public function entertainergroupByentainerId()
+    {
+        return $this->belongsToMany(Entertainer::class, 'members', 'perfomer_id', 'entertainer_id')->groupBy('members.entertainer_id');
         //return $this->belongsToMany(Entertainer::class);
         //return $this->belongsTo(Entertainer::class);
     }
+
+
     
     //この個人が所属する事務所。
     public function office()

@@ -10,6 +10,7 @@ use App\Youtube;
 use App\Member;
 use App\Award;
 use App\User;
+use App\Favorite;
 
 use Carbon\Carbon; //芸歴計算
 
@@ -206,44 +207,91 @@ class RankingController extends Controller
     public function heightDiff()
     {
 
-        $entertainers = Entertainer::withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
-        ->whereHas('perfomers', function ($query) {
-            $query->whereNotNull('height');
-            $query->where('height','!=','');
-            //$query->whereNotIn('height','');
-        })->take(8)->get();  
-        
-        
-        // $entertainers = Perfomer::whereNotNull('height')->where('height','!=','')
-        // ->whereHas('entertainer', function ($query) {
-        //     $query->whereNumberofpeople('2');
-        //     $query->whereNull('activeend');
-        // })->take(10)->get();
 
-        $results = array(); //比較結果を配列へ格納
+        /*
+        entertainerから取得
+        */
 
-dd($entertainers);
+        $entertainers = Entertainer::with('perfomers')->withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
+            ->whereHas('perfomers', function ($query) {
+                $query->whereNotNull('height')->where('height','!=','');
+            })->get(); 
+
+        //dd($entertainers[25]);
+
+        //$results = array(); //比較結果を配列へ格納
+
+        foreach($entertainers as $id => $entertainer){
         
-        foreach($entertainers as $entertainer){
-        
-            $first = $entertainer->perfomers[0]->height;
-            $second = $entertainer->perfomers[1]->height;    
+             $first = $entertainer->perfomers[0]->height;
+             $second = $entertainer->perfomers[1]->height;               
 
-//dd($first,$second);
-
-            $results[] = abs($first-$second); //差分の絶対値を配列へ格納
+            if(!is_numeric($first) or !is_numeric($second)){
+                $entertainers->forget($id);
+                continue;
+            }
+            
+            if(abs($first-$second) >= 10){
+            
+                $entertainer->diff = abs($first-$second); //差分の絶対値を配列へ格納
+                
+            }
 
         }
 
-//dd($results);
+        //dd($entertainers);
+
+
+        $entertainers = $entertainers->sortByDesc('diff');
+
+        //dd($entertainers);
+
         
-        arsort($results);
         
-dd($results);        
+        
+        
+
+    //     /*
+    //     perfomerrから取得
+    //     */
+        
+    //     $perfomers = Perfomer::with('entertainer')->whereNotNull('height')->where('height','!=','')
+    //         ->whereHas('entertainer', function ($query) {
+    //             $query->whereNumberofpeople('2');
+    //             $query->whereNull('activeend');
+    //         })->take(10)->get();
+
+
+    //     $results = array(); //比較結果を配列へ格納
+
+    //     foreach($perfomers as $perfomer){
+        
+    //         dd($perfomer->entertainer);
+        
+    //             $first = $entertainer->perfomers[0]->height;
+    //             $second = $entertainer->perfomers[1]->height;                    
+            
+    //     //dd($first,$second);
+
+    //         $results[] = abs($first-$second); //差分の絶対値を配列へ格納
+
+    //     }
+
+    // dd($results);
+        
+    //     arsort($results);
+        
+    //     //dd($results);        
+
+
+
+
+
+    
         
         // 一覧ビューで表示
         return view('ranking.heightDiff', [
-            'results' => $results,
+            //'results' => $results,
             'entertainers' => $entertainers,
             'now' => new \Carbon\Carbon(),
         ]);
@@ -382,13 +430,11 @@ dd($results);
         $count = array();
 
         foreach($awards as $value){
-            //dd($award->award->count());
+
             $count[] = $value->award->count();
         }
         
         arsort($count); //受賞数を降順で並べ替え
-
-//dd($count);
         
         // 一覧ビューで表示
         return view('ranking.award', [
@@ -401,59 +447,27 @@ dd($results);
 
 
 
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
      
-    public function favorite()
+    public function favorite() //ネタ動画の「お気に入り件数」ランキング
     {
 
         //おすすめネタ動画　Youtube動画一覧
-        $youtubes = Youtube::with(['user'])->get();
-        $count = $youtubes->count();    
-    
-//dd($youtubes);
+        $youtubes = Favorite::withCount('user')->orderBy('user_count', 'desc')->get();
+        
+        // 関係するモデルの件数をロード
+        // $youtubes = Youtube::all();
+        // $youtubes->loadRelationshipCounts();        
 
-        //Youtubeのサムネイルを取得
-        if (empty($count)) {
-            //nullの場合何もしない
-            $iflame = array();     //初期化
-                $iframe[] = "-";
-            
-        }else{
-            $iflame = array();     //初期化     
-            
-            foreach($youtubes as $value){
-                
-                if (strpos($value->youtube, "watch") != false) //ページURL?
-            	
-            	{
-            		/** コード変換 */
-                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);        		
-            		$code = substr($value->youtube, (strpos($code, "=")+1));
-            	}
-            	else
-            	{
-            		/** 短縮URL用に変換 */
-                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);
-            		$code = substr($value->youtube, (strpos($code, "youtu.be/")+9));
-            	}
-            
-                $iframe[] = "http://img.youtube.com/vi/{$code}/2.jpg";
-            }            
-        }
-
-
-//dd($youtubes);
-
+dd($youtubes);
         
         // 一覧ビューで表示
         return view('ranking.favorite', [
             'youtubes' => $youtubes,
-            'iframe' => $iframe,  
             'now' => new \Carbon\Carbon(),
         ]);
     } 
@@ -468,55 +482,16 @@ dd($results);
      * @return \Illuminate\Http\Response
      */
      
-    public function youtubeCount()
+    public function youtubeCount() //ネタ動画の「登録件数」ランキング
     {
 
         //おすすめネタ動画　Youtube動画一覧
-        $youtubes = Entertainer::with(['youtubes'])->find(5);
-        $youtubes = $youtubes->youtubes[0]->youtube;
-        //$count = $youtubes->loadRelationshipCounts();                
-
-//dd($count);
-//dd($youtubes);
-
-        //Youtube動画をカウント
-        if (empty($count)) {
-            //nullの場合何もしない
-            $iflame = array();     //初期化
-                $iframe[] = "-";
-            
-        }else{
-            $iflame = array();     //初期化     
-            
-            foreach($youtubes as $value){
-                
-                if (strpos($value->youtube, "watch") != false) //ページURL?
-            	
-            	{
-            		/** コード変換 */
-                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);        		
-            		$code = substr($value->youtube, (strpos($code, "=")+1));
-            	}
-            	else
-            	{
-            		/** 短縮URL用に変換 */
-                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);
-            		$code = substr($value->youtube, (strpos($code, "youtu.be/")+9));
-            	}
-            
-                $iframe[] = "http://img.youtube.com/vi/{$code}/2.jpg";
-            }            
-        }
-
-
-//dd($youtubes);
-
+        $youtubes = Entertainer::withCount('youtubes')->orderBy('youtubes_count', 'desc')->take(10)->get();
+        //dd($youtubes);
         
         // 一覧ビューで表示
-        return view('ranking.favorite', [
+        return view('ranking.youtubecount', [
             'youtubes' => $youtubes,
-            'iframe' => $iframe,  
-            'now' => new \Carbon\Carbon(),
         ]);
     } 
 

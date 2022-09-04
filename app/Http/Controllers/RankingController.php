@@ -233,7 +233,7 @@ class RankingController extends Controller
             
             if(abs($first-$second) >= 10){
             
-                $entertainer->diff = abs($first-$second); //差分の絶対値を配列へ格納
+                $entertainer->heightDiff = abs($first-$second); //差分の絶対値を配列へ格納
                 
             }
 
@@ -242,7 +242,7 @@ class RankingController extends Controller
         //dd($entertainers);
 
 
-        $entertainers = $entertainers->sortByDesc('diff');
+        $entertainers = $entertainers->sortByDesc('heightDiff');
 
         //dd($entertainers);
 

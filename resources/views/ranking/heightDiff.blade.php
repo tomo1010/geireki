@@ -16,10 +16,10 @@
                     </thead>
                     <tbody>
                         @foreach ($entertainers as $entertainer)
-                            @if(!empty($entertainer->diff))
+                            @if(!empty($entertainer->heightDiff))
                             <tr>
                                 <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, [$entertainer->id]) !!}</td>
-                                <td>{!!$entertainer->diff!!}cm</td>
+                                <td>{!!$entertainer->heightDiff!!}cm</td>
                                 <td>{!! link_to_route('lists.historyList', $now->diffInYears($entertainer->active), ['year' => $now->diffInYears($entertainer->active)]) !!}</td>
                             </tr>
                             @endif

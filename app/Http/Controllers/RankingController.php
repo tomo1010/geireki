@@ -284,11 +284,6 @@ class RankingController extends Controller
     //     //dd($results);        
 
 
-
-
-
-    
-        
         // 一覧ビューで表示
         return view('ranking.heightDiff', [
             //'results' => $results,
@@ -316,44 +311,50 @@ class RankingController extends Controller
     public function heightSum()
     {
 
-        $entertainers = Entertainer::withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
-        ->whereHas('perfomers', function ($query) {
-            $query->whereNotNull('height');
-            $query->where('height','!=','');
-            $query->whereNotIn('height','');
-        })->take(8)->get();  
+        /*
+        entertainerから取得
+        */
+
+        $entertainers = Entertainer::with('perfomers')->withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
+            ->whereHas('perfomers', function ($query) {
+                $query->whereNotNull('height')->where('height','!=','');
+            })->get(); 
+
+        foreach($entertainers as $id => $entertainer){
         
+             $first = $entertainer->perfomers[0]->height;
+             $second = $entertainer->perfomers[1]->height;     
+             
 
+            if(!is_numeric($first) or !is_numeric($second)){
+                $entertainers->forget($id);
+                continue;
+            }
+            
+            if(($first+$second) > 355){
 
-        $results = array(); //比較結果を配列へ格納
-
-//dd($entertainers);
-        
-        foreach($entertainers as $entertainer){
-        
-            $first = $entertainer->perfomers[0]->height;
-            $second = $entertainer->perfomers[1]->height;    
-
-//dd($first,$second);
-
-            $results[] = abs($first+$second);
+                $entertainer->heightSum = $first + $second; //合計をプロパティへ格納
+                
+            }
 
         }
 
-dd($results);
-        
-        arsort($results);
-        
-//dd($results);        
-        
+        $entertainers = $entertainers->sortByDesc('heightSum');
+
         // 一覧ビューで表示
-        return view('ranking.heightDiff', [
-            'results' => $results,
+        return view('ranking.heightSum', [
             'entertainers' => $entertainers,
             'now' => new \Carbon\Carbon(),
         ]);
     } 
     
+
+
+
+
+
+
+
 
 
 

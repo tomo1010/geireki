@@ -4,7 +4,7 @@
 
 
 
-    <h2 class="mt-5 pb-2" >本日のギャグガチャ</h2>    
+    <h2 class="mt-5 pb-2" >ギャグガチャ</h2>    
         <table class="table table-striped">
             <thead>
                 <tr>

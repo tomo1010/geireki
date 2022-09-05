@@ -64,7 +64,7 @@ Route::get('ranking/tall', 'RankingController@tall')->name('ranking.tall');
 Route::get('ranking/short', 'RankingController@short')->name('ranking.short');
 Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
 Route::get('ranking/heightDiff', 'RankingController@heightDiff')->name('ranking.heightDiff');
-//Route::get('ranking/heightSum', 'RankingController@heightSum')->name('ranking.heightSum');
+Route::get('ranking/heightSum', 'RankingController@heightSum')->name('ranking.heightSum');
 Route::get('ranking/yearDiff', 'RankingController@yearDiff')->name('ranking.yearDiff');
 Route::get('ranking/tag', 'TagsController@tagRanking')->name('ranking.tag');
 

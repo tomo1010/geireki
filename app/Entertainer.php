@@ -15,6 +15,7 @@ class Entertainer extends Model
     use Sortable; // 追加
     public $sortable = ['name', 'active']; // 追加
     public $hightDiff; // 追加    
+    public $hightSum; // 追加        
     
     
     //dates（formatメソッドを使用できるようにする）

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <center><h1 class="mt-5 pb-2">芸人・コンビの身長の差ランキング</h1></center>
+    <center><h1 class="mt-5 pb-2">芸人・コンビの身長の合計ランキング</h1></center>
 
     <div class="container">
         <div class="row">
@@ -10,16 +10,16 @@
                     <thead>
                         <tr>
                             <th>名前</th>
-                            <th>身長の差</th>
+                            <th>身長の合計</th>
                             <th>芸歴</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($entertainers as $entertainer)
-                            @if(!empty($entertainer->heightDiff))
+                            @if(!empty($entertainer->heightSum))
                             <tr>
                                 <td nowrap>{!! link_to_route('entertainers.show', $entertainer->name, [$entertainer->id]) !!}</td>
-                                <td>{!!$entertainer->heightDiff!!}cm</td>
+                                <td>{!!$entertainer->heightSum!!}cm</td>
                                 <td>{!! link_to_route('lists.historyList', $now->diffInYears($entertainer->active), ['year' => $now->diffInYears($entertainer->active)]) !!}</td>
                             </tr>
                             @endif

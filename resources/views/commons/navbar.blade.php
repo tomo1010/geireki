@@ -40,25 +40,23 @@
                             {{--
                             <li class="dropdown-item">{!! link_to_route('ranking.ageDiff', '年の差', ) !!}</li>
                             <li class="dropdown-divider"></li>
-                            --}}
+                            <li class="dropdown-item">{!! link_to_route('ranking.yearDiff', '年齢と芸歴の差', ) !!}</li>
+                            <li class="dropdown-divider"></li>
                             <li class="dropdown-item">{!! link_to_route('ranking.heightDiff', '身長の差', ) !!}</li>
                             <li class="dropdown-divider"></li>
                             <li class="dropdown-item">{!! link_to_route('ranking.heightSum', '身長の合計', ) !!}</li>
                             <li class="dropdown-divider"></li>                            
                             <li class="dropdown-item">{!! link_to_route('ranking.favorite', 'Youutbeお気に入り数', ) !!}</li>
                             <li class="dropdown-divider"></li>
-                            <li class="dropdown-item">{!! link_to_route('ranking.youtubeCount', 'Youutbe投稿数', ) !!}</li>
-                            <li class="dropdown-divider"></li>                            
+                            --}}                            
                             <li class="dropdown-item">{!! link_to_route('ranking.tall', '高身長', ) !!}</li>
                             <li class="dropdown-divider"></li>
                             <li class="dropdown-item">{!! link_to_route('ranking.short', '低身長', ) !!}</li>
                             <li class="dropdown-divider"></li>
-                            {{--
-                            <li class="dropdown-item">{!! link_to_route('ranking.yearDiff', '年齢と芸歴の差', ) !!}</li>
-                            <li class="dropdown-divider"></li>
-                            --}}
                             <li class="dropdown-item">{!! link_to_route('ranking.award', '受賞数', ) !!}</li>
-                            <li class="dropdown-divider"></li>                            
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item">{!! link_to_route('ranking.youtubeCount', 'Youutbe投稿数', ) !!}</li>
+                            <li class="dropdown-divider"></li>                                                        
                             <li class="dropdown-item">{!! link_to_route('ranking.tag', 'Tag', ) !!}</li>
                             <li class="dropdown-divider"></li>                                
                         </ul>
@@ -69,12 +67,12 @@
                     
                     {{-- システム管理者権限のみ表示 --}}
                     @can('admin-only') 
-                    <li class="nav-item">{!! link_to_route('admin', '管理者ページ', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('admin', 'admin', [], ['class' => 'nav-link']) !!}</li>
                     @endcan
     
                     {{-- ログインユーザのみ表示 --}}
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">マイページ</a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 {{-- ユーザ詳細ページへのリンク --}}
                                 <li class="dropdown-item">{!! link_to_route('users.show', 'プロフィール', ['user' => Auth::id()]) !!}</li>

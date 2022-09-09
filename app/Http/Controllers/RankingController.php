@@ -31,79 +31,7 @@ class RankingController extends Controller
     {
         
 
-        //年齢差ランキング
-        
-        $entertainers = Entertainer::withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
-        ->whereHas('perfomers', function ($query) {
-            $query->where('birthday','!=', NULL);
-        })->get();  
 
-        $results = array(); //比較結果を配列へ
-        
-        foreach($entertainers as $entertainer){
-        
-            $first = $entertainer->perfomers[0]->birthday;
-            $second = $entertainer->perfomers[1]->birthday;    
-            $results[] = $first->diffInYears($second);
-        }
-        
-        arsort($results);
-
-
-        //芸歴差ランキング
-
-        $perfomers = Perfomer::with(['entertainer'])->where('active', '!=' , NULL)->where('activeend', NULL)->where('birthday','!=', NULL)->get();  
-
-        $young = array(); //比較結果を配列へ格納　※若い時から芸人
-
-        foreach($perfomers as $perfomer){
-            $birthday = $perfomer->birthday;
-            $active = $perfomer->active;    
-            $young[] = $birthday->diffInYears($active);
-        }
-
-        arsort($young);
-
-
-        $elderly = array(); //比較結果を配列へ格納　※年をとってから芸人
-
-        foreach($perfomers as $perfomer){
-            $birthday = $perfomer->birthday;
-            $active = $perfomer->active;    
-            $elderly[] = $birthday->diffInYears($active);
-        }
-
-        asort($elderly);
-
-
-        //身長が低いランキング
-
-        $shorts = Perfomer::with(['entertainer'])->where('height', '!=', '')->orderBy('height', 'asc')->paginate(10);
-        
-
-        //身長が高いランキング        
-
-        $talls = Perfomer::with(['entertainer'])->where('height', '!=', '')->orderBy('height', 'desc')->paginate(10);
-
-
-
-
-
-        // 一覧ビューで表示
-        return view('ranking.index', [
-            'results' => $results,
-            'entertainers' => $entertainers,
-
-            'young' => $young,
-            'elderly' => $elderly,            
-            'perfomers' => $perfomers,
-
-            'now' => new \Carbon\Carbon(),
-
-            'shorts' => $shorts,
-            'talls' => $talls,            
-
-        ]);
     }     
     
 
@@ -156,14 +84,14 @@ class RankingController extends Controller
      * @return \Illuminate\Http\Response
      */
      
-    public function tall()
+    public function heightTall()
     {
 
         $talls = Perfomer::with(['entertainer'])->where('height', '!=', '')->orderBy('height', 'desc')->paginate(10);
 
         
         // 一覧ビューで表示
-        return view('ranking.tall', [
+        return view('ranking.heightTall', [
             'talls' => $talls,
         ]);
     }     
@@ -177,14 +105,14 @@ class RankingController extends Controller
      * @return \Illuminate\Http\Response
      */
      
-    public function short()
+    public function heightShort()
     {
 
         $shorts = Perfomer::with(['entertainer'])->where('height', '!=', '')->orderBy('height', 'asc')->paginate(10);
 
         
         // 一覧ビューで表示
-        return view('ranking.short', [
+        return view('ranking.heightShort', [
             'shorts' => $shorts,
         ]);
     }
@@ -201,55 +129,33 @@ class RankingController extends Controller
 
 
     /*
-    身長の差・コンビ
+    身長の差・凸凹コンビ
     */
 
     public function heightDiff()
     {
-
-
-        /*
-        entertainerから取得
-        */
-
-        $entertainers = Entertainer::with('perfomers')->withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
-            ->whereHas('perfomers', function ($query) {
-                $query->whereNotNull('height')->where('height','!=','');
-            })->get(); 
-
-        //dd($entertainers[25]);
-
-        //$results = array(); //比較結果を配列へ格納
+            
+        $entertainers = Entertainer::with('perfomers')->withCount('perfomers')->having('perfomers_count', '=', 2)
+                        ->where('activeend', NULL)->get(); 
 
         foreach($entertainers as $id => $entertainer){
         
              $first = $entertainer->perfomers[0]->height;
              $second = $entertainer->perfomers[1]->height;               
 
-            if(!is_numeric($first) or !is_numeric($second)){
+            if(!is_numeric($first) or !is_numeric($second)){ //heightにデータが無い場合を除く処理
                 $entertainers->forget($id);
                 continue;
             }
             
             if(abs($first-$second) >= 10){
-            
-                $entertainer->heightDiff = abs($first-$second); //差分の絶対値を配列へ格納
-                
+                $entertainer->heightDiff = abs($first-$second); //差分の絶対値をプロパティへ格納
             }
 
         }
 
-        //dd($entertainers);
-
-
         $entertainers = $entertainers->sortByDesc('heightDiff');
 
-        //dd($entertainers);
-
-        
-        
-        
-        
 
     //     /*
     //     perfomerrから取得
@@ -315,28 +221,22 @@ class RankingController extends Controller
         entertainerから取得
         */
 
-        $entertainers = Entertainer::with('perfomers')->withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
-            ->whereHas('perfomers', function ($query) {
-                $query->whereNotNull('height')->where('height','!=','');
-            })->get(); 
+        $entertainers = Entertainer::with('perfomers')->withCount('perfomers')->having('perfomers_count', '=', 2)
+                        ->where('activeend', NULL)->get(); 
 
         foreach($entertainers as $id => $entertainer){
         
-             $first = $entertainer->perfomers[0]->height;
-             $second = $entertainer->perfomers[1]->height;     
+            $first = $entertainer->perfomers[0]->height;
+            $second = $entertainer->perfomers[1]->height;     
              
-
             if(!is_numeric($first) or !is_numeric($second)){
                 $entertainers->forget($id);
                 continue;
             }
             
-            if(($first+$second) > 355){
-
+            if(($first+$second) > 360){
                 $entertainer->heightSum = $first + $second; //合計をプロパティへ格納
-                
             }
-
         }
 
         $entertainers = $entertainers->sortByDesc('heightSum');
@@ -351,7 +251,33 @@ class RankingController extends Controller
 
 
 
+    /*
+    若い時からから芸人スタート
+    */
 
+    public function ageYoung()
+    {
+
+        $perfomers = Perfomer::with(['entertainer'])->where('active', '!=' , '')->where('activeend', NULL)->where('birthday','!=', '')->get();  
+        
+        $young = array(); //比較結果を配列へ格納        
+
+        foreach($perfomers as $perfomer){
+            $birthday = $perfomer->birthday;
+            $active = $perfomer->active;    
+            $young[] = $birthday->diffInYears($active);
+        }
+
+        asort($young);        
+
+
+        // 一覧ビューで表示
+        return view('ranking.ageYoung', [
+            'young' => $young,            
+            'perfomers' => $perfomers,
+            'now' => new \Carbon\Carbon(),
+        ]);
+    }    
 
 
 
@@ -367,30 +293,15 @@ class RankingController extends Controller
 
 
     /*
-    年齢と芸歴の差分
+    年を取ってからから芸人スタート
     */
 
-    public function yearDiff()
+    public function ageElderly()    
     {
 
         $perfomers = Perfomer::with(['entertainer'])->where('active', '!=' , '')->where('activeend', NULL)->where('birthday','!=', '')->get();  
-        
-//dd($);
 
-        $young = array(); //比較結果を配列へ格納
-
-        foreach($perfomers as $perfomer){
-            $birthday = $perfomer->birthday;
-            $active = $perfomer->active;    
-            $young[] = $birthday->diffInYears($active);
-        }
-
-        arsort($young);
-        
-//dd($young);        
-
-
-        $elderly = array(); //比較結果を配列へ格納        
+        $elderly = array(); //比較結果を配列へ格納
 
         foreach($perfomers as $perfomer){
             $birthday = $perfomer->birthday;
@@ -398,21 +309,17 @@ class RankingController extends Controller
             $elderly[] = $birthday->diffInYears($active);
         }
 
-        asort($elderly);        
-
-//dd($perfomers[1]->entertainer[0]->name);
-
-//dd($elderly);
+        arsort($elderly);
         
         // 一覧ビューで表示
-        return view('ranking.yearDiff', [
-            'young' => $young,
-            'elderly' => $elderly,            
+        return view('ranking.ageElderly', [
+            'elderly' => $elderly,
             'perfomers' => $perfomers,
             'now' => new \Carbon\Carbon(),
         ]);
     }    
     
+
 
 
 
@@ -454,21 +361,55 @@ class RankingController extends Controller
      * @return \Illuminate\Http\Response
      */
      
-    public function favorite() //ネタ動画の「お気に入り件数」ランキング
+    public function movieFavorite() //ネタ動画の「お気に入り件数」ランキング
     {
 
         //おすすめネタ動画　Youtube動画一覧
-        $youtubes = Favorite::withCount('user')->orderBy('user_count', 'desc')->get();
+        $youtubes = Youtube::with('entertainer')->withCount('favoritesUser')->orderBy('favorites_user_count', 'desc')->get();
         
-        // 関係するモデルの件数をロード
-        // $youtubes = Youtube::all();
-        // $youtubes->loadRelationshipCounts();        
+        //Youtubeのサムネイルを取得
+        // if (empty($count)) {
+        //     //nullの場合何もしない
+        //     $iflame = array();     //初期化
+        //     $iframe[] = "-";
+        // }else{
 
-dd($youtubes);
+        
+            $iflame = array();     //初期化     
+
+            foreach($youtubes as $value){
+                if (strpos($value->youtube, "watch") != false) //ページURL?
+            	{
+            		/** コード変換 */
+                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);        		
+            		$code = substr($value->youtube, (strpos($code, "=")+1));
+            	}
+            	else
+            	{
+            		/** 短縮URL用に変換 */
+                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);
+            		$code = substr($value->youtube, (strpos($code, "youtu.be/")+9));
+            	}
+                //$iframe[] = "<iframe width=\"100%\" height=\"400\" src=\"https://www.youtube.com/embed/{$code}\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+                $iframe[] = "http://img.youtube.com/vi/{$code}/2.jpg";
+            }            
+
+
+        // }
+        
+        // if (\Auth::check()) {
+        //     $user = \Auth::user();  // 認証済みユーザを取得
+        // } 
+
+
+
+
+//dd($youtubes);
         
         // 一覧ビューで表示
-        return view('ranking.favorite', [
+        return view('ranking.movieFavorite', [
             'youtubes' => $youtubes,
+            'iframe' => $iframe,            
             'now' => new \Carbon\Carbon(),
         ]);
     } 
@@ -483,7 +424,7 @@ dd($youtubes);
      * @return \Illuminate\Http\Response
      */
      
-    public function youtubeCount() //ネタ動画の「登録件数」ランキング
+    public function movieCount() //ネタ動画の「登録件数」ランキング
     {
 
         //おすすめネタ動画　Youtube動画一覧
@@ -491,10 +432,69 @@ dd($youtubes);
         //dd($youtubes);
         
         // 一覧ビューで表示
-        return view('ranking.youtubecount', [
+        return view('ranking.movieCount', [
             'youtubes' => $youtubes,
         ]);
     } 
+    
+    
+
+
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+    /*
+    perfomerの2人の芸歴平均とentertainer芸歴の差分
+    */
+
+    public function historyAvg()
+    {
+
+        $entertainers = Entertainer::with('perfomers')->withCount('perfomers')->having('perfomers_count', '=', 2)->where('activeend', NULL)
+            ->whereHas('perfomers', function ($query) {
+                $query->whereNotNull('active')->where('active','!=','');
+            })->get();
+
+        $now = new \Carbon\Carbon();
+
+        foreach($entertainers as $id => $entertainer){
+        
+            $first = $entertainer->perfomers[0]->active;
+            $second = $entertainer->perfomers[1]->active;
+
+            $first = $now->diffInYears($first);
+            $second = $now->diffInYears($second);
+             
+            if(!is_numeric($first) or !is_numeric($second)){
+                $entertainers->forget($id);
+                continue;
+            }
+
+            if(empty($first) or empty($second)){
+                $entertainers->forget($id);
+                continue;
+            }
+
+            $entertainer->historyAvg = round(($first + $second)/2,1); //平均をプロパティへ格納            
+            $entertainer->historyDiff = abs($now->diffInYears($entertainer->active) - $entertainer->historyAvg); //個人芸歴平均とコンビ芸歴の差分を格納　★★★
+
+        }
+
+        $entertainers = $entertainers->sortByDesc('historyDiff');
+
+        // 一覧ビューで表示
+        return view('ranking.historyAvg', [
+            'entertainers' => $entertainers,
+            'now' => new \Carbon\Carbon(),
+        ]);
+    }    
 
 
 

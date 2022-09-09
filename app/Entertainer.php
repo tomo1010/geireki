@@ -14,8 +14,10 @@ class Entertainer extends Model
     
     use Sortable; // 追加
     public $sortable = ['name', 'active']; // 追加
-    public $hightDiff; // 追加    
-    public $hightSum; // 追加        
+    public $hightDiff; // 身長凸凹追加    
+    public $hightSum; // 身長合計追加
+    public $historyAvg; // コンビの芸歴平均追加
+    public $historyDiff; // コンビの芸歴差分追加
     
     
     //dates（formatメソッドを使用できるようにする）
@@ -66,6 +68,7 @@ class Entertainer extends Model
     {
         return $this->belongsToMany(Tag::class, 'entertainer_tag', 'entertainer_id', 'tag_id')->withTimestamps();
     }
+    
     
 
     //この芸人に紐付けされたユーザ

@@ -34,17 +34,17 @@
         </td>
   
         <td>
-            {!! link_to_route('ranking.tall', '高身長', ) !!}</br>
-            {!! link_to_route('ranking.short', '低身長', ) !!}</br>
+            {!! link_to_route('ranking.heightTall', '高身長', ) !!}</br>
+            {!! link_to_route('ranking.heightShort', '低身長', ) !!}</br>
             {!! link_to_route('ranking.award', '受賞数', ) !!}</br>
-            {!! link_to_route('ranking.youtubeCount', 'Youtube投稿数', ) !!}</br>                        
+            {!! link_to_route('ranking.movieCount', 'Youtube投稿数', ) !!}</br>
+            {!! link_to_route('ranking.movieFavorite', 'Youtubeお気に入り数', ) !!}</br>            
             {!! link_to_route('ranking.tag', 'Tag', ) !!}
             {{--
             {!! link_to_route('ranking.ageDiff', '年の差', ) !!}</br>
             {!! link_to_route('ranking.yearDiff', '年齢と芸歴の差', ) !!}</br>
             {!! link_to_route('ranking.heightDiff', '身長の差', ) !!}</br>        
             {!! link_to_route('ranking.heightSum', '身長の合計', ) !!}</br>                    
-            {!! link_to_route('ranking.favorite', 'Youtubeお気に入り数', ) !!}</br>
             --}}
         </td>
         

@@ -58,15 +58,20 @@ Route::get('lists/birthdayList/{birthday}', 'ListsController@birthdayList')->nam
 //ランキング
 //Route::get('ranking/index', 'RankingController@index')->name('ranking.index');
 Route::get('ranking/ageDiff', 'RankingController@ageDiff')->name('ranking.ageDiff');
-Route::get('ranking/favorite', 'RankingController@favorite')->name('ranking.favorite');
-Route::get('ranking/youtubeCount', 'RankingController@youtubeCount')->name('ranking.youtubeCount');
-Route::get('ranking/tall', 'RankingController@tall')->name('ranking.tall');
-Route::get('ranking/short', 'RankingController@short')->name('ranking.short');
-Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
+Route::get('ranking/ageYoung', 'RankingController@ageYoung')->name('ranking.ageYoung');
+Route::get('ranking/ageElderly', 'RankingController@ageElderly')->name('ranking.ageElderly');
+
+Route::get('ranking/movieFavorite', 'RankingController@movieFavorite')->name('ranking.movieFavorite');
+Route::get('ranking/movieCount', 'RankingController@movieCount')->name('ranking.movieCount');
+
+Route::get('ranking/heightTall', 'RankingController@heightTall')->name('ranking.heightTall');
+Route::get('ranking/heightShort', 'RankingController@heightShort')->name('ranking.heightShort');
 Route::get('ranking/heightDiff', 'RankingController@heightDiff')->name('ranking.heightDiff');
 Route::get('ranking/heightSum', 'RankingController@heightSum')->name('ranking.heightSum');
-Route::get('ranking/yearDiff', 'RankingController@yearDiff')->name('ranking.yearDiff');
+
+Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
 Route::get('ranking/tag', 'TagsController@tagRanking')->name('ranking.tag');
+Route::get('ranking/historyAvg', 'RankingController@historyAvg')->name('ranking.historyAvg');
 
 
 //検索

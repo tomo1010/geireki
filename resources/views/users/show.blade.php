@@ -14,8 +14,9 @@
             {{-- タブ --}}
             @include('users.navtabs')
 
-            {{-- 投稿一覧 --}}
-            @include('youtubes.youtubes')
+            {{-- tag一覧 --}}
+            @include('users.tags')
+                        {{--@include('youtubes.youtubes')--}}
         
         </div>
     </div>

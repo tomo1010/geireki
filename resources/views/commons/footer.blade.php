@@ -40,12 +40,7 @@
             {!! link_to_route('ranking.movieCount', 'Youtube投稿数', ) !!}</br>
             {!! link_to_route('ranking.movieFavorite', 'Youtubeお気に入り数', ) !!}</br>            
             {!! link_to_route('ranking.tag', 'Tag', ) !!}
-            {{--
-            {!! link_to_route('ranking.ageDiff', '年の差', ) !!}</br>
-            {!! link_to_route('ranking.yearDiff', '年齢と芸歴の差', ) !!}</br>
-            {!! link_to_route('ranking.heightDiff', '身長の差', ) !!}</br>        
-            {!! link_to_route('ranking.heightSum', '身長の合計', ) !!}</br>                    
-            --}}
+
         </td>
         
         <td>

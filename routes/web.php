@@ -56,7 +56,8 @@ Route::get('lists/birthdayList/{birthday}', 'ListsController@birthdayList')->nam
 
 
 //ランキング
-//Route::get('ranking/index', 'RankingController@index')->name('ranking.index');
+Route::get('ranking/index', 'RankingController@index')->name('ranking.index');
+
 Route::get('ranking/ageDiff', 'RankingController@ageDiff')->name('ranking.ageDiff');
 Route::get('ranking/ageYoung', 'RankingController@ageYoung')->name('ranking.ageYoung');
 Route::get('ranking/ageElderly', 'RankingController@ageElderly')->name('ranking.ageElderly');
@@ -103,10 +104,13 @@ Route::get('basics.xml', 'SitemapController@basics')->name('sitemap-basics');
 Route::group(['middleware' => ['auth']], function () {
     
     Route::group(['prefix' => 'users/{id}'], function () {
-        Route::get('favorite', 'FavoriteController@store')->name('user.favorite');
-        Route::get('unfavorite', 'FavoriteController@destroy')->name('user.unfavorite');
-        Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
+        Route::get('favorite', 'FavoriteController@store')->name('user.favorite'); //お気に入り処理
+        Route::get('unfavorite', 'FavoriteController@destroy')->name('user.unfavorite'); //非お気に入り処理
+        
         Route::get('tags', 'UsersController@tags')->name('users.tags');        
+        Route::get('youtubes', 'UsersController@youtubes')->name('users.youtubes');        
+        Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
+
 
         Route::get('edit', 'UsersController@edit')->name('users.edit'); 
         Route::put('/', 'UsersController@update')->name('users.update');

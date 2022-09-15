@@ -2,180 +2,29 @@
 
 @section('content')
 
-    <ul class="nav nav-tabs justify-content-center">
-    <li class="nav-item"><a href="#ageDiff" class="nav-link active" data-toggle="tab">コンビ年齢差</a></li>        
-    <li class="nav-item"><a href="#yearDiff" class="nav-link" data-toggle="tab">芸歴と年齢差</a></li>            
-    <li class="nav-item"><a href="#short" class="nav-link" data-toggle="tab">背が低い</a></li>
-    <li class="nav-item"><a href="#tall" class="nav-link" data-toggle="tab">背が高い</a></li>    
-    </ul>
-
-
-    <div class="tab-content">
-
-        <div id="ageDiff" class="tab-pane active">
-
-            <div class="container">
-                <div class="row">
-                    <h2 class="mt-5 pb-2" >年齢差ランキング</h2>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>名前</th>
-                                <th>年の差</th>
-                                <th>芸歴</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($results as $key => $value)
-                                @if($value > 5)
-                                <tr>
-                                    <td nowrap>{!! link_to_route('entertainers.show', $entertainers[$key]->name, [$entertainers[$key]->id]) !!}</td>
-                                    <td>{{$value}}</td>
-                                    <td>{!! link_to_route('lists.historyList', $now->diffInYears($entertainers[$key]->active), ['year' => $now->diffInYears($entertainers[$key]->active)]) !!}</td>
-                                </tr>                            
-                                @endif
-                            @endforeach
-                        </tbody>   
-                    </table>
-                </div>
-            </div>
-
-        </div>
-  
-        
-        <div id="yearDiff" class="tab-pane">
+コンビ間の年齢差ランキング
+            {!! link_to_route('ranking.ageDiff', '年の差', ) !!}</br>
+若い時から芸人になったランキング
+            {!! link_to_route('ranking.ageYoung', '若くして芸人に', ) !!}</br>
+年を取ってから芸人になったランキング
+            {!! link_to_route('ranking.ageElderly', '年を取ってから芸人に', ) !!}</br>            
+お笑い好きがオススメするネタ動画ランキング
+            {!! link_to_route('ranking.movieCount', 'Youtube投稿数', ) !!}</br>
+お笑い好きがお気に入りのネタ動画ランキング
+            {!! link_to_route('ranking.movieFavorite', 'Youtubeお気に入り数', ) !!}</br>                                    
+背が高い芸人ランキング            
+            {!! link_to_route('ranking.heightTall', '高身長', ) !!}</br>
+背が低い芸人ランキング
+            {!! link_to_route('ranking.heightShort', '低身長', ) !!}</br>
+凸凹コンビランキング
+            {!! link_to_route('ranking.heightDiff', '身長の差', ) !!}</br>        
+２人ともデカいコンビは誰だ？威圧感ランキング
+            {!! link_to_route('ranking.heightSum', '身長の合計', ) !!}</br>
+実力者のひとつの指標。受賞数ランキング            
+            {!! link_to_route('ranking.award', '受賞数', ) !!}</br>
+お笑い好きの傾向がわかるタグランキング
+            {!! link_to_route('ranking.tag', 'Tag', ) !!}</br>
+実力コンビが一目瞭然ランキング
+            {!! link_to_route('ranking.historyAvg', '各個人の芸歴は長いけどコンビ芸歴は短い', ) !!}</br>
             
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">    
-                        <h2 class="mt-5 pb-2" >年齢をとってから芸人に</h2>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>名前</th>
-                                    <th>年齢</th>
-                                    <th>芸歴</th>
-                                    <th>差分</th>                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($young as $key => $value)
-                                    @if($value >= 30)
-                                    <tr>
-                                        <td nowrap>{!! link_to_route('perfomers.show', $perfomers[$key]->name, [$perfomers[$key]->id]) !!}<br>
-                                        <td>{!! link_to_route('lists.age2List', $now->diffInYears($perfomers[$key]->birthday), ['yearsOld' => $now->diffInYears($perfomers[$key]->birthday)]) !!}</td>
-                                        <td>{!! link_to_route('lists.historyList', $now->diffInYears($perfomers[$key]->active), ['year' => $now->diffInYears($perfomers[$key]->active)]) !!}</td>
-                                        <td>{{ '$now->diffInYears($perfomers[$key]->birthday' }}</td>
-                                    </tr>                            
-                                    @endif
-                                @endforeach
-                            </tbody>   
-                        </table>
-                    </div>
-        
-        
-                    <div class="col-lg-6">
-                        <h2 class="mt-5 pb-2" >若い時から芸人に</h2>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>名前</th>
-                                    <th>年齢</th>
-                                    <th>芸歴</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($elderly as $key => $value)
-                                    @if($value <= 15)
-                                    <tr>
-                                        <td nowrap>{!! link_to_route('perfomers.show', $perfomers[$key]->name, [$perfomers[$key]->id]) !!}</td>
-                                        <td>{!! link_to_route('lists.age2List', $now->diffInYears($perfomers[$key]->birthday), ['yearsOld' => $now->diffInYears($perfomers[$key]->birthday)]) !!}</td>
-                                        <td>{!! link_to_route('lists.historyList', $now->diffInYears($perfomers[$key]->active), ['year' => $now->diffInYears($perfomers[$key]->active)]) !!}</td>
-                                    </tr>                            
-                                    @endif
-                                @endforeach
-                            </tbody>   
-                        </table>
-                    </div>
-                </div>
-            </div>
-       
-        </div>
-
-        
-        <div id="short" class="tab-pane">
-            
-        <h2 class="mt-5 pb-2">背が低い芸人ランキング</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>名前</th>                    
-                        <th>コンビ名など</th>                                        
-                        <th>身長</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                    @foreach ($shorts as $value)
-                    @if(Empty($value->height))
-                    @else
-                        <tr>
-                            <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
-                            <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
-                            @else
-                            @endif    
-                            </td>
-                            <td>{{ $value->height }}</td>
-                        </tr>
-                    @endif    
-                    @endforeach
-                </tbody>
-            </table>
-        
-        {{-- ページネーションのリンク --}}
-        {{ $shorts->appends(request()->query())->links() }}   
-        </div>
-
-
-        <div id="tall" class="tab-pane">
-
-        <h2 class="mt-5 pb-2">背が高い芸人ランキング</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>名前</th>                    
-                        <th>コンビ名など</th>                                        
-                        <th>身長</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                    @foreach ($talls as $value)
-                    @if(Empty($value->height))
-                    @else
-                        <tr>
-                            <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
-                            <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
-                            @else
-                            @endif    
-                            </td>
-                            <td>{{ $value->height }}</td>
-                        </tr>
-                    @endif    
-                    @endforeach
-                </tbody>
-            </table>
-        
-        {{-- ページネーションのリンク --}}
-        {{ $shorts->appends(request()->query())->links() }}   
-            
-        </div>
-
-    </div>
-    
-
 @endsection

@@ -12,9 +12,9 @@
                 
                 {{-- 投稿Youtube一覧タブ --}}
                 <li class="nav-item">
-                    <a href="{{ route('users.show', [$user->id]) }}" class="nav-link {{ Request::routeIs('users.show') ? 'active' : '' }}">
+                    <a href="{{ route('users.youtubes', [$user->id]) }}" class="nav-link {{ Request::routeIs('users.youtubes') ? 'active' : '' }}">
                         投稿Youtube
-                        <span class="badge badge-secondary">{{ $user->youtubes_count }}</span>
+                        <span class="badge badge-secondary">{{ $user->youtubes()->count() }}</span>
                     </a>
                 </li>
 

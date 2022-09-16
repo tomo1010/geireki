@@ -392,7 +392,7 @@ class RankingController extends Controller
             	}
                 //$iframe[] = "<iframe width=\"100%\" height=\"400\" src=\"https://www.youtube.com/embed/{$code}\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
                 $iframe[] = "http://img.youtube.com/vi/{$code}/2.jpg";
-            }            
+            }
 
 
         // }

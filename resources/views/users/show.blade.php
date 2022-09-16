@@ -16,7 +16,6 @@
 
             {{-- tag一覧 --}}
             @include('users.tags')
-                        {{--@include('youtubes.youtubes')--}}
         
         </div>
     </div>

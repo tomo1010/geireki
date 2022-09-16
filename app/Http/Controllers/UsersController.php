@@ -186,10 +186,31 @@ class UsersController extends Controller
         $youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
 
 
+            $iflame = array();     //初期化     
+
+            foreach($youtubes as $value){
+                if (strpos($value->youtube, "watch") != false) //ページURL?
+            	{
+            		/** コード変換 */
+                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);        		
+            		$code = substr($value->youtube, (strpos($code, "=")+1));
+            	}
+            	else
+            	{
+            		/** 短縮URL用に変換 */
+                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);
+            		$code = substr($value->youtube, (strpos($code, "youtu.be/")+9));
+            	}
+                //$iframe[] = "<iframe width=\"100%\" height=\"400\" src=\"https://www.youtube.com/embed/{$code}\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+                $iframe[] = "http://img.youtube.com/vi/{$code}/2.jpg";
+            }
+
+
         // ユーザ詳細ビューでそれらを表示
         return view('users.youtubes', [
             'user' => $user,
             'youtubes' => $youtubes,
+            'iframe' => $iframe,            
         ]);
     }
 
@@ -230,6 +251,29 @@ class UsersController extends Controller
         $age = Perfomer::inRandomOrder()->with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->first();
 
 
+
+
+            $iflame = array();     //初期化     
+
+            foreach($favorites as $value){
+                if (strpos($value->youtube, "watch") != false) //ページURL?
+            	{
+            		/** コード変換 */
+                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);        		
+            		$code = substr($value->youtube, (strpos($code, "=")+1));
+            	}
+            	else
+            	{
+            		/** 短縮URL用に変換 */
+                	$code = htmlspecialchars($value->youtube, ENT_QUOTES);
+            		$code = substr($value->youtube, (strpos($code, "youtu.be/")+9));
+            	}
+                //$iframe[] = "<iframe width=\"100%\" height=\"400\" src=\"https://www.youtube.com/embed/{$code}\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+                $iframe[] = "http://img.youtube.com/vi/{$code}/2.jpg";
+            }
+
+
+
         // ユーザ詳細ビューでそれらを表示
         return view('users.favorites', [
             'user' => $user,
@@ -237,7 +281,8 @@ class UsersController extends Controller
             'now' => new \Carbon\Carbon(),            
             'birthday' => $birthday,            
             'pref' => $pref,            
-            'age' => $age,            
+            'age' => $age,
+            'iframe' => $iframe,
         ]);
     }
     

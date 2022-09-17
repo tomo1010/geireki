@@ -145,7 +145,6 @@ class UsersController extends Controller
 
         // ユーザの投稿一覧を作成日時の降順で取得
         $tags = $user->tags()->withPivot('tag_id')->orderBy('tag_id','asc')->get();
-        //$tags = $user->tags()->entertainers()->get();        
 
 //dd($tags);
 //dd($tags[0]->entertainers());
@@ -158,6 +157,29 @@ class UsersController extends Controller
             $entertainers[] = Entertainer::find($tag->pivot->entertainer_id);
         }
 
+
+
+        // 誕生日同じ芸人
+        $value = explode("-",$user->birthday); //誕生日を月と日で分割
+        $month = $value[1];
+        $day = $value[2];
+        $birthday = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->inRandomOrder()->first();        
+        
+        // 同郷芸人
+        $pref = Perfomer::where('birthplace', 'like',  '%'.$user->birthplace.'%')->inRandomOrder()->first();
+        //dd($pref);
+
+        // 同い年芸人
+        $now = new \Carbon\Carbon();
+        $yearsOld = $now->diffInYears($user->birthday);//年齢
+
+        $from = Carbon::now()->subYear($yearsOld)->format('Y-m-d');
+        $to = Carbon::now()->subYear($yearsOld+1)->format('Y-m-d');    
+
+        $age = Perfomer::inRandomOrder()->with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->first();
+
+
+
 //dd($entertainers);
 
         // ユーザ詳細ビューでそれらを表示
@@ -166,6 +188,9 @@ class UsersController extends Controller
             'tags' => $tags,
             'entertainers' => $entertainers,            
             'now' => new \Carbon\Carbon(), 
+            'birthday' => $birthday,            
+            'pref' => $pref,            
+            'age' => $age,            
         ]);
     }    
     
@@ -184,6 +209,30 @@ class UsersController extends Controller
 
         // ユーザの投稿一覧を作成日時の降順で取得
         $youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
+
+
+
+
+        // 誕生日同じ芸人
+        $value = explode("-",$user->birthday); //誕生日を月と日で分割
+        $month = $value[1];
+        $day = $value[2];
+        $birthday = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->inRandomOrder()->first();        
+        
+        // 同郷芸人
+        $pref = Perfomer::where('birthplace', 'like',  '%'.$user->birthplace.'%')->inRandomOrder()->first();
+        //dd($pref);
+
+        // 同い年芸人
+        $now = new \Carbon\Carbon();
+        $yearsOld = $now->diffInYears($user->birthday);//年齢
+
+        $from = Carbon::now()->subYear($yearsOld)->format('Y-m-d');
+        $to = Carbon::now()->subYear($yearsOld+1)->format('Y-m-d');    
+
+        $age = Perfomer::inRandomOrder()->with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->first();
+        
+        
 
 
             $iflame = array();     //初期化     
@@ -210,6 +259,9 @@ class UsersController extends Controller
         return view('users.youtubes', [
             'user' => $user,
             'youtubes' => $youtubes,
+            'birthday' => $birthday,            
+            'pref' => $pref,            
+            'age' => $age,            
             'iframe' => $iframe,            
         ]);
     }
@@ -229,6 +281,7 @@ class UsersController extends Controller
 
         // ユーザの投稿一覧を作成日時の降順で取得
         $favorites = $user->favoritesyoutubes()->orderBy('created_at', 'desc')->paginate(10);
+
 
 
         // 誕生日同じ芸人

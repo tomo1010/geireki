@@ -10,16 +10,17 @@
 
 
                     <div>
-                        {{-- #タグの表示 --}}
-                        <h3><span class="badge badge-success">#{{ $key }}</span></h3>
+                        {{-- タグの表示 --}}
+                        <h3><span class="badge badge-success">#{{$key}}.</span></h3>
                     </div>
 
                     @foreach($tag as $entertainer)
                     <div>
-                        {{-- タグづけした芸人 --}}
+                        {{-- タグづけした芸人--}}
                         <p class="mb-0">                        
                         {!! link_to_route('entertainers.show', $entertainer->name, ['id' => $entertainer->id]) !!}
                 		</p>
+
                     </div>
                     @endforeach
                 

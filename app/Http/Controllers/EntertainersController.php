@@ -60,6 +60,7 @@ class EntertainersController extends Controller
         }
     
 
+//dd($perfomers);
         
 
         //明日誕生日を取得        

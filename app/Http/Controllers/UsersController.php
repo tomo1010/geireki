@@ -145,6 +145,7 @@ class UsersController extends Controller
 
         // ユーザの投稿一覧を作成日時の降順で取得
         $tags = $user->tags()->withPivot('tag_id')->orderBy('tag_id','asc')->get();
+
         //$tags = $user->tags()->withPivot('tag_id')->orderBy('tag_id','asc')->get()->groupBy('name');        
         //$tags = $user->entertainers()->withPivot('tag_id')->get();              
 
@@ -152,10 +153,10 @@ class UsersController extends Controller
 //dd($user->tags()->with('entertainers')->get());
 //dd($tags['好き'][1]->entertainers()->get());
 //dd($tags[0]->entertainers());
-//dd($tags);
+
 
         //$entertainers = array();
-        $entertainers = [];        
+        $entertainers = [];
         
         foreach($tags as $tag){
 
@@ -184,8 +185,6 @@ class UsersController extends Controller
         $age = Perfomer::inRandomOrder()->with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->first();
 
 
-
-//dd($entertainers);
 
         // ユーザ詳細ビューでそれらを表示
         return view('users.tags', [

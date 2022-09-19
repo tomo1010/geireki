@@ -145,19 +145,24 @@ class UsersController extends Controller
 
         // ユーザの投稿一覧を作成日時の降順で取得
         $tags = $user->tags()->withPivot('tag_id')->orderBy('tag_id','asc')->get();
+        //$tags = $user->tags()->withPivot('tag_id')->orderBy('tag_id','asc')->get()->groupBy('name');        
+        //$tags = $user->entertainers()->withPivot('tag_id')->get();              
 
-//dd($tags);
+
+//dd($user->tags()->with('entertainers')->get());
+//dd($tags['好き'][1]->entertainers()->get());
 //dd($tags[0]->entertainers());
+//dd($tags);
 
-
-        $entertainers = array();
+        //$entertainers = array();
+        $entertainers = [];        
         
         foreach($tags as $tag){
 
-            $entertainers[] = Entertainer::find($tag->pivot->entertainer_id);
+            $entertainers[$tag->name][] = Entertainer::find($tag->pivot->entertainer_id);
         }
-
-
+        
+//dd($entertainers);
 
         // 誕生日同じ芸人
         $value = explode("-",$user->birthday); //誕生日を月と日で分割
@@ -211,7 +216,7 @@ class UsersController extends Controller
         $youtubes = $user->youtubes()->orderBy('created_at', 'desc')->paginate(10);
 
 
-
+//dd($youtubes);
 
         // 誕生日同じ芸人
         $value = explode("-",$user->birthday); //誕生日を月と日で分割

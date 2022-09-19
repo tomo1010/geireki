@@ -14,6 +14,13 @@ class Tag extends Model
     }
 
 
+    // //このTagに紐付けされた芸人
+    // public function entertainer()
+    // {
+    //     return $this->hasOne(Entertainer::class);
+    // }
+
+
     //このTagに紐付けされたユーザー
     public function users()
     {

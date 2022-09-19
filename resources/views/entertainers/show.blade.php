@@ -215,7 +215,7 @@
                     
                     @if (Auth::user()->is_tagging($tag->id,$entertainer->id))
 
-                            {{-- お気に入りを外す --}}
+                            {{-- Tagを外す --}}
                             {!! Form::open(['method'=>'delete', 'route' => 'tagentertainer.destroy']) !!}
                                 <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
                                 <input type="hidden" value="{{$tag->id}}" name="tag_id">   
@@ -226,7 +226,7 @@
                     	  
                     @else
         
-                            {{-- お気に入りにする --}}
+                            {{-- Tagする --}}
                             {!! Form::open(['route' => 'tagentertainer.store']) !!}
                                 <input type="hidden" value="{{$entertainer->id}}" name="entertainer_id">
                                 <input type="hidden" value="{{$tag->id}}" name="tag_id">

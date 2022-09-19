@@ -250,7 +250,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Youtube</th>
+                    <th>ネタ動画</th>
                     <th>芸人</th>                                        
                     <th>投稿者</th>
                     <th>投稿日</th>                    
@@ -270,7 +270,9 @@
                     			{{ $youtube->favoritesUser()->count() }}
                     		</span>
                         </span>
-                        @include('youtubes.favorite')
+                        
+                        @include('youtubes.favoriteAction')
+                    
                     </td>
                     <td nowrap>
                         {!! link_to_route('entertainers.show', $youtube->entertainer->name, ['id' => $youtube->entertainer->id]) !!}

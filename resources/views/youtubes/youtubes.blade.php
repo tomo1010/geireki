@@ -24,7 +24,8 @@
                             			{{ $youtube->favoritesUser()->count() }}
                             		</span>
                                 </span>
-                        @include('youtubes.favorite')
+                                
+                        @include('youtubes.favoriteAction')
 
                                 @if (Auth::id() == $youtube->user_id)
                                     {{-- 投稿削除ボタンのフォーム --}}

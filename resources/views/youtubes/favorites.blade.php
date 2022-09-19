@@ -24,9 +24,8 @@
                             			{{ $youtube->favoritesUser()->count() }}
                             		</span>
                                 </span>
-                        @include('youtubes.favorite')
-                        
-                        
+                                
+                        @include('youtubes.favoriteAction')
                         
                 {{-- 投稿の所有者のメールアドレスをもとにGravatarを取得して表示 --}}
                 <img class="mr-2 rounded" src="{{ Gravatar::get($youtube->user->email, ['size' => 50]) }}" alt="">                        

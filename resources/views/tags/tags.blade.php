@@ -2,7 +2,7 @@
 
     <ul class="list-unstyled">
 
-        @foreach ($entertainers as $key=>$tag)
+        @foreach ($entertainers as $tag=>$entertainers)
 
             <li class="media mb-3">
 
@@ -11,10 +11,10 @@
 
                     <div>
                         {{-- タグの表示 --}}
-                        <h3><span class="badge badge-success">#{{$key}}.</span></h3>
+                        <h3><span class="badge badge-success">#{{$tag}}..</span></h3>
                     </div>
 
-                    @foreach($tag as $entertainer)
+                    @foreach($entertainers as $entertainer)
                     <div>
                         {{-- タグづけした芸人--}}
                         <p class="mb-0">                        

@@ -6,7 +6,7 @@
                  <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ネタ動画</th>
+                            <th>投稿ネタ動画</th>
                             <th>芸人</th>                                  
                         </tr>
                     </thead>
@@ -17,6 +17,7 @@
                             <td>
                                 <a href="{{$youtube->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}" alt="おすすめYoutubeネタ動画" hspace="5" vspace="5"></a>
                                 </br>
+                                
                                 <span>
                                 <img src="{{asset('../icon/nicebutton.png')}}" width="30px">
                             		<!-- 「いいね」の数を表示 -->

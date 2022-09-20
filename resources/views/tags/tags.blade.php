@@ -11,7 +11,7 @@
 
                     <div>
                         {{-- タグの表示 --}}
-                        <h3><span class="badge badge-success">#{{$tag}}..</span></h3>
+                        <h3><span class="badge badge-success">#{{$tag}}</span></h3>
                     </div>
 
                     @foreach($entertainers as $entertainer)

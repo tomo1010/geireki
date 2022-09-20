@@ -30,55 +30,58 @@ class UsersController extends Controller
         // idの値でユーザを検索して取得
         $user = User::findOrFail($id);
 
-        // 関係するモデルの件数をロード
-        $user->loadRelationshipCounts();
-
-
-        // ユーザのtag一覧を作成日時の降順で取得
+        // ユーザの投稿一覧を作成日時の降順で取得
         $tags = $user->tags()->withPivot('tag_id')->orderBy('tag_id','asc')->get();
 
-        $entertainers = array();
-        foreach($tags as $tag){
-            $entertainers[] = Entertainer::find($tag->pivot->entertainer_id);
-        }
+        //$tags = $user->tags()->withPivot('tag_id')->orderBy('tag_id','asc')->get()->groupBy('name');        
+        //$tags = $user->entertainers()->withPivot('tag_id')->get();              
 
 
-            // 誕生日同じ芸人
-            $value = explode("-",$user->birthday); //誕生日を月と日で分割
-            $month = $value[1];
-            $day = $value[2];
-            $birthday = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->inRandomOrder()->first();        
-       
+//dd($user->tags()->with('entertainers')->get());
+//dd($tags['好き'][1]->entertainers()->get());
+//dd($tags[0]->entertainers());
+
+
+        //$entertainers = array();
+        $entertainers = [];
         
-            // 同郷芸人
-            if(!empty($user->birthplace))
-            $pref = Perfomer::where('birthplace', 'like',  '%'.$user->birthplace.'%')->inRandomOrder()->first();
-            else
-            $pref = null;
-            //dd($pref);
+        foreach($tags as $tag){
 
+            $entertainers[$tag->name][] = Entertainer::find($tag->pivot->entertainer_id);
+        }
+        
+//dump($entertainers);
 
-            // 同い年芸人
-            $now = new \Carbon\Carbon();
-            $yearsOld = $now->diffInYears($user->birthday);//年齢
-    
-            $from = Carbon::now()->subYear($yearsOld)->format('Y-m-d');
-            $to = Carbon::now()->subYear($yearsOld+1)->format('Y-m-d');    
-    
-            $age = Perfomer::inRandomOrder()->with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->first();
-            //dd($age);
+        // 誕生日同じ芸人
+        $value = explode("-",$user->birthday); //誕生日を月と日で分割
+        $month = $value[1];
+        $day = $value[2];
+        $birthday = Perfomer::whereMonth('birthday', '=', $month)->whereDay('birthday', '=', $day)->inRandomOrder()->first();        
+        
+        // 同郷芸人
+        $pref = Perfomer::where('birthplace', 'like',  '%'.$user->birthplace.'%')->inRandomOrder()->first();
+        //dd($pref);
+
+        // 同い年芸人
+        $now = new \Carbon\Carbon();
+        $yearsOld = $now->diffInYears($user->birthday);//年齢
+
+        $from = Carbon::now()->subYear($yearsOld)->format('Y-m-d');
+        $to = Carbon::now()->subYear($yearsOld+1)->format('Y-m-d');    
+
+        $age = Perfomer::inRandomOrder()->with(['entertainer.office'])->where('activeend', NULL)->where([['birthday', '<=', $from],['birthday', '>', $to]],)->orderBy('active','desc')->first();
+
 
 
         // ユーザ詳細ビューでそれらを表示
-        return view('users.show', [
+        return view('users.tags', [
             'user' => $user,
-            //'youtubes' => $youtubes,
             'tags' => $tags,
             'entertainers' => $entertainers,            
-            'now' => new \Carbon\Carbon(),            
+            'now' => new \Carbon\Carbon(), 
             'birthday' => $birthday,            
             'pref' => $pref,            
-            'age' => $age,                     
+            'age' => $age,            
         ]);
     }
     
@@ -134,9 +137,9 @@ class UsersController extends Controller
     
     
     
-
-
-
+    /*
+    tags()はshow()と同じ内容。マイページへ最初にアクセスした時はtags()タブが表示されるので。切り分ける場合にはこちらを利用。
+    */
 
     public function tags($id)
     {
@@ -163,7 +166,7 @@ class UsersController extends Controller
             $entertainers[$tag->name][] = Entertainer::find($tag->pivot->entertainer_id);
         }
         
-//dd($entertainers);
+//dump($entertainers);
 
         // 誕生日同じ芸人
         $value = explode("-",$user->birthday); //誕生日を月と日で分割
@@ -328,8 +331,7 @@ class UsersController extends Controller
                 //$iframe[] = "<iframe width=\"100%\" height=\"400\" src=\"https://www.youtube.com/embed/{$code}\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
                 $iframe[] = "http://img.youtube.com/vi/{$code}/2.jpg";
             }
-
-
+//dd($favorites);
 
         // ユーザ詳細ビューでそれらを表示
         return view('users.favorites', [

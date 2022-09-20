@@ -13,7 +13,7 @@
                 {{-- 投稿Youtube一覧タブ --}}
                 <li class="nav-item">
                     <a href="{{ route('users.youtubes', [$user->id]) }}" class="nav-link {{ Request::routeIs('users.youtubes') ? 'active' : '' }}">
-                        投稿Youtube
+                        投稿ネタ動画
                         <span class="badge badge-secondary">{{ $user->youtubes()->count() }}</span>
                     </a>
                 </li>
@@ -22,7 +22,7 @@
                 {{-- お気に入りYoutube一覧タブ --}}
                 <li class="nav-item">
                     <a href="{{ route('users.favorites', [$user->id]) }}" class="nav-link {{ Request::routeIs('users.favorites') ? 'active' : '' }}">
-                        お気に入りYoutube
+                        お気に入りネタ動画
                         <span class="badge badge-secondary">{{ $user->favoritesyoutubes()->count() }}</span>
                     </a>
                 </li>

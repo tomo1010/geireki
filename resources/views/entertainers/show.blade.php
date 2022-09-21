@@ -205,15 +205,17 @@
 
         <table class="table">
 
-            @foreach($tags as $tag)
+            @foreach($tags as $category=>$vals)
 
             <tr>
 
                 @if (Auth::check())
                 
-                    @include('tags.category')
+                <div class="border-bottom-white" style="padding:10px;">{{ $category }}</div>
                     
-                    @if (Auth::user()->is_tagging($tag->id,$entertainer->id))
+                    @foreach($vals as $tag)    
+                    
+                        @if (Auth::user()->is_tagging($tag->id,$entertainer->id))
 
                             {{-- Tagを外す --}}
                             {!! Form::open(['method'=>'delete', 'route' => 'tagentertainer.destroy']) !!}
@@ -224,7 +226,7 @@
                                 </button>
                     	    {!! Form::close() !!} 
                     	  
-                    @else
+                        @else
         
                             {{-- Tagする --}}
                             {!! Form::open(['route' => 'tagentertainer.store']) !!}
@@ -235,30 +237,30 @@
                                 </button>
                     	    {!! Form::close() !!} 
                         
-                    @endif
+                        @endif
+
+                    @endforeach  
                     
                 @else
-                
-                    @include('tags.category')
+
+                <div class="border-bottom-white" style="padding:10px;">{{ $category }}</div>
+
+                    @foreach($vals as $tag)    
         
                             {{-- 未ログインはタグ表示のみ --}}
                             <button class="btn btn-secondary btn-lg m-1">
                             #{{$tag->name}}
                             </button>
+
+                    @endforeach            
                                 
                 @endif
-        
+                
             </tr>
 
             @endforeach
     
         </table>    
-    
-    
-    
-    
-    
-    
     
     
     

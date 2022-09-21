@@ -387,7 +387,9 @@ class EntertainersController extends Controller
 
 
         //タグを取得
-        $tags = Tag::all();
+        $tags = Tag::all()->groupBy('category');
+        
+//dd($tags);
 
 
         /*

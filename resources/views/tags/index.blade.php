@@ -16,9 +16,9 @@
             <tbody>
                 @foreach ($tags as $tag)
                 <tr>
-                    <td>{!! link_to_route('tags.show', $tag->id, ['tag' => $tag->id]) !!}</td>
+                    <td>{{ $tag->id }}</td>
                     <td>{{ $tag->category }}</td>                    
-                    <td>{{ $tag->name }}</td>
+                    <td>{!! link_to_route('tags.show', $tag->name, ['tag' => $tag->id]) !!}</td>
                 </tr>
                 @endforeach
             </tbody>

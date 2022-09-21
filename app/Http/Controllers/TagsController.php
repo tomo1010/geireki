@@ -57,6 +57,7 @@ class TagsController extends Controller
     public function store(Request $request)
     {
         
+        
         // メッセージを作成
         $tag = new Tag;
         $tag->category = $request->category;

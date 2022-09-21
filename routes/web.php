@@ -56,7 +56,7 @@ Route::get('lists/birthdayList/{birthday}', 'ListsController@birthdayList')->nam
 
 
 //ランキング
-Route::get('ranking/index', 'RankingController@index')->name('ranking.index');
+//Route::get('ranking/index', 'RankingController@index')->name('ranking.index');
 
 Route::get('ranking/ageDiff', 'RankingController@ageDiff')->name('ranking.ageDiff');
 Route::get('ranking/ageYoung', 'RankingController@ageYoung')->name('ranking.ageYoung');
@@ -162,7 +162,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:admin']], funct
     // Route::get('members/create', 'MembersController@create')->name('members.create');    
 
 
-    //タグ
+    //タグ管理
     Route::resource('tags', 'TagsController');
 
     

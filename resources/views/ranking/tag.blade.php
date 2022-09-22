@@ -4,7 +4,7 @@
 
 <center><h1 class="mt-3 pb-0">Tagランキング</h1></center></br>
 
-@include('ranking.tag_tab')
+    @include('ranking.tag_tab')
 
     <div class="tab-content">
         
@@ -18,7 +18,7 @@
                 <button class="btn btn-success btn-lg m-1">#{{$tags[$i]->name}}</button>
                 </h3>
                 
-                @include('ranking.tag_table')
+                @include('ranking.tag_list')
             
             @endfor
 
@@ -34,7 +34,7 @@
                 <button class="btn btn-success btn-lg m-1">#{{$tags[$i]->name}}</button>
                 </h3>
                 
-                @include('ranking.tag_table')
+                @include('ranking.tag_list')
             
             @endfor
             
@@ -50,7 +50,7 @@
                 <button class="btn btn-success btn-lg m-1">#{{$tags[$i]->name}}</button>
                 </h3>
                 
-                @include('ranking.tag_table')
+                @include('ranking.tag_list')
             
             @endfor
             
@@ -66,7 +66,7 @@
                 <button class="btn btn-success btn-lg m-1">#{{$tags[$i]->name}}</button>
                 </h3>
                 
-                @include('ranking.tag_table')
+                @include('ranking.tag_list')
             
             @endfor
             
@@ -82,7 +82,7 @@
                 <button class="btn btn-success btn-lg m-1">#{{$tags[$i]->name}}</button>
                 </h3>
                 
-                @include('ranking.tag_table')
+                @include('ranking.tag_list')
             
             @endfor
             
@@ -98,7 +98,7 @@
                 <button class="btn btn-success btn-lg m-1">#{{$tags[$i]->name}}</button>
                 </h3>
                 
-                @include('ranking.tag_table')
+                @include('ranking.tag_list')
             
             @endfor
             
@@ -114,7 +114,7 @@
                 <button class="btn btn-success btn-lg m-1">#{{$tags[$i]->name}}</button>
                 </h3>
                 
-                @include('ranking.tag_table')
+                @include('ranking.tag_list')
             
             @endfor
             

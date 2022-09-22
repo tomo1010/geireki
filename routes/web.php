@@ -71,7 +71,7 @@ Route::get('ranking/heightDiff', 'RankingController@heightDiff')->name('ranking.
 Route::get('ranking/heightSum', 'RankingController@heightSum')->name('ranking.heightSum');
 
 Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
-Route::get('ranking/tag', 'TagsController@tagRanking')->name('ranking.tag');
+Route::get('ranking/tag', 'RankingController@tag')->name('ranking.tag');
 Route::get('ranking/historyAvg', 'RankingController@historyAvg')->name('ranking.historyAvg');
 
 

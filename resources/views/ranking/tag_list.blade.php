@@ -1,9 +1,5 @@
 
-                            
-                            
-                            
-                            
-                                            <table class="table table-striped">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>芸人</th>                    
@@ -17,7 +13,9 @@
                             $i++;
                             $value = 'tagCount_'.$i;
                         @endphp
+
                         @foreach ($$value as $entertainer)
+                        
                             <tr>
                                 <td>
                                     @include('commons.entertainer_name')

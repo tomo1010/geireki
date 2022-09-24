@@ -511,67 +511,79 @@ class RankingController extends Controller
 
         //$tags = Tag::with('entertainers')->get(); //タグ情報を取得
         $tags = Tag::all(); //タグ情報を取得        
+        $tagNames = Tag::all()->groupBy('category'); //タグ名取得用                
 
-
-
-        for($i = 1; $i < 30; $i++){ //$iはtagのidと連動し、viewへ渡す変数も[tagCounr_$id]と設定。tagづけされた芸人の上位10件をtagIdづつ取得
-            $value = 'tagCount_'.$i;
-            $$value = Entertainer::withCount(['tags' => function ($query) use ($i) { //芸人のタグごと上位10件取得
-                    $query->where('tag_id', $i);
-            }])->orderBy('tags_count', 'desc')->take(10)->get();
-        }
-
-
-//dd($tagCount_1);
-
-            // $tags = Entertainer::withCount(['tags' => function ($query) { //芸人のタグごと上位10件取得
-            //         $query->where('tag_id');
-            // }])->orderBy('tags_count', 'desc')->take(10)->get();
 
 
         // for($i = 1; $i < 30; $i++){ //$iはtagのidと連動し、viewへ渡す変数も[tagCounr_$id]と設定。tagづけされた芸人の上位10件をtagIdづつ取得
-        //     //$value = 'tagCount_'.$i;
-        //     $tags = Entertainer::withCount(['tags' => function ($query) use ($i) { //芸人のタグごと上位10件取得
+        //     $value = 'tagCount_'.$i;
+        //     $$value = Entertainer::withCount(['tags' => function ($query) use ($i) { //芸人のタグごと上位10件取得
         //             $query->where('tag_id', $i);
         //     }])->orderBy('tags_count', 'desc')->take(10)->get();
         // }
 
+
+//dd($tagCount_1);
+
+        // バックアップ            
+        // foreach($tags as $i=>$tag){ 
+        //     $value = 'tagCount_'.$i;
+        //     $$value = Entertainer::withCount(['tags' => function ($query)  use ($i){  //芸人のタグごと上位10件取得
+        //             $query->where('tag_id', $i);
+        //     }])->orderBy('tags_count', 'desc')->take(10)->get();
+        // }
+        
+//dd($tagNames);
+  
+        $tagCounts = []; //配列へ格納
+        
+        foreach($tags as $i=>$tag){ 
+            $i++;
+            $tagCounts[$tag->category][] = Entertainer::with('tags')->withCount(['tags' => function ($query)  use ($i){  //芸人のタグごと上位10件取得
+                    $query->where('tag_id', $i);
+            }])->orderBy('tags_count', 'desc')->take(10)->get();
+        }        
+
 //dd($tags);
+//dd($tagCounts);
+//dd($tagCounts['好き'][2]);
 
     
         // ビューで表示
         return view('ranking.tag', [
             'tags' => $tags,
+            'tagNames' => $tagNames,            
+            'tagCounts' => $tagCounts,
             'now' => new \Carbon\Carbon(),
-            'tagCount_1' => $tagCount_1,
-            'tagCount_2' => $tagCount_2,
-            'tagCount_3' => $tagCount_3,
-            'tagCount_4' => $tagCount_4,
-            'tagCount_5' => $tagCount_5,
-            'tagCount_6' => $tagCount_6,
-            'tagCount_7' => $tagCount_7,
-            'tagCount_8' => $tagCount_8,
-            'tagCount_9' => $tagCount_9,
-            'tagCount_10' => $tagCount_10,
-            'tagCount_11' => $tagCount_11,
-            'tagCount_12' => $tagCount_12,
-            'tagCount_13' => $tagCount_13,
-            'tagCount_14' => $tagCount_14,
-            'tagCount_15' => $tagCount_15,
-            'tagCount_16' => $tagCount_16,
-            'tagCount_17' => $tagCount_17,
-            'tagCount_18' => $tagCount_18,
-            'tagCount_19' => $tagCount_19,
-            'tagCount_20' => $tagCount_20,
-            'tagCount_21' => $tagCount_21,
-            'tagCount_22' => $tagCount_22,
-            'tagCount_23' => $tagCount_23,
-            'tagCount_24' => $tagCount_24,
-            'tagCount_25' => $tagCount_25,
-            'tagCount_26' => $tagCount_26,
-            'tagCount_27' => $tagCount_27,
-            'tagCount_28' => $tagCount_28,
-            'tagCount_29' => $tagCount_29,
+            // 'tagCount_1' => $tagCount_1,
+            // 'tagCount_2' => $tagCount_2,
+            // 'tagCount_3' => $tagCount_3,
+            // 'tagCount_4' => $tagCount_4,
+            // 'tagCount_5' => $tagCount_5,
+            // 'tagCount_6' => $tagCount_6,
+            // 'tagCount_7' => $tagCount_7,
+            // 'tagCount_8' => $tagCount_8,
+            // 'tagCount_9' => $tagCount_9,
+            // 'tagCount_10' => $tagCount_10,
+            // 'tagCount_11' => $tagCount_11,
+            // 'tagCount_12' => $tagCount_12,
+            // 'tagCount_13' => $tagCount_13,
+            // 'tagCount_14' => $tagCount_14,
+            // 'tagCount_15' => $tagCount_15,
+            // 'tagCount_16' => $tagCount_16,
+            // 'tagCount_17' => $tagCount_17,
+            // 'tagCount_18' => $tagCount_18,
+            // 'tagCount_19' => $tagCount_19,
+            // 'tagCount_20' => $tagCount_20,
+            // 'tagCount_21' => $tagCount_21,
+            // 'tagCount_22' => $tagCount_22,
+            // 'tagCount_23' => $tagCount_23,
+            // 'tagCount_24' => $tagCount_24,
+            // 'tagCount_25' => $tagCount_25,
+            // 'tagCount_26' => $tagCount_26,
+            // 'tagCount_27' => $tagCount_27,
+            // 'tagCount_28' => $tagCount_28,
+            // 'tagCount_29' => $tagCount_29,
             
             ]);    
 

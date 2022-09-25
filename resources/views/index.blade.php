@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+@include('welcome')
 
     <h2 class="mt-5 pb-2" >ギャグガチャ</h2>    
         <table class="table table-striped">
@@ -390,7 +390,7 @@
         <table class="table table-striped">
         <thead>
             <tr>
-                <th>順位
+                <th>順位</th>
                 <th>芸人</th>
                 <th>事務所</th>                
                 <th>芸歴</th>                         
@@ -415,7 +415,7 @@
         <table class="table table-striped">
         <thead>
             <tr>
-                <th>順位
+                <th>順位</th>
                 <th>芸人</th>
                 <th>事務所</th>                
                 <th>芸歴</th>                         
@@ -434,6 +434,6 @@
             </tbody>
         </table>
 
-<p style="text-align: right">最終更新：2022.5.26</p>
+<p style="text-align: right">最終更新：2022.9.26</p>
 
 @endsection

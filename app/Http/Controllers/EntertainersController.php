@@ -85,7 +85,7 @@ class EntertainersController extends Controller
 
 
         /*
-        新着芸人　更新芸人
+        新しく登録された芸人
         */
         
         $creates = Entertainer::whereNotNull('created_at')->orderBy('created_at', 'desc')->take(3)->get();
@@ -94,7 +94,7 @@ class EntertainersController extends Controller
 
 
         /*
-        今年の賞レース結果
+        今年の大会結果
         */
 
         $year = $today->year; //誕生日で作ったcarbon$todayを再利用

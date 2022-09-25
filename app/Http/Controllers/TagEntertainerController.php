@@ -19,6 +19,7 @@ class TagEntertainerController extends Controller
     {
 
 //dd($request);
+
         //タグ件数の制限   
         $id = $request->tag_id;
 
@@ -26,7 +27,7 @@ class TagEntertainerController extends Controller
         $counts = $user->tags()->where('tag_id', $id)->count();
         
         if($counts >= 3){
-            return back()->with('message', 'タグひとつにつき芸人３人までとなります');
+            return back()->with('message', 'ひとつのtagにつき芸人３人までとなります');
         }
 
         // 認証済みユーザ（閲覧者）が、表示している芸人をタグする

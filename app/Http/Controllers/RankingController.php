@@ -514,14 +514,6 @@ class RankingController extends Controller
         
   
         $tagCounts = []; //配列へ格納
-        
-        //バックアップ
-        // foreach($tags as $i=>$tag){ 
-        //     $i++;
-        //     $tagCounts[$tag->category][] = Entertainer::withCount(['tags' => function ($query)  use ($i){  //芸人のtag件数ごと上位10件取得
-        //             $query->where('tag_id', $i);
-        //     }])->orderBy('tags_count', 'desc')->take(10)->get();
-        // }        
 
 
         foreach($tags as $category=>$tag){

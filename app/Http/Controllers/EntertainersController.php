@@ -82,7 +82,6 @@ class EntertainersController extends Controller
         //$tags = Entertainer::all()->tags()->orderBy('created_at', 'desc')->take(3)->get();
         //$updates = Entertainer::orderBy('update_at', 'decs')->take(3)->get();        
 
-//dd($tags);
 
 
         /*
@@ -99,8 +98,8 @@ class EntertainersController extends Controller
         */
 
         $year = $today->year; //誕生日で作ったcarbon$todayを再利用
-        $awards = Award::where('year', '=' , $year)->get();
-        //dd($awards);
+        $awards = Award::where('year', '=' , $year)->orderBy('id','desc')->get();
+    //dd($awards);
 
 
 

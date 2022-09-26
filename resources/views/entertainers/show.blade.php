@@ -28,7 +28,11 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-3"><h1 class="mt-3 pb-0">芸歴{{$now->diffInYears($entertainer->active)}}年目：</h1></div>
+            @if(empty($entertainer->active))
+            <div class="col-lg-3"><h1 class="mt-3 pb-0">芸歴-年目：</h1></div>
+            @else
+            <div class="col-lg-3"><h1 class="mt-3 pb-0">芸歴{{$now->diffInYears($entertainer->active)}}年目：</h1></div>            
+            @endif
             <div class="col-lg-9"><h1 class="mt-3 pb-2"><strong>{{ $entertainer->name }}</strong></h1></div>
         </div>
     </div>

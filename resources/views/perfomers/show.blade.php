@@ -87,19 +87,23 @@
         <tr>
             <th>誕生日</th>
             <td>{{!empty($perfomer->birthday) ? $perfomer->birthday->format('Y年m月d日') : '-' }}　
-
-            {{--故人はカッコ表示--}}
+        </tr>
+        <tr>
+            <th>年齢</th>
+            <td>
+                {{--故人はカッコ表示--}}
                 @empty($perfomer->deth)
                     @include('commons.perfomer_age')歳</td>
                 @else
                     （@include('commons.perfomer_age')歳）</td>
                 @endempty
+            </td>
         </tr>
         <tr>
             <th>没年月日</th>
             <td>{{!empty($perfomer->deth) ? $perfomer->deth->format('Y年m月d日') : '-' }}
 
-            {{--享年表示--}}
+                {{--享年表示--}}
                 @empty($perfomer->deth)
                     </td>
                 @else

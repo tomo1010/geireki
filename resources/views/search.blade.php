@@ -1,3 +1,7 @@
+@php
+$flug = 1;
+@endphp
+
 @extends('layouts.app')
 
 @section('content')

@@ -112,6 +112,10 @@
         </script>
 
 
+@if($flug = 1)
+
+@else
+
 <center><p>
         
         {{--検索BOX--}}
@@ -133,19 +137,9 @@
                 @endfor
             </select>
         </form>
-        
-
-        
-{{--一覧へのリンク
-<p><br>
-{!! link_to_route('lists.history', '芸歴', [], ['class' => 'btn btn-primary']) !!}
-{!! link_to_route('lists.office', '事務所', [], ['class' => 'btn btn-primary']) !!}
-{!! link_to_route('lists.age', '年代', [], ['class' => 'btn btn-primary']) !!}
-{!! link_to_route('lists.pref', '出身地', [], ['class' => 'btn btn-primary']) !!}
-{!! link_to_route('ranking.tag', 'Tag', [], ['class' => 'btn btn-primary']) !!}
-</p>
---}}
 
 </p></center>
+        
+@endif        
         
 </header>

@@ -112,34 +112,34 @@
         </script>
 
 
-@if($flug = 1)
+@if(empty($flug))
+
+        <center><p>
+                
+                {{--検索BOX--}}
+                <form class="input-group col-md-5" action="{{ route('searchbox')}}" method="GET"> 
+                  <input type="search" name="search" class="form-control input-group-prepend" placeholder="芸人さんを入力"></input>
+                  <span class="input-group-btn input-group-append">
+                    <input type="submit" class="btn btn-primary"  value="検索">
+                  </span>
+                </form>
+        
+        </br>
+        
+                {{--芸歴リストへのセレクトBOX--}}
+                <form method="post" action="{{ route('lists.select')}}">
+                    @csrf
+                    <select class="form-select" name="year" onchange="submit(this.form)">
+                        @for($i = 0; $i < 70; $i++)
+                              <option value="{{$i}}">芸歴{{$i}}年目</option>
+                        @endfor
+                    </select>
+                </form>
+        
+        </p></center>
 
 @else
 
-<center><p>
-        
-        {{--検索BOX--}}
-        <form class="input-group col-md-5" action="{{ route('searchbox')}}" method="GET"> 
-          <input type="search" name="search" class="form-control input-group-prepend" placeholder="芸人さんを入力"></input>
-          <span class="input-group-btn input-group-append">
-            <input type="submit" class="btn btn-primary"  value="検索">
-          </span>
-        </form>
-
-</br>
-
-        {{--芸歴リストへのセレクトBOX--}}
-        <form method="post" action="{{ route('lists.select')}}">
-            @csrf
-            <select class="form-select" name="year" onchange="submit(this.form)">
-                @for($i = 0; $i < 70; $i++)
-                      <option value="{{$i}}">芸歴{{$i}}年目</option>
-                @endfor
-            </select>
-        </form>
-
-</p></center>
-        
-@endif        
+@endif
         
 </header>

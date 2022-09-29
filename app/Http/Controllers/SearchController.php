@@ -418,14 +418,14 @@ class SearchController extends Controller
 
 
         $perfomers = $query->paginate(15);
-        
-       
+    
         $now = new \Carbon\Carbon();
         $prefs = config('pref');
         $offices = Office::get(); 
         //dd($offices);
+        $flug = 1; //viewの表示を変更するためのフラグ        
 
-        return view('search', compact('perfomers','now','prefs','offices','request'));
+        return view('search', compact('perfomers','now','prefs','offices','request','flug'));
 
     }
     

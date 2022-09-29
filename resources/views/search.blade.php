@@ -1,5 +1,3 @@
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -10,7 +8,8 @@
  $s_birthplace = null;
 ?>
 
-
+<h2 class="mt-5 pb-2" >詳細検索</h2>    
+<hr>
 {!! Form::open(['action' => 'SearchController@search','method' => 'get']) !!}
 
 {{--名前
@@ -251,7 +250,7 @@
 
             <div class="form-check col-md-0 d-flex align-items-center pr-2">
                 {{Form::checkbox('etc[]','キングオブコント',false,['class'=>'col-md-0 form-check-input','id'=>'king'])}}
-                {{Form::label('king','キングオブコントファイナリスト',['class' => 'col-md-0 form-check-label text-left'])}}
+                {{Form::label('king','KOCファイナリスト',['class' => 'col-md-0 form-check-label text-left'])}}
             </div>
 
         </div>
@@ -265,13 +264,13 @@
         </div>
     </div>
 
-
-    {{--<div class="form-group row">
+{{--リセットボタン
+    <div class="form-group row">
         <div class="offset-2 col-9">
         {!! Form::reset('リセット', ['id' => 'reset-button', 'class' => 'btn btn-outline-success btn-lg']) !!}
         </div>
-    </div>--}}
-    
+    </div>
+--}}    
     
 {!! Form::close() !!}
 
@@ -281,9 +280,23 @@
 
     <h2 class="mt-2 pb-2">芸人一覧</h1>
     
+    @if(empty($request))
     
-    {{--検索条件：{{$request->s_name}}{{$request->s_start}}--}}
-    
+    検索条件：なし
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>芸人</th>
+                    <th>年齢</th>
+                    <th>コンビ名など</th>
+                    <th>事務所</th>                                   
+                </tr>
+            </thead>
+        </table>    
+
+    @else
+
+    検索結果：<font color="red">{{$counts}}</font>件
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -341,6 +354,7 @@
                 @endforeach
             </tbody>
         </table>
+    @endif
 
     <!--ページネーションのリンク-->
     {{ $perfomers->appends(request()->query())->links() }}

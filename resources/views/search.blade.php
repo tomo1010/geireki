@@ -11,9 +11,9 @@
 ?>
 
 
-{{--名前
 {!! Form::open(['action' => 'SearchController@search','method' => 'get']) !!}
 
+{{--名前
     <div class="form-group row">
         <label class="col-3 col-form-label">名前:</label>
         <div class="col-9">
@@ -257,6 +257,8 @@
         </div>
     </div>
 
+
+{{--検索ボタン--}}
     <div class="form-group row">
         <div class="offset-2 col-8">
         {!! Form::submit('検索',['class' => 'btn btn-primary btn-block']) !!}

@@ -27,13 +27,14 @@ class SearchController extends Controller
             $query = Perfomer::with(['entertainer', 'office'])->where('activeend', NULL)->orderByRaw('active desc, name desc');
         }
 
-//dd($query);
 
-        $prefs = config('pref');
+        $prefs = config('pref'); //出身地情報読み込み
 
 
-        /* 検索条件の値を取得
+        /* 
+        　検索条件の値を取得
         */
+        
         $s_name = $request->input('s_name');
         $s_bloodtype = $request->input('s_bloodtype');
         $s_birthplace = $request->input('s_birthplace');
@@ -119,7 +120,7 @@ class SearchController extends Controller
                 $s_ageStart = 95;
                 $s_ageEnd = 99;
             }
-        //dd($s_ageStart,$s_ageEnd);            
+
 
         $s_month = $request->input('s_month'); 
         $s_day = $request->input('s_day');                
@@ -130,10 +131,7 @@ class SearchController extends Controller
         $office_id = $request->input('office_id');
         $s_judge = $request->input('judge');
         
-        //dd($office_id,$s_judge);
-
         $nsc = $request->input('nsc');  
-        //dd($nsc);
         
         $s_etc = $request->input('etc');        
 
@@ -165,6 +163,7 @@ class SearchController extends Controller
         elseif(empty($s_start) && !empty($s_end)){
             $query->where('active', '>=' ,$end);
         }
+
 
 
         //年齢検索
@@ -289,7 +288,7 @@ class SearchController extends Controller
 
 
 
- //dd($query);       
+//dd($query);       
 
         //誕生日検索
         if(!empty($s_month)) {
@@ -319,7 +318,7 @@ class SearchController extends Controller
 
 
 
-        //内訳の条件指定        
+        //↑の内訳を条件指定        
         if(!empty($s_gender)) {
             
                 $query->whereHas('entertainer', function ($que) use ($s_gender) {
@@ -425,9 +424,9 @@ class SearchController extends Controller
         $prefs = config('pref');
         $offices = Office::get(); 
         //dd($offices);
-        $flug = 1; //viewの表示を変更するためのフラグ     
+        $flug = 1; //viewの表示を変更するためのフラグ
         
-//dd($request);        
+//dd($request);
 
         return view('search', compact('perfomers','now','prefs','offices','request','flug','counts'));
 

@@ -253,6 +253,11 @@
                 {{Form::label('king','KOCファイナリスト',['class' => 'col-md-0 form-check-label text-left'])}}
             </div>
 
+            <div class="form-check col-md-0 d-flex align-items-center pr-2">
+                {{Form::checkbox('etc[]','R-1',false,['class'=>'col-md-0 form-check-input','id'=>'R-1'])}}
+                {{Form::label('R-1','R-1ファイナリスト',['class' => 'col-md-0 form-check-label text-left'])}}
+            </div>            
+
         </div>
     </div>
 
@@ -302,7 +307,6 @@
                 <tr>
                     <th>芸人</th>
                     <th>年齢</th>
-                    <th>コンビ名など</th>
                     <th>事務所</th>                                   
                 </tr>
             </thead>
@@ -312,9 +316,24 @@
                 
                     @if($value->activeend == NULL)
                     <tr>
-                        <td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>
+                        {{--<td>{!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}</td>--}}
+                        
+                        
+                        <td nowrap>
+                            {!! link_to_route('perfomers.show', $value->name, ['id' => $value->id]) !!}
+        
+                            {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
+                            @if(!empty($value->entertainer[0]->name))
+                                @if (strcmp($value->entertainer[0]->name, $value->name) == 0 )
+                                @else
+                                    </br>{!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
+                                @endif
+                            @endif
+                        </td>
+                        
+                        
 
-                        {{--年齢もリンク--}}
+                        {{--年齢リンク--}}
                         @empty($value->birthday)
                         <td>-</td>
                         @else
@@ -323,14 +342,6 @@
                         <!--<td>{{!empty($value->birthday) ? $now->diffInYears($value->birthday) : '-' }}歳</td>                        -->
                         <!--<td>{{!empty($value->active) ? $now->diffInYears($value->active) : '-' }}年</td>-->
                        
-                        {{--コンビ名リンク--}}                                
-                        <td>
-                            @if(!empty($value->entertainer[0]->name))
-                                {!! link_to_route('entertainers.show', $value->entertainer[0]->name, $value->entertainer[0]->id) !!}
-                            @else
-                            @endif
-                        </td>                       
-                        <!--<td>{{!empty($value->entertainer[0]->name) ? $value->entertainer[0]->name : '' }}</td>  -->
 
                         {{--事務所リンク--}}                                
                         @empty($value->office->office)

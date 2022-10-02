@@ -1,16 +1,9 @@
 <footer class="footer">
 
 <center><p>
-    {{--一覧へのリンク
-    <p><br>
-        {!! link_to_route('lists.history', '芸歴', [], ['class' => 'btn btn-primary']) !!}
-        {!! link_to_route('lists.office', '事務所', [], ['class' => 'btn btn-primary']) !!}
-        {!! link_to_route('lists.age', '年代', [], ['class' => 'btn btn-primary']) !!}
-        {!! link_to_route('lists.birthday', '誕生日', [], ['class' => 'btn btn-primary']) !!}        
-        {!! link_to_route('lists.pref', '出身', [], ['class' => 'btn btn-primary']) !!}
-        {!! link_to_route('lists.award', '受賞歴', [], ['class' => 'btn btn-primary']) !!}
-    </p>--}}
-        {!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-light']) !!}
+
+        {{--詳細検索ボタン--}}
+        {!! link_to_route('search', '詳細検索', [], ['class' => 'btn btn-success']) !!}
 
 </p></center>
 

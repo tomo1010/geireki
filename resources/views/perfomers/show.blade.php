@@ -291,15 +291,20 @@
                     @foreach ($sync as $perfomer)
                     <tr>
                         @if($perfomer->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                            <td>@include('commons.perfomer_name')</td>
-                            
-                            {{--コンビ名もリンク--}}
+
+                            {{--名前--}}                        
                             <td>
-                            @if(!empty($perfomer->entertainer[0]->name))
-                                @include('commons.perfomer_combiName')
-                            @else
-                            @endif    
+                                @include('commons.perfomer_name')
                             </td>
+                            
+                            {{--コンビ名など--}}
+                            <td>
+                            {{--@if(!empty($perfomer->entertainer[0]->name))--}}
+                                @include('commons.perfomer_combiName')
+                            {{--@else
+                            @endif--}}  
+                            </td>
+                        
                         @else
                             <td class="text-secondary">@include('commons.perfomer_name')（解散済）</td>
                         @endif

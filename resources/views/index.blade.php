@@ -362,7 +362,7 @@
                     <tr>
                         <td nowrap>@include('commons.perfomer_name')
 
-                        {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
+                        {{--コンビ名表示、ただし個人と芸人が同じ名前の場合は表示しない--}}
                         @include('commons.perfomer_combiNameEqual')                                    
 
                     </td>

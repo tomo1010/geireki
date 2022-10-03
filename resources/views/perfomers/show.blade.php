@@ -260,15 +260,15 @@
                     @foreach ($senior as $perfomer)
                     <tr>
                         @if($perfomer->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                            <td>@include('commons.perfomer_name')</td>
 
-                            {{--コンビ名もリンク--}}
                             <td>
-                            @if(!empty($perfomer->entertainer[0]->name))
-                                @include('commons.perfomer_combiName')
-                            @else
-                            @endif    
+                                @include('commons.perfomer_name')
                             </td>
+                            
+                            <td>
+                                @include('commons.perfomer_combiName')
+                            </td>
+
                         @else
                             <td class="text-secondary">@include('commons.perfomer_combiName')（解散済）</td>
                         @endif
@@ -292,17 +292,12 @@
                     <tr>
                         @if($perfomer->activeend == NULL){{--解散済みの場合はグレー文字--}}
 
-                            {{--名前--}}                        
                             <td>
                                 @include('commons.perfomer_name')
                             </td>
                             
-                            {{--コンビ名など--}}
                             <td>
-                            {{--@if(!empty($perfomer->entertainer[0]->name))--}}
                                 @include('commons.perfomer_combiName')
-                            {{--@else
-                            @endif--}}  
                             </td>
                         
                         @else
@@ -327,14 +322,15 @@
                     @foreach ($junior as $perfomer)
                     <tr>
                         @if($perfomer->activeend == NULL){{--解散済みの場合はグレー文字--}}
-                            <td>@include('commons.perfomer_name')</td>
-                            {{--コンビ名もリンク--}}
+                            
                             <td>
-                            @if(!empty($perfomer->entertainer[0]->name))
-                                @include('commons.perfomer_combiName')
-                            @else
-                            @endif    
+                                @include('commons.perfomer_name')
                             </td>
+
+                            <td>
+                                @include('commons.perfomer_combiName')
+                            </td>
+
                         @else
                             <td class="text-secondary">@include('commons.perfomer_name')（解散済）</td>
                         @endif

@@ -94,7 +94,7 @@
                                 {{--名前リンク--}}
                                 <td nowrap>
                                     @include('commons.perfomer_name')
-
+                                    </br>
                                     {{--コンビ名リンク、個人と芸人が同じ場合は表示しない--}}
                                     @include('commons.perfomer_combiNameEqual')                                    
                                 </td>
@@ -360,8 +360,9 @@
             <tbody>
                 @foreach ($nsc as $perfomer)
                     <tr>
-                        <td nowrap>@include('commons.perfomer_name')
-
+                        <td nowrap>
+                        @include('commons.perfomer_name')
+                        </br>
                         {{--コンビ名表示、ただし個人と芸人が同じ名前の場合は表示しない--}}
                         @include('commons.perfomer_combiNameEqual')                                    
 

@@ -16,8 +16,7 @@
                     <thead>
                         <tr>
                             <th>年</th>
-                            <th>大会名</th>
-                            <th>コンビ名</th>                                                   
+                            <th>大会名/コンビ名</th>
                             <th>当時の芸歴</th>
                         </tr>
                     </thead>
@@ -25,8 +24,8 @@
                         @foreach ($awards as $award)
                         <tr>
                             <td>{{$award->year}}</td>                            
-                            <td>{{$award->award}}</td>
-                            <td nowrap>{!! link_to_route('entertainers.show', $award->entertainer->name, [$award->entertainer->id]) !!}</td>
+                            <td nowrap>{{$award->award}}
+                            </br>{!! link_to_route('entertainers.show', $award->entertainer->name, [$award->entertainer->id]) !!}</td>
                             <td>{{$now->diffInYears($award->entertainer->active)-$now->diffInYears($award->year.'-1-1')}}年目</td>   
                         </tr>
                         @endforeach

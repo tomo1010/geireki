@@ -191,8 +191,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>名前</th>
-                    <th>事務所</th>                    
+                    <th>名前/事務所</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -202,10 +201,8 @@
                 <tr>
                     <td nowrap>
                         @include('commons.entertainer_name')
-                    </td>
-                    
-                    <td>
-                        @include('commons.entertainer_office')
+                        </br>
+                        @include('commons.entertainer_office')                        
                     </td>
 
                     {{--芸歴リンク--}}
@@ -225,8 +222,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>大会名/コンビ名</th>
-                    <th>事務所</th>                    
+                    <th>大会名/コンビ名/事務所</th>
                     <th>芸歴</th>
                 </tr>
             </thead>
@@ -234,8 +230,11 @@
             <tbody>
                 @foreach ($awards as $award)
                 <tr>
-                    <td>{{$award->award}}<br>@include('commons.award_entertainerName')</td>
-                    <td>@include('commons.award_entertainerOffice')</td>
+                    <td>
+                        {{$award->award}}
+                        </br>
+                        @include('commons.award_entertainerName') / @include('commons.award_entertainerOffice')
+                    </td>
                     <td>@include('commons.award_entertainerHistory')年</td>
 
                 </tr>

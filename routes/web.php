@@ -67,12 +67,12 @@ Route::get('ranking/movieCount', 'RankingController@movieCount')->name('ranking.
 
 Route::get('ranking/heightTall', 'RankingController@heightTall')->name('ranking.heightTall');
 Route::get('ranking/heightShort', 'RankingController@heightShort')->name('ranking.heightShort');
-Route::get('ranking/heightDiff', 'RankingController@heightDiff')->name('ranking.heightDiff');
-Route::get('ranking/heightSum', 'RankingController@heightSum')->name('ranking.heightSum');
+//Route::get('ranking/heightDiff', 'RankingController@heightDiff')->name('ranking.heightDiff');
+//Route::get('ranking/heightSum', 'RankingController@heightSum')->name('ranking.heightSum');
 
 Route::get('ranking/award', 'RankingController@award')->name('ranking.award');
 Route::get('ranking/tag', 'RankingController@tag')->name('ranking.tag');
-Route::get('ranking/historyAvg', 'RankingController@historyAvg')->name('ranking.historyAvg');
+//Route::get('ranking/historyAvg', 'RankingController@historyAvg')->name('ranking.historyAvg');
 
 
 //検索

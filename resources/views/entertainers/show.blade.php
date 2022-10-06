@@ -283,7 +283,7 @@
             <tbody>
                 @foreach ($youtubes as $youtube)
                 <tr>
-                    <td><a href="{{$youtube->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('youtubes.favorite')</td>
+                    <td><a href="{{$youtube->youtube}}" target="_blank""><img src = "{{ $iframe[$loop->index] }}"></a>@include('youtubes.favoriteAction')</td>
                     <td>{{ $youtube->comment }}</td>
                     <td>{{ $youtube->user->name }}</td>                    
                 </tr>

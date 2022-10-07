@@ -23,6 +23,7 @@ class CreateMembersTable extends Migration
             // 外部キー制約
             // $table->foreign('entertainer_id')->references('id')->on('entertainers');
             // $table->foreign('perfomer_id')->references('id')->on('perfomers');
+            //
             
             // entertainer_idとperfomer_idの組み合わせの重複を許さない
             $table->unique(['entertainer_id', 'perfomer_id']);

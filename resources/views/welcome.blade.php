@@ -1,4 +1,4 @@
-<h2 class="mt-5 pb-2"><font color="red">キングオブコント2022 ファイナリスト</font></h2>（決勝10/8 19:00～）
+<h2 class="mt-5 pb-2"><font color="red">キングオブコント2022 ファイナリスト</font></h2>（本日決勝10/8 19:00～）
         <table class="table table-striped">
         <thead>
             <tr>

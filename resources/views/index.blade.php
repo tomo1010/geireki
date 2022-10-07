@@ -287,34 +287,39 @@
 
 
 
-<h2 class="mt-5 pb-2">M1ラストイヤーの芸人<strong>（芸歴15年目）</strong></h2>    
-            <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>芸人</th>
-                    <th>事務所</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                @foreach ($m1year as $entertainer)
-                <tr>
-                    <td>
-                    @include('commons.entertainer_name')
-                    </td>
+<h2 class="mt-5 pb-2">M1ラストイヤーの芸人<strong>（芸歴15年目）</strong></h2>   
 
-                    {{--事務所リンク--}}                                
-                    @empty($entertainer->office->office)
-                    <td>-</td>
-                    @else
+    <table class="table table-striped">
+        
+        <thead>
+            <tr>
+                <th>芸人</th>
+                <th>スタイル</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @foreach ($m1year as $entertainer)
+            <tr>
+                {{--@empty($entertainer->office->office)
                     <td>
-                    @include('commons.entertainer_office')
+                        @include('commons.entertainer_name')
                     </td>
-                    @endempty
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                @else--}}
+                    <td>
+                        @include('commons.entertainer_name')
+                        </br>
+                        @include('commons.entertainer_office')
+                    </td>
+                {{--@endempty--}}
+            
+                    @include('commons.gender')
+
+            </tr>
+            @endforeach
+        </tbody>
+
+    </table>
 
 
 
@@ -333,10 +338,12 @@
                 @foreach ($dissolutions as $entertainer)
                 <tr>
                     <td nowrap>
-                    @include('commons.entertainer_name')
+                        @include('commons.entertainer_name')
+                        </br>
+                        @include('commons.entertainer_office')
                     </td>
                     <td>
-                    @include('commons.entertainer_history')年
+                        @include('commons.entertainer_history')年
                     </td>
                 </tr>
                 @endforeach

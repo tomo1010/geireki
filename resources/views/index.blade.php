@@ -2,8 +2,6 @@
 
 @section('content')
 
-@include('welcome')
-
     <h2 class="mt-5 pb-2" >ギャグガチャ</h2>    
         <table class="table table-striped">
             <thead>
@@ -393,6 +391,31 @@
 {!! link_to_route('perfomers.nsc', '一覧', ) !!}
 --}}
 
+
+<h2 class="mt-5 pb-2">キングオブコント2022 結果</h2>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>順位</th>
+                <th>芸人</th>
+                <th>事務所</th>                
+                <th>芸歴</th>                         
+            </tr>
+        </thead>
+            
+            <tbody>
+                @foreach ($koc as $award)
+                <tr>
+                    <td>{{$award->rank}}</td>
+                    <td nowrap>@include('commons.award_entertainerName')</td>
+                    <td>@include('commons.award_entertainerOffice')</td>
+                    <td>@include('commons.award_entertainerHistory')年</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+
 <h2 class="mt-5 pb-2">M1グランプリ2021 結果</h2>
         <table class="table table-striped">
         <thead>
@@ -418,29 +441,8 @@
 
 
     
-<h2 class="mt-5 pb-2">キングオブコント2021 結果</h2>
-        <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>順位</th>
-                <th>芸人</th>
-                <th>事務所</th>                
-                <th>芸歴</th>                         
-            </tr>
-        </thead>
-            
-            <tbody>
-                @foreach ($koc as $award)
-                <tr>
-                    <td>{{$award->rank}}</td>
-                    <td nowrap>@include('commons.award_entertainerName')</td>
-                    <td>@include('commons.award_entertainerOffice')</td>
-                    <td>@include('commons.award_entertainerHistory')年</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
 
-<p style="text-align: right">最終更新：2022.9.26</p>
+
+<p style="text-align: right">最終更新：2022.10.10</p>
 
 @endsection

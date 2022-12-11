@@ -74,7 +74,7 @@
    <div class="container">
         <div class="row">
             <div class="col-lg-8">    
-                <h2 class="mt-5 pb-2" >本日誕生日の芸人</h2>    
+                <h2 class="mt-5 pb-2" >本日誕生日の芸人.</h2>    
                     <table class="table table-striped">
                         <thead>
                             <tr>

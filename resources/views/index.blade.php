@@ -443,6 +443,6 @@
     
 
 
-<p style="text-align: right">最終更新：2022.10.10</p>
+<p style="text-align: right">最終更新：2023.1.10</p>
 
 @endsection

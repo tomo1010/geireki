@@ -186,7 +186,7 @@ class EntertainersController extends Controller
 
         
         //最新のM1結果
-        $m1 = Award::with('entertainer')->where('year', '2021')->where('award', 'like','%M-1グランプリ%')->orderBy('rank', 'asc')->get();
+        $m1 = Award::with('entertainer')->where('year', '2022')->where('award', 'like','%M-1グランプリ%')->orderBy('rank', 'asc')->get();
         
         //最新のKOC結果
         $koc = Award::with('entertainer')->where('year', '2022')->where('award', 'like','%キングオブコント%')->orderBy('rank', 'asc')->get();
